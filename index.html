@@ -26,6 +26,7 @@
     }
   </script>
   <style>
+    /* Continuous 3-second loader bar animation */
     @keyframes loadProgress {
       0% { width: 0%; }
       100% { width: 100%; }
@@ -33,44 +34,70 @@
     .animate-progress {
       animation: loadProgress 3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     }
+
+    /* 3D Horizontal Flip Animation for Logo */
+    @keyframes horizontalFlip {
+      0% { transform: rotateY(0deg); }
+      50% { transform: rotateY(180deg); }
+      100% { transform: rotateY(360deg); }
+    }
+    .animate-flip-horizontal {
+      animation: horizontalFlip 2s infinite ease-in-out;
+      transform-style: preserve-3d;
+    }
   </style>
 </head>
 <body class="bg-brand-black text-white font-mono min-h-screen flex flex-col justify-between items-center p-6">
 
-  <div></div>
+  <div><!-- Top Spacer --></div>
 
+  <!-- LOADING CONTAINER -->
   <main class="w-full max-w-sm flex flex-col items-center text-center">
-    <div class="relative mb-6 p-5 bg-brand-border/30 rounded-2xl border border-brand-border flex items-center justify-center">
-      <img src="./assets/srcslogo" alt="Sync Race Logo" class="w-20 h-20 object-contain animate-pulse" />
+    
+    <!-- BRAND LOGO WITH FLIP EFFECT -->
+    <div class="relative mb-6 p-5 bg-brand-border/30 rounded-2xl border border-brand-border flex items-center justify-center [perspective:1000px]">
+      <img 
+        src="./cropped-designer-1-1.png" 
+        alt="Sync Race Logo" 
+        class="w-20 h-20 object-contain animate-flip-horizontal"
+      />
     </div>
 
+    <!-- BRAND HEADING -->
     <h1 class="text-2xl font-black tracking-wider text-white mb-1">
       SYNC RACE <span class="text-brand-accent text-sm font-normal">[srcs.online]</span>
     </h1>
     <p class="text-xs text-brand-muted mb-8">Corporate Sucks. Initializing Workspace...</p>
 
+    <!-- LOADING PROGRESS BAR -->
     <div class="w-full bg-brand-border h-1.5 rounded-full overflow-hidden mb-3">
       <div class="bg-brand-accent h-full animate-progress"></div>
     </div>
 
+    <!-- STATUS TEXT & TIMER -->
     <div class="flex justify-between items-center w-full text-xs text-brand-muted">
       <span id="status-text">Bypassing corporate fluff...</span>
       <span id="timer" class="text-brand-accent font-bold">3s</span>
     </div>
 
+    <!-- MANUAL OVERRIDE LINK -->
     <div class="mt-8">
       <a id="redirect-link" href="#" class="text-xs text-brand-muted underline hover:text-white transition-colors">
         Skip intro & go directly →
       </a>
     </div>
+
   </main>
 
+  <!-- FOOTER STATUS -->
   <footer class="text-xs text-brand-muted/60 text-center">
     SYSTEM // NON-CAPITALIST CODE & CREATIVE LAB
   </footer>
 
+  <!-- ROUTING & TIMER SCRIPT -->
   <script>
     document.getElementById('redirect-link').href = TARGET_PAGE;
+
     let timeLeft = 3;
     const timerElement = document.getElementById('timer');
     const statusText = document.getElementById('status-text');
