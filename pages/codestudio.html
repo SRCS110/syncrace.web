@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
+<!DOCTYPE html>
+<html lang="en" class="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Code Studio | SYNC RACE</title>
+  <title>Sync Race</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            brand: { black: '#0a0a0c', card: '#121216', border: '#24242d', accent: '#3bf4a3', warning: '#ff4757', text: '#e2e8f0', muted: '#808b9e' }
-          },
-          fontFamily: { mono: ['JetBrains Mono', 'monospace'], sans: ['Inter', 'sans-serif'] }
-        }
-      }
-    }
-  </script>
+  
+  <!-- IMPORT THE CENTRALIZED NAV SCRIPT -->
+  <script src="./nav.js" defer></script>
 </head>
+<body class="bg-brand-black text-brand-text font-sans">
+
+  <!-- CENTRALIZED NAV INJECTS HERE -->
+  <site-nav></site-nav>
+
+  <!-- MAIN PAGE CONTENT GOES HERE -->
+
+</body>
+</html>
 <body class="bg-brand-black text-brand-text font-sans min-h-screen flex flex-col justify-between">
 
   <!-- HEADER -->
