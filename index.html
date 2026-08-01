@@ -6,7 +6,7 @@
   <title>SYNC RACE | Initializing...</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    // TARGET ROUTE: Change this path to point to your main content page inside your folder structure
+    // TARGET ROUTE: Change this path to point to your main home file inside your pages folder
     const TARGET_PAGE = "./pages/home.html"; 
 
     tailwind.config = {
@@ -44,18 +44,14 @@
   <!-- LOADING CONTAINER -->
   <main class="w-full max-w-sm flex flex-col items-center text-center">
     
-    <!-- CROSSED WRENCH AND SPOON SVG ICON -->
-    <div class="relative mb-6 p-5 bg-brand-border/30 rounded-2xl border border-brand-border group">
-      <svg class="w-16 h-16 text-brand-accent animate-pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-        <!-- Spoon (slanted top-left to bottom-right) -->
-        <path d="M12 12L4.5 19.5C3.5 20.5 2 20.5 2 19C2 17.5 3.5 16 4.5 15L12 12Z" fill="currentColor" fill-opacity="0.1" />
-        <path d="M20 4C18 2 14.5 2.5 13 5.5C11.5 8.5 12.5 11.5 12.5 11.5L4.5 19.5C3.5 20.5 2 20.5 2 19C2 17.5 3.5 16 4.5 15L12.5 7C12.5 7 15.5 8 18.5 6.5C21.5 5 22 2 20 4Z" />
-        
-        <!-- Wrench (slanted top-right to bottom-left) -->
-        <path d="M14.7 9.3L20 4M20 4C20.5 3.5 21.5 3.5 22 4C22.5 4.5 22.5 5.5 22 6L18 10" />
-        <path d="M14.7 9.3L5 19C4 20 2.5 20 2 19.5C1.5 19 1.5 17.5 2.5 16.5L12.2 6.8" />
-        <path d="M12.2 6.8C11.5 5.5 11.8 3.8 13 2.8C14.2 1.8 16 1.8 17 2.8L15 4.8L16.2 6L18.2 4C19.2 5 19.2 6.8 18.2 8C17.2 9.2 15.5 9.5 14.2 8.8" />
-      </svg>
+    <!-- YOUR BRAND LOGO -->
+    <div class="relative mb-6 p-5 bg-brand-border/30 rounded-2xl border border-brand-border group flex items-center justify-center">
+      <!-- Update the src path below if your image is inside a subfolder, e.g., src="./assets/cropped-designer-1-1.png" -->
+      <img 
+        src="./cropped-designer-1-1.png" 
+        alt="Sync Race Logo" 
+        class="w-20 h-20 object-contain animate-pulse"
+      />
     </div>
 
     <!-- BRAND HEADING -->
