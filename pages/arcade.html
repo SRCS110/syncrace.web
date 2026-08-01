@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SYNC RACE | Creative Studio</title>
+  <title>SYNC RACE | The Arcade</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -24,55 +24,297 @@
 
   <site-nav></site-nav>
 
+  <!-- PAGE HEADER -->
   <section class="max-w-6xl mx-auto px-6 py-12 w-full border-b border-brand-border">
-    <span class="text-brand-accent font-mono text-sm">// VISUAL PRODUCTION</span>
-    <h1 class="text-4xl font-black text-white mt-1 mb-4">Creative Studio</h1>
-    <p class="text-brand-muted max-w-2xl">Visual art, graphic design, layout experiments, and photographic references without stock photo conventions.</p>
-  </section>
-
-  <section class="max-w-6xl mx-auto px-6 py-12 w-full">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="bg-brand-card border border-brand-border rounded-lg overflow-hidden group hover:border-brand-accent transition-all">
-        <div class="h-48 bg-brand-border/40 flex items-center justify-center font-mono text-xs text-brand-muted group-hover:bg-brand-accent/10 transition-all">
-          [UI ARCHITECTURE WIREFRAME]
-        </div>
-        <div class="p-4 font-mono">
-          <span class="text-xs text-brand-accent block mb-1">DESIGN SYSTEM</span>
-          <h3 class="text-white font-bold text-sm">Brutalist Dashboard UI</h3>
-          <p class="text-xs text-brand-muted mt-2">Dark-mode UI framework prioritizing typography and data density over marketing filler.</p>
-        </div>
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
+      <div>
+        <span class="text-brand-warning font-mono text-sm">// NON-COMMERCIAL PLAYGROUND</span>
+        <h1 class="text-4xl font-black text-white mt-1 mb-2">The Arcade & Dev Lab</h1>
+        <p class="text-brand-muted max-w-2xl text-sm sm:text-base">
+          An interactive laboratory testing browser physics, Canvas rendering engines, and retro visual art. No paywalls, micro-transactions, or predatory design.
+        </p>
       </div>
-
-      <div class="bg-brand-card border border-brand-border rounded-lg overflow-hidden group hover:border-brand-accent transition-all">
-        <div class="h-48 bg-brand-border/40 flex items-center justify-center font-mono text-xs text-brand-muted group-hover:bg-brand-accent/10 transition-all">
-          [VISUAL EXPERIMENT]
-        </div>
-        <div class="p-4 font-mono">
-          <span class="text-xs text-brand-accent block mb-1">DIGITAL ART</span>
-          <h3 class="text-white font-bold text-sm">HTML Reserve Concepts</h3>
-          <p class="text-xs text-brand-muted mt-2">Experimental web layouts combining brutalist design principles with raw code aesthetics.</p>
-        </div>
-      </div>
-
-      <div class="bg-brand-card border border-brand-border rounded-lg overflow-hidden group hover:border-brand-accent transition-all">
-        <div class="h-48 bg-brand-border/40 flex items-center justify-center font-mono text-xs text-brand-muted group-hover:bg-brand-accent/10 transition-all">
-          [PHOTOGRAPHY COLLECTION]
-        </div>
-        <div class="p-4 font-mono">
-          <span class="text-xs text-brand-accent block mb-1">GALLERY</span>
-          <h3 class="text-white font-bold text-sm">Urban & Technical References</h3>
-          <p class="text-xs text-brand-muted mt-2">Raw photographic reference material used for visual moodboards and texture maps.</p>
-        </div>
+      <div class="font-mono text-xs bg-brand-card border border-brand-border px-3 py-2 rounded text-brand-accent flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-brand-accent animate-ping"></span>
+        ENGINE STATUS: READY
       </div>
     </div>
   </section>
 
+  <!-- MAIN INTERACTIVE SECTION -->
+  <section class="max-w-6xl mx-auto px-6 py-12 w-full grid grid-cols-1 lg:grid-cols-3 gap-8">
+    
+    <!-- LEFT & CENTER: INTERACTIVE CANVAS CONTAINER -->
+    <div class="lg:col-span-2 bg-brand-card border border-brand-border rounded-xl p-6 flex flex-col justify-between">
+      
+      <!-- MODE SELECTION TABS -->
+      <div class="flex flex-wrap items-center justify-between border-b border-brand-border pb-4 mb-4 gap-2 font-mono text-xs">
+        <div class="flex gap-2">
+          <button id="btn-particles" onclick="switchMode('particles')" class="px-3 py-1.5 rounded bg-brand-accent text-brand-black font-bold transition-all">01. Vector Field</button>
+          <button id="btn-pixels" onclick="switchMode('pixels')" class="px-3 py-1.5 rounded bg-brand-border text-brand-muted hover:text-white transition-all">02. Pixel Canvas</button>
+          <button id="btn-waves" onclick="switchMode('waves')" class="px-3 py-1.5 rounded bg-brand-border text-brand-muted hover:text-white transition-all">03. Wave Synthesizer</button>
+        </div>
+        <span class="text-brand-muted hidden sm:inline">[INTERACTIVE ENGINE]</span>
+      </div>
+
+      <!-- CANVAS VIEWPORT -->
+      <div class="w-full h-80 bg-brand-black rounded-lg border border-brand-border relative overflow-hidden flex items-center justify-center">
+        <canvas id="arcadeCanvas" class="w-full h-full cursor-crosshair"></canvas>
+      </div>
+
+      <!-- INTERACTIVE CONTROL PANEL -->
+      <div class="mt-6 pt-4 border-t border-brand-border flex flex-wrap items-center justify-between gap-4 font-mono text-xs">
+        
+        <!-- DYNAMIC CONTROLS (Swapped via JS depending on active tab) -->
+        <div id="particle-controls" class="flex flex-wrap items-center gap-4">
+          <label class="flex items-center gap-2 text-brand-muted">
+            Color:
+            <select id="color-select" class="bg-brand-black border border-brand-border rounded px-2 py-1 text-white">
+              <option value="#3bf4a3">Terminal Mint</option>
+              <option value="#ff4757">Warning Red</option>
+              <option value="#3b82f6">Electric Blue</option>
+            </select>
+          </label>
+          <button onclick="resetCanvas()" class="px-3 py-1 border border-brand-border rounded text-brand-muted hover:text-white hover:border-brand-accent transition-all">Clear Matrix</button>
+        </div>
+
+        <div id="pixel-controls" class="hidden flex flex-wrap items-center gap-4">
+          <span class="text-brand-muted">Click & drag to paint pixels</span>
+          <button onclick="clearPixels()" class="px-3 py-1 border border-brand-border rounded text-brand-muted hover:text-white hover:border-brand-accent transition-all">Reset Grid</button>
+        </div>
+
+        <div id="wave-controls" class="hidden flex flex-wrap items-center gap-4">
+          <label class="flex items-center gap-2 text-brand-muted">
+            Frequency:
+            <input id="wave-freq" type="range" min="1" max="10" value="3" class="accent-brand-accent" />
+          </label>
+        </div>
+
+        <span class="text-brand-muted">Engine: Raw HTML5 JS</span>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: DEVLOG & ROADMAP -->
+    <div class="space-y-6 font-mono">
+      
+      <!-- DEVLOG -->
+      <div class="bg-brand-card border border-brand-border rounded-xl p-6">
+        <h3 class="text-white font-bold text-base mb-4 text-brand-warning flex items-center gap-2">
+          <span>// Devlog & Game Build Status</span>
+        </h3>
+        
+        <div class="space-y-4 text-xs">
+          <div class="border-l-2 border-brand-accent pl-3">
+            <span class="text-brand-muted block">ENTRY #03 — Canvas Particle Vector Field</span>
+            <p class="text-white mt-1">Multi-mode rendering engine integrated. Supports dynamic vector physics, pixel matrix painting, and sine-wave calculations.</p>
+          </div>
+          <div class="border-l-2 border-brand-border pl-3">
+            <span class="text-brand-muted block">ENTRY #02 — Game Loop Mechanics</span>
+            <p class="text-brand-muted mt-1">Testing 60FPS physics step routines in browser engine. Zero external engine dependencies.</p>
+          </div>
+          <div class="border-l-2 border-brand-border pl-3">
+            <span class="text-brand-muted block">ENTRY #01 — Canvas Initialization</span>
+            <p class="text-brand-muted mt-1">Initializing pixel matrices, particle boundaries, and input handlers.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- UPCOMING GAMES ROADMAP -->
+      <div class="bg-brand-card border border-brand-border rounded-xl p-6">
+        <h3 class="text-white font-bold text-base mb-4 text-brand-accent">// Upcoming Releases</h3>
+        <ul class="space-y-3 text-xs">
+          <li class="flex justify-between items-center text-brand-muted">
+            <span>> Cyberpunk Terminal RPG</span>
+            <span class="bg-brand-border text-brand-accent px-2 py-0.5 rounded text-[10px]">CONCEPT</span>
+          </li>
+          <li class="flex justify-between items-center text-brand-muted">
+            <span>> Vector Physics Arcade Racer</span>
+            <span class="bg-brand-border text-brand-warning px-2 py-0.5 rounded text-[10px]">PROTOTYPING</span>
+          </li>
+          <li class="flex justify-between items-center text-brand-muted">
+            <span>> Retro Pixel Puzzle Engine</span>
+            <span class="bg-brand-border text-white px-2 py-0.5 rounded text-[10px]">IN DEV</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
   <footer class="border-t border-brand-border bg-brand-black px-6 py-8 font-mono text-xs text-brand-muted">
     <div class="max-w-6xl mx-auto flex justify-between">
-      <div>&copy; SYNC RACE CREATIVE STUDIO</div>
+      <div>&copy; SYNC RACE GAME LAB</div>
       <a href="../index.html" class="hover:text-white">← System Loading Screen</a>
     </div>
   </footer>
+
+  <!-- MULTI-MODE CANVAS SCRIPT -->
+  <script>
+    const canvas = document.getElementById('arcadeCanvas');
+    const ctx = canvas.getContext('2d');
+    let currentMode = 'particles';
+
+    // Particle Mode State
+    let particles = [];
+    let particleColor = '#3bf4a3';
+
+    // Pixel Mode State
+    let grid = [];
+    const gridSize = 16;
+    let isDrawing = false;
+
+    // Wave Mode State
+    let waveStep = 0;
+
+    function resize() {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+      initPixels();
+    }
+    window.addEventListener('resize', resize);
+
+    // MODE SWITCHER
+    function switchMode(mode) {
+      currentMode = mode;
+      document.getElementById('particle-controls').classList.toggle('hidden', mode !== 'particles');
+      document.getElementById('pixel-controls').classList.toggle('hidden', mode !== 'pixels');
+      document.getElementById('wave-controls').classList.toggle('hidden', mode !== 'waves');
+
+      // Update button highlights
+      ['particles', 'pixels', 'waves'].forEach(m => {
+        const btn = document.getElementById(`btn-${m}`);
+        if (m === mode) {
+          btn.className = "px-3 py-1.5 rounded bg-brand-accent text-brand-black font-bold transition-all";
+        } else {
+          btn.className = "px-3 py-1.5 rounded bg-brand-border text-brand-muted hover:text-white transition-all";
+        }
+      });
+
+      if (mode === 'pixels') initPixels();
+    }
+
+    // --- MODE 1: PARTICLES ---
+    class Particle {
+      constructor(x, y, color) {
+        this.x = x;
+        this.y = y;
+        this.vx = (Math.random() - 0.5) * 5;
+        this.vy = (Math.random() - 0.5) * 5;
+        this.life = 100;
+        this.color = color;
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.life -= 1.5;
+      }
+      draw() {
+        ctx.fillStyle = this.color;
+        ctx.fillRect(this.x, this.y, 4, 4);
+      }
+    }
+
+    canvas.addEventListener('mousemove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      if (currentMode === 'particles') {
+        particleColor = document.getElementById('color-select').value;
+        for(let i=0; i<3; i++){
+          particles.push(new Particle(x, y, particleColor));
+        }
+      } else if (currentMode === 'pixels' && isDrawing) {
+        paintPixel(x, y);
+      }
+    });
+
+    canvas.addEventListener('mousedown', (e) => {
+      isDrawing = true;
+      if (currentMode === 'pixels') {
+        const rect = canvas.getBoundingClientRect();
+        paintPixel(e.clientX - rect.left, e.clientY - rect.top);
+      }
+    });
+    window.addEventListener('mouseup', () => isDrawing = false);
+
+    // --- MODE 2: PIXEL MATRIX ---
+    function initPixels() {
+      grid = Array(gridSize).fill(0).map(() => Array(gridSize).fill('#0a0a0c'));
+    }
+
+    function paintPixel(x, y) {
+      const col = Math.floor((x / canvas.width) * gridSize);
+      const row = Math.floor((y / canvas.height) * gridSize);
+      if (col >= 0 && col < gridSize && row >= 0 && row < gridSize) {
+        grid[row][col] = '#3bf4a3';
+      }
+    }
+
+    function clearPixels() {
+      initPixels();
+    }
+
+    function drawPixels() {
+      const cellW = canvas.width / gridSize;
+      const cellH = canvas.height / gridSize;
+
+      for (let r = 0; r < gridSize; r++) {
+        for (let c = 0; c < gridSize; c++) {
+          ctx.fillStyle = grid[r][c];
+          ctx.fillRect(c * cellW, r * cellH, cellW - 1, cellH - 1);
+        }
+      }
+    }
+
+    // --- MODE 3: WAVE SYNTHESIZER ---
+    function drawWaves() {
+      const freq = document.getElementById('wave-freq').value;
+      ctx.beginPath();
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = '#3bf4a3';
+
+      for (let x = 0; x < canvas.width; x++) {
+        const y = canvas.height / 2 + Math.sin((x + waveStep) * 0.02 * freq) * 40;
+        if (x === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+      waveStep += 2;
+    }
+
+    // MASTER ANIMATION LOOP
+    function animate() {
+      ctx.fillStyle = 'rgba(10, 10, 12, 0.2)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      if (currentMode === 'particles') {
+        particles.forEach((p, index) => {
+          p.update();
+          p.draw();
+          if (p.life <= 0) particles.splice(index, 1);
+        });
+      } else if (currentMode === 'pixels') {
+        drawPixels();
+      } else if (currentMode === 'waves') {
+        drawWaves();
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    function resetCanvas() {
+      particles = [];
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    // INIT
+    resize();
+    animate();
+  </script>
 
 </body>
 </html>
