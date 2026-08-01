@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Corporate Sucks | SYNC RACE Manifesto</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: { black: '#0a0a0c', card: '#121216', border: '#24242d', accent: '#3bf4a3', warning: '#ff4757', text: '#e2e8f0', muted: '#808b9e' }
+          },
+          fontFamily: { mono: ['JetBrains Mono', 'monospace'], sans: ['Inter', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-brand-black text-brand-text font-sans min-h-screen flex flex-col justify-between">
+
+  <!-- HEADER -->
+  <header class="sticky top-0 z-50 bg-brand-black/90 backdrop-blur-md border-b border-brand-border px-6 py-4">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+      <a href="index.html" class="font-mono text-2xl font-black text-white">SYNC RACE <span class="text-brand-accent text-sm font-normal">[srcs.online]</span></a>
+      <nav class="flex flex-wrap items-center gap-2 font-mono text-sm">
+        <a href="index.html" class="px-3 py-1.5 rounded hover:bg-brand-border">/home</a>
+        <a href="code-studio.html" class="px-3 py-1.5 rounded hover:bg-brand-border">/code-studio</a>
+        <a href="creative-studio.html" class="px-3 py-1.5 rounded hover:bg-brand-border">/creative-studio</a>
+        <a href="arcade.html" class="px-3 py-1.5 rounded hover:bg-brand-border">/arcade</a>
+        <a href="manifesto.html" class="px-3 py-1.5 rounded bg-brand-warning text-black font-bold">!manifesto</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MANIFESTO CONTENT -->
+  <section class="max-w-4xl mx-auto px-6 py-16 w-full">
+    
+    <span class="bg-brand-warning text-black text-xs font-mono font-bold px-2.5 py-1 rounded">
+      THE PHILOSOPHY
+    </span>
+    
+    <h1 class="text-4xl sm:text-6xl font-black text-white mt-4 mb-8 tracking-tight">
+      Corporate Sucks.
+    </h1>
+
+    <div class="space-y-6 text-brand-text text-base sm:text-lg leading-relaxed border-l-2 border-brand-warning/40 pl-6 my-8">
+      <p>
+        Modern software development has become obsessed with quarterly metrics, micro-subscriptions, user tracking, and endless design updates that solve problems nobody had.
+      </p>
+      <p>
+        <strong>Sync Race is an independent production studio built to reject that cycle.</strong>
+      </p>
+      <p>
+        We build systems because they provide real utility—like creating bespoke reporting engines for hotel platforms like Stayntouch, or building lean command centers for freelancers who just want to get work done without paying monthly SaaS taxes.
+      </p>
+    </div>
+
+    <!-- CORE PILLARS -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono text-xs my-12">
+      <div class="bg-brand-card p-6 rounded-lg border border-brand-border">
+        <span class="text-brand-accent font-bold block mb-2">01 // NO SUBSCRIPTION TRAPS</span>
+        <p class="text-brand-muted">Tools should be owned or simple to access—not locked behind aggressive monthly paywalls.</p>
+      </div>
+      <div class="bg-brand-card p-6 rounded-lg border border-brand-border">
+        <span class="text-brand-accent font-bold block mb-2">02 // NO BLOAT</span>
+        <p class="text-brand-muted">Clean code, fast loading, zero tracking scripts, and minimal UI dependencies.</p>
+      </div>
+      <div class="bg-brand-card p-6 rounded-lg border border-brand-border">
+        <span class="text-brand-accent font-bold block mb-2">03 // DIRECT CREATION</span>
+        <p class="text-brand-muted">Visual arts and gaming experiments built out of raw technical passion and aesthetic craft.</p>
+      </div>
+      <div class="bg-brand-card p-6 rounded-lg border border-brand-border">
+        <span class="text-brand-accent font-bold block mb-2">04 // OPEN COLLABORATION</span>
+        <p class="text-brand-muted">Direct email communication. No middle managers, ticketing system walls, or sales pitches.</p>
+      </div>
+    </div>
+
+    <!-- DIRECT CONTACT -->
+    <div class="bg-brand-card border border-brand-border p-8 rounded-xl font-mono">
+      <h3 class="text-white text-xl font-bold mb-2">// Direct Signal</h3>
+      <p class="text-brand-muted text-sm mb-6">Want to collaborate, talk software integration, or request access to tools?</p>
+      <a href="mailto:hello@srcs.online" class="inline-block bg-white text-black px-6 py-3 rounded font-bold hover:bg-brand-accent transition-all text-sm">
+        Transmit Message: hello@srcs.online
+      </a>
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-brand-border bg-brand-black px-6 py-8">
+    <div class="max-w-6xl mx-auto flex justify-between text-xs font-mono text-brand-muted">
+      <div>&copy; SYNC RACE MANIFESTO</div>
+      <a href="index.html" class="hover:text-white">← Return Home</a>
+    </div>
+  </footer>
+
+</body>
+</html>
