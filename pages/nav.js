@@ -24,5 +24,4 @@ class SiteNav extends HTMLElement {
   }
 }
 
-// Registers the custom <site-nav></site-nav> tag
 customElements.define('site-nav', SiteNav);
