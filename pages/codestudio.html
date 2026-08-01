@@ -1,56 +1,41 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
-<!DOCTYPE html>
-<html lang="en" class="dark">
 <head>
   <meta charset="UTF-8" />
-  <title>Sync Race</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SYNC RACE | Code Studio</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- IMPORT THE CENTRALIZED NAV SCRIPT -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: { black: '#0a0a0c', card: '#121216', border: '#24242d', accent: '#3bf4a3', warning: '#ff4757', text: '#e2e8f0', muted: '#808b9e' }
+          },
+          fontFamily: { mono: ['JetBrains Mono', 'monospace'], sans: ['Inter', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
   <script src="./nav.js" defer></script>
 </head>
-<body class="bg-brand-black text-brand-text font-sans">
-
-  <!-- CENTRALIZED NAV INJECTS HERE -->
-  <site-nav></site-nav>
-
-  <!-- MAIN PAGE CONTENT GOES HERE -->
-
-</body>
-</html>
 <body class="bg-brand-black text-brand-text font-sans min-h-screen flex flex-col justify-between">
 
-  <!-- HEADER -->
-  <header class="sticky top-0 z-50 bg-brand-black/90 backdrop-blur-md border-b border-brand-border px-6 py-4">
-    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-      <a href="index.html" class="font-mono text-2xl font-black text-white">SYNC RACE <span class="text-brand-accent text-sm font-normal">[srcs.online]</span></a>
-      <nav class="flex flex-wrap items-center gap-2 font-mono text-sm">
-        <a href="index.html" class="px-3 py-1.5 rounded hover:bg-brand-border">/home</a>
-        <a href="code-studio.html" class="px-3 py-1.5 rounded text-brand-accent bg-brand-border">/code-studio</a>
-        <a href="creative-studio.html" class="px-3 py-1.5 rounded hover:bg-brand-border">/creative-studio</a>
-        <a href="arcade.html" class="px-3 py-1.5 rounded hover:bg-brand-border">/arcade</a>
-        <a href="manifesto.html" class="px-3 py-1.5 rounded bg-brand-warning/10 text-brand-warning font-bold">!manifesto</a>
-      </nav>
-    </div>
-  </header>
+  <site-nav></site-nav>
 
-  <!-- PAGE HEADER -->
   <section class="max-w-6xl mx-auto px-6 py-12 w-full border-b border-brand-border">
     <span class="text-brand-accent font-mono text-sm">// SOFTWARE & INTEGRATIONS</span>
     <h1 class="text-4xl font-black text-white mt-1 mb-4">Code Studio</h1>
     <p class="text-brand-muted max-w-2xl">High-utility engines, client management systems, and micro-tools. No subscription bloat—just functional engineering.</p>
   </section>
 
-  <!-- FEATURED PROJECTS -->
   <section class="max-w-6xl mx-auto px-6 py-12 w-full space-y-12">
-    
-    <!-- STAYNTOUCH PMS PLATFORM -->
     <article class="bg-brand-card border border-brand-border rounded-xl p-8 hover:border-brand-accent/50 transition-all">
       <div class="flex flex-wrap justify-between items-start gap-4 mb-4">
         <div>
           <span class="text-xs font-mono bg-blue-500/10 text-blue-400 px-2.5 py-1 rounded">Enterprise Platform Integration</span>
-          <h2 class="text-2xl font-bold text-white mt-2">Stayntouch PMS Comprehensive Reporting Platform</h2>
+          <h2 class="text-2xl font-bold text-white mt-2">Stayntouch PMS Analytics Engine</h2>
         </div>
         <span class="text-xs font-mono text-brand-accent border border-brand-accent/30 px-2.5 py-1 rounded">Status: Operational</span>
       </div>
@@ -80,18 +65,17 @@
       </div>
     </article>
 
-    <!-- FREELANCER TRACKER -->
     <article class="bg-brand-card border border-brand-border rounded-xl p-8 hover:border-brand-accent/50 transition-all">
       <div class="flex flex-wrap justify-between items-start gap-4 mb-4">
         <div>
           <span class="text-xs font-mono bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded">Independent SaaS</span>
-          <h2 class="text-2xl font-bold text-white mt-2">Freelancer Project & Client Command Center</h2>
+          <h2 class="text-2xl font-bold text-white mt-2">Independent Freelancer OS</h2>
         </div>
         <span class="text-xs font-mono text-brand-warning border border-brand-warning/30 px-2.5 py-1 rounded">Status: Active Build</span>
       </div>
 
       <p class="text-brand-muted text-sm leading-relaxed mb-6">
-        Commercial client management software is bloated with CRM features independent freelancers never use. This lightweight tool allows solo creators to manage active deliverables, track client milestones, and issue clear, un-cluttered invoices without monthly SaaS lock-in.
+        Commercial client management software is bloated with CRM features independent freelancers never use. This lightweight tool allows solo creators to manage active deliverables, track client milestones, and issue clear invoices without monthly SaaS lock-in.
       </p>
 
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6 font-mono text-xs">
@@ -114,14 +98,12 @@
         <a href="#" class="text-brand-accent hover:underline">Join Beta Access →</a>
       </div>
     </article>
-
   </section>
 
-  <!-- FOOTER -->
-  <footer class="border-t border-brand-border bg-brand-black px-6 py-8">
-    <div class="max-w-6xl mx-auto flex justify-between text-xs font-mono text-brand-muted">
+  <footer class="border-t border-brand-border bg-brand-black px-6 py-8 font-mono text-xs text-brand-muted">
+    <div class="max-w-6xl mx-auto flex justify-between">
       <div>&copy; SYNC RACE CODE STUDIO</div>
-      <a href="index.html" class="hover:text-white">← Return Home</a>
+      <a href="../index.html" class="hover:text-white">← System Loading Screen</a>
     </div>
   </footer>
 
