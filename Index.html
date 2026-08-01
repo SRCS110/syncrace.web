@@ -1,11 +1,121 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=./pages/home.html">
-  <title>Redirecting to Sync Race...</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SYNC RACE | Initializing...</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // TARGET ROUTE: Change this path to point to your main content page inside your folder structure
+    const TARGET_PAGE = "./pages/home.html"; 
+
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              black: '#0a0a0c',
+              border: '#24242d',
+              accent: '#3bf4a3',
+              muted: '#808b9e'
+            }
+          },
+          fontFamily: { mono: ['JetBrains Mono', 'Fira Code', 'monospace'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Continuous 3-second loader bar animation */
+    @keyframes loadProgress {
+      0% { width: 0%; }
+      100% { width: 100%; }
+    }
+    .animate-progress {
+      animation: loadProgress 3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+  </style>
 </head>
-<body>
-  <p>Redirecting to <a href="./pages/home.html">Sync Race</a>...</p>
+<body class="bg-brand-black text-white font-mono min-h-screen flex flex-col justify-between items-center p-6 selection:bg-brand-accent selection:text-black">
+
+  <div><!-- Top Spacer for centering --></div>
+
+  <!-- LOADING CONTAINER -->
+  <main class="w-full max-w-sm flex flex-col items-center text-center">
+    
+    <!-- CROSSED WRENCH AND SPOON SVG ICON -->
+    <div class="relative mb-6 p-5 bg-brand-border/30 rounded-2xl border border-brand-border group">
+      <svg class="w-16 h-16 text-brand-accent animate-pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+        <!-- Spoon (slanted top-left to bottom-right) -->
+        <path d="M12 12L4.5 19.5C3.5 20.5 2 20.5 2 19C2 17.5 3.5 16 4.5 15L12 12Z" fill="currentColor" fill-opacity="0.1" />
+        <path d="M20 4C18 2 14.5 2.5 13 5.5C11.5 8.5 12.5 11.5 12.5 11.5L4.5 19.5C3.5 20.5 2 20.5 2 19C2 17.5 3.5 16 4.5 15L12.5 7C12.5 7 15.5 8 18.5 6.5C21.5 5 22 2 20 4Z" />
+        
+        <!-- Wrench (slanted top-right to bottom-left) -->
+        <path d="M14.7 9.3L20 4M20 4C20.5 3.5 21.5 3.5 22 4C22.5 4.5 22.5 5.5 22 6L18 10" />
+        <path d="M14.7 9.3L5 19C4 20 2.5 20 2 19.5C1.5 19 1.5 17.5 2.5 16.5L12.2 6.8" />
+        <path d="M12.2 6.8C11.5 5.5 11.8 3.8 13 2.8C14.2 1.8 16 1.8 17 2.8L15 4.8L16.2 6L18.2 4C19.2 5 19.2 6.8 18.2 8C17.2 9.2 15.5 9.5 14.2 8.8" />
+      </svg>
+    </div>
+
+    <!-- BRAND HEADING -->
+    <h1 class="text-2xl font-black tracking-wider text-white mb-1">
+      SYNC RACE <span class="text-brand-accent text-sm font-normal">[srcs.online]</span>
+    </h1>
+    <p class="text-xs text-brand-muted mb-8">Corporate Sucks. Initializing Workspace...</p>
+
+    <!-- LOADING PROGRESS BAR -->
+    <div class="w-full bg-brand-border h-1.5 rounded-full overflow-hidden mb-3">
+      <div class="bg-brand-accent h-full animate-progress"></div>
+    </div>
+
+    <!-- STATUS TEXT & TIMER -->
+    <div class="flex justify-between items-center w-full text-xs text-brand-muted">
+      <span id="status-text">Bypassing corporate fluff...</span>
+      <span id="timer" class="text-brand-accent font-bold">3s</span>
+    </div>
+
+    <!-- MANUAL OVERRIDE LINK -->
+    <div class="mt-8">
+      <a id="redirect-link" href="#" class="text-xs text-brand-muted underline hover:text-white transition-colors">
+        Skip intro & go directly →
+      </a>
+    </div>
+
+  </main>
+
+  <!-- FOOTER STATUS -->
+  <footer class="text-xs text-brand-muted/60 text-center">
+    SYSTEM // NON-CAPITALIST CODE & CREATIVE LAB
+  </footer>
+
+  <!-- ROUTING & TIMER SCRIPT -->
+  <script>
+    document.getElementById('redirect-link').href = TARGET_PAGE;
+
+    let timeLeft = 3;
+    const timerElement = document.getElementById('timer');
+    const statusText = document.getElementById('status-text');
+
+    const statuses = [
+      "Bypassing corporate fluff...",
+      "Loading code & creative modules...",
+      "Redirecting to Sync Race..."
+    ];
+
+    const countdown = setInterval(() => {
+      timeLeft--;
+      if (timeLeft > 0) {
+        timerElement.textContent = `${timeLeft}s`;
+        statusText.textContent = statuses[3 - timeLeft] || statuses[0];
+      } else {
+        timerElement.textContent = "0s";
+        statusText.textContent = "Routing...";
+        clearInterval(countdown);
+        window.location.href = TARGET_PAGE;
+      }
+    }, 1000);
+  </script>
+
 </body>
 </html>
