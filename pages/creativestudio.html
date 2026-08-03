@@ -1,9 +1,25 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SYNC RACE | Creative Studio</title>
+  <script>
+    // Apply saved theme before first paint to avoid a flash of the wrong theme.
+    if (localStorage.getItem('sr-theme') === 'light') document.documentElement.classList.add('light');
+  </script>
+  <style>
+    :root {
+      --sr-bg: 10 10 12; --sr-card: 18 18 22; --sr-border: 36 36 45; --sr-text: 226 232 240;
+      --sr-muted: 128 139 158; --sr-white: 255 255 255; --sr-black: 0 0 0;
+      --sr-accent: 59 244 163; --sr-warning: 255 71 87;
+    }
+    :root.light {
+      --sr-bg: 255 255 255; --sr-card: 244 245 247; --sr-border: 220 223 228; --sr-text: 23 23 28;
+      --sr-muted: 100 108 122; --sr-white: 15 15 18; --sr-black: 255 255 255;
+      --sr-accent: 5 150 105; --sr-warning: 220 38 38;
+    }
+  </style>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -11,7 +27,14 @@
       theme: {
         extend: {
           colors: {
-            brand: { black: '#0a0a0c', card: '#121216', border: '#24242d', accent: '#3bf4a3', warning: '#ff4757', text: '#e2e8f0', muted: '#808b9e' }
+            white: 'rgb(var(--sr-white) / <alpha-value>)',
+            black: 'rgb(var(--sr-black) / <alpha-value>)',
+            brand: {
+              black: 'rgb(var(--sr-bg) / <alpha-value>)', card: 'rgb(var(--sr-card) / <alpha-value>)',
+              border: 'rgb(var(--sr-border) / <alpha-value>)', accent: 'rgb(var(--sr-accent) / <alpha-value>)',
+              warning: 'rgb(var(--sr-warning) / <alpha-value>)', text: 'rgb(var(--sr-text) / <alpha-value>)',
+              muted: 'rgb(var(--sr-muted) / <alpha-value>)'
+            }
           },
           fontFamily: { mono: ['JetBrains Mono', 'monospace'], sans: ['Inter', 'sans-serif'] }
         }
