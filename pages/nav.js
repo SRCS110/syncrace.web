@@ -50,4 +50,4 @@ function updateThemeToggleUI() {
   const button = document.getElementById('theme-toggle');
   if (label) label.textContent = isLight ? 'light' : 'dark';
   if (button) button.setAttribute('aria-pressed', String(isLight));
-}" 
+}
