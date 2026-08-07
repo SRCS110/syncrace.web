@@ -75,7 +75,7 @@
         <div class="flex gap-2">
           <button id="btn-particles" onclick="switchMode('particles')" class="px-3 py-1.5 rounded bg-brand-accent text-brand-black font-bold transition-all">01. Vector Field</button>
           <button id="btn-pixels" onclick="switchMode('pixels')" class="px-3 py-1.5 rounded bg-brand-border text-brand-muted hover:text-white transition-all">02. Pixel Canvas</button>
-          <button id="btn-waves" onclick="switchMode('waves')" class="px-3 py-1.5 rounded bg-brand-border text-brand-muted hover:text-white transition-all">03. Wave Synthesizer</button>
+          <button id="btn-waves" onclick="switchMode('waves')" class="px-3 py-1.5 rounded bg-brand-border text-brand-muted hover:text-white transition-all">03. Interactive Jellysifh</button>
         </div>
         <span class="text-brand-muted hidden sm:inline">[INTERACTIVE ENGINE]</span>
       </div>
@@ -129,16 +129,17 @@
         
         <div class="space-y-4 text-xs">
           <div class="border-l-2 border-brand-accent pl-3">
-            <span class="text-brand-muted block">ENTRY #03 — Canvas Particle Vector Field</span>
-            <p class="text-white mt-1">Multi-mode rendering engine integrated. Supports dynamic vector physics, pixel matrix painting, and sine-wave calculations.</p>
+            <span class="text-brand-muted block">ENTRY #03 — Interactive Jellyfish</span>
+            <p class="text-white mt-1">Testing fluid dynaimcs of HTML5 and cursor tracking functionality.</p>
           </div>
           <div class="border-l-2 border-brand-border pl-3">
-            <span class="text-brand-muted block">ENTRY #02 — Game Loop Mechanics</span>
-            <p class="text-brand-muted mt-1">Testing 60FPS physics step routines in browser engine. Zero external engine dependencies.</p>
+            <span class="text-brand-muted block">ENTRY #02 — Pixel Canvas</span>
+            <p class="text-brand-muted mt-1">Interacting with grid game functionality and user input logging.</p>
           </div>
           <div class="border-l-2 border-brand-border pl-3">
-            <span class="text-brand-muted block">ENTRY #01 — Canvas Initialization</span>
-            <p class="text-brand-muted mt-1">Initializing pixel matrices, particle boundaries, and input handlers.</p>
+            <span class="text-brand-muted block">ENTRY #01 — Vector Field</span>
+            <p class="text-brand-muted mt-1">Multi-mode rendering engine integrated. Supports dynamic vector physics, pixel matrix painting, and sine-wave calculations.
+</p>
           </div>
         </div>
       </div>
@@ -293,7 +294,7 @@
       }
     }
 
-    // --- MODE 3: WAVE SYNTHESIZER ---
+    // --- MODE 3: Jellyfish ---
     function drawWaves() {
       const freq = document.getElementById('wave-freq').value;
       ctx.beginPath();
@@ -310,33 +311,324 @@
     }
 
     // MASTER ANIMATION LOOP
-    function animate() {
-      ctx.fillStyle = 'rgba(10, 10, 12, 0.2)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+   <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Volumetric Realism Jellyfish</title>
+  <style>
+    * { margin: 0; padding: 0; overflow: hidden; }
+    body, html { width: 100%; height: 100%; background: #02050e; font-family: sans-serif; }
+    canvas { display: block; width: 100%; height: 100%; cursor: pointer; }
+    #info {
+      position: absolute; top: 20px; left: 20px; color: #a0e0ff;
+      background: rgba(3, 10, 25, 0.6); padding: 10px 16px; border-radius: 8px;
+      backdrop-filter: blur(6px); border: 1px solid rgba(160, 224, 255, 0.15);
+      pointer-events: none; font-size: 13px;
+    }
+  </style>
+</head>
+<body>
 
-      if (currentMode === 'particles') {
-        particles.forEach((p, index) => {
-          p.update();
-          p.draw();
-          if (p.life <= 0) particles.splice(index, 1);
-        });
-      } else if (currentMode === 'pixels') {
-        drawPixels();
-      } else if (currentMode === 'waves') {
-        drawWaves();
+  <div id="info">
+    <strong style="color: #fff;">Volumetric Ocean Jellyfish</strong><br>
+    Click anywhere to pulse & propel
+  </div>
+
+  <canvas id="canvas"></canvas>
+
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    let width, height;
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    const VISCOSITY = 0.93;
+    const GRAVITY = -0.04;
+
+    // Ambient floating marine snow / plankton
+    class MarineSnow {
+      constructor() { this.reset(); }
+      reset() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.size = Math.random() * 2 + 0.5;
+        this.alpha = Math.random() * 0.4 + 0.1;
+        this.vx = (Math.random() - 0.5) * 0.15;
+        this.vy = (Math.random() - 0.5) * 0.15 - 0.05;
       }
+      update() {
+        this.x += this.vx; this.y += this.vy;
+        if (this.x < 0 || this.x > width || this.y < 0 || this.y > height) this.reset();
+      }
+      draw() {
+        ctx.fillStyle = `rgba(140, 210, 255, ${this.alpha})`;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    // Verlet Node for Tentacles
+    class Node {
+      constructor(x, y) {
+        this.x = x; this.y = y;
+        this.oldX = x; this.oldY = y;
+      }
+      update() {
+        const vx = (this.x - this.oldX) * VISCOSITY;
+        const vy = (this.y - this.oldY) * VISCOSITY;
+        this.oldX = this.x; this.oldY = this.y;
+        this.x += vx; this.y += vy;
+      }
+    }
+
+    class RealisticJellyfish {
+      constructor(x, y) {
+        this.x = x; this.y = y;
+        this.vx = 0; this.vy = 0;
+        this.angle = 0;
+        this.targetAngle = 0;
+
+        this.baseRadius = 55;
+        this.pulsePhase = 0;
+        this.time = 0;
+
+        // Outer Fine Tentacles (30 individual threads)
+        this.numOuterTentacles = 28;
+        this.outerNodes = 16;
+        this.outerTentacles = [];
+
+        // Inner Frilly Oral Arms (4 thick ruffled ribbons)
+        this.numOralArms = 4;
+        this.oralNodes = 14;
+        this.oralArms = [];
+
+        this.initPhysics();
+      }
+
+      initPhysics() {
+        // Init outer tentacles
+        for (let i = 0; i < this.numOuterTentacles; i++) {
+          const t = [];
+          for (let j = 0; j < this.outerNodes; j++) {
+            t.push(new Node(this.x, this.y + j * 9));
+          }
+          this.outerTentacles.push(t);
+        }
+        // Init inner oral arms
+        for (let i = 0; i < this.numOralArms; i++) {
+          const arm = [];
+          for (let j = 0; j < this.oralNodes; j++) {
+            arm.push(new Node(this.x, this.y + j * 12));
+          }
+          this.oralArms.push(arm);
+        }
+      }
+
+      pulse(force = 5, tx = null, ty = null) {
+        if (tx !== null && ty !== null) {
+          const dx = tx - this.x;
+          const dy = ty - this.y;
+          this.targetAngle = Math.atan2(dy, dx) + Math.PI / 2;
+        }
+        this.pulsePhase = 0.01;
+        const dir = this.angle - Math.PI / 2;
+        this.vx += Math.cos(dir) * force;
+        this.vy += Math.sin(dir) * force;
+      }
+
+      update() {
+        this.time += 0.03;
+
+        // Angle interpolation
+        let diff = this.targetAngle - this.angle;
+        while (diff < -Math.PI) diff += Math.PI * 2;
+        while (diff > Math.PI) diff -= Math.PI * 2;
+        this.angle += diff * 0.04;
+
+        // Pulse timer cycle
+        if (this.pulsePhase > 0) {
+          this.pulsePhase += 0.035;
+          if (this.pulsePhase >= Math.PI) this.pulsePhase = 0;
+        } else if (Math.random() < 0.008) {
+          this.pulse(2.5 + Math.random() * 2);
+        }
+
+        // Motion physics
+        this.x += this.vx; this.y += this.vy;
+        this.vy += GRAVITY;
+        this.vx *= VISCOSITY; this.vy *= VISCOSITY;
+
+        // Screen boundary pushes
+        if (this.x < 120) this.vx += 0.15;
+        if (this.x > width - 120) this.vx -= 0.15;
+        if (this.y < 120) this.vy += 0.15;
+        if (this.y > height - 120) this.vy -= 0.15;
+
+        this.updateChain(this.outerTentacles, 9, 0.9);
+        this.updateChain(this.oralArms, 12, 0.6);
+      }
+
+      updateChain(chains, segLength, spread) {
+        const contraction = Math.sin(this.pulsePhase);
+        const rimR = this.baseRadius * (1 - 0.28 * contraction);
+
+        chains.forEach((chain, idx) => {
+          const ratio = (idx / (chains.length - 1) - 0.5) * spread;
+          const attachX = this.x + Math.cos(this.angle) * ratio * rimR * 2;
+          const attachY = this.y + Math.sin(this.angle) * ratio * rimR * 2 + Math.cos(this.angle) * 12;
+
+          chain[0].x = attachX;
+          chain[0].y = attachY;
+
+          for (let j = 1; j < chain.length; j++) {
+            const n = chain[j];
+            n.update();
+            const prev = chain[j - 1];
+            const dx = n.x - prev.x;
+            const dy = n.y - prev.y;
+            const d = Math.hypot(dx, dy) || 1;
+            const factor = (d - segLength) / d;
+
+            n.x -= dx * 0.5 * factor;
+            n.y -= dy * 0.5 * factor;
+            prev.x += dx * 0.5 * factor;
+            prev.y += dy * 0.5 * factor;
+          }
+        });
+      }
+
+      draw() {
+        ctx.save();
+
+        // Use 'screen' blending to simulate organic translucency
+        ctx.globalCompositeOperation = 'screen';
+
+        const contraction = Math.sin(this.pulsePhase);
+        const rx = this.baseRadius * (1 - 0.28 * contraction);
+        const ry = this.baseRadius * (1 + 0.22 * contraction);
+
+        // --- 1. Fine Outer Hair Tentacles ---
+        this.outerTentacles.forEach((t) => {
+          ctx.beginPath();
+          ctx.moveTo(t[0].x, t[0].y);
+          for (let j = 1; j < t.length - 1; j++) {
+            const xc = (t[j].x + t[j + 1].x) / 2;
+            const yc = (t[j].y + t[j + 1].y) / 2;
+            ctx.quadraticCurveTo(t[j].x, t[j].y, xc, yc);
+          }
+          ctx.strokeStyle = 'rgba(160, 220, 255, 0.18)';
+          ctx.lineWidth = 1.2;
+          ctx.stroke();
+        });
+
+        // --- 2. Volumetric Ruffled Oral Arms ---
+        this.oralArms.forEach((arm, aIdx) => {
+          ctx.beginPath();
+          // Draw ruffled left edge
+          for (let j = 0; j < arm.length; j++) {
+            const node = arm[j];
+            const wave = Math.sin(this.time * 4 + j * 0.6 + aIdx) * (14 - j * 0.7);
+            const widthOffset = (12 - j * 0.6);
+            if (j === 0) ctx.moveTo(node.x - widthOffset + wave, node.y);
+            else ctx.lineTo(node.x - widthOffset + wave, node.y);
+          }
+          // Draw ruffled right edge backward
+          for (let j = arm.length - 1; j >= 0; j--) {
+            const node = arm[j];
+            const wave = Math.sin(this.time * 4 + j * 0.6 + aIdx + 1) * (14 - j * 0.7);
+            const widthOffset = (12 - j * 0.6);
+            ctx.lineTo(node.x + widthOffset + wave, node.y);
+          }
+          ctx.closePath();
+
+          const armGrad = ctx.createLinearGradient(this.x, this.y, this.x, this.y + 120);
+          armGrad.addColorStop(0, 'rgba(255, 140, 220, 0.35)');
+          armGrad.addColorStop(0.5, 'rgba(140, 180, 255, 0.2)');
+          armGrad.addColorStop(1, 'rgba(100, 230, 255, 0.0)');
+          ctx.fillStyle = armGrad;
+          ctx.fill();
+        });
+
+        // Translate to jellyfish center for cap & organs
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.angle);
+
+        // --- 3. Inner Glowing Organs (Horseshoe Gonads) ---
+        for (let i = 0; i < 4; i++) {
+          const a = (i * Math.PI) / 2 + Math.PI / 4;
+          const gx = Math.cos(a) * (rx * 0.35);
+          const gy = Math.sin(a) * (ry * 0.25) - ry * 0.2;
+
+          const organGrad = ctx.createRadialGradient(gx, gy, 2, gx, gy, rx * 0.25);
+          organGrad.addColorStop(0, 'rgba(255, 160, 230, 0.7)');
+          organGrad.addColorStop(0.6, 'rgba(180, 90, 240, 0.3)');
+          organGrad.addColorStop(1, 'rgba(0,0,0,0)');
+
+          ctx.fillStyle = organGrad;
+          ctx.beginPath();
+          ctx.arc(gx, gy, rx * 0.25, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // --- 4. Subsurface Volumetric Bell ---
+        const bellBody = ctx.createRadialGradient(0, -ry * 0.3, 5, 0, 0, rx * 1.3);
+        bellBody.addColorStop(0, 'rgba(220, 245, 255, 0.45)');
+        bellBody.addColorStop(0.4, 'rgba(120, 190, 255, 0.25)');
+        bellBody.addColorStop(0.75, 'rgba(140, 90, 230, 0.12)');
+        bellBody.addColorStop(1, 'rgba(0, 0, 0, 0)');
+
+        ctx.beginPath();
+        ctx.moveTo(-rx, 0);
+        ctx.bezierCurveTo(-rx * 1.05, -ry * 1.35, rx * 1.05, -ry * 1.35, rx, 0);
+        ctx.bezierCurveTo(rx * 0.6, ry * 0.25, -rx * 0.6, ry * 0.25, -rx, 0);
+        ctx.fillStyle = bellBody;
+        ctx.fill();
+
+        // --- 5. Refractive Rim Highlight (No Dark Lines) ---
+        ctx.beginPath();
+        ctx.moveTo(-rx, 0);
+        ctx.bezierCurveTo(-rx * 1.02, -ry * 1.32, rx * 1.02, -ry * 1.32, rx, 0);
+        ctx.strokeStyle = 'rgba(200, 245, 255, 0.55)';
+        ctx.lineWidth = 2.5;
+        ctx.stroke();
+
+        ctx.restore();
+      }
+    }
+
+    const snow = Array.from({ length: 80 }, () => new MarineSnow());
+    const jellyfish = new RealisticJellyfish(width / 2, height / 2);
+
+    window.addEventListener('click', (e) => {
+      jellyfish.pulse(6, e.clientX, e.clientY);
+    });
+
+    function animate() {
+      // Soft ocean depth background clearing
+      ctx.fillStyle = 'rgba(2, 5, 14, 0.28)';
+      ctx.fillRect(0, 0, width, height);
+
+      snow.forEach(s => { s.update(); s.draw(); });
+
+      jellyfish.update();
+      jellyfish.draw();
 
       requestAnimationFrame(animate);
     }
 
-    function resetCanvas() {
-      particles = [];
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-    }
-
-    // INIT
-    resize();
     animate();
+  </script>
+</body>
+</html>
   </script>
 
 </body>
