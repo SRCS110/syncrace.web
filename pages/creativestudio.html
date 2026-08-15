@@ -1,174 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SYNC RACE | Web Design</title>
-  <script>
-    // Apply saved theme before first paint to avoid a flash of the wrong theme.
-    if (localStorage.getItem('sr-theme') === 'light') document.documentElement.classList.add('light');
-  </script>
-  <style>
-    :root {
-      --sr-bg: 10 10 12; --sr-card: 18 18 22; --sr-border: 36 36 45; --sr-text: 226 232 240;
-      --sr-muted: 128 139 158; --sr-white: 255 255 255; --sr-black: 0 0 0;
-      --sr-accent: 59 244 163; --sr-warning: 255 71 87;
-    }
-    :root.light {
-      --sr-bg: 255 255 255; --sr-card: 244 245 247; --sr-border: 220 223 228; --sr-text: 23 23 28;
-      --sr-muted: 100 108 122; --sr-white: 15 15 18; --sr-black: 255 255 255;
-      --sr-accent: 5 150 105; --sr-warning: 220 38 38;
-    }
-    /* Screenshots scroll on hover so a full-page capture reads as a real site, not a crop. */
-    .shot { transition: object-position 2.5s ease-in-out; object-position: top center; }
-    .group:hover .shot { object-position: bottom center; }
-    @media (prefers-reduced-motion: reduce) {
-      .shot { transition: none; }
-      .group:hover .shot { object-position: top center; }
-    }
-    :focus-visible { outline: 2px solid rgb(var(--sr-accent)); outline-offset: 2px; }
-  </style>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            white: 'rgb(var(--sr-white) / <alpha-value>)',
-            black: 'rgb(var(--sr-black) / <alpha-value>)',
-            brand: {
-              black: 'rgb(var(--sr-bg) / <alpha-value>)', card: 'rgb(var(--sr-card) / <alpha-value>)',
-              border: 'rgb(var(--sr-border) / <alpha-value>)', accent: 'rgb(var(--sr-accent) / <alpha-value>)',
-              warning: 'rgb(var(--sr-warning) / <alpha-value>)', text: 'rgb(var(--sr-text) / <alpha-value>)',
-              muted: 'rgb(var(--sr-muted) / <alpha-value>)'
-            }
-          },
-          fontFamily: { mono: ['JetBrains Mono', 'monospace'], sans: ['Inter', 'sans-serif'] }
-        }
-      }
-    }
-  </script>
-  <script src="./nav.js" defer></script>
+<title>Websites — Sync Race Studios</title>
+<meta name="description" content="Websites designed and built end to end by Sync Race Studios.">
+<link rel="canonical" href="https://www.srcs.online/pages/creativestudio.html">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>if(localStorage.getItem('sr-theme')==='dark')document.documentElement.classList.add('dark');</script>
+<link rel="icon" href="../assets/srcslogo">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../srcs.css">
 </head>
-<body class="bg-brand-black text-brand-text font-sans min-h-screen flex flex-col justify-between">
+<body>
 
-  <site-nav></site-nav>
+<site-nav></site-nav>
 
-  <section class="max-w-6xl mx-auto px-6 py-12 w-full border-b border-brand-border">
-    <span class="text-brand-accent font-mono text-sm">// WEBSITE DESIGN</span>
-    <h1 class="text-4xl font-black text-white mt-1 mb-4">Web Design</h1>
-    <p class="text-brand-muted max-w-2xl">Sites I've designed and built end to end — layout, type, front end, and the backend that keeps them running. Every project below is live code, not a mockup.</p>
+<main>
+
+  <section class="shell page-top">
+    <span class="kicker rise">Websites</span>
+    <h1 class="rise">Designed and built<br><span class="warm">from an empty file.</span></h1>
+    <p class="lede rise" style="margin-top:1.6rem">Layout, type, photography, front end, and the bits behind the scenes that keep it running. Every site below is live — click through and have a proper look.</p>
   </section>
 
-  <section class="max-w-6xl mx-auto px-6 py-12 w-full">
+  <!--
+    TO ADD A PROJECT
+    1. Save a screenshot as Assets/work/<name>.png — a full-page capture
+       around 1200px wide looks best.
+    2. Copy one <a class="card frame-link"> block and change the image path,
+       alt text, domain, pill, title, blurb, and href.
+    If the image isn't there yet, the card shows a note naming the file it wants.
+  -->
+  <section class="band shell" style="padding-top:0">
+    <div class="cards">
 
-    <!--
-      TO ADD A PROJECT:
-      1. Drop a screenshot in ./images/ (a full-page capture at ~1200px wide works best).
-      2. Copy one <article> block below and change: image src, alt, domain, tag, title, blurb, stack, href.
-      If the image file isn't there yet, the card falls back to a labeled placeholder telling you which file it wants.
-    -->
+      <a class="card frame-link rise" href="#" style="padding:0;overflow:hidden">
+        <div class="frame" style="border:0;border-radius:0;box-shadow:none">
+          <div class="frame-bar">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span class="frame-url">project-one.com</span>
+          </div>
+          <img class="shot" src="../assets/work/one.png" alt=""
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="slot" style="display:none"><b>Project one</b><span>Assets/work/one.png</span></div>
+        </div>
+        <div style="padding:1.5rem 1.6rem 1.75rem">
+          <span class="pill pill-lamp">Project type</span>
+          <h3 style="margin-top:.9rem">Project name</h3>
+          <p>Who it was for and what changed for them after it launched. Write it the way you'd say it out loud, not the way a brochure would.</p>
+        </div>
+      </a>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <a class="card frame-link rise" href="#" style="padding:0;overflow:hidden">
+        <div class="frame" style="border:0;border-radius:0;box-shadow:none">
+          <div class="frame-bar">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span class="frame-url">project-two.com</span>
+          </div>
+          <img class="shot" src="../assets/work/two.png" alt=""
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="slot" style="display:none"><b>Project two</b><span>Assets/work/two.png</span></div>
+        </div>
+        <div style="padding:1.5rem 1.6rem 1.75rem">
+          <span class="pill pill-lamp">Project type</span>
+          <h3 style="margin-top:.9rem">Project name</h3>
+          <p>If you have a number worth quoting — bookings up, phone calls down, hours saved a week — this is where it belongs.</p>
+        </div>
+      </a>
 
-      <!-- PROJECT 01 -->
-      <article class="bg-brand-card border border-brand-border rounded-lg overflow-hidden group hover:border-brand-accent transition-all flex flex-col">
-        <div class="flex items-center gap-2 px-3 py-2 border-b border-brand-border bg-brand-black/40 font-mono text-[10px] text-brand-muted">
-          <span class="flex gap-1" aria-hidden="true">
-            <span class="w-2 h-2 rounded-full bg-brand-border"></span>
-            <span class="w-2 h-2 rounded-full bg-brand-border"></span>
-            <span class="w-2 h-2 rounded-full bg-brand-border"></span>
-          </span>
-          <span class="truncate group-hover:text-brand-accent transition-all">surflinejaxbeach.com</span>
-        </div>
-        <div class="relative h-48 bg-brand-border/40 overflow-hidden">
-          <img src="https://srcs.online/assets/surfline.jpg" alt="Homepage of the Surfline 8th Avenue So. vacation rental site"
-               class="shot w-full h-full object-cover"
-               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-          <div class="hidden absolute inset-0 items-center justify-center text-center px-4 font-mono text-xs text-brand-muted">
-            [ ADD ./images/surfline.png ]
+      <a class="card frame-link rise" href="#" style="padding:0;overflow:hidden">
+        <div class="frame" style="border:0;border-radius:0;box-shadow:none">
+          <div class="frame-bar">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span class="frame-url">project-three.com</span>
           </div>
+          <img class="shot" src="../assets/work/three.png" alt=""
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="slot" style="display:none"><b>Project three</b><span>Assets/work/three.png</span></div>
         </div>
-        <div class="p-4 font-mono flex flex-col flex-1">
-          <span class="text-xs text-brand-accent block mb-1">RENTAL MARKETING SITE</span>
-          <h3 class="text-white font-bold text-sm">Surfline 8th Avenue So.</h3>
-          <p class="text-xs text-brand-muted mt-2">Marketting site for a beachfront condo in Jacksonville Beach. Photo-led layout, gallery, and booking details built to convert without the listing-platform fees.</p>
-          <div class="flex flex-wrap gap-1.5 mt-3">
-            <span class="text-[10px] border border-brand-border px-1.5 py-0.5 rounded text-brand-muted">HTML</span>
-            <span class="text-[10px] border border-brand-border px-1.5 py-0.5 rounded text-brand-muted">TAILWIND</span>
-            <span class="text-[10px] border border-brand-border px-1.5 py-0.5 rounded text-brand-muted">SUPABASE</span>
-          </div>
-          <a href="https://surflinejaxbeach.com" class="mt-4 text-xs text-brand-muted hover:text-brand-accent transition-all inline-flex items-center gap-1">View live site →</a>
+        <div style="padding:1.5rem 1.6rem 1.75rem">
+          <span class="pill pill-lamp">Project type</span>
+          <h3 style="margin-top:.9rem">Project name</h3>
+          <p>Duplicate this block for each new site. Three across looks right on a laptop; they stack on a phone.</p>
         </div>
-      </article>
-
-      <!-- PROJECT 02 -->
-      <article class="bg-brand-card border border-brand-border rounded-lg overflow-hidden group hover:border-brand-accent transition-all flex flex-col">
-        <div class="flex items-center gap-2 px-3 py-2 border-b border-brand-border bg-brand-black/40 font-mono text-[10px] text-brand-muted">
-          <span class="flex gap-1" aria-hidden="true">
-            <span class="w-2 h-2 rounded-full bg-brand-border"></span>
-            <span class="w-2 h-2 rounded-full bg-brand-border"></span>
-            <span class="w-2 h-2 rounded-full bg-brand-border"></span>
-          </span>
-          <span class="truncate group-hover:text-brand-accent transition-all">freelancehub.app</span>
-        </div>
-        <div class="relative h-48 bg-brand-border/40 overflow-hidden">
-          <img src="./images/freelancehub.png" alt="FreelanceHub dashboard interface"
-               class="shot w-full h-full object-cover"
-               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-          <div class="hidden absolute inset-0 items-center justify-center text-center px-4 font-mono text-xs text-brand-muted">
-            [ ADD ./images/freelancehub.png ]
-          </div>
-        </div>
-        <div class="p-4 font-mono flex flex-col flex-1">
-          <span class="text-xs text-brand-accent block mb-1">WEB APP</span>
-          <h3 class="text-white font-bold text-sm">FreelanceHub</h3>
-          <p class="text-xs text-brand-muted mt-2">Single-page dashboard for freelancers and small shops — clients, documents, bookmarks, and recurring charges in one dark, data-dense interface. No framework, no bundler.</p>
-          <div class="flex flex-wrap gap-1.5 mt-3">
-            <span class="text-[10px] border border-brand-border px-1.5 py-0.5 rounded text-brand-muted">VANILLA JS</span>
-            <span class="text-[10px] border border-brand-border px-1.5 py-0.5 rounded text-brand-muted">SUPABASE</span>
-            <span class="text-[10px] border border-brand-border px-1.5 py-0.5 rounded text-brand-muted">GOOGLE OAUTH</span>
-          </div>
-          <a href="#" class="mt-4 text-xs text-brand-muted hover:text-brand-accent transition-all inline-flex items-center gap-1">View live site →</a>
-        </div>
-      </article>
-
-      <!-- PROJECT 03 — duplicate this block for each new project -->
-      <article class="bg-brand-card border border-dashed border-brand-border rounded-lg overflow-hidden group hover:border-brand-accent transition-all flex flex-col">
-        <div class="flex items-center gap-2 px-3 py-2 border-b border-brand-border bg-brand-black/40 font-mono text-[10px] text-brand-muted">
-          <span class="flex gap-1" aria-hidden="true">
-            <span class="w-2 h-2 rounded-full bg-brand-border"></span>
-            <span class="w-2 h-2 rounded-full bg-brand-border"></span>
-            <span class="w-2 h-2 rounded-full bg-brand-border"></span>
-          </span>
-          <span class="truncate">yournextproject.com</span>
-        </div>
-        <div class="relative h-48 bg-brand-border/40 overflow-hidden">
-          <div class="absolute inset-0 flex items-center justify-center text-center px-4 font-mono text-xs text-brand-muted">
-            [ ADD ./images/project-03.png ]
-          </div>
-        </div>
-        <div class="p-4 font-mono flex flex-col flex-1">
-          <span class="text-xs text-brand-accent block mb-1">CATEGORY</span>
-          <h3 class="text-white font-bold text-sm">Project title</h3>
-          <p class="text-xs text-brand-muted mt-2">One or two lines on what the site does and what you built. Swap this block out — the markup is identical to the cards above.</p>
-          <div class="flex flex-wrap gap-1.5 mt-3">
-            <span class="text-[10px] border border-brand-border px-1.5 py-0.5 rounded text-brand-muted">STACK</span>
-          </div>
-          <a href="#" class="mt-4 text-xs text-brand-muted hover:text-brand-accent transition-all inline-flex items-center gap-1">View live site →</a>
-        </div>
-      </article>
+      </a>
 
     </div>
   </section>
 
-  <footer class="border-t border-brand-border bg-brand-black px-6 py-8 font-mono text-xs text-brand-muted">
-    <div class="max-w-6xl mx-auto flex justify-between">
-      <div>&copy; SYNC RACE WEB DESIGN</div>
-      <a href="../index.html" class="hover:text-white">← System Loading Screen</a>
+  <section class="shell" style="padding-bottom:clamp(2.5rem,7vw,4rem)">
+    <div class="rise" style="background:var(--surface);border:1px solid var(--hair);border-radius:22px;box-shadow:var(--lift-3);padding:clamp(2.5rem,6vw,4rem) var(--gut);text-align:center">
+      <h2>Want one of these?</h2>
+      <p class="muted" style="max-width:44ch;margin:1.1rem auto 2rem">Send a couple of sentences about your business and what the site needs to do.</p>
+      <a class="btn btn-lamp" href="mailto:hello@srcs.online">hello@srcs.online</a>
     </div>
-  </footer>
+  </section>
 
+</main>
+
+<footer class="foot">
+  <div class="shell">
+    <span>© 2026 Sync Race Studios</span>
+    <span><a href="mailto:hello@srcs.online">hello@srcs.online</a></span>
+    <span>srcs.online</span>
+  </div>
+</footer>
+
+<script src="../nav.js" defer></script>
+<script>
+  const io_items = document.querySelectorAll('.rise');
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+    io_items.forEach(el => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver(es => es.forEach((e,i) => {
+      if (!e.isIntersecting) return;
+      setTimeout(() => e.target.classList.add('in'), i*80);
+      io.unobserve(e.target);
+    }), { threshold:.1, rootMargin:'0px 0px -50px' });
+    io_items.forEach(el => io.observe(el));
+  }
+</script>
 </body>
 </html>

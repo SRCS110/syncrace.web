@@ -1,107 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SYNC RACE | Manifesto</title>
-  <script>
-    // Apply saved theme before first paint to avoid a flash of the wrong theme.
-    if (localStorage.getItem('sr-theme') === 'light') document.documentElement.classList.add('light');
-  </script>
-  <style>
-    :root {
-      --sr-bg: 10 10 12; --sr-card: 18 18 22; --sr-border: 36 36 45; --sr-text: 226 232 240;
-      --sr-muted: 128 139 158; --sr-white: 255 255 255; --sr-black: 0 0 0;
-      --sr-accent: 59 244 163; --sr-warning: 255 71 87;
-    }
-    :root.light {
-      --sr-bg: 255 255 255; --sr-card: 244 245 247; --sr-border: 220 223 228; --sr-text: 23 23 28;
-      --sr-muted: 100 108 122; --sr-white: 15 15 18; --sr-black: 255 255 255;
-      --sr-accent: 5 150 105; --sr-warning: 220 38 38;
-    }
-  </style>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            white: 'rgb(var(--sr-white) / <alpha-value>)',
-            black: 'rgb(var(--sr-black) / <alpha-value>)',
-            brand: {
-              black: 'rgb(var(--sr-bg) / <alpha-value>)', card: 'rgb(var(--sr-card) / <alpha-value>)',
-              border: 'rgb(var(--sr-border) / <alpha-value>)', accent: 'rgb(var(--sr-accent) / <alpha-value>)',
-              warning: 'rgb(var(--sr-warning) / <alpha-value>)', text: 'rgb(var(--sr-text) / <alpha-value>)',
-              muted: 'rgb(var(--sr-muted) / <alpha-value>)'
-            }
-          },
-          fontFamily: { mono: ['JetBrains Mono', 'monospace'], sans: ['Inter', 'sans-serif'] }
-        }
-      }
-    }
-  </script>
-  <script src="./nav.js" defer></script>
+<title>How we work — Sync Race Studios</title>
+<meta name="description" content="Why Sync Race Studios builds the way it does: no subscription traps, no bloat, no middlemen.">
+<link rel="canonical" href="https://www.srcs.online/pages/manifesto.html">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>if(localStorage.getItem('sr-theme')==='dark')document.documentElement.classList.add('dark');</script>
+<link rel="icon" href="../assets/srcslogo">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../srcs.css">
 </head>
-<body class="bg-brand-black text-brand-text font-sans min-h-screen flex flex-col justify-between">
+<body>
 
-  <site-nav></site-nav>
+<site-nav></site-nav>
 
-  <section class="max-w-4xl mx-auto px-6 py-16 w-full">
-    <span class="bg-brand-warning text-black text-xs font-mono font-bold px-2.5 py-1 rounded">
-      THE PHILOSOPHY
-    </span>
-    
-    <h1 class="text-4xl sm:text-6xl font-black text-white mt-4 mb-8 tracking-tight">
-      Corporate Sucks.
-    </h1>
+<main>
 
-    <div class="space-y-6 text-brand-text text-base sm:text-lg leading-relaxed border-l-2 border-brand-warning/40 pl-6 my-8">
-      <p>
-        Modern software development has become obsessed with quarterly metrics, micro-subscriptions, user tracking, and endless design updates that solve problems nobody had.
-      </p>
-      <p>
-        <strong>Sync Race is an independent production studio built to reject that cycle.</strong>
-      </p>
-      <p>
-        We build systems because they provide real utility—like creating bespoke reporting engines for hotel platforms like Stayntouch, or building lean command centers for freelancers who just want to get work done without paying monthly SaaS taxes.
-      </p>
-    </div>
+  <section class="shell page-top" style="max-width:840px">
+    <span class="kicker rise">How we work</span>
+    <h1 class="rise">We're not trying to<br><span class="warm">sell you a subscription.</span></h1>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono text-xs my-12">
-      <div class="bg-brand-card p-6 rounded-lg border border-brand-border">
-        <span class="text-brand-accent font-bold block mb-2">01 // NO SUBSCRIPTION TRAPS</span>
-        <p class="text-brand-muted">Tools should be owned or simple to access—not locked behind aggressive monthly paywalls.</p>
-      </div>
-      <div class="bg-brand-card p-6 rounded-lg border border-brand-border">
-        <span class="text-brand-accent font-bold block mb-2">02 // NO BLOAT</span>
-        <p class="text-brand-muted">Clean code, fast loading, zero tracking scripts, and minimal UI dependencies.</p>
-      </div>
-      <div class="bg-brand-card p-6 rounded-lg border border-brand-border">
-        <span class="text-brand-accent font-bold block mb-2">03 // DIRECT CREATION</span>
-        <p class="text-brand-muted">Visual arts and gaming experiments built out of raw technical passion and aesthetic craft.</p>
-      </div>
-      <div class="bg-brand-card p-6 rounded-lg border border-brand-border">
-        <span class="text-brand-accent font-bold block mb-2">04 // OPEN COLLABORATION</span>
-        <p class="text-brand-muted">Direct email communication. No middle managers, ticketing system walls, or sales pitches.</p>
-      </div>
-    </div>
-
-    <div class="bg-brand-card border border-brand-border p-8 rounded-xl font-mono">
-      <h3 class="text-white text-xl font-bold mb-2">// Direct Signal</h3>
-      <p class="text-brand-muted text-sm mb-6">Want to collaborate, talk software integration, or request access to tools?</p>
-      <a href="mailto:hello@srcs.online" class="inline-block bg-white text-black px-6 py-3 rounded font-bold hover:bg-brand-accent transition-all text-sm">
-        Transmit Message: hello@srcs.online
-      </a>
+    <div class="rise" style="margin-top:2.5rem;display:grid;gap:1.4rem;font-size:1.12rem;line-height:1.72;max-width:60ch">
+      <p>Most software you're offered today is designed to charge you a little bit forever. It gets redesigned when nothing was wrong with it, it collects more about your customers than it needs, and if you ever stop paying, you lose the thing you helped build.</p>
+      <p style="font-weight:600">We build the other way round.</p>
+      <p class="muted">A hotel group needed their numbers each morning without an hour of exporting. A freelancer needed to see their clients and invoices without paying monthly for a sales tool built for a team of forty. Both are real, both are running, and both belong to the people who asked for them.</p>
     </div>
   </section>
 
-  <footer class="border-t border-brand-border bg-brand-black px-6 py-8 font-mono text-xs text-brand-muted">
-    <div class="max-w-6xl mx-auto flex justify-between">
-      <div>&copy; SYNC RACE MANIFESTO</div>
-      <a href="../index.html" class="hover:text-white">← System Loading Screen</a>
+  <section class="band shell" style="padding-top:clamp(2rem,5vw,3rem)">
+    <div class="cards">
+      <div class="card rise">
+        <div class="bulb"></div>
+        <h3>You own it</h3>
+        <p>The files, the domain, the accounts. Everything is in your name from the start, so leaving is always an option you don't have to think about.</p>
+      </div>
+      <div class="card rise">
+        <div class="bulb"></div>
+        <h3>It loads fast</h3>
+        <p>Clean code, small pages, and no tracking scripts running in the background. Your customers get where they're going quickly, on any phone.</p>
+      </div>
+      <div class="card rise">
+        <div class="bulb"></div>
+        <h3>We make things ourselves</h3>
+        <p>Design, photography, and the odd game built for the pleasure of it. The habit of making things by hand is what keeps the client work good.</p>
+      </div>
+      <div class="card rise">
+        <div class="bulb"></div>
+        <h3>You talk to the person building it</h3>
+        <p>No account manager, no ticket system, no sales call before anyone will answer a question. Just email, and a reply from whoever is doing the work.</p>
+      </div>
     </div>
-  </footer>
+  </section>
 
+  <section class="shell" style="padding-bottom:clamp(2.5rem,7vw,4rem)">
+    <div class="rise" style="background:var(--surface);border:1px solid var(--hair);border-radius:22px;box-shadow:var(--lift-3);padding:clamp(2.5rem,6vw,4rem) var(--gut);text-align:center">
+      <h2>Sound like your kind of thing?</h2>
+      <p class="muted" style="max-width:44ch;margin:1.1rem auto 2rem">Tell us what you're working on. No pitch, no discovery call, just a reply.</p>
+      <a class="btn btn-lamp" href="mailto:hello@srcs.online">hello@srcs.online</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="shell">
+    <span>© 2026 Sync Race Studios</span>
+    <span><a href="mailto:hello@srcs.online">hello@srcs.online</a></span>
+    <span>srcs.online</span>
+  </div>
+</footer>
+
+<script src="../nav.js" defer></script>
+<script>
+  const io_items = document.querySelectorAll('.rise');
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+    io_items.forEach(el => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver(es => es.forEach((e,i) => {
+      if (!e.isIntersecting) return;
+      setTimeout(() => e.target.classList.add('in'), i*80);
+      io.unobserve(e.target);
+    }), { threshold:.1, rootMargin:'0px 0px -50px' });
+    io_items.forEach(el => io.observe(el));
+  }
+</script>
 </body>
 </html>

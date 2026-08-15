@@ -1,167 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SYNC RACE | Code Studio</title>
-  <script>
-    // Apply saved theme before first paint to avoid a flash of the wrong theme.
-    if (localStorage.getItem('sr-theme') === 'light') document.documentElement.classList.add('light');
-  </script>
-  <style>
-    :root {
-      --sr-bg: 10 10 12; --sr-card: 18 18 22; --sr-border: 36 36 45; --sr-text: 226 232 240;
-      --sr-muted: 128 139 158; --sr-white: 255 255 255; --sr-black: 0 0 0;
-      --sr-accent: 59 244 163; --sr-warning: 255 71 87;
-    }
-    :root.light {
-      --sr-bg: 255 255 255; --sr-card: 244 245 247; --sr-border: 220 223 228; --sr-text: 23 23 28;
-      --sr-muted: 100 108 122; --sr-white: 15 15 18; --sr-black: 255 255 255;
-      --sr-accent: 5 150 105; --sr-warning: 220 38 38;
-    }
-  </style>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            white: 'rgb(var(--sr-white) / <alpha-value>)',
-            black: 'rgb(var(--sr-black) / <alpha-value>)',
-            brand: {
-              black: 'rgb(var(--sr-bg) / <alpha-value>)', card: 'rgb(var(--sr-card) / <alpha-value>)',
-              border: 'rgb(var(--sr-border) / <alpha-value>)', accent: 'rgb(var(--sr-accent) / <alpha-value>)',
-              warning: 'rgb(var(--sr-warning) / <alpha-value>)', text: 'rgb(var(--sr-text) / <alpha-value>)',
-              muted: 'rgb(var(--sr-muted) / <alpha-value>)'
-            }
-          },
-          fontFamily: { mono: ['JetBrains Mono', 'monospace'], sans: ['Inter', 'sans-serif'] }
-        }
-      }
-    }
-  </script>
-  <script src="./nav.js" defer></script>
+<title>Software — Sync Race Studios</title>
+<meta name="description" content="Custom reporting tools and lightweight business software built by Sync Race Studios.">
+<link rel="canonical" href="https://www.srcs.online/pages/codestudio.html">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>if(localStorage.getItem('sr-theme')==='dark')document.documentElement.classList.add('dark');</script>
+<link rel="icon" href="../assets/srcslogo">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../srcs.css">
 </head>
-<body class="bg-brand-black text-brand-text font-sans min-h-screen flex flex-col justify-between">
+<body>
 
-  <site-nav></site-nav>
+<site-nav></site-nav>
 
-  <section class="max-w-6xl mx-auto px-6 py-12 w-full border-b border-brand-border">
-    <span class="text-brand-accent font-mono text-sm">// SOFTWARE & INTEGRATIONS</span>
-    <h1 class="text-4xl font-black text-white mt-1 mb-4">Code Studio</h1>
-    <p class="text-brand-muted max-w-2xl">High-utility engines, client management systems, and micro-tools. No subscription bloat—just functional engineering.</p>
+<main>
+
+  <section class="shell page-top">
+    <span class="kicker rise">Software</span>
+    <h1 class="rise">Tools that do one job<br><span class="warm">and stay out of the way.</span></h1>
+    <p class="lede rise" style="margin-top:1.6rem">Most business software charges you every month for a hundred features you'll never open. We build the handful you actually use, and then we leave it alone.</p>
   </section>
 
-  <section class="max-w-6xl mx-auto px-6 py-12 w-full space-y-12">
-    <article class="bg-brand-card border border-brand-border rounded-xl p-8 hover:border-brand-accent/50 transition-all">
-      <div class="flex flex-wrap justify-between items-start gap-4 mb-4">
-        <div>
-          <span class="text-xs font-mono bg-blue-500/10 text-blue-400 px-2.5 py-1 rounded">Independent Saas</span>
-          <h2 class="text-2xl font-bold text-white mt-2">Live HTML Visual Editor</h2>
-        </div>
-        <span class="text-xs font-mono text-brand-accent border border-brand-accent/30 px-2.5 py-1 rounded">Status: Operational</span>
+  <section class="band shell" style="display:grid;gap:1.15rem">
+
+    <article class="card rise" style="padding:clamp(1.9rem,4vw,2.75rem)">
+      <div style="display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:space-between">
+        <span class="pill pill-blue">For hotels</span>
+        <span class="pill pill-lamp">Running now</span>
       </div>
-
-      <p class="text-brand-muted text-sm leading-relaxed mb-6">
-An interactive platform and educational tool that enables beginners to practice HTML with real-time previews. Features safe editing modes that protect essential code from accidental modification.
-      </p>
-
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6 font-mono text-xs">
-        <div class="bg-brand-black p-4 rounded border border-brand-border">
-          <span class="text-brand-accent block mb-1">01. Upload/Download</span>
-          <span class="text-brand-muted">Import raw html with and immediately begin safe edit. Built in export functions.</span>
-        </div>
-        <div class="bg-brand-black p-4 rounded border border-brand-border">
-          <span class="text-brand-accent block mb-1">02. Built In Tools</span>
-          <span class="text-brand-muted">Content creation blocks with built in HTML and CSS snippets.</span>
-        </div>
-        <div class="bg-brand-black p-4 rounded border border-brand-border">
-          <span class="text-brand-accent block mb-1">03. Live DOM Tree</span>
-          <span class="text-brand-muted">Live DOM tree showing hierarchical flow of HTML as edits are made.</span>
-        </div>
+      <h2 style="margin:1rem 0 .9rem;font-size:clamp(1.6rem,3.4vw,2.3rem)">Stayntouch reporting engine</h2>
+      <p class="muted" style="max-width:62ch">Hotel teams using Stayntouch were spending the first hour of every day pulling numbers out of the system by hand. This sits on top of the platform and has the figures waiting for them instead — occupancy, revenue, housekeeping, all current.</p>
+      <div class="wells" style="margin-top:1.9rem">
+        <div class="well"><b>Reports that arrive on their own</b><span>Set the time once. They turn up every morning without anyone touching it.</span></div>
+        <div class="well"><b>Numbers a manager can read</b><span>RevPAR, ADR, and daily pace laid out plainly — no spreadsheet archaeology.</span></div>
+        <div class="well"><b>Exports that fit your accountant</b><span>CSV or JSON in whatever shape the rest of your finance tools expect.</span></div>
       </div>
-
-      <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-brand-border font-mono text-xs">
-        <div class="text-brand-muted">Tech Stack: All HTML served online.</div>
-        <a href="https://htmlv.srcs.online" class="text-brand-accent hover:underline">Open Now →</a>
-      </div>
-    </article>
- <article class="bg-brand-card border border-brand-border rounded-xl p-8 hover:border-brand-accent/50 transition-all">
-      <div class="flex flex-wrap justify-between items-start gap-4 mb-4">
-        <div>
-          <span class="text-xs font-mono bg-blue-500/10 text-blue-400 px-2.5 py-1 rounded">Enterprise Platform Integration</span>
-          <h2 class="text-2xl font-bold text-white mt-2">Stayntouch PMS Analytics Engine</h2>
-        </div>
-        <span class="text-xs font-mono text-brand-accent border border-brand-accent/30 px-2.5 py-1 rounded">Status: Operational</span>
-      </div>
-
-      <p class="text-brand-muted text-sm leading-relaxed mb-6">
-        A custom reporting layer built for the Stayntouch PMS ecosystem. Modern hotel chains often run into data export friction with legacy reporting modules; this engine extracts, structures, and visualizes real-time operational revenue, occupancy, and booking pace metrics.
-      </p>
-
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6 font-mono text-xs">
-        <div class="bg-brand-black p-4 rounded border border-brand-border">
-          <span class="text-brand-accent block mb-1">01. Real-Time Data Pipeline</span>
-          <span class="text-brand-muted">Automated SFTP uploads with custom cron schedules for automated report delivery.</span>
-        </div>
-        <div class="bg-brand-black p-4 rounded border border-brand-border">
-          <span class="text-brand-accent block mb-1">02. Executive Dashboards</span>
-          <span class="text-brand-muted">Clean visualization of RevPAR, ADR, and reservation pace.</span>
-        </div>
-        <div class="bg-brand-black p-4 rounded border border-brand-border">
-          <span class="text-brand-accent block mb-1">03. PDF Exports</span>
-          <span class="text-brand-muted">Instant PDF exports compiling data for property performance meetings.</span>
-        </div>
-      </div>
-
-      <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-brand-border font-mono text-xs">
-        <div class="text-brand-muted">Tech Stack: Node.js / PostgreSQL / REST API / Tailwind</div>
-        <a href="#" class="text-brand-accent hover:underline">Request Demo →</a>
+      <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center;margin-top:1.9rem;padding-top:1.4rem;border-top:1px solid var(--hair)">
+        <span class="muted" style="font-size:.88rem">Built with Node.js and PostgreSQL</span>
+        <a class="btn btn-quiet" href="mailto:hello@srcs.online?subject=Stayntouch%20reporting%20demo">Ask for a walkthrough</a>
       </div>
     </article>
 
-    <article class="bg-brand-card border border-brand-border rounded-xl p-8 hover:border-brand-accent/50 transition-all">
-      <div class="flex flex-wrap justify-between items-start gap-4 mb-4">
-        <div>
-          <span class="text-xs font-mono bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded">Independent SaaS</span>
-          <h2 class="text-2xl font-bold text-white mt-2">Freelancer Business OS</h2>
-        </div>
-        <span class="text-xs font-mono text-brand-warning border border-brand-warning/30 px-2.5 py-1 rounded">Status: Active Build</span>
+    <article class="card rise" style="padding:clamp(1.9rem,4vw,2.75rem)">
+      <div style="display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:space-between">
+        <span class="pill pill-lamp">For freelancers</span>
+        <span class="pill pill-blue">In progress</span>
       </div>
-
-      <p class="text-brand-muted text-sm leading-relaxed mb-6">
-        Client management software is bloated with CRM features independent freelancers never use. This lightweight tool allows solo creators to manage active deliverables, track clients, manage projects, and create workflows.
-      </p>
-
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6 font-mono text-xs">
-        <div class="bg-brand-black p-4 rounded border border-brand-border">
-          <span class="text-brand-accent block mb-1">Client CRM</span>
-          <span class="text-brand-muted">Minimal client profiles, contract tracking, and direct deliverable links.</span>
-        </div>
-        <div class="bg-brand-black p-4 rounded border border-brand-border">
-          <span class="text-brand-accent block mb-1">Deliverable Matrix</span>
-          <span class="text-brand-muted">Kanban-style task tracking stripped down for solo speed.</span>
-        </div>
-        <div class="bg-brand-black p-4 rounded border border-brand-border">
-          <span class="text-brand-accent block mb-1">Privacy First</span>
-          <span class="text-brand-muted">Client data stays strictly in your control. No third-party data tracking.</span>
-        </div>
+      <h2 style="margin:1rem 0 .9rem;font-size:clamp(1.6rem,3.4vw,2.3rem)">Freelancer OS</h2>
+      <p class="muted" style="max-width:62ch">Client software is built for sales teams of forty. If you're one person, most of it is in the way. This keeps your clients, your current work, and your invoices on one screen — and nothing else.</p>
+      <div class="wells" style="margin-top:1.9rem">
+        <div class="well"><b>Your clients, briefly</b><span>Who they are, what you agreed, and where the files live. Nothing more.</span></div>
+        <div class="well"><b>What's actually due</b><span>A simple board of what's in progress and what's waiting on someone else.</span></div>
+        <div class="well"><b>Your data stays yours</b><span>No tracking, no third parties reading your client list.</span></div>
       </div>
-
-      <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-brand-border font-mono text-xs">
-        <div class="text-brand-muted">Tech Stack: HTML5 / Alpine.js / LocalStorage / Node</div>
-        <a href="#" class="text-brand-accent hover:underline">Freelancer Website →</a>
+      <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center;margin-top:1.9rem;padding-top:1.4rem;border-top:1px solid var(--hair)">
+        <span class="muted" style="font-size:.88rem">Built with plain HTML, Alpine.js and Node</span>
+        <a class="btn btn-quiet" href="mailto:hello@srcs.online?subject=Freelancer%20OS%20beta">Ask for early access</a>
       </div>
     </article>
+
   </section>
 
-  <footer class="border-t border-brand-border bg-brand-black px-6 py-8 font-mono text-xs text-brand-muted">
-    <div class="max-w-6xl mx-auto flex justify-between">
-      <div>&copy; SYNC RACE CODE STUDIO</div>
-      <a href="../index.html" class="hover:text-white">← System Loading Screen</a>
+  <section class="shell" style="padding-bottom:clamp(2.5rem,7vw,4rem)">
+    <div class="rise" style="background:var(--surface);border:1px solid var(--hair);border-radius:22px;box-shadow:var(--lift-3);padding:clamp(2.5rem,6vw,4rem) var(--gut);text-align:center">
+      <h2>Got a job like these?</h2>
+      <p class="muted" style="max-width:44ch;margin:1.1rem auto 2rem">If there's a task eating your week, tell us what it looks like. We'll say honestly whether it's worth building.</p>
+      <a class="btn btn-lamp" href="mailto:hello@srcs.online">hello@srcs.online</a>
     </div>
-  </footer>
+  </section>
 
+</main>
+
+<footer class="foot">
+  <div class="shell">
+    <span>© 2026 Sync Race Studios</span>
+    <span><a href="mailto:hello@srcs.online">hello@srcs.online</a></span>
+    <span>srcs.online</span>
+  </div>
+</footer>
+
+<script src="../nav.js" defer></script>
+<script>
+  const io_items = document.querySelectorAll('.rise');
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+    io_items.forEach(el => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver(es => es.forEach((e,i) => {
+      if (!e.isIntersecting) return;
+      setTimeout(() => e.target.classList.add('in'), i*80);
+      io.unobserve(e.target);
+    }), { threshold:.1, rootMargin:'0px 0px -50px' });
+    io_items.forEach(el => io.observe(el));
+  }
+</script>
 </body>
 </html>
