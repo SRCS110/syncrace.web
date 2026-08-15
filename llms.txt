@@ -2,6 +2,8 @@
 
 > Websites and practical software for independent businesses. Hand-built, fast, and handed over — clients own their files, domain, and accounts from the start.
 
+After launch, clients choose one of three: self-manage at no ongoing cost, pay hourly for changes as they come up, or take an optional flat monthly plan covering updates, backups, small changes, and monitoring. The monthly plan is cancellable at any time and nothing switches off if it ends — ownership never depends on it.
+
 Work is hand-written HTML, CSS, and JavaScript with Node.js and PostgreSQL behind it. No page builders, no monthly platform lock-in, no tracking scripts.
 
 ## Pages

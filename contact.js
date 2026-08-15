@@ -26,6 +26,7 @@ const SUBJECTS = {
   software:        'software or a reporting tool',
   stayntouch:      'the Stayntouch reporting engine',
   'freelancer-os': 'Freelancer OS early access',
+  care:            'ongoing site care',
   other:           'something else',
 };
 

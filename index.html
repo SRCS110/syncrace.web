@@ -6,7 +6,21 @@
 <link rel="canonical" href="https://www.srcs.online/">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>if(localStorage.getItem('sr-theme')==='dark')document.documentElement.classList.add('dark');</script>
+<script>
+/* Light is the default. Dark ("Evening") only applies if the visitor chose it
+   here. The previous version of this site wrote its own values under the same
+   sr-theme key, so anything from before v2 is cleared once and ignored.
+   Wrapped in try/catch because private browsing can throw on localStorage. */
+(function(){try{
+  if(localStorage.getItem('sr-theme-v')!=='2'){
+    localStorage.removeItem('sr-theme');
+    localStorage.setItem('sr-theme-v','2');
+  }
+  if(localStorage.getItem('sr-theme')==='dark'){
+    document.documentElement.classList.add('dark');
+  }
+}catch(e){}})();
+</script>
 <link rel="icon" href="./assets/srcslogo">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +36,7 @@
   <section class="shell page-top">
     <span class="kicker rise">Sync Race Studios</span>
     <h1 class="rise">Websites that feel like<br><span class="warm">somewhere worth staying.</span></h1>
-    <p class="lede rise" style="margin:1.6rem 0 2.4rem">We build websites and practical software for independent businesses. Warm, quick, easy to use — and built by hand, so you own every file at the end of it.</p>
+    <p class="lede rise" style="margin:1.6rem 0 2.4rem">We build websites and practical software for independent businesses. Warm, quick, easy to use — and yours at the end of it. Look after it yourself, or let us look after it for you.</p>
     <div class="rise" style="display:flex;flex-wrap:wrap;gap:.8rem">
       <a class="btn btn-lamp" href="./pages/contact.html">Start a project</a>
       <a class="btn btn-quiet" href="#work">See what we've made</a>
@@ -60,8 +74,8 @@
         <p>Reporting, booking, client lists, invoices. The unglamorous pieces that quietly take hours off your week.</p>
       </div>
       <div class="card rise">
-        <h3>Someone who picks up</h3>
-        <p>After launch you still have a person to call. No ticket queue, no account manager, no waiting a week for a text change.</p>
+        <h3>Looking after it, if you want</h3>
+        <p>Take the keys and run it yourself, call us hourly when something needs doing, or put us on a monthly retainer. All three are fine by us.</p>
       </div>
     </div>
   </section>
@@ -90,6 +104,31 @@
     </div>
   </section>
 
+  <section class="band shell" id="after">
+    <div class="head rise">
+      <span class="kicker">After it launches</span>
+      <h2>Three ways to keep it running.</h2>
+      <p>The site is yours either way — the files, the domain, the accounts, all in your name. What changes is only how much of the upkeep you'd like to hand off.</p>
+    </div>
+    <div class="cards">
+      <a class="card rise" href="./pages/contact.html?about=website">
+        <span class="pill pill-blue">No ongoing cost</span>
+        <h3>Run it yourself</h3>
+        <p>We hand over the code and show you how it fits together. Plenty of people take it from here, and that's a perfectly good outcome.</p>
+      </a>
+      <a class="card rise" href="./pages/contact.html?about=website">
+        <span class="pill pill-blue">Pay per change</span>
+        <h3>Call us when you need us</h3>
+        <p>New photos, a price change, an extra page. Email us, we quote the hours, you approve it. Nothing standing between jobs.</p>
+      </a>
+      <a class="card rise" href="./pages/contact.html?about=care">
+        <span class="pill pill-lamp">Optional monthly</span>
+        <h3>We look after it</h3>
+        <p>Updates, backups, small changes, and someone keeping an eye on it — for a flat monthly fee. Cancel whenever; you keep everything.</p>
+      </a>
+    </div>
+  </section>
+
   <section class="band shell">
     <div class="head rise">
       <span class="kicker">How it works</span>
@@ -99,7 +138,7 @@
       <div class="well"><b>We talk</b><span>What it needs to do and who it's for. Free, and there's no pitch deck.</span></div>
       <div class="well"><b>You get a price</b><span>Scope and cost in writing first. It doesn't move unless you ask it to.</span></div>
       <div class="well"><b>We build it</b><span>You see it working on a real link early, so you're never guessing from a flat picture.</span></div>
-      <div class="well"><b>It's yours</b><span>Domain, hosting, search setup — then the files are handed over.</span></div>
+      <div class="well"><b>It's yours</b><span>Domain, hosting, search setup, then the files are handed over — and you pick how you'd like it maintained.</span></div>
     </div>
   </section>
 
