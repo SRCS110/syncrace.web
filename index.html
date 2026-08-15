@@ -1,140 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SYNC RACE | Initializing...</title>
-  <script>
-    // Apply saved theme before first paint to avoid a flash of the wrong theme.
-    if (localStorage.getItem('sr-theme') === 'light') document.documentElement.classList.add('light');
-  </script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    const TARGET_PAGE = "/pages/home.html";
-
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            white: 'rgb(var(--sr-white) / <alpha-value>)',
-            brand: {
-              black: 'rgb(var(--sr-bg) / <alpha-value>)',
-              border: 'rgb(var(--sr-border) / <alpha-value>)',
-              accent: 'rgb(var(--sr-accent) / <alpha-value>)',
-              muted: 'rgb(var(--sr-muted) / <alpha-value>)'
-            }
-          },
-          fontFamily: { mono: ['JetBrains Mono', 'monospace'] }
-        }
-      }
-    }
-  </script>
-  <style>
-    :root {
-      --sr-bg: 10 10 12; --sr-border: 36 36 45; --sr-muted: 128 139 158;
-      --sr-white: 255 255 255; --sr-accent: 59 244 163;
-    }
-    :root.light {
-      --sr-bg: 255 255 255; --sr-border: 220 223 228; --sr-muted: 100 108 122;
-      --sr-white: 15 15 18; --sr-accent: 5 150 105;
-    }
-
-    /* Continuous 3-second loader bar animation */
-    @keyframes loadProgress {
-      0% { width: 0%; }
-      100% { width: 100%; }
-    }
-    .animate-progress {
-      animation: loadProgress 3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    }
-
-    /* 3D Horizontal Flip Animation for Logo */
-    @keyframes horizontalFlip {
-      0% { transform: rotateY(0deg); }
-      50% { transform: rotateY(180deg); }
-      100% { transform: rotateY(360deg); }
-    }
-    .animate-flip-horizontal {
-      animation: horizontalFlip 2s infinite ease-in-out;
-      transform-style: preserve-3d;
-    }
-  </style>
+<title>Sync Race Studios — Websites and software for small businesses</title>
+<meta name="description" content="Sync Race Studios builds websites and practical software for independent businesses. Hand-built, fast, and yours to keep.">
+<link rel="canonical" href="https://www.srcs.online/">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>if(localStorage.getItem('sr-theme')==='dark')document.documentElement.classList.add('dark');</script>
+<link rel="icon" href="./assets/srcslogo">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./srcs.css">
 </head>
-<body class="bg-brand-black text-white font-mono min-h-screen flex flex-col justify-between items-center p-6">
+<body>
 
-  <div><!-- Top Spacer --></div>
+<site-nav></site-nav>
 
-  <!-- LOADING CONTAINER -->
-  <main class="w-full max-w-sm flex flex-col items-center text-center">
-    
-    <!-- BRAND LOGO WITH FLIP EFFECT -->
-    <div class="relative mb-6 p-5 bg-brand-border/30 rounded-2xl border border-brand-border flex items-center justify-center [perspective:1000px]">
-      <img 
-        src="./assets/srcslogo" 
-        alt="Sync Race Logo" 
-        class="w-20 h-20 object-contain animate-flip-horizontal"
-      />
+<main>
+
+  <section class="shell page-top">
+    <span class="kicker rise">Sync Race Studios</span>
+    <h1 class="rise">Websites that feel like<br><span class="warm">somewhere worth staying.</span></h1>
+    <p class="lede rise" style="margin:1.6rem 0 2.4rem">We build websites and practical software for independent businesses. Warm, quick, easy to use — and built by hand, so you own every file at the end of it.</p>
+    <div class="rise" style="display:flex;flex-wrap:wrap;gap:.8rem">
+      <a class="btn btn-lamp" href="mailto:hello@srcs.online">Start a project</a>
+      <a class="btn btn-quiet" href="#work">See what we've made</a>
     </div>
 
-    <!-- BRAND HEADING -->
-    <h1 class="text-2xl font-black tracking-wider text-white mb-1">
-      SYNC RACE <span class="text-brand-accent text-sm font-normal">[srcs.online]</span>
-    </h1>
-    <p class="text-xs text-brand-muted mb-8">Corporate Sucks. Initializing Workspace...</p>
-
-    <!-- LOADING PROGRESS BAR -->
-    <div class="w-full bg-brand-border h-1.5 rounded-full overflow-hidden mb-3">
-      <div class="bg-brand-accent h-full animate-progress"></div>
+    <div class="rise" style="margin-top:clamp(3rem,7vw,5rem)">
+      <div class="frame">
+        <div class="frame-bar">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="frame-url">your-best-project.com</span>
+        </div>
+        <img class="shot" src="./assets/work/hero.png" alt=""
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="slot" style="display:none">
+          <b>Add your best screenshot here</b>
+          <span>Save it as Assets/work/hero.png</span>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <!-- STATUS TEXT & TIMER -->
-    <div class="flex justify-between items-center w-full text-xs text-brand-muted">
-      <span id="status-text">Bypassing corporate fluff...</span>
-      <span id="timer" class="text-brand-accent font-bold">3s</span>
+  <section class="band shell">
+    <div class="head rise">
+      <span class="kicker">What we do</span>
+      <h2>Three things, done properly.</h2>
+      <p>No packages, no tiers, no upsells. Tell us what your business needs and we'll say straight away whether we're the right fit for it.</p>
     </div>
+    <div class="cards">
+      <div class="card rise">
+        <div class="bulb"></div>
+        <h3>A website that fits</h3>
+        <p>Built around what your customers actually come to you for — not a template with your logo dropped into the corner.</p>
+      </div>
+      <div class="card rise">
+        <div class="bulb"></div>
+        <h3>Software that saves you time</h3>
+        <p>Reporting, booking, client lists, invoices. The unglamorous pieces that quietly take hours off your week.</p>
+      </div>
+      <div class="card rise">
+        <div class="bulb"></div>
+        <h3>Someone who picks up</h3>
+        <p>After launch you still have a person to call. No ticket queue, no account manager, no waiting a week for a text change.</p>
+      </div>
+    </div>
+  </section>
 
-    <!-- MANUAL OVERRIDE LINK -->
-    <div class="mt-8">
-      <a id="redirect-link" href="#" class="text-xs text-brand-muted underline hover:text-white transition-colors">
-        Skip intro & go directly →
+  <section class="band shell" id="work">
+    <div class="head rise">
+      <span class="kicker">Recent work</span>
+      <h2>Things we've built lately.</h2>
+    </div>
+    <div class="cards">
+      <a class="card rise" href="./pages/codestudio.html">
+        <span class="pill pill-blue">Hotels</span>
+        <h3>Stayntouch reporting engine</h3>
+        <p>Hotel managers were waiting on exports that took all morning. Now the numbers land in their inbox before they sit down.</p>
+      </a>
+      <a class="card rise" href="./pages/codestudio.html">
+        <span class="pill pill-lamp">Freelancers</span>
+        <h3>Freelancer OS</h3>
+        <p>Clients, deliverables, and invoices in one place, for people who were tired of paying monthly for features they never touched.</p>
+      </a>
+      <a class="card rise" href="./pages/creativestudio.html">
+        <span class="pill pill-lamp">Websites</span>
+        <h3>Design work</h3>
+        <p>Layout, type, and front-end builds. Have a look at what a finished site from us actually looks like.</p>
       </a>
     </div>
+  </section>
 
-  </main>
+  <section class="band shell">
+    <div class="head rise">
+      <span class="kicker">How it works</span>
+      <h2>Four steps. No surprises on the invoice.</h2>
+    </div>
+    <div class="wells rise">
+      <div class="well"><b>We talk</b><span>What it needs to do and who it's for. Free, and there's no pitch deck.</span></div>
+      <div class="well"><b>You get a price</b><span>Scope and cost in writing first. It doesn't move unless you ask it to.</span></div>
+      <div class="well"><b>We build it</b><span>You see it working on a real link early, so you're never guessing from a flat picture.</span></div>
+      <div class="well"><b>It's yours</b><span>Domain, hosting, search setup — then the files are handed over.</span></div>
+    </div>
+  </section>
 
-  <!-- FOOTER STATUS -->
-  <footer class="text-xs text-brand-muted/60 text-center">
-    SYSTEM // NON-CAPITALIST CODE & CREATIVE LAB
-  </footer>
+  <section class="shell" style="padding-bottom:clamp(2.5rem,7vw,4rem)">
+    <div class="rise" style="background:var(--surface);border:1px solid var(--hair);border-radius:22px;box-shadow:var(--lift-3);padding:clamp(2.75rem,7vw,5rem) var(--gut);text-align:center">
+      <span class="kicker">Say hello</span>
+      <h2>Tell us what you're building.</h2>
+      <p class="muted" style="max-width:44ch;margin:1.2rem auto 2.1rem">A couple of sentences is plenty. You'll get a real reply from a real person, usually the same day.</p>
+      <a class="btn btn-lamp" href="mailto:hello@srcs.online">hello@srcs.online</a>
+    </div>
+  </section>
 
-  <!-- ROUTING & TIMER SCRIPT -->
-  <script>
-    document.getElementById('redirect-link').href = TARGET_PAGE;
+</main>
 
-    let timeLeft = 3;
-    const timerElement = document.getElementById('timer');
-    const statusText = document.getElementById('status-text');
+<footer class="foot">
+  <div class="shell">
+    <span>© 2026 Sync Race Studios</span>
+    <span><a href="mailto:hello@srcs.online">hello@srcs.online</a></span>
+    <span>srcs.online</span>
+  </div>
+</footer>
 
-    const statuses = [
-      "Bypassing corporate fluff...",
-      "Loading code & creative modules...",
-      "Redirecting to Sync Race..."
-    ];
-
-    const countdown = setInterval(() => {
-      timeLeft--;
-      if (timeLeft > 0) {
-        timerElement.textContent = `${timeLeft}s`;
-        statusText.textContent = statuses[3 - timeLeft] || statuses[0];
-      } else {
-        timerElement.textContent = "0s";
-        statusText.textContent = "Routing...";
-        clearInterval(countdown);
-        window.location.href = TARGET_PAGE;
-      }
-    }, 1000);
-  </script>
-
+<script src="./nav.js" defer></script>
+<script>
+  const io_items = document.querySelectorAll('.rise');
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+    io_items.forEach(el => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver(es => es.forEach((e,i) => {
+      if (!e.isIntersecting) return;
+      setTimeout(() => e.target.classList.add('in'), i*80);
+      io.unobserve(e.target);
+    }), { threshold:.1, rootMargin:'0px 0px -50px' });
+    io_items.forEach(el => io.observe(el));
+  }
+</script>
 </body>
 </html>
