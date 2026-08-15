@@ -6,7 +6,21 @@
 <link rel="canonical" href="https://www.srcs.online/pages/contact">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>if(localStorage.getItem('sr-theme')==='dark')document.documentElement.classList.add('dark');</script>
+<script>
+/* Light is the default. Dark ("Evening") only applies if the visitor chose it
+   here. The previous version of this site wrote its own values under the same
+   sr-theme key, so anything from before v2 is cleared once and ignored.
+   Wrapped in try/catch because private browsing can throw on localStorage. */
+(function(){try{
+  if(localStorage.getItem('sr-theme-v')!=='2'){
+    localStorage.removeItem('sr-theme');
+    localStorage.setItem('sr-theme-v','2');
+  }
+  if(localStorage.getItem('sr-theme')==='dark'){
+    document.documentElement.classList.add('dark');
+  }
+}catch(e){}})();
+</script>
 <link rel="icon" href="../assets/srcslogo">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -53,6 +67,7 @@
               <option value="software">Software or a reporting tool</option>
               <option value="stayntouch">The Stayntouch reporting engine</option>
               <option value="freelancer-os">Freelancer OS early access</option>
+              <option value="care">Looking after a site I already have</option>
               <option value="other">Something else</option>
             </select>
           </div>

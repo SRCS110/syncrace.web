@@ -6,7 +6,21 @@
 <link rel="canonical" href="https://www.srcs.online/pages/codestudio">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>if(localStorage.getItem('sr-theme')==='dark')document.documentElement.classList.add('dark');</script>
+<script>
+/* Light is the default. Dark ("Evening") only applies if the visitor chose it
+   here. The previous version of this site wrote its own values under the same
+   sr-theme key, so anything from before v2 is cleared once and ignored.
+   Wrapped in try/catch because private browsing can throw on localStorage. */
+(function(){try{
+  if(localStorage.getItem('sr-theme-v')!=='2'){
+    localStorage.removeItem('sr-theme');
+    localStorage.setItem('sr-theme-v','2');
+  }
+  if(localStorage.getItem('sr-theme')==='dark'){
+    document.documentElement.classList.add('dark');
+  }
+}catch(e){}})();
+</script>
 <link rel="icon" href="../assets/srcslogo">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +36,7 @@
   <section class="shell page-top">
     <span class="kicker rise">Software</span>
     <h1 class="rise">Tools that do one job<br><span class="warm">and stay out of the way.</span></h1>
-    <p class="lede rise" style="margin-top:1.6rem">Most business software charges you every month for a hundred features you'll never open. We build the handful you actually use, and then we leave it alone.</p>
+    <p class="lede rise" style="margin-top:1.6rem">Most business software charges you every month for a hundred features you'll never open, and holds your data hostage if you stop. We build the handful you actually use. Hosting and support can be monthly if that suits you — but the tool and the data stay yours regardless.</p>
   </section>
 
   <section class="band shell" style="display:grid;gap:1.15rem">

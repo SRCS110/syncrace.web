@@ -6,7 +6,21 @@
 <link rel="canonical" href="https://www.srcs.online/pages/creativestudio">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>if(localStorage.getItem('sr-theme')==='dark')document.documentElement.classList.add('dark');</script>
+<script>
+/* Light is the default. Dark ("Evening") only applies if the visitor chose it
+   here. The previous version of this site wrote its own values under the same
+   sr-theme key, so anything from before v2 is cleared once and ignored.
+   Wrapped in try/catch because private browsing can throw on localStorage. */
+(function(){try{
+  if(localStorage.getItem('sr-theme-v')!=='2'){
+    localStorage.removeItem('sr-theme');
+    localStorage.setItem('sr-theme-v','2');
+  }
+  if(localStorage.getItem('sr-theme')==='dark'){
+    document.documentElement.classList.add('dark');
+  }
+}catch(e){}})();
+</script>
 <link rel="icon" href="../assets/srcslogo">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -93,7 +107,7 @@
   <section class="shell" style="padding-bottom:clamp(2.5rem,7vw,4rem)">
     <div class="rise" style="background:var(--surface);border:1px solid var(--hair);border-radius:22px;box-shadow:var(--lift-3);padding:clamp(2.5rem,6vw,4rem) var(--gut);text-align:center">
       <h2>Want one of these?</h2>
-      <p class="muted" style="max-width:44ch;margin:1.1rem auto 2rem">Send a couple of sentences about your business and what the site needs to do.</p>
+      <p class="muted" style="max-width:52ch;margin:1.1rem auto 2rem">Send a couple of sentences about your business and what the site needs to do. Once it's built you can run it yourself, call us hourly for changes, or put us on an optional monthly plan — your call, and you own it either way.</p>
       <a class="btn btn-lamp" href="./contact.html">Get in touch</a>
     </div>
   </section>

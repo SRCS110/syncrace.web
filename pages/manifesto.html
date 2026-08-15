@@ -6,7 +6,21 @@
 <link rel="canonical" href="https://www.srcs.online/pages/manifesto">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>if(localStorage.getItem('sr-theme')==='dark')document.documentElement.classList.add('dark');</script>
+<script>
+/* Light is the default. Dark ("Evening") only applies if the visitor chose it
+   here. The previous version of this site wrote its own values under the same
+   sr-theme key, so anything from before v2 is cleared once and ignored.
+   Wrapped in try/catch because private browsing can throw on localStorage. */
+(function(){try{
+  if(localStorage.getItem('sr-theme-v')!=='2'){
+    localStorage.removeItem('sr-theme');
+    localStorage.setItem('sr-theme-v','2');
+  }
+  if(localStorage.getItem('sr-theme')==='dark'){
+    document.documentElement.classList.add('dark');
+  }
+}catch(e){}})();
+</script>
 <link rel="icon" href="../assets/srcslogo">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,20 +35,21 @@
 
   <section class="shell page-top" style="max-width:840px">
     <span class="kicker rise">How we work</span>
-    <h1 class="rise">We're not trying to<br><span class="warm">sell you a subscription.</span></h1>
+    <h1 class="rise">Pay us monthly if you like.<br><span class="warm">Just never because you're stuck.</span></h1>
 
     <div class="rise" style="margin-top:2.5rem;display:grid;gap:1.4rem;font-size:1.12rem;line-height:1.72;max-width:60ch">
-      <p>Most software you're offered today is designed to charge you a little bit forever. It gets redesigned when nothing was wrong with it, it collects more about your customers than it needs, and if you ever stop paying, you lose the thing you helped build.</p>
-      <p style="font-weight:600">We build the other way round.</p>
-      <p class="muted">A hotel group needed their numbers each morning without an hour of exporting. A freelancer needed to see their clients and invoices without paying monthly for a sales tool built for a team of forty. Both are real, both are running, and both belong to the people who asked for them.</p>
+      <p>Most software you're offered is built so that leaving costs you everything. Stop paying and the site goes dark, the data is hostage, and the thing you helped build was never really yours. The monthly fee isn't buying service — it's buying back your own work.</p>
+      <p style="font-weight:600">We do sell a monthly plan. It just isn't that.</p>
+      <p>Ours covers actual work: updates, backups, changes, and someone keeping an eye on things. It's optional, month to month, and if you cancel, nothing switches off. The site was already yours. Some clients take the code on launch day and never speak to us again, and that's a good outcome too.</p>
+      <p class="muted">A hotel group needed their numbers each morning without an hour of exporting. A freelancer needed to see their clients and invoices without a sales tool built for a team of forty. Both are real, both are running, and both belong to the people who asked for them.</p>
     </div>
   </section>
 
   <section class="band shell" style="padding-top:clamp(2rem,5vw,3rem)">
     <div class="cards">
       <div class="card rise">
-        <h3>You own it</h3>
-        <p>The files, the domain, the accounts. Everything is in your name from the start, so leaving is always an option you don't have to think about.</p>
+        <h3>You own it, paid or not</h3>
+        <p>The files, the domain, the accounts — all in your name from day one. Whether you're on a monthly plan or not doesn't change what you'd walk away with.</p>
       </div>
       <div class="card rise">
         <h3>It loads fast</h3>
@@ -46,7 +61,7 @@
       </div>
       <div class="card rise">
         <h3>You talk to the person building it</h3>
-        <p>No account manager, no ticket system, no sales call before anyone will answer a question. Just email, and a reply from whoever is doing the work.</p>
+        <p>No account manager, no ticket system, no sales call before anyone will answer a question. Just email, and a reply from whoever is doing the work — retainer or no retainer.</p>
       </div>
     </div>
   </section>
