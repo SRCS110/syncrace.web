@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Get in touch — Sync Race Studios</title>
+<meta name="description" content="Tell Sync Race Studios about your project. A couple of sentences is plenty.">
+<link rel="canonical" href="https://www.srcs.online/pages/contact">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>if(localStorage.getItem('sr-theme')==='dark')document.documentElement.classList.add('dark');</script>
+<link rel="icon" href="../assets/srcslogo">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../srcs.css">
+</head>
+<body>
+
+<site-nav></site-nav>
+
+<main>
+
+  <section class="shell page-top" style="max-width:880px">
+    <span class="kicker rise">Get in touch</span>
+    <h1 class="rise">Tell us what<br><span class="warm">you're building.</span></h1>
+    <p class="lede rise" style="margin-top:1.5rem">A couple of sentences is plenty to start. You'll get a reply from the person who'd actually be doing the work, usually the same day.</p>
+  </section>
+
+  <section class="shell band" style="max-width:880px;padding-top:clamp(1.5rem,4vw,2.5rem)">
+    <div class="rise" style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(230px,1fr);gap:clamp(1.5rem,4vw,3rem);align-items:start">
+
+      <div class="card" style="padding:clamp(1.75rem,4vw,2.5rem)">
+        <!--
+          The form posts to /api/contact, a serverless function that sends
+          the message on with Resend. Nothing to configure here — set
+          RESEND_API_KEY in your Vercel project settings and it works.
+        -->
+        <form class="form" id="contact-form" action="/api/contact" method="POST">
+
+          <div class="field">
+            <label for="name">Your name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required>
+          </div>
+
+          <div class="field">
+            <label for="email">Email <span class="hint">— so we can reply</span></label>
+            <input id="email" name="email" type="email" autocomplete="email" required>
+          </div>
+
+          <div class="field">
+            <label for="about">What's this about?</label>
+            <select id="about" name="about">
+              <option value="website">A website for my business</option>
+              <option value="software">Software or a reporting tool</option>
+              <option value="stayntouch">The Stayntouch reporting engine</option>
+              <option value="freelancer-os">Freelancer OS early access</option>
+              <option value="other">Something else</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="message">Tell us a bit more</label>
+            <textarea id="message" name="message" required
+              placeholder="What does your business do, and what do you need this to solve? Rough is fine."></textarea>
+          </div>
+
+          <!-- Honeypot: bots fill this in, people never see it. -->
+          <div class="trap" aria-hidden="true">
+            <label for="company">Company</label>
+            <input id="company" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
+          </div>
+
+          <div>
+            <button class="btn btn-lamp" type="submit">Send it</button>
+          </div>
+
+          <p class="form-note" id="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+
+      <aside style="display:grid;gap:1.15rem">
+        <div class="card" style="padding:1.6rem 1.5rem">
+          <h3 style="font-size:1.1rem">Rather just email?</h3>
+          <p style="margin-top:.6rem"><a href="mailto:hello@srcs.online" style="color:var(--lamp-ink);font-weight:600;text-decoration:none">hello@srcs.online</a></p>
+        </div>
+        <div class="card" style="padding:1.6rem 1.5rem">
+          <h3 style="font-size:1.1rem">What happens next</h3>
+          <p style="margin-top:.6rem">We read it, and reply with either some questions or an honest "we're not the right fit for this." No automated sequence, no follow-up drip.</p>
+        </div>
+        <div class="card" style="padding:1.6rem 1.5rem">
+          <h3 style="font-size:1.1rem">No budget yet?</h3>
+          <p style="margin-top:.6rem">That's fine. Tell us the problem anyway and we'll give you a rough number so you know what you're planning for.</p>
+        </div>
+      </aside>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="shell">
+    <span>© 2026 Sync Race Studios</span>
+    <span><a href="mailto:hello@srcs.online">hello@srcs.online</a></span>
+    <span>srcs.online</span>
+  </div>
+</footer>
+
+<script src="../nav.js" defer></script>
+<script>
+  const form   = document.getElementById('contact-form');
+  const status = document.getElementById('form-status');
+  const button = form.querySelector('button[type="submit"]');
+
+  // Deep links like contact?about=stayntouch preselect the dropdown, so
+  // someone arriving from the Software page doesn't re-state why.
+  const asked = new URLSearchParams(location.search).get('about');
+  if (asked) {
+    const opt = document.querySelector(`#about option[value="${CSS.escape(asked)}"]`);
+    if (opt) opt.selected = true;
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    button.disabled = true;
+    const label = button.textContent;
+    button.textContent = 'Sending…';
+    status.textContent = '';
+
+    const payload = Object.fromEntries(new FormData(form).entries());
+
+    try {
+      const res  = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) throw new Error(data.error || 'Something went wrong.');
+
+      form.reset();
+      status.textContent = 'Thanks — that came through. You\'ll hear back shortly.';
+    } catch (err) {
+      status.textContent = err.message.includes('name') || err.message.includes('email')
+        ? err.message
+        : 'That didn\'t send. Email hello@srcs.online directly and it\'ll reach us.';
+    } finally {
+      button.disabled = false;
+      button.textContent = label;
+    }
+  });
+
+  const io_items = document.querySelectorAll('.rise');
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+    io_items.forEach(el => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver(es => es.forEach((e,i) => {
+      if (!e.isIntersecting) return;
+      setTimeout(() => e.target.classList.add('in'), i*80);
+      io.unobserve(e.target);
+    }), { threshold:.1, rootMargin:'0px 0px -50px' });
+    io_items.forEach(el => io.observe(el));
+  }
+</script>
+
+<style>
+  @media(max-width:760px){
+    main section > div[style*="grid-template-columns"]{ grid-template-columns:1fr !important; }
+  }
+</style>
+</body>
+</html>
