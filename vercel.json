@@ -1,4 +1,33 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+
+  "//": "cleanUrls drops the .html from every URL — /pages/contact.html becomes /pages/contact. Vercel 308-redirects the old .html URLs automatically, so nothing you've already published breaks. Set it to false if you'd rather keep .html visible.",
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" }
+      ]
+    }
+  ],
+
+  "redirects": [
+    {
+      "//": "The old home lived here before index.html took over.",
+      "source": "/pages/home",
+      "destination": "/",
+      "permanent": true
+    }
+  ]
 }

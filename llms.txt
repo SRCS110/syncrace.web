@@ -7,10 +7,11 @@ Work is hand-written HTML, CSS, and JavaScript with Node.js and PostgreSQL behin
 ## Pages
 
 - [Home](https://www.srcs.online/): What the studio does, recent work, and how a project runs.
-- [Software](https://www.srcs.online/pages/codestudio.html): Custom reporting tools and lightweight business software.
-- [Websites](https://www.srcs.online/pages/creativestudio.html): Websites designed and built end to end.
-- [How we work](https://www.srcs.online/pages/manifesto.html): Why the studio builds without subscriptions or middlemen.
-- [Playground](https://www.srcs.online/pages/arcade.html): Browser experiments and canvas toys.
+- [Software](https://www.srcs.online/pages/codestudio): Custom reporting tools and lightweight business software.
+- [Websites](https://www.srcs.online/pages/creativestudio): Websites designed and built end to end.
+- [How we work](https://www.srcs.online/pages/manifesto): Why the studio builds without subscriptions or middlemen.
+- [Get in touch](https://www.srcs.online/pages/contact): Contact form for project enquiries.
+- [Playground](https://www.srcs.online/pages/arcade): Browser experiments and canvas toys.
 
 ## Projects
 
