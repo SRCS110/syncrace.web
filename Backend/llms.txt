@@ -1,0 +1,22 @@
+# Sync Race Studios
+
+> Websites and practical software for independent businesses. Hand-built, fast, and handed over — clients own their files, domain, and accounts from the start.
+
+Work is hand-written HTML, CSS, and JavaScript with Node.js and PostgreSQL behind it. No page builders, no monthly platform lock-in, no tracking scripts.
+
+## Pages
+
+- [Home](https://www.srcs.online/): What the studio does, recent work, and how a project runs.
+- [Software](https://www.srcs.online/pages/codestudio.html): Custom reporting tools and lightweight business software.
+- [Websites](https://www.srcs.online/pages/creativestudio.html): Websites designed and built end to end.
+- [How we work](https://www.srcs.online/pages/manifesto.html): Why the studio builds without subscriptions or middlemen.
+- [Playground](https://www.srcs.online/pages/arcade.html): Browser experiments and canvas toys.
+
+## Projects
+
+- Stayntouch reporting engine: A reporting layer over the Stayntouch hotel property management system. Pulls occupancy, revenue, and housekeeping figures on a schedule so managers aren't exporting by hand each morning. Node.js and PostgreSQL. Running in production.
+- Freelancer OS: A lightweight tool for solo freelancers covering clients, current deliverables, and invoices, without the bulk of a sales CRM. Plain HTML, Alpine.js, and Node. In active development.
+
+## Contact
+
+- Email: hello@srcs.online — available for website and software projects.
