@@ -11,6 +11,8 @@ const LINKS = [
   { file: 'creativestudio.html', label: 'Websites' },
   { file: 'arcade.html',         label: 'Playground' },
   { file: 'manifesto.html',      label: 'How we work' },
+  // Contact is deliberately NOT here — the Get in touch button is its only
+  // entry point, so the link doesn't appear twice in the nav.
 ];
 
 class SiteNav extends HTMLElement {
@@ -41,7 +43,7 @@ class SiteNav extends HTMLElement {
             <a href="${toRoot}index.html"${homeCurrent}>Home</a>
             ${items}
             <button class="theme-btn" type="button" aria-label="Switch between day and evening"></button>
-            <a class="nav-cta" href="mailto:hello@srcs.online">Get in touch</a>
+            <a class="nav-cta" href="${toPages}contact.html">Get in touch</a>
           </nav>
         </div>
       </div>`;
