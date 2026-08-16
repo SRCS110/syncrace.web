@@ -9,15 +9,16 @@ Work is hand-written HTML, CSS, and JavaScript with Node.js and PostgreSQL behin
 ## Pages
 
 - [Home](https://www.srcs.online/): What the studio does, recent work, and how a project runs.
-- [Software](https://www.srcs.online/pages/codestudio): Custom reporting tools and lightweight business software.
-- [Websites](https://www.srcs.online/pages/creativestudio): Websites designed and built end to end.
-- [How we work](https://www.srcs.online/pages/manifesto): Why the studio builds without subscriptions or middlemen.
-- [Get in touch](https://www.srcs.online/pages/contact): Contact form for project enquiries.
-- [Playground](https://www.srcs.online/pages/arcade): Browser experiments and canvas toys.
+- [Software](https://www.srcs.online/pages/codestudio.html): Custom reporting tools and lightweight business software.
+- [Websites](https://www.srcs.online/pages/creativestudio.html): Websites designed and built end to end.
+- [How we work](https://www.srcs.online/pages/manifesto.html): Why the studio builds without subscriptions or middlemen.
+- [Get in touch](https://www.srcs.online/pages/contact.html): Contact form for project enquiries.
+- [Playground](https://www.srcs.online/pages/arcade.html): Browser experiments and canvas toys.
 
 ## Projects
 
 - Stayntouch reporting engine: A reporting layer over the Stayntouch hotel property management system. Pulls occupancy, revenue, and housekeeping figures on a schedule so managers aren't exporting by hand each morning. Node.js and PostgreSQL. Running in production.
+- Visual HTML editor: A browser-based editor that lets clients change text and images on their own site without touching code. Output stays plain HTML, so nothing is locked to the tool. In active development.
 - Freelancer OS: A lightweight tool for solo freelancers covering clients, current deliverables, and invoices, without the bulk of a sales CRM. Plain HTML, Alpine.js, and Node. In active development.
 
 ## Contact
