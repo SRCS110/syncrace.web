@@ -197,7 +197,7 @@ site-nav{ position:sticky; top:0; z-index:80; display:block; }
 }
 .theme-btn{
   background:none; border:1px solid var(--hair); border-radius:999px;
-  padding:.4rem .9rem; font:inherit; font-size:.82rem; color:var(--dust);
+  padding:.4rem 1rem; font:inherit; font-size:.82rem; color:var(--dust);
   cursor:pointer; transition:color .25s ease, border-color .25s ease;
 }
 .theme-btn:hover{ color:var(--ink); border-color:var(--lamp); }
