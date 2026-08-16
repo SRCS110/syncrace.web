@@ -3,7 +3,7 @@
 <head>
 <title>Get in touch — Sync Race Studios</title>
 <meta name="description" content="Tell Sync Race Studios about your project. A couple of sentences is plenty.">
-<link rel="canonical" href="https://www.srcs.online/pages/contact">
+<link rel="canonical" href="https://www.srcs.online/pages/contact.html">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script>
@@ -56,11 +56,11 @@
           </div>
          <div class="field">
             <label for="phone">Phone number</label>
-            <input id="phone" name="phone" type="text" autocomplete="phone" required>
+            <input id="phone" name="phone" type="tel" autocomplete="tel">
           </div>
          <div class="field">
-            <label for="budget">Budget</label>
-            <input id="budget" name="budget" type="text" optional>
+            <label for="budget">Budget <span class="hint">— rough range is fine</span></label>
+            <input id="budget" name="budget" type="text" placeholder="Not sure yet">
           </div>
           <div class="field">
             <label for="email">Email <span class="hint">— so we can reply</span></label>
@@ -71,7 +71,9 @@
             <label for="about">What's this about?</label>
             <select id="about" name="about">
               <option value="website">A website for my business</option>
-              <option value="care">A custom application</option>
+              <option value="software">A custom application</option>
+              <option value="editor">The visual HTML editor</option>
+              <option value="care">Looking after a site I already have</option>
               <option value="other">Something else</option>
             </select>
           </div>
