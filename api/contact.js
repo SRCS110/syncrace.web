@@ -24,6 +24,10 @@ const FROM = process.env.CONTACT_FROM || 'Sync Race Studios <hello@srcs.online>'
 const SUBJECTS = {
   website:         'a website for my business',
   software:        'a custom application',
+  editor:          'the visual HTML editor',
+  care:            'looking after an existing site',
+  stayntouch:      'the Stayntouch reporting engine',
+  'freelancer-os': 'Freelancer OS early access',
   other:           'something else',
 };
 
@@ -40,7 +44,8 @@ export default async function handler(req, res) {
   }
 
   const body = typeof req.body === 'string' ? safeParse(req.body) : (req.body || {});
-  const { name = '', email = '', about = 'other', message = '', _gotcha = '' } = body;
+  const { name = '', email = '', phone = '', budget = '',
+          about = 'other', message = '', _gotcha = '' } = body;
 
   // Honeypot. Bots fill this; people can't see it. Pretend it worked.
   if (_gotcha) return res.status(200).json({ ok: true });
@@ -48,6 +53,8 @@ export default async function handler(req, res) {
   const clean = {
     name:    String(name).trim().slice(0, 120),
     email:   String(email).trim().slice(0, 200),
+    phone:   String(phone).trim().slice(0, 40),
+    budget:  String(budget).trim().slice(0, 60),
     message: String(message).trim().slice(0, 5000),
     about:   SUBJECTS[about] ? about : 'other',
   };
@@ -69,7 +76,7 @@ export default async function handler(req, res) {
       subject: `New enquiry from ${clean.name} — ${SUBJECTS[clean.about]}`,
       text:
 `${clean.name} <${clean.email}>
-Asking about: ${SUBJECTS[clean.about]}
+${clean.phone  ? `Phone: ${clean.phone}\n` : ''}${clean.budget ? `Budget: ${clean.budget}\n` : ''}Asking about: ${SUBJECTS[clean.about]}
 
 ${clean.message}
 
