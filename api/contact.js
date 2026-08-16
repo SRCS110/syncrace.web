@@ -22,11 +22,8 @@ const TO   = process.env.CONTACT_TO   || 'hello@srcs.online';
 const FROM = process.env.CONTACT_FROM || 'Sync Race Studios <hello@srcs.online>';
 
 const SUBJECTS = {
-  website:         'a website',
-  software:        'software or a reporting tool',
-  stayntouch:      'the Stayntouch reporting engine',
-  'freelancer-os': 'Freelancer OS early access',
-  care:            'ongoing site care',
+  website:         'a website for my business',
+  software:        'a custom application',
   other:           'something else',
 };
 
