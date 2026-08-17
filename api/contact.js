@@ -18,8 +18,8 @@
 
 import { Resend } from 'resend';
 
-const TO   = process.env.CONTACT_TO   || 'hello@srcs.online';
-const FROM = process.env.CONTACT_FROM || 'Sync Race Studios <hello@srcs.online>';
+const TO   = process.env.CONTACT_TO   || 'admin@srcs.online';
+const FROM = process.env.CONTACT_FROM || 'Sync Race Studios <admin@srcs.online>';
 
 const SUBJECTS = {
   website:         'a website for my business',
