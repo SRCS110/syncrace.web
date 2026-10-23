@@ -9,7 +9,7 @@ Work is hand-written HTML, CSS, and JavaScript with Node.js and PostgreSQL behin
 ## Pages
 
 - [Home](https://www.srcs.online/): What the studio does, recent work, and how a project runs.
-- [Software](https://www.srcs.online/pages/codestudio.html): Custom reporting tools and lightweight business software.
+- [Software](https://www.srcs.online/pages/codestudio.html): Vendor booking, a searchable local directory, and a visual HTML editor.
 - [Websites](https://www.srcs.online/pages/creativestudio.html): Websites designed and built end to end.
 - [How we work](https://www.srcs.online/pages/manifesto.html): Why the studio builds without subscriptions or middlemen.
 - [Wanderlust Santa Rosa case study](https://www.srcs.online/pages/wanderlust.html): Food truck festival website, Thursday vendor application, and market admin.
@@ -24,9 +24,7 @@ Work is hand-written HTML, CSS, and JavaScript with Node.js and PostgreSQL behin
 
 - Wanderlust Santa Rosa (wanderlustsantarosa.com): Website for a free weekly food truck festival in Old Courthouse Square, Santa Rosa, with a vendor application where trucks request Thursdays on a calendar and a market admin where the manager approves them. Approved trucks appear in the public weekly lineup automatically. HTML, CSS, JavaScript, Supabase, Vercel. Live.
 - Stay Santa Rosa (staysantarosa.com): Travel guide to Santa Rosa and Sonoma wine country created by Hotel E and Art House Santa Rosa. Dining, wine, attractions, a searchable directory of 79 places with list and map views, and booking that links directly to each hotel. HTML, CSS, JavaScript, Vercel. Live.
-- Stayntouch reporting engine: A reporting layer over the Stayntouch hotel property management system. Pulls occupancy, revenue, and housekeeping figures on a schedule so managers aren't exporting by hand each morning. Node.js and PostgreSQL. Running in production.
 - Visual HTML editor: A browser-based editor that lets clients change text and images on their own site without touching code. Output stays plain HTML, so nothing is locked to the tool. In active development.
-- Freelancer OS: A lightweight tool for solo freelancers covering clients, current deliverables, and invoices, without the bulk of a sales CRM. Plain HTML, Alpine.js, and Node. In active development.
 
 ## Contact
 
