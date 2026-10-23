@@ -1,0 +1,39 @@
+# Sync Race Studios
+# Must sit at the site root: https://www.srcs.online/robots.txt
+# A robots.txt inside a subfolder is never read.
+
+User-agent: *
+Allow: /
+
+# Assistant crawlers — these cite and link back, so leaving them open
+# sends you traffic.
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# Training crawlers — change Allow to Disallow on any you'd rather
+# not have using your work as training data.
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+Sitemap: https://www.srcs.online/sitemap.xml

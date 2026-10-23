@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Stay Santa Rosa — case study — Sync Race Studios</title>
+<meta name="description" content="How Sync Race Studios built Stay Santa Rosa: a Sonoma travel guide with a 79-place directory and direct hotel booking for Hotel E and Art House Santa Rosa.">
+<link rel="canonical" href="https://www.srcs.online/pages/staysantarosa.html">
+<meta charset="UTF-8">
+<meta property="og:title" content="Stay Santa Rosa — case study — Sync Race Studios">
+<meta property="og:description" content="How Sync Race Studios built Stay Santa Rosa: a Sonoma travel guide with a 79-place directory and direct hotel booking for Hotel E and Art House Santa Rosa.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.srcs.online/pages/staysantarosa.html">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+/* Light is the default. Dark ("Evening") only applies if the visitor chose it
+   here. The previous version of this site wrote its own values under the same
+   sr-theme key, so anything from before v2 is cleared once and ignored.
+   Wrapped in try/catch because private browsing can throw on localStorage. */
+(function(){try{
+  if(localStorage.getItem('sr-theme-v')!=='2'){
+    localStorage.removeItem('sr-theme');
+    localStorage.setItem('sr-theme-v','2');
+  }
+  if(localStorage.getItem('sr-theme')==='dark'){
+    document.documentElement.classList.add('dark');
+  }
+}catch(e){}})();
+</script>
+<link rel="icon" href="../assets/srcs-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../srcs.css">
+</head>
+<body>
+
+<site-nav></site-nav>
+
+<main id="main" tabindex="-1">
+
+  <section class="shell case-hero">
+    <span class="kicker rise">Case study · Website</span>
+    <h1 class="rise">Stay <span class="warm">Santa Rosa</span></h1>
+    <p class="lede rise" style="margin-top:1.6rem">A travel guide to Santa Rosa and Sonoma wine country, created by two downtown hotels — Hotel E and Art House Santa Rosa. It helps visitors plan the trip, then sends them to book directly with the hotels.</p>
+    <dl class="meta rise" style="margin-top:clamp(2rem,5vw,3rem)">
+      <div><dt>Client</dt><dd>Hotel E &amp; Art House Santa Rosa</dd></div>
+      <div><dt>Scope</dt><dd>Travel guide, directory, booking</dd></div>
+      <div><dt>Built with</dt><dd>HTML, CSS, JavaScript · Vercel</dd></div>
+      <div><dt>Live</dt><dd><a href="https://staysantarosa.com/" target="_blank" rel="noopener">staysantarosa.com<span class="sr-only"> (opens in a new tab)</span></a></dd></div>
+    </dl>
+    <figure class="case-shot rise">
+      <div class="frame">
+        <div class="frame-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="frame-url">staysantarosa.com</span></div>
+        <img class="shot" src="../assets/work/stay-home.webp" alt="Stay Santa Rosa home page: looking up into redwoods behind the headline One City Worth Exploring, with a booking bar for property, dates, adults and children." width="1600" height="1000" fetchpriority="high">
+      </div>
+    </figure>
+  </section>
+
+  <section class="band shell">
+    <div class="split" style="align-items:start">
+      <div class="rise">
+        <span class="kicker">The brief</span>
+        <h2>A guide first. A booking engine second.</h2>
+      </div>
+      <div class="prose rise">
+        <p>Two hotels a few blocks apart wanted to be found by people planning a Sonoma trip — not just people already searching for a hotel.</p>
+        <p>So the site leads with the city: <strong>where to eat, where to taste, what to see</strong>, and why downtown is a walkable base for wine country. The hotels sit inside that story, and every booking button goes straight to the hotel's own site.</p>
+        <p>The look is editorial — big serif headlines, a quiet palette and full-bleed video — so it reads like a magazine, not an ad.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="night slant-top slant-bottom band">
+    <div class="shell">
+      <div class="head rise">
+        <span class="kicker">The directory</span>
+        <h2>79 places, one search box.</h2>
+        <p>Restaurants, wineries and breweries, hotels and attractions in and around downtown, with addresses, phone numbers and hours in one place.</p>
+      </div>
+      <figure class="rise">
+        <div class="frame">
+          <div class="frame-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="frame-url">staysantarosa.com/directory</span></div>
+          <img class="shot" src="../assets/work/stay-directory.webp" alt="Santa Rosa Directory page: category filters for restaurants, wineries and breweries, hotels and attractions, a search box, an open now toggle, and list and map views." width="1600" height="1000" loading="lazy" decoding="async">
+        </div>
+        <figcaption>Filters, search, an open-now switch, and list or map view.</figcaption>
+      </figure>
+      <div class="wells" style="margin-top:clamp(3rem,6vw,4.5rem)">
+        <div class="well rise"><b>Filter by category</b><span>Restaurants, wine and beer, hotels and attractions, with a live count on each.</span></div>
+        <div class="well rise"><b>Search the way people think</b><span>By name, cuisine or street.</span></div>
+        <div class="well rise"><b>Open now</b><span>One switch hides anything that's closed.</span></div>
+        <div class="well rise"><b>List or map</b><span>Browse as cards, or see where everything sits around downtown.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band shell">
+    <div class="split">
+      <div class="rise">
+        <span class="kicker">Booking</span>
+        <h2>Straight to the hotel, no middleman.</h2>
+        <div class="prose" style="margin-top:1.5rem">
+          <p>The booking bar on the home page takes the property, dates and number of guests, then hands the visitor to that hotel's own booking page.</p>
+          <p>No third-party booking site in between — the guest books with the hotel.</p>
+        </div>
+      </div>
+      <div class="rise">
+        <div class="phone" style="margin-inline:auto"><img src="../assets/work/stay-mobile.webp" alt="Stay Santa Rosa on a phone: redwood video behind the headline One City Worth Exploring." width="600" height="1299" loading="lazy" decoding="async"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band shell" style="padding-top:0">
+    <div class="head rise">
+      <span class="kicker">Inside the guide</span>
+      <h2>Planned around the trip, not the hotel.</h2>
+    </div>
+    <figure class="rise" style="margin-bottom:clamp(3rem,6vw,4.5rem)">
+      <div class="frame">
+        <div class="frame-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="frame-url">staysantarosa.com/hotels</span></div>
+        <img class="shot" src="../assets/work/stay-hotels.webp" alt="Where to stay in Santa Rosa page: downtown boutique hotels, with the courthouse clock tower framed by trees." width="1600" height="1000" loading="lazy" decoding="async">
+      </div>
+    </figure>
+    <div class="cards">
+      <div class="card rise"><span class="num">01</span><h3>Dining, wine &amp; attractions</h3><p>A section each for downtown dining, wine and beer, and things to do, plus a journal of longer reads.</p></div>
+      <div class="card rise"><span class="num">02</span><h3>Neighborhoods</h3><p>Old Courthouse Square, Railroad Square and the 4th Street corridor, and how they fit together on foot.</p></div>
+      <div class="card rise"><span class="num">03</span><h3>Both hotels, side by side</h3><p>Art House and Hotel E compared side by side, so guests pick the one that suits the trip.</p></div>
+    </div>
+  </section>
+
+  <section class="shell">
+    <div class="cta rise">
+      <div>
+        <h2>Want a site people plan around?</h2>
+        <p>Hotels, venues and local businesses — we'll build the guide your guests are already searching for.</p>
+      </div>
+      <a class="btn" href="./contact.html?about=website">Get in touch <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <section class="band shell" style="padding-bottom:0">
+    <a class="next-case rise" href="./wanderlust.html">
+      <span><span class="kicker" style="margin:0 0 .9rem">Next case study</span><br><b>Wanderlust Santa Rosa</b></span>
+      <span class="btn btn-quiet" aria-hidden="true">View <span class="arrow">→</span></span>
+    </a>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="shell foot-grid">
+    <div class="foot-brand">
+      <a class="brand" href="../index.html">
+        <img src="../assets/srcs-mark.png" alt="" width="36" height="36" loading="lazy" decoding="async">
+        <span><b>Sync Race</b><em>Code Studio · Creative Studio</em></span>
+      </a>
+      <p>Websites and practical software for independent businesses. Hand-built, fast, and handed over.</p>
+    </div>
+    <nav class="foot-col" aria-labelledby="foot-studio">
+      <h2 class="foot-title" id="foot-studio">Studio</h2>
+      <ul><li><a href="../pages/codestudio.html">Software</a></li><li><a href="../pages/creativestudio.html">Websites</a></li><li><a href="../pages/arcade.html">Playground</a></li><li><a href="../pages/manifesto.html">How we work</a></li></ul>
+    </nav>
+    <div class="foot-col">
+      <h2 class="foot-title">Contact</h2>
+      <ul><li><a href="../pages/contact.html">Get in touch</a></li><li><a href="mailto:hello@srcs.online">hello@srcs.online</a></li></ul>
+    </div>
+    <nav class="foot-col" aria-labelledby="foot-legal">
+      <h2 class="foot-title" id="foot-legal">Legal</h2>
+      <ul><li><a href="../pages/privacy.html">Privacy</a></li><li><a href="../pages/terms.html">Terms</a></li><li><a href="../pages/accessibility.html">Accessibility</a></li><li><a href="#cookie-settings" data-cookie-settings>Cookie settings</a></li></ul>
+    </nav>
+  </div>
+  <div class="shell foot-word" aria-hidden="true">Sync Race</div>
+  <div class="shell foot-base">
+    <span>&copy; <span data-year>2026</span> Sync Race Studios</span>
+    <span>srcs.online</span>
+  </div>
+</footer>
+
+<script src="../nav.js" defer></script>
+<script>
+  const io_items = document.querySelectorAll('.rise');
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+    io_items.forEach(el => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver(es => es.forEach((e,i) => {
+      if (!e.isIntersecting) return;
+      setTimeout(() => e.target.classList.add('in'), i*80);
+      io.unobserve(e.target);
+    }), { threshold:.1, rootMargin:'0px 0px -50px' });
+    io_items.forEach(el => io.observe(el));
+  }
+</script>
+</body>
+</html>

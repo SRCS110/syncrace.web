@@ -21,37 +21,56 @@
   }
 }catch(e){}})();
 </script>
-<link rel="icon" href="../assets/srcslogo">
+<link rel="icon" href="../assets/srcs-mark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../srcs.css">
 </head>
 <body>
 
 <site-nav></site-nav>
 
-<main>
+<main id="main" tabindex="-1">
 
   <section class="shell page-top">
     <span class="kicker rise">Software</span>
     <h1 class="rise">Tools that do one job<br><span class="warm">and stay out of the way.</span></h1>
-    <p class="lede rise" style="margin-top:1.6rem">Most business software charges you every month for a hundred features you'll never open, and holds your data hostage if you stop. We build the handful you actually use. Hosting and support can be monthly if that suits you — but the tool and the data stay yours regardless.</p>
+    <p class="lede rise" style="margin-top:1.6rem">Most software charges you for a hundred features you'll never open. We build what you actually use. Hosting and support can be monthly if that suits you — but we prefer to hand it over to you to own with no monthly charges.</p>
   </section>
 
   <section class="band shell" style="display:grid;gap:1.15rem">
 
     <article class="card rise" style="padding:clamp(1.9rem,4vw,2.75rem)">
       <div style="display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:space-between">
+        <span class="pill pill-blue">For markets &amp; events</span>
+        <span class="pill pill-green">Live</span>
+      </div>
+      <h2 style="margin:1rem 0 .9rem;font-size:clamp(1.6rem,3.4vw,2.3rem)">Wanderlust vendor application &amp; market admin</h2>
+      <p class="muted" style="max-width:70ch">A weekly food truck festival was booking trucks by email. Now vendors pick their Thursdays on a live calendar, the market manager approves them from one dashboard, and approved trucks show up in the public lineup on their own.</p>
+      <div class="wells" style="margin-top:1.9rem">
+        <div class="well"><b>Thursday-only calendar</b><span>Pick up to 12 dates at a time, with available, pending and approved shown on every date.</span></div>
+        <div class="well"><b>One place to approve</b><span>The manager reviews every request and keeps the menu balanced. Vendors hear back by email either way.</span></div>
+        <div class="well"><b>Lineup updates itself</b><span>Approvals feed the public site's weekly lineup — nobody edits a page by hand.</span></div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center;margin-top:1.9rem;padding-top:1.4rem;border-top:1px solid var(--hair)">
+        <span class="muted" style="font-size:.88rem">Built with HTML, JavaScript and Supabase</span>
+        <a class="btn btn-quiet" href="./wanderlust.html">Read the case study</a>
+      </div>
+    </article>
+
+
+    <article class="card rise" style="padding:clamp(1.9rem,4vw,2.75rem)">
+      <div style="display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:space-between">
         <span class="pill pill-blue">For hotels</span>
-        <span class="pill pill-lamp">Running now</span>
+        <span class="pill pill-lamp">In final review</span>
       </div>
       <h2 style="margin:1rem 0 .9rem;font-size:clamp(1.6rem,3.4vw,2.3rem)">Stayntouch reporting engine</h2>
-      <p class="muted" style="max-width:70ch">Hotel teams using Stayntouch were spending the first hour of every day pulling numbers out of the system by hand. This sits on top of the platform and has the figures waiting for them instead — occupancy, revenue, housekeeping, all current.</p>
+      <p class="muted" style="max-width:70ch">Hotel teams using Stayntouch were spending the first hour of every day pulling numbers out of the system by hand. This sits on top of the platform and has the figures waiting for them instead — occupancy, revenue, budget, all current.</p>
       <div class="wells" style="margin-top:1.9rem">
         <div class="well"><b>Reports that arrive on their own</b><span>Set the time once. They turn up every morning without anyone touching it.</span></div>
-        <div class="well"><b>Numbers a manager can read</b><span>RevPAR, ADR, and daily pace laid out plainly — no spreadsheet archaeology.</span></div>
-        <div class="well"><b>Exports that fit your accountant</b><span>CSV or JSON in whatever shape the rest of your finance tools expect.</span></div>
+        <div class="well"><b>Numbers a manager can read</b><span>RevPAR, ADR, and monthly pace laid out plainly — no spreadsheet archaeology.</span></div>
+        <div class="well"><b>Exports that fit your meeting</b><span>Printable PDF to take to your performance meetings.</span></div>
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center;margin-top:1.9rem;padding-top:1.4rem;border-top:1px solid var(--hair)">
         <span class="muted" style="font-size:.88rem">Built with Node.js and PostgreSQL</span>
@@ -59,58 +78,80 @@
       </div>
     </article>
 
-    <article class="card rise" style="padding:clamp(1.9rem,4vw,2.75rem)">
+     <article class="card rise" style="padding:clamp(1.9rem,4vw,2.75rem)">
       <div style="display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:space-between">
         <span class="pill pill-lamp">For freelancers</span>
-        <span class="pill pill-blue">In progress</span>
+        <span class="pill pill-blue">In testing</span>
       </div>
       <h2 style="margin:1rem 0 .9rem;font-size:clamp(1.6rem,3.4vw,2.3rem)">Freelancer OS</h2>
-      <p class="muted" style="max-width:70ch">Client software is built for sales teams of forty. If you're one person, most of it is in the way. This keeps your clients, your current work, and your invoices on one screen — and nothing else.</p>
+      <p class="muted" style="max-width:70ch">Client software is built for sales teams of forty. If you're one person, most of it is in the way. This keeps your clients, your current work, and your invoices on one application — no unnecessary bloat.</p>
       <div class="wells" style="margin-top:1.9rem">
         <div class="well"><b>Your clients, briefly</b><span>Who they are, what you agreed, and where the files live. Nothing more.</span></div>
         <div class="well"><b>What's actually due</b><span>A simple board of what's in progress and what's waiting on someone else.</span></div>
         <div class="well"><b>Your data stays yours</b><span>No tracking, no third parties reading your client list.</span></div>
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center;margin-top:1.9rem;padding-top:1.4rem;border-top:1px solid var(--hair)">
-        <span class="muted" style="font-size:.88rem">Built with plain HTML, Alpine.js and Node</span>
-        <a class="btn btn-quiet" href="./contact.html?about=freelancer-os">Ask for early access</a>
+        <span class="muted" style="font-size:.88rem">Built with HTML, Alpine.js and Node</span>
+        <a class="btn btn-quiet" href="https://freelancer.srcs.online/index.html?demo=true">View demo</a>
       </div>
     </article>
 
     <article class="card rise" style="padding:clamp(1.9rem,4vw,2.75rem)">
       <div style="display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:space-between">
-        <span class="pill pill-blue">For our own clients</span>
-        <span class="pill pill-lamp">In progress</span>
+        <span class="pill pill-blue">Educational Tool</span>
+        <span class="pill pill-green">Complete</span>
       </div>
       <h2 style="margin:1rem 0 .9rem;font-size:clamp(1.6rem,3.4vw,2.3rem)">Visual HTML editor</h2>
       <p class="muted" style="max-width:70ch">Handing over the code is only useful if you can actually change it. This lets you click a heading on your own site and retype it — no code, no staging server, no waiting on us for a price update or a new photo. Everything you edit is still plain HTML underneath, so nothing about the site gets locked to a tool.</p>
       <div class="wells" style="margin-top:1.9rem">
-        <div class="well"><b>Click it, change it</b><span>Edit text and swap images directly on the page, the way you'd expect to.</span></div>
-        <div class="well"><b>See it before it goes live</b><span>Preview your changes first, then publish when you're happy.</span></div>
+        <div class="well"><b>Click it, change it</b><span>Edit text and change images directly on the page, the way you'd expect to.</span></div>
+        <div class="well"><b>See it before it goes live</b><span>Preview your changes first, then download the new file and publish when you're happy.</span></div>
         <div class="well"><b>Still just HTML</b><span>No proprietary format. Walk away with the same files you'd have had anyway.</span></div>
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center;margin-top:1.9rem;padding-top:1.4rem;border-top:1px solid var(--hair)">
-        <span class="muted" style="font-size:.88rem">Built with vanilla JavaScript</span>
-        <a class="btn btn-quiet" href="./contact.html?about=editor">Ask to try it</a>
+        <span class="muted" style="font-size:.88rem">Built with vanilla JavaScript and HTML</span>
+        <a class="btn btn-quiet" href="https://htmlv.srcs.online">Try it now</a>
       </div>
     </article>
-
   </section>
 
-  <section class="shell" style="padding-bottom:clamp(2.5rem,7vw,4rem)">
-    <div class="rise" style="background:var(--surface);border:1px solid var(--hair);border-radius:22px;box-shadow:var(--lift-3);padding:clamp(2.5rem,6vw,4rem) var(--gut);text-align:center">
-      <h2>Got a job like these?</h2>
-      <p class="muted" style="max-width:44ch;margin:1.1rem auto 2rem">If there's a task eating your week, tell us what it looks like. We'll say honestly whether it's worth building.</p>
-      <a class="btn btn-lamp" href="./contact.html">Get in touch</a>
+  <section class="shell">
+    <div class="cta rise">
+      <div>
+        <h2>Got a job like these?</h2>
+        <p>If there's a task eating your week, tell us what it looks like. We'll say honestly whether it's worth building.</p>
+      </div>
+      <a class="btn" href="./contact.html">Get in touch <span class="arrow" aria-hidden="true">→</span></a>
     </div>
   </section>
 
 </main>
 
 <footer class="foot">
-  <div class="shell">
-    <span>© 2026 Sync Race Studios</span>
-    <span><a href="mailto:hello@srcs.online">hello@srcs.online</a></span>
+  <div class="shell foot-grid">
+    <div class="foot-brand">
+      <a class="brand" href="../index.html">
+        <img src="../assets/srcs-mark.png" alt="" width="36" height="36" loading="lazy" decoding="async">
+        <span><b>Sync Race</b><em>Code Studio · Creative Studio</em></span>
+      </a>
+      <p>Websites and practical software for independent businesses. Hand-built, fast, and handed over.</p>
+    </div>
+    <nav class="foot-col" aria-labelledby="foot-studio">
+      <h2 class="foot-title" id="foot-studio">Studio</h2>
+      <ul><li><a href="../pages/codestudio.html">Software</a></li><li><a href="../pages/creativestudio.html">Websites</a></li><li><a href="../pages/arcade.html">Playground</a></li><li><a href="../pages/manifesto.html">How we work</a></li></ul>
+    </nav>
+    <div class="foot-col">
+      <h2 class="foot-title">Contact</h2>
+      <ul><li><a href="../pages/contact.html">Get in touch</a></li><li><a href="mailto:hello@srcs.online">hello@srcs.online</a></li></ul>
+    </div>
+    <nav class="foot-col" aria-labelledby="foot-legal">
+      <h2 class="foot-title" id="foot-legal">Legal</h2>
+      <ul><li><a href="../pages/privacy.html">Privacy</a></li><li><a href="../pages/terms.html">Terms</a></li><li><a href="../pages/accessibility.html">Accessibility</a></li><li><a href="#cookie-settings" data-cookie-settings>Cookie settings</a></li></ul>
+    </nav>
+  </div>
+  <div class="shell foot-word" aria-hidden="true">Sync Race</div>
+  <div class="shell foot-base">
+    <span>&copy; <span data-year>2026</span> Sync Race Studios</span>
     <span>srcs.online</span>
   </div>
 </footer>

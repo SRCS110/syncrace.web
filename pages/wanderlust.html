@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Wanderlust Santa Rosa — case study — Sync Race Studios</title>
+<meta name="description" content="How Sync Race Studios built the Wanderlust Santa Rosa food truck festival site, its Thursday vendor application, and the market admin that runs the weekly lineup.">
+<link rel="canonical" href="https://www.srcs.online/pages/wanderlust.html">
+<meta charset="UTF-8">
+<meta property="og:title" content="Wanderlust Santa Rosa — case study — Sync Race Studios">
+<meta property="og:description" content="How Sync Race Studios built the Wanderlust Santa Rosa food truck festival site, its Thursday vendor application, and the market admin that runs the weekly lineup.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.srcs.online/pages/wanderlust.html">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+/* Light is the default. Dark ("Evening") only applies if the visitor chose it
+   here. The previous version of this site wrote its own values under the same
+   sr-theme key, so anything from before v2 is cleared once and ignored.
+   Wrapped in try/catch because private browsing can throw on localStorage. */
+(function(){try{
+  if(localStorage.getItem('sr-theme-v')!=='2'){
+    localStorage.removeItem('sr-theme');
+    localStorage.setItem('sr-theme-v','2');
+  }
+  if(localStorage.getItem('sr-theme')==='dark'){
+    document.documentElement.classList.add('dark');
+  }
+}catch(e){}})();
+</script>
+<link rel="icon" href="../assets/srcs-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../srcs.css">
+</head>
+<body>
+
+<site-nav></site-nav>
+
+<main id="main" tabindex="-1">
+
+  <section class="shell case-hero">
+    <span class="kicker rise">Case study · Website + application</span>
+    <h1 class="rise">Wanderlust <span class="warm">Santa Rosa</span></h1>
+    <p class="lede rise" style="margin-top:1.6rem">A free food truck festival every Thursday night in Old Courthouse Square. The public site tells people who's cooking this week. The application behind it lets trucks claim their Thursdays and gives the market manager one place to approve them.</p>
+    <dl class="meta rise" style="margin-top:clamp(2rem,5vw,3rem)">
+      <div><dt>Client</dt><dd>Wanderlust Food Truck Festival</dd></div>
+      <div><dt>Scope</dt><dd>Website, vendor application, admin</dd></div>
+      <div><dt>Built with</dt><dd>HTML, CSS, JavaScript · Supabase · Vercel</dd></div>
+      <div><dt>Live</dt><dd><a href="https://wanderlustsantarosa.com/" target="_blank" rel="noopener">wanderlustsantarosa.com<span class="sr-only"> (opens in a new tab)</span></a></dd></div>
+    </dl>
+    <figure class="case-shot rise">
+      <div class="frame">
+        <div class="frame-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="frame-url">wanderlustsantarosa.com</span></div>
+        <img class="shot" src="../assets/work/wanderlust-home.webp" alt="Wanderlust Santa Rosa home page: a red and turquoise food truck under string lights at dusk, headline Thursday night, food truck festival, with buttons to see this week's lineup." width="1600" height="1000" fetchpriority="high">
+      </div>
+    </figure>
+  </section>
+
+  <section class="band shell">
+    <div class="split" style="align-items:start">
+      <div class="rise">
+        <span class="kicker">The brief</span>
+        <h2>One night a week, two very different audiences.</h2>
+      </div>
+      <div class="prose rise">
+        <p><strong>People coming to eat</strong> want three answers fast: when, where, and which trucks. They're usually on a phone, often already downtown.</p>
+        <p><strong>Trucks wanting a spot</strong> need to see which Thursdays are open, ask for the ones they want, and know where they stand — without a back-and-forth of emails and spreadsheets.</p>
+        <p>So the site does both: a warm, photo-led front door for the public, and a booking flow for vendors that feeds straight into the weekly lineup.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="night slant-top slant-bottom band">
+    <div class="shell">
+      <div class="head rise">
+        <span class="kicker">The application</span>
+        <h2>Pick your Thursdays. Get an answer by Monday.</h2>
+        <p>Vendors fill in their details once, tap the dates they want on a Thursday-only calendar, and send the request. The market manager reviews every one and the vendor gets an email either way.</p>
+      </div>
+      <figure class="rise">
+        <div class="frame">
+          <div class="frame-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="frame-url">wanderlustsantarosa.com/vendors</span></div>
+          <img class="shot" src="../assets/work/wanderlust-application.webp" alt="Vendor sign up page, Get a Thursday: a details form beside a calendar of October where only Thursdays can be picked, with a legend for available, selected, pending and approved." width="1600" height="1000" loading="lazy" decoding="async">
+        </div>
+        <figcaption>The vendor form and Thursday calendar, side by side.</figcaption>
+      </figure>
+      <div class="wells" style="margin-top:clamp(3rem,6vw,4.5rem)">
+        <div class="well rise"><b>Thursdays only</b><span>The calendar only offers market nights. Pick up to 12 at a time, or ask for the whole season.</span></div>
+        <div class="well rise"><b>Status at a glance</b><span>Every date shows as available, selected, pending or approved, so vendors know where they stand.</span></div>
+        <div class="well rise"><b>Pay as you go</b><span>A flat booth fee per date by vendor type, due a week before each market — not the whole season up front.</span></div>
+        <div class="well rise"><b>No retyping</b><span>Details are saved in the vendor's own browser for next time, with a button to clear them.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band shell">
+    <div class="split">
+      <div class="rise">
+        <span class="kicker">Market admin</span>
+        <h2>The lineup builds itself.</h2>
+        <div class="prose" style="margin-top:1.5rem">
+          <p>The market manager signs in to a private dashboard to review requests, keep the menu balanced across the night, and approve trucks week by week.</p>
+          <p>Approved trucks appear on the public site's <strong>Next Thursday</strong> and <strong>Upcoming Thursdays</strong> lineup automatically — no one has to edit the website by hand.</p>
+        </div>
+      </div>
+      <div class="rise">
+        <div class="phone" style="margin-inline:auto"><img src="../assets/work/wanderlust-mobile.webp" alt="Wanderlust Santa Rosa on a phone: the food truck photo, headline, and a full-width See this week's lineup button." width="600" height="1299" loading="lazy" decoding="async"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band shell" style="padding-top:0">
+    <div class="head rise">
+      <span class="kicker">What's on the public site</span>
+      <h2>Everything a Thursday needs.</h2>
+    </div>
+    <div class="cards">
+      <div class="card rise"><span class="num">01</span><h3>This week's lineup</h3><p>Confirmed trucks for next Thursday and the weeks after, straight from the approvals.</p></div>
+      <div class="card rise"><span class="num">02</span><h3>Getting there</h3><p>Parking garages, street meters, transit and bike racks around the square.</p></div>
+      <div class="card rise"><span class="num">03</span><h3>The questions people ask</h3><p>Cost, seating, dogs, rain, beer and wine, and how to pay — answered before anyone has to ask.</p></div>
+    </div>
+  </section>
+
+  <section class="shell">
+    <div class="cta rise">
+      <div>
+        <h2>Need bookings like this?</h2>
+        <p>Markets, events, rentals, classes — if people need to ask for a date and someone needs to say yes, we can build it.</p>
+      </div>
+      <a class="btn" href="./contact.html?about=software">Get in touch <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <section class="band shell" style="padding-bottom:0">
+    <a class="next-case rise" href="./staysantarosa.html">
+      <span><span class="kicker" style="margin:0 0 .9rem">Next case study</span><br><b>Stay Santa Rosa</b></span>
+      <span class="btn btn-quiet" aria-hidden="true">View <span class="arrow">→</span></span>
+    </a>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="shell foot-grid">
+    <div class="foot-brand">
+      <a class="brand" href="../index.html">
+        <img src="../assets/srcs-mark.png" alt="" width="36" height="36" loading="lazy" decoding="async">
+        <span><b>Sync Race</b><em>Code Studio · Creative Studio</em></span>
+      </a>
+      <p>Websites and practical software for independent businesses. Hand-built, fast, and handed over.</p>
+    </div>
+    <nav class="foot-col" aria-labelledby="foot-studio">
+      <h2 class="foot-title" id="foot-studio">Studio</h2>
+      <ul><li><a href="../pages/codestudio.html">Software</a></li><li><a href="../pages/creativestudio.html">Websites</a></li><li><a href="../pages/arcade.html">Playground</a></li><li><a href="../pages/manifesto.html">How we work</a></li></ul>
+    </nav>
+    <div class="foot-col">
+      <h2 class="foot-title">Contact</h2>
+      <ul><li><a href="../pages/contact.html">Get in touch</a></li><li><a href="mailto:hello@srcs.online">hello@srcs.online</a></li></ul>
+    </div>
+    <nav class="foot-col" aria-labelledby="foot-legal">
+      <h2 class="foot-title" id="foot-legal">Legal</h2>
+      <ul><li><a href="../pages/privacy.html">Privacy</a></li><li><a href="../pages/terms.html">Terms</a></li><li><a href="../pages/accessibility.html">Accessibility</a></li><li><a href="#cookie-settings" data-cookie-settings>Cookie settings</a></li></ul>
+    </nav>
+  </div>
+  <div class="shell foot-word" aria-hidden="true">Sync Race</div>
+  <div class="shell foot-base">
+    <span>&copy; <span data-year>2026</span> Sync Race Studios</span>
+    <span>srcs.online</span>
+  </div>
+</footer>
+
+<script src="../nav.js" defer></script>
+<script>
+  const io_items = document.querySelectorAll('.rise');
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+    io_items.forEach(el => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver(es => es.forEach((e,i) => {
+      if (!e.isIntersecting) return;
+      setTimeout(() => e.target.classList.add('in'), i*80);
+      io.unobserve(e.target);
+    }), { threshold:.1, rootMargin:'0px 0px -50px' });
+    io_items.forEach(el => io.observe(el));
+  }
+</script>
+</body>
+</html>

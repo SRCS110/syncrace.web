@@ -3,7 +3,7 @@
 <head>
 <title>How we work — Sync Race Studios</title>
 <meta name="description" content="Why Sync Race Studios builds the way it does: no subscription traps, no bloat, no middlemen.">
-<link rel="canonical" href="https://www.srcs.online/pages/manifesto">
+<link rel="canonical" href="https://www.srcs.online/pages/manifesto.html">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script>
@@ -21,17 +21,17 @@
   }
 }catch(e){}})();
 </script>
-<link rel="icon" href="../assets/srcslogo">
+<link rel="icon" href="../assets/srcs-mark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../srcs.css">
 </head>
 <body>
 
 <site-nav></site-nav>
 
-<main>
+<main id="main" tabindex="-1">
 
   <section class="shell page-top" style="max-width:980px">
     <span class="kicker rise">How we work</span>
@@ -53,7 +53,7 @@
       </div>
       <div class="card rise">
         <h3>It loads fast</h3>
-        <p>Clean code, small pages, and no tracking scripts running in the background. Your customers get where they're going quickly, on any phone.</p>
+        <p>Clean code, small pages, and no tracking scripts running unless you say so. Your customers get where they're going quickly, on any phone.</p>
       </div>
       <div class="card rise">
         <h3>We make things ourselves</h3>
@@ -66,20 +66,43 @@
     </div>
   </section>
 
-  <section class="shell" style="padding-bottom:clamp(2.5rem,7vw,4rem)">
-    <div class="rise" style="background:var(--surface);border:1px solid var(--hair);border-radius:22px;box-shadow:var(--lift-3);padding:clamp(2.5rem,6vw,4rem) var(--gut);text-align:center">
-      <h2>Sound like your kind of thing?</h2>
-      <p class="muted" style="max-width:44ch;margin:1.1rem auto 2rem">Tell us what you're working on. No pitch, no discovery call, just a reply.</p>
-      <a class="btn btn-lamp" href="./contact.html">Get in touch</a>
+  <section class="shell">
+    <div class="cta rise">
+      <div>
+        <h2>Sound like your kind of thing?</h2>
+        <p>Tell us what you're working on. No pitch, no discovery call, just a reply.</p>
+      </div>
+      <a class="btn" href="./contact.html">Get in touch <span class="arrow" aria-hidden="true">→</span></a>
     </div>
   </section>
 
 </main>
 
 <footer class="foot">
-  <div class="shell">
-    <span>© 2026 Sync Race Studios</span>
-    <span><a href="mailto:hello@srcs.online">hello@srcs.online</a></span>
+  <div class="shell foot-grid">
+    <div class="foot-brand">
+      <a class="brand" href="../index.html">
+        <img src="../assets/srcs-mark.png" alt="" width="36" height="36" loading="lazy" decoding="async">
+        <span><b>Sync Race</b><em>Code Studio · Creative Studio</em></span>
+      </a>
+      <p>Websites and practical software for independent businesses. Hand-built, fast, and handed over.</p>
+    </div>
+    <nav class="foot-col" aria-labelledby="foot-studio">
+      <h2 class="foot-title" id="foot-studio">Studio</h2>
+      <ul><li><a href="../pages/codestudio.html">Software</a></li><li><a href="../pages/creativestudio.html">Websites</a></li><li><a href="../pages/arcade.html">Playground</a></li><li><a href="../pages/manifesto.html">How we work</a></li></ul>
+    </nav>
+    <div class="foot-col">
+      <h2 class="foot-title">Contact</h2>
+      <ul><li><a href="../pages/contact.html">Get in touch</a></li><li><a href="mailto:hello@srcs.online">hello@srcs.online</a></li></ul>
+    </div>
+    <nav class="foot-col" aria-labelledby="foot-legal">
+      <h2 class="foot-title" id="foot-legal">Legal</h2>
+      <ul><li><a href="../pages/privacy.html">Privacy</a></li><li><a href="../pages/terms.html">Terms</a></li><li><a href="../pages/accessibility.html">Accessibility</a></li><li><a href="#cookie-settings" data-cookie-settings>Cookie settings</a></li></ul>
+    </nav>
+  </div>
+  <div class="shell foot-word" aria-hidden="true">Sync Race</div>
+  <div class="shell foot-base">
+    <span>&copy; <span data-year>2026</span> Sync Race Studios</span>
     <span>srcs.online</span>
   </div>
 </footer>

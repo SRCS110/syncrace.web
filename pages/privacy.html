@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Privacy policy | Sync Race Studios</title>
+<meta name="description" content="How Sync Race Studios handles personal data on srcs.online: the contact form, consent-based Google Analytics, our providers, retention, and your rights.">
+<link rel="canonical" href="https://www.srcs.online/pages/privacy.html">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+/* Light is the default. Dark ("Evening") only applies if the visitor chose it
+   here. The previous version of this site wrote its own values under the same
+   sr-theme key, so anything from before v2 is cleared once and ignored.
+   Wrapped in try/catch because private browsing can throw on localStorage. */
+(function(){try{
+  if(localStorage.getItem('sr-theme-v')!=='2'){
+    localStorage.removeItem('sr-theme');
+    localStorage.setItem('sr-theme-v','2');
+  }
+  if(localStorage.getItem('sr-theme')==='dark'){
+    document.documentElement.classList.add('dark');
+  }
+}catch(e){}})();
+</script>
+<link rel="icon" href="../assets/srcs-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../srcs.css">
+</head>
+<body>
+
+<site-nav></site-nav>
+
+<main id="main" tabindex="-1">
+
+  <section class="shell legal">
+  <article class="legal-body">
+    <h1>Privacy policy</h1>
+    <p class="lede">The short version: we collect what you choose to send us through the contact form or by email, we use it to reply, and Google Analytics only runs if you say yes. We never use advertising cookies.</p>
+
+    <nav class="toc" aria-labelledby="toc-title">
+      <h2 id="toc-title">On this page</h2>
+      <ol>
+        <li><a href="#who">Who we are</a></li>
+        <li><a href="#collect">What we collect</a></li>
+        <li><a href="#why">Why we use it</a></li>
+        <li><a href="#providers">Who processes it for us</a></li>
+        <li><a href="#storage">Cookies and browser storage</a></li>
+        <li><a href="#transfers">International transfers</a></li>
+        <li><a href="#retention">How long we keep it</a></li>
+        <li><a href="#rights">Your rights</a></li>
+        <li><a href="#children">Children</a></li>
+        <li><a href="#changes">Changes to this policy</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="who">1. Who we are</h2>
+    <p>This website, www.srcs.online, is run by Sync Race Studios. The legal entity responsible for your personal data is <span class="supply">[CLIENT TO SUPPLY: registered legal entity name]</span>, <span class="supply">[CLIENT TO SUPPLY: business mailing address]</span>.</p>
+    <p>For anything to do with your data, email <a href="mailto:hello@srcs.online">hello@srcs.online</a>.</p>
+    <p>This policy covers www.srcs.online only. The Freelancer OS demo (freelancer.srcs.online) and the visual HTML editor (htmlv.srcs.online) run at their own addresses and are not covered here.</p>
+
+    <h2 id="collect">2. What we collect</h2>
+    <h3>When you use the contact form</h3>
+    <ul>
+      <li>Your name and email address (required).</li>
+      <li>Your phone number and a budget range, if you choose to add them.</li>
+      <li>The topic you pick and the message you write.</li>
+    </ul>
+    <p>A hidden anti-spam field is also sent. Real visitors never see or fill it in.</p>
+    <h3>When you email us directly</h3>
+    <p>Your email address, your name if included, and whatever you write.</p>
+    <h3>When you visit any page</h3>
+    <p>Like every website, the server that delivers pages receives technical request information: your IP address, browser type, the page requested and the time. Our hosting provider records this in its logs to run and protect the service. We do not use it to identify or profile visitors.</p>
+    <h3>If you accept Analytics</h3>
+    <p>Google Analytics records which pages you view, how you arrived, your device and browser type, and your approximate location (city level), linked to a random identifier stored in a cookie. It does not receive your name or email. If you decline, or never answer, it does not load at all.</p>
+    <h3>Fonts</h3>
+    <p>The site's typefaces are served by Google Fonts. When a page loads, your browser requests them from Google, which receives your IP address and browser details. Google Fonts does not set cookies.</p>
+    <p>We do not use advertising pixels or social media embeds on this site.</p>
+
+    <h2 id="why">3. Why we use it</h2>
+    <div class="table-wrap" role="region" aria-label="Why we use your data" tabindex="0">
+      <table>
+        <thead><tr><th scope="col">Purpose</th><th scope="col">Data</th><th scope="col">Legal basis</th></tr></thead>
+        <tbody>
+          <tr><td>Replying to your enquiry and discussing a project</td><td>Contact form and email content</td><td>Steps you ask us to take before a contract, and our legitimate interest in answering messages</td></tr>
+          <tr><td>Keeping the site running and secure</td><td>Server request logs</td><td>Our legitimate interest in operating a safe website</td></tr>
+          <tr><td>Understanding which pages are useful, so we can improve the site</td><td>Google Analytics usage data</td><td>Your consent, which you can withdraw at any time</td></tr>
+          <tr><td>Remembering your theme and privacy choices</td><td>Browser storage on your device</td><td>Strictly necessary for the features you use</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>We do not sell your personal information, and we do not share it for advertising.</p>
+
+    <h2 id="providers">4. Who processes it for us</h2>
+    <p>These are the services actually used to run this site:</p>
+    <ul>
+      <li><b>Vercel</b> hosts the website and runs the small server function that receives the contact form. It keeps request logs as described above.</li>
+      <li><b>Resend</b> delivers contact form messages to our inbox by email.</li>
+      <li><b>Google Analytics</b> (Google LLC) measures site usage, only if you accept Analytics. Google's advertising features are switched off.</li>
+      <li><b>Google Fonts</b> (Google LLC) serves the typefaces used on every page.</li>
+      <li><b>Cloudflare</b> provides the domain name service (DNS) for srcs.online.</li>
+      <li><b><span class="supply">[CLIENT TO SUPPLY: email provider that hosts the hello@srcs.online inbox]</span></b> stores the messages we receive and send.</li>
+    </ul>
+    <p>Each provider handles data under its own terms and privacy policy. We only give them what they need to do their job.</p>
+
+    <h2 id="storage">5. Cookies and browser storage</h2>
+    <p>Our own code sets no cookies. It stores a few small values in your browser's local storage, which never leave your device. Google Analytics sets cookies only if you accept Analytics.</p>
+    <div class="table-wrap" role="region" aria-label="Browser storage and cookies" tabindex="0">
+      <table>
+        <thead><tr><th scope="col">Name</th><th scope="col">What it does</th><th scope="col">Category</th></tr></thead>
+        <tbody>
+          <tr><td><code>sr-theme</code>, <code>sr-theme-v</code></td><td>Remembers whether you chose the day or evening theme</td><td>Strictly necessary</td></tr>
+          <tr><td><code>srcs-consent</code></td><td>Records your privacy choice, when you made it, and which version of these choices you saw</td><td>Strictly necessary</td></tr>
+          <tr><td><code>_ga</code>, <code>_ga_7CEJ06WQR2</code> (cookies)</td><td>Google Analytics identifier that tells repeat visits apart. Expires after up to 2 years.</td><td>Analytics (only with your consent)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Analytics stays off unless you switch it on, and we don't use marketing cookies. If you turn Analytics off later, we remove its cookies. You can change your choice at any time with <a href="#cookie-settings" data-cookie-settings>Cookie settings</a>, also linked in the footer of every page. If your browser sends a Global Privacy Control signal, we treat it as a refusal of anything non-essential.</p>
+
+    <h2 id="transfers">6. International transfers</h2>
+    <p>Our providers operate in the United States and other countries. If you contact us from outside those countries, your information will be processed there. Where the law requires it, transfers rely on the providers' standard contractual safeguards.</p>
+
+    <h2 id="retention">7. How long we keep it</h2>
+    <ul>
+      <li>Enquiries and email correspondence: <span class="supply">[CLIENT TO SUPPLY: retention period for enquiry emails]</span>, or longer if we go on to work together and the messages form part of the project record.</li>
+      <li>Google Analytics data: <span class="supply">[CLIENT TO SUPPLY: GA4 data retention setting, 2 or 14 months]</span>.</li>
+      <li>Server request logs: kept by Vercel for the period set by its log retention for our plan.</li>
+      <li>Browser storage: stays on your device until you clear it.</li>
+    </ul>
+
+    <h2 id="rights">8. Your rights</h2>
+    <p>Depending on where you live (for example the EU, the UK, or US states such as California), you may have the right to:</p>
+    <ul>
+      <li>ask for a copy of the personal data we hold about you;</li>
+      <li>ask us to correct it or delete it;</li>
+      <li>receive it in a portable format;</li>
+      <li>object to or restrict how we use it;</li>
+      <li>withdraw consent you have given, at any time.</li>
+    </ul>
+    <p>To use any of these rights, email <a href="mailto:hello@srcs.online">hello@srcs.online</a>. We will reply within <span class="supply">[CLIENT TO SUPPLY: response window]</span>. You can also complain to your local data protection authority.</p>
+
+    <h2 id="children">9. Children</h2>
+    <p>This site is for businesses and is not aimed at children. We do not knowingly collect personal data from anyone under 16. If you think a child has sent us their details, email us and we will delete them.</p>
+
+    <h2 id="changes">10. Changes to this policy</h2>
+    <p>If we change how we handle data, we will update this page and the date below. If the change affects your privacy choices, the site will ask you again.</p>
+
+    <p class="effective">
+      Effective date: <span class="supply">[CLIENT TO SUPPLY: effective date, once reviewed]</span><br>
+      Changelog: 2026-09-27, first version.
+    </p>
+  </article>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="shell foot-grid">
+    <div class="foot-brand">
+      <a class="brand" href="../index.html">
+        <img src="../assets/srcs-mark.png" alt="" width="36" height="36" loading="lazy" decoding="async">
+        <span><b>Sync Race</b><em>Code Studio · Creative Studio</em></span>
+      </a>
+      <p>Websites and practical software for independent businesses. Hand-built, fast, and handed over.</p>
+    </div>
+    <nav class="foot-col" aria-labelledby="foot-studio">
+      <h2 class="foot-title" id="foot-studio">Studio</h2>
+      <ul><li><a href="../pages/codestudio.html">Software</a></li><li><a href="../pages/creativestudio.html">Websites</a></li><li><a href="../pages/arcade.html">Playground</a></li><li><a href="../pages/manifesto.html">How we work</a></li></ul>
+    </nav>
+    <div class="foot-col">
+      <h2 class="foot-title">Contact</h2>
+      <ul><li><a href="../pages/contact.html">Get in touch</a></li><li><a href="mailto:hello@srcs.online">hello@srcs.online</a></li></ul>
+    </div>
+    <nav class="foot-col" aria-labelledby="foot-legal">
+      <h2 class="foot-title" id="foot-legal">Legal</h2>
+      <ul><li><a href="../pages/privacy.html" aria-current="page">Privacy</a></li><li><a href="../pages/terms.html">Terms</a></li><li><a href="../pages/accessibility.html">Accessibility</a></li><li><a href="#cookie-settings" data-cookie-settings>Cookie settings</a></li></ul>
+    </nav>
+  </div>
+  <div class="shell foot-word" aria-hidden="true">Sync Race</div>
+  <div class="shell foot-base">
+    <span>&copy; <span data-year>2026</span> Sync Race Studios</span>
+    <span>srcs.online</span>
+  </div>
+</footer>
+
+<script src="../nav.js" defer></script>
+<script>
+  const io_items = document.querySelectorAll('.rise');
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+    io_items.forEach(el => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver(es => es.forEach((e,i) => {
+      if (!e.isIntersecting) return;
+      setTimeout(() => e.target.classList.add('in'), i*80);
+      io.unobserve(e.target);
+    }), { threshold:.1, rootMargin:'0px 0px -50px' });
+    io_items.forEach(el => io.observe(el));
+  }
+</script>
+</body>
+</html>

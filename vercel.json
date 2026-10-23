@@ -1,0 +1,24 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+
+  "//": "cleanUrls is OFF on purpose. Every canonical tag, sitemap entry, and existing link uses .html, so leaving this false means nothing changes when you switch hosts. Turning it on means also stripping .html from all six canonical tags, sitemap.xml, and llms.txt.",
+  "cleanUrls": false,
+  "trailingSlash": false,
+
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" }
+      ]
+    }
+  ]
+}

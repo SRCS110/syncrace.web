@@ -3,7 +3,7 @@
 <head>
 <title>Websites — Sync Race Studios</title>
 <meta name="description" content="Websites designed and built end to end by Sync Race Studios.">
-<link rel="canonical" href="https://www.srcs.online/pages/creativestudio">
+<link rel="canonical" href="https://www.srcs.online/pages/creativestudio.html">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script>
@@ -21,103 +21,125 @@
   }
 }catch(e){}})();
 </script>
-<link rel="icon" href="../assets/srcslogo">
+<link rel="icon" href="../assets/srcs-mark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../srcs.css">
 </head>
 <body>
 
 <site-nav></site-nav>
 
-<main>
+<main id="main" tabindex="-1">
 
   <section class="shell page-top">
     <span class="kicker rise">Websites</span>
     <h1 class="rise">Designed and built<br><span class="warm">from an empty file.</span></h1>
-    <p class="lede rise" style="margin-top:1.6rem">Layout, type, photography, front end, and the bits behind the scenes that keep it running. Every site below is live — click through and have a proper look.</p>
+    <p class="lede rise" style="margin-top:1.6rem">Layout, type, design, front end, and the bits behind the scenes that keep it running. Every site below is live and enabled with llms.txt — click through and have a proper look.</p>
   </section>
 
   <!--
     TO ADD A PROJECT
-    1. Save a screenshot as Assets/work/<name>.png — a full-page capture
-       around 1200px wide looks best.
-    2. Copy one <a class="card frame-link"> block and change the image path,
-       alt text, domain, pill, title, blurb, and href.
-    If the image isn't there yet, the card shows a note naming the file it wants.
+    1. Save a screenshot as assets/work/<name>.webp — about 1600px wide.
+    2. Copy one <article class="work-row"> block and change the image,
+       alt text, domain, pills, title, blurb and links.
   -->
-  <section class="band shell" style="padding-top:0">
-    <div class="cards">
+  <section class="night slant-top slant-bottom band" style="margin-top:clamp(1rem,3vw,2rem)">
+    <div class="shell work">
 
-      <a class="card frame-link rise" href="#" style="padding:0;overflow:hidden">
-        <div class="frame" style="border:0;border-radius:0;box-shadow:none">
-          <div class="frame-bar">
-            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-            <span class="frame-url">project-one.com</span>
+      <article class="work-row">
+        <a class="work-media rise" href="./wanderlust.html" aria-label="Wanderlust Santa Rosa case study">
+          <div class="frame">
+            <div class="frame-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="frame-url">wanderlustsantarosa.com</span></div>
+            <img class="shot" src="../assets/work/wanderlust-home.webp" alt="Wanderlust Santa Rosa home page: a red food truck under string lights at dusk, with the headline Thursday night, food truck festival." width="1600" height="1000" fetchpriority="high">
           </div>
-          <img class="shot" src="../assets/work/one.png" alt=""
-               onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-          <div class="slot" style="display:none"><b>Project one</b><span>Assets/work/one.png</span></div>
+          <div class="phone"><img src="../assets/work/wanderlust-mobile.webp" alt="" width="600" height="1299" loading="lazy" decoding="async"></div>
+        </a>
+        <div class="work-body rise">
+          <div class="pills"><span class="pill pill-lamp">Website</span><span class="pill pill-blue">Vendor application</span></div>
+          <h3>Wanderlust Santa Rosa</h3>
+          <p>A weekly food truck festival in downtown Santa Rosa. The site shows this Thursday's lineup; vendors claim their dates on a Thursday-only calendar, and the market manager approves them from a private admin.</p>
+          <div class="btns">
+            <a class="btn btn-lamp" href="./wanderlust.html">Read the case study <span class="arrow" aria-hidden="true">→</span></a>
+            <a class="btn btn-quiet" href="https://wanderlustsantarosa.com/" target="_blank" rel="noopener">Visit site<span class="sr-only"> (opens in a new tab)</span></a>
+          </div>
         </div>
-        <div style="padding:1.5rem 1.6rem 1.75rem">
-          <span class="pill pill-lamp">Project type</span>
-          <h3 style="margin-top:.9rem">Project name</h3>
-          <p>Who it was for and what changed for them after it launched. Write it the way you'd say it out loud, not the way a brochure would.</p>
-        </div>
-      </a>
+      </article>
 
-      <a class="card frame-link rise" href="#" style="padding:0;overflow:hidden">
-        <div class="frame" style="border:0;border-radius:0;box-shadow:none">
-          <div class="frame-bar">
-            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-            <span class="frame-url">project-two.com</span>
+      <article class="work-row">
+        <a class="work-media rise" href="./staysantarosa.html" aria-label="Stay Santa Rosa case study">
+          <div class="frame">
+            <div class="frame-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="frame-url">staysantarosa.com</span></div>
+            <img class="shot" src="../assets/work/stay-home.webp" alt="Stay Santa Rosa home page: redwoods behind the headline One City Worth Exploring, with a hotel booking bar." width="1600" height="1000" loading="lazy" decoding="async">
           </div>
-          <img class="shot" src="../assets/work/two.png" alt=""
-               onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-          <div class="slot" style="display:none"><b>Project two</b><span>Assets/work/two.png</span></div>
+          <div class="phone"><img src="../assets/work/stay-mobile.webp" alt="" width="600" height="1299" loading="lazy" decoding="async"></div>
+        </a>
+        <div class="work-body rise">
+          <div class="pills"><span class="pill pill-lamp">Website</span><span class="pill pill-blue">Travel guide</span></div>
+          <h3>Stay Santa Rosa</h3>
+          <p>A Sonoma wine country travel guide for two downtown hotels: dining, wine, attractions, a 79-place searchable directory, and booking that goes straight to each hotel.</p>
+          <div class="btns">
+            <a class="btn btn-lamp" href="./staysantarosa.html">Read the case study <span class="arrow" aria-hidden="true">→</span></a>
+            <a class="btn btn-quiet" href="https://staysantarosa.com/" target="_blank" rel="noopener">Visit site<span class="sr-only"> (opens in a new tab)</span></a>
+          </div>
         </div>
-        <div style="padding:1.5rem 1.6rem 1.75rem">
-          <span class="pill pill-lamp">Project type</span>
-          <h3 style="margin-top:.9rem">Project name</h3>
-          <p>If you have a number worth quoting — bookings up, phone calls down, hours saved a week — this is where it belongs.</p>
-        </div>
-      </a>
+      </article>
 
-      <a class="card frame-link rise" href="#" style="padding:0;overflow:hidden">
-        <div class="frame" style="border:0;border-radius:0;box-shadow:none">
-          <div class="frame-bar">
-            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-            <span class="frame-url">project-three.com</span>
+      <article class="work-row">
+        <div class="work-media rise">
+          <div class="frame">
+            <div class="frame-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="frame-url">surflinejaxbeach.com</span></div>
+            <img class="shot" src="../assets/work/surfline.webp" alt="Surfline 8th Ave. So rental website home page." width="1600" height="864" loading="lazy" decoding="async">
           </div>
-          <img class="shot" src="../assets/work/three.png" alt=""
-               onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-          <div class="slot" style="display:none"><b>Project three</b><span>Assets/work/three.png</span></div>
         </div>
-        <div style="padding:1.5rem 1.6rem 1.75rem">
-          <span class="pill pill-lamp">Project type</span>
-          <h3 style="margin-top:.9rem">Project name</h3>
-          <p>Duplicate this block for each new site. Three across looks right on a laptop; they stack on a phone.</p>
+        <div class="work-body rise">
+          <div class="pills"><span class="pill pill-lamp">Static website</span><span class="pill pill-blue">Availability calendar</span></div>
+          <h3>Surfline 8th Ave. So</h3>
+          <p>A marketing website for an Airbnb/VRBO rental in Jacksonville, Florida. With an integrated availability calendar, the owner can now market their rental directly.</p>
         </div>
-      </a>
+      </article>
 
     </div>
   </section>
 
-  <section class="shell" style="padding-bottom:clamp(2.5rem,7vw,4rem)">
-    <div class="rise" style="background:var(--surface);border:1px solid var(--hair);border-radius:22px;box-shadow:var(--lift-3);padding:clamp(2.5rem,6vw,4rem) var(--gut);text-align:center">
-      <h2>Want one of these?</h2>
-      <p class="muted" style="max-width:52ch;margin:1.1rem auto 2rem">Send a couple of sentences about your business and what the site needs to do. Once it's built you can run it yourself, call us hourly for changes, or put us on an optional monthly plan — your call, and you own it either way.</p>
-      <a class="btn btn-lamp" href="./contact.html">Get in touch</a>
+  <section class="shell">
+    <div class="cta rise">
+      <div>
+        <h2>Want one of these?</h2>
+        <p>Send a couple of sentences about your business and what the site needs to do. Once it's built you can run it yourself, call us hourly for changes, or put us on an optional monthly plan — your call, and you own it either way.</p>
+      </div>
+      <a class="btn" href="./contact.html">Get in touch <span class="arrow" aria-hidden="true">→</span></a>
     </div>
   </section>
 
 </main>
 
 <footer class="foot">
-  <div class="shell">
-    <span>© 2026 Sync Race Studios</span>
-    <span><a href="mailto:hello@srcs.online">hello@srcs.online</a></span>
+  <div class="shell foot-grid">
+    <div class="foot-brand">
+      <a class="brand" href="../index.html">
+        <img src="../assets/srcs-mark.png" alt="" width="36" height="36" loading="lazy" decoding="async">
+        <span><b>Sync Race</b><em>Code Studio · Creative Studio</em></span>
+      </a>
+      <p>Websites and practical software for independent businesses. Hand-built, fast, and handed over.</p>
+    </div>
+    <nav class="foot-col" aria-labelledby="foot-studio">
+      <h2 class="foot-title" id="foot-studio">Studio</h2>
+      <ul><li><a href="../pages/codestudio.html">Software</a></li><li><a href="../pages/creativestudio.html">Websites</a></li><li><a href="../pages/arcade.html">Playground</a></li><li><a href="../pages/manifesto.html">How we work</a></li></ul>
+    </nav>
+    <div class="foot-col">
+      <h2 class="foot-title">Contact</h2>
+      <ul><li><a href="../pages/contact.html">Get in touch</a></li><li><a href="mailto:hello@srcs.online">hello@srcs.online</a></li></ul>
+    </div>
+    <nav class="foot-col" aria-labelledby="foot-legal">
+      <h2 class="foot-title" id="foot-legal">Legal</h2>
+      <ul><li><a href="../pages/privacy.html">Privacy</a></li><li><a href="../pages/terms.html">Terms</a></li><li><a href="../pages/accessibility.html">Accessibility</a></li><li><a href="#cookie-settings" data-cookie-settings>Cookie settings</a></li></ul>
+    </nav>
+  </div>
+  <div class="shell foot-word" aria-hidden="true">Sync Race</div>
+  <div class="shell foot-base">
+    <span>&copy; <span data-year>2026</span> Sync Race Studios</span>
     <span>srcs.online</span>
   </div>
 </footer>

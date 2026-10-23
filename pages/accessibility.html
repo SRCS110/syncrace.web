@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Accessibility statement | Sync Race Studios</title>
+<meta name="description" content="Sync Race Studios aims for WCAG 2.2 Level AA on srcs.online. Read the current conformance status, known limitations, and how to report a barrier.">
+<link rel="canonical" href="https://www.srcs.online/pages/accessibility.html">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+/* Light is the default. Dark ("Evening") only applies if the visitor chose it
+   here. The previous version of this site wrote its own values under the same
+   sr-theme key, so anything from before v2 is cleared once and ignored.
+   Wrapped in try/catch because private browsing can throw on localStorage. */
+(function(){try{
+  if(localStorage.getItem('sr-theme-v')!=='2'){
+    localStorage.removeItem('sr-theme');
+    localStorage.setItem('sr-theme-v','2');
+  }
+  if(localStorage.getItem('sr-theme')==='dark'){
+    document.documentElement.classList.add('dark');
+  }
+}catch(e){}})();
+</script>
+<link rel="icon" href="../assets/srcs-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../srcs.css">
+</head>
+<body>
+
+<site-nav></site-nav>
+
+<main id="main" tabindex="-1">
+
+  <section class="shell legal">
+  <article class="legal-body">
+    <h1>Accessibility statement</h1>
+    <p class="lede">We want everyone to be able to use this site, whatever device, browser, or assistive technology they rely on.</p>
+
+    <nav class="toc" aria-labelledby="toc-title">
+      <h2 id="toc-title">On this page</h2>
+      <ol>
+        <li><a href="#target">Our target</a></li>
+        <li><a href="#status">Current status</a></li>
+        <li><a href="#works">What works today</a></li>
+        <li><a href="#limits">Known limitations</a></li>
+        <li><a href="#third-party">Content we don't control</a></li>
+        <li><a href="#feedback">Report a barrier</a></li>
+        <li><a href="#assessment">How we tested</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="target">1. Our target</h2>
+    <p>This site aims to meet the Web Content Accessibility Guidelines (WCAG) 2.2 at Level AA.</p>
+
+    <h2 id="status">2. Current status</h2>
+    <p><b>Partially conformant.</b> Parts of the site do not yet meet the target. They are listed under known limitations below.</p>
+
+    <h2 id="works">3. What works today</h2>
+    <ul>
+      <li>Every page has one main heading, a page title, and a set language.</li>
+      <li>Pages reflow on a 320px wide screen without sideways scrolling.</li>
+      <li>Contact form fields have visible labels, and the send status is announced to screen readers.</li>
+      <li>Animation is reduced when your device asks for reduced motion.</li>
+      <li>The cookie banner and its choices can be used with a keyboard alone.</li>
+    </ul>
+
+    <h2 id="limits">4. Known limitations</h2>
+    <ul>
+      <li><b>Low contrast text.</b> Some small grey text on tinted panels (the feature lists on the Software page, and the placeholder labels in project screenshots on the Websites page) is below the 4.5:1 contrast ratio. (WCAG 1.4.3)</li>
+      <li><b>No skip link.</b> Keyboard users have to tab through the header on every page to reach the content. (WCAG 2.4.1)</li>
+      <li><b>Heading levels.</b> Some pages jump from the main heading to a third-level heading. (WCAG 1.3.1)</li>
+      <li><b>Header landmark.</b> The site header isn't marked up as a header landmark, so screen readers don't list it as one.</li>
+      <li><b>Playground canvas experiments.</b> Sparks, Draw, and Jellyfish need a mouse or touch screen, and none of the four experiments can be read by a screen reader. Muncher can be played with a keyboard. The build notes beside the canvas describe each one in text.</li>
+      <li><b>Screen reader testing.</b> A full pass with VoiceOver and NVDA has not been done yet.</li>
+    </ul>
+    <p>Target date for fixing these: <span class="supply">[CLIENT TO SUPPLY: target date]</span>.</p>
+
+    <h2 id="third-party">5. Content we don't control</h2>
+    <p>Client websites shown in our work, the Freelancer OS demo, and the visual HTML editor are separate sites. They are not covered by this statement.</p>
+
+    <h2 id="feedback">6. Report a barrier</h2>
+    <p>If something on this site doesn't work for you, email <a href="mailto:hello@srcs.online">hello@srcs.online</a> with the page address and what happened. We'll reply within <span class="supply">[CLIENT TO SUPPLY: response window]</span> and, where we can, send you the information in a format that works for you.</p>
+
+    <h2 id="assessment">7. How we tested</h2>
+    <p>Most recent audit: 27 September 2026. Every page was checked with the axe-core automated rules (WCAG 2.2 A and AA) in Chromium, in both the day and evening themes, at desktop width and at 320px.</p>
+
+    <p class="effective">
+      This statement was prepared on 27 September 2026 and will be reviewed after each significant change to the site.
+    </p>
+  </article>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="shell foot-grid">
+    <div class="foot-brand">
+      <a class="brand" href="../index.html">
+        <img src="../assets/srcs-mark.png" alt="" width="36" height="36" loading="lazy" decoding="async">
+        <span><b>Sync Race</b><em>Code Studio · Creative Studio</em></span>
+      </a>
+      <p>Websites and practical software for independent businesses. Hand-built, fast, and handed over.</p>
+    </div>
+    <nav class="foot-col" aria-labelledby="foot-studio">
+      <h2 class="foot-title" id="foot-studio">Studio</h2>
+      <ul><li><a href="../pages/codestudio.html">Software</a></li><li><a href="../pages/creativestudio.html">Websites</a></li><li><a href="../pages/arcade.html">Playground</a></li><li><a href="../pages/manifesto.html">How we work</a></li></ul>
+    </nav>
+    <div class="foot-col">
+      <h2 class="foot-title">Contact</h2>
+      <ul><li><a href="../pages/contact.html">Get in touch</a></li><li><a href="mailto:hello@srcs.online">hello@srcs.online</a></li></ul>
+    </div>
+    <nav class="foot-col" aria-labelledby="foot-legal">
+      <h2 class="foot-title" id="foot-legal">Legal</h2>
+      <ul><li><a href="../pages/privacy.html">Privacy</a></li><li><a href="../pages/terms.html">Terms</a></li><li><a href="../pages/accessibility.html" aria-current="page">Accessibility</a></li><li><a href="#cookie-settings" data-cookie-settings>Cookie settings</a></li></ul>
+    </nav>
+  </div>
+  <div class="shell foot-word" aria-hidden="true">Sync Race</div>
+  <div class="shell foot-base">
+    <span>&copy; <span data-year>2026</span> Sync Race Studios</span>
+    <span>srcs.online</span>
+  </div>
+</footer>
+
+<script src="../nav.js" defer></script>
+<script>
+  const io_items = document.querySelectorAll('.rise');
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+    io_items.forEach(el => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver(es => es.forEach((e,i) => {
+      if (!e.isIntersecting) return;
+      setTimeout(() => e.target.classList.add('in'), i*80);
+      io.unobserve(e.target);
+    }), { threshold:.1, rootMargin:'0px 0px -50px' });
+    io_items.forEach(el => io.observe(el));
+  }
+</script>
+</body>
+</html>

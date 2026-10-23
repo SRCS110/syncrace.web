@@ -4,7 +4,7 @@
 
 After launch, clients choose one of three: self-manage at no ongoing cost, pay hourly for changes as they come up, or take an optional flat monthly plan covering updates, backups, small changes, and monitoring. The monthly plan is cancellable at any time and nothing switches off if it ends — ownership never depends on it.
 
-Work is hand-written HTML, CSS, and JavaScript with Node.js and PostgreSQL behind it. No page builders, no monthly platform lock-in, no tracking scripts.
+Work is hand-written HTML, CSS, and JavaScript with Node.js and PostgreSQL behind it. No page builders, no monthly platform lock-in, and no tracking without consent.
 
 ## Pages
 
@@ -12,11 +12,18 @@ Work is hand-written HTML, CSS, and JavaScript with Node.js and PostgreSQL behin
 - [Software](https://www.srcs.online/pages/codestudio.html): Custom reporting tools and lightweight business software.
 - [Websites](https://www.srcs.online/pages/creativestudio.html): Websites designed and built end to end.
 - [How we work](https://www.srcs.online/pages/manifesto.html): Why the studio builds without subscriptions or middlemen.
+- [Wanderlust Santa Rosa case study](https://www.srcs.online/pages/wanderlust.html): Food truck festival website, Thursday vendor application, and market admin.
+- [Stay Santa Rosa case study](https://www.srcs.online/pages/staysantarosa.html): Sonoma travel guide with a 79-place directory and direct hotel booking.
 - [Get in touch](https://www.srcs.online/pages/contact.html): Contact form for project enquiries.
 - [Playground](https://www.srcs.online/pages/arcade.html): Browser experiments and canvas toys.
+- [Privacy policy](https://www.srcs.online/pages/privacy.html): What the contact form collects, consent-based Google Analytics, providers, and your rights.
+- [Terms of use](https://www.srcs.online/pages/terms.html): Terms for using the site, its content, and the demos.
+- [Accessibility statement](https://www.srcs.online/pages/accessibility.html): WCAG 2.2 AA target, current status, and known limitations.
 
 ## Projects
 
+- Wanderlust Santa Rosa (wanderlustsantarosa.com): Website for a free weekly food truck festival in Old Courthouse Square, Santa Rosa, with a vendor application where trucks request Thursdays on a calendar and a market admin where the manager approves them. Approved trucks appear in the public weekly lineup automatically. HTML, CSS, JavaScript, Supabase, Vercel. Live.
+- Stay Santa Rosa (staysantarosa.com): Travel guide to Santa Rosa and Sonoma wine country created by Hotel E and Art House Santa Rosa. Dining, wine, attractions, a searchable directory of 79 places with list and map views, and booking that links directly to each hotel. HTML, CSS, JavaScript, Vercel. Live.
 - Stayntouch reporting engine: A reporting layer over the Stayntouch hotel property management system. Pulls occupancy, revenue, and housekeeping figures on a schedule so managers aren't exporting by hand each morning. Node.js and PostgreSQL. Running in production.
 - Visual HTML editor: A browser-based editor that lets clients change text and images on their own site without touching code. Output stays plain HTML, so nothing is locked to the tool. In active development.
 - Freelancer OS: A lightweight tool for solo freelancers covering clients, current deliverables, and invoices, without the bulk of a sales CRM. Plain HTML, Alpine.js, and Node. In active development.
