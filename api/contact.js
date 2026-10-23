@@ -18,8 +18,11 @@
 
 import { Resend } from 'resend';
 
-const TO   = process.env.CONTACT_TO   || 'hello@srcs.online';
-const FROM = process.env.CONTACT_FROM || 'Sync Race Studios <hello@srcs.online>';
+// Accept both spellings — the Vercel project uses CONTACT_TO_EMAIL,
+// CONTACT_FROM_EMAIL and Resend_Api_Key.
+const TO   = process.env.CONTACT_TO   || process.env.CONTACT_TO_EMAIL   || 'hello@srcs.online';
+const FROM = process.env.CONTACT_FROM || process.env.CONTACT_FROM_EMAIL || 'Sync Race Studios <hello@srcs.online>';
+const API_KEY = process.env.RESEND_API_KEY || process.env.Resend_Api_Key;
 
 const SUBJECTS = {
   website:         'a website for my business',
@@ -37,7 +40,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Use POST.' });
   }
 
-  if (!process.env.RESEND_API_KEY) {
+  if (!API_KEY) {
     // Don't leak config problems to visitors — log it, show something human.
     console.error('RESEND_API_KEY is not set.');
     return res.status(500).json({ error: 'Mail is not configured yet.' });
@@ -66,7 +69,7 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'That email address looks incomplete.' });
   }
 
-  const resend = new Resend(process.env.RESEND_API_KEY);
+  const resend = new Resend(API_KEY);
 
   try {
     const { error } = await resend.emails.send({
