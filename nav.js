@@ -134,7 +134,7 @@ class SiteFoot extends HTMLElement {
           </nav>
           <nav class="foot-col" aria-labelledby="foot-legal">
             <h2 class="foot-title" id="foot-legal">Legal</h2>
-            <ul>${li('privacy.html','Privacy')}${li('terms.html','Terms')}${li('accessibility.html','Accessibility')}<li><a href="#cookie-settings" data-cookie-settings>Cookie settings</a></li></ul>
+            <ul>${li('privacy.html','Privacy')}${li('terms.html','Terms')}${li('accessibility.html','Accessibility')}${li('sitemap.html','Sitemap')}<li><a href="#cookie-settings" data-cookie-settings>Cookie settings</a></li></ul>
           </nav>
         </div>
         <div class="shell foot-base">
