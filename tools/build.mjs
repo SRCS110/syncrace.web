@@ -13,6 +13,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { POSTS } from './articles.mjs';
 import { applyChanges } from './cms/apply.js';
+import * as parse5 from 'parse5';
 const ROOT = process.argv[2] || path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
 
@@ -881,32 +882,70 @@ const foldPass = html => html.replace(/<svg data-fold="(\d+)"([^>]*)>(?:\s*<use[
 });
 
 /* ---------- SRCS CMS ----------
-   Editable: each page's h1, every intro paragraph (p.lede) and section h2s inside <main>.
-   Keys follow page order (title, lede-1, heading-1…), so keep that order stable.
-   Only plain text or simple inline formatting is marked; headings with styled spans stay locked. */
+   Marks text inside <main> as editable, then re-applies edits saved in cms/content.json.
+   Editable: h1 (except article titles), section headings, intros, paragraphs, card titles and
+   notes, "how it works" steps, and list items.
+   Locked on purpose, so edits can't break the site or put visible text out of step with the
+   structured data Google reads: article titles (BlogPosting headline), prices (OfferCatalog),
+   FAQs (FAQPage), forms, interactive pieces, buttons, link lists and anything with an id or
+   script hook.
+   Keys follow page order per kind (title, heading-N, lede-N, text-N…). Existing kinds keep
+   their numbering, so saved edits stay attached. */
 const CMS_LOADER = '<script src="https://cms.srcs.online/loader.js" data-site="srcs" defer></script>';
 const CMS_FILE = `${ROOT}/cms/content.json`;
 const CMS_DATA = fs.existsSync(CMS_FILE) ? JSON.parse(fs.readFileSync(CMS_FILE, 'utf8')) : { files: {}, globals: {} };
-const plainText = (inner) => !/[<>]/.test(inner);
-const simpleInline = (inner) => !/<(?!\/?(strong|em|b|i|br|a)\b)[a-z]/i.test(inner) && !/\sstyle=|\sclass=/.test(inner);
+const CMS_SKIP_TAGS = new Set(['form', 'details', 'nav', 'svg', 'script', 'style', 'noscript', 'template', 'button', 'select', 'label', 'textarea', 'site-nav', 'site-foot']);
+const CMS_SKIP_CLASS = /(^|\s)(faq|prices|price|unfold|folds|crumbs|trap|btns|btn|kicker|work-media)(\s|$)/;
+const cmsAttr = (n, k) => n.attrs?.find((a) => a.name === k)?.value;
+const plainText = (inner) => !/[<>]/.test(inner) && inner.trim().length > 0;
+const simpleInline = (inner) => !/<(?!\/?(strong|em|b|i|br|a)\b)[a-z]/i.test(inner) && !/\s(style|class|id|data-[a-z-]+)=/.test(inner) && inner.trim().length > 0;
+
 function cms(html, rel) {
-  const a = html.indexOf('<main'), b = html.indexOf('</main>');
-  if (a < 0 || b < 0) return html;
-  let main = html.slice(a, b);
-  let h2n = 0, leden = 0, h1done = false;
-  main = main.replace(/<(h1|h2|p)(\s[^>]*)?>([\s\S]*?)<\/\1>/g, (m, tag, attrs = '', inner) => {
-    if (/data-cms/.test(attrs)) return m;
-    let key, type;
-    if (tag === 'h1' && !h1done) { h1done = true; key = 'title'; }
-    else if (tag === 'h2' && /class="rise"/.test(attrs)) key = `heading-${++h2n}`;
-    else if (tag === 'p' && /class="lede/.test(attrs)) key = `lede-${++leden}`;
-    else return m;
+  // Start clean so the marking is the same on every build.
+  html = html.replace(/ data-cms(?:-type)?="[^"]*"/g, '');
+  const doc = parse5.parse(html, { sourceCodeLocationInfo: true });
+  const isArticle = POSTS.some((p) => rel === `pages/${p.slug}`);
+  const n = { heading: 0, lede: 0, h2: 0, subhead: 0, text: 0, item: 0, note: 0, stepTitle: 0, stepText: 0 };
+  let h1done = false;
+  const inserts = [];
+  const mark = (node, key, rich) => {
+    const loc = node.sourceCodeLocation;
+    if (!loc?.startTag || !loc?.endTag) return false;
+    const inner = html.slice(loc.startTag.endOffset, loc.endTag.startOffset);
+    let type;
     if (plainText(inner)) type = '';
-    else if (simpleInline(inner)) type = ' data-cms-type="rich"';
-    else return m;
-    return `<${tag}${attrs} data-cms="${key}"${type}>${inner}</${tag}>`;
-  });
-  html = html.slice(0, a) + main + html.slice(b);
+    else if (rich !== false && simpleInline(inner)) type = ' data-cms-type="rich"';
+    else return false;
+    inserts.push([loc.startTag.endOffset - 1, ` data-cms="${key}"${type}`]);
+    return true;
+  };
+  const walk = (node, ctx) => {
+    for (const c of node.childNodes || []) {
+      if (!c.tagName) continue;
+      const tag = c.tagName, cls = cmsAttr(c, 'class') || '';
+      if (tag === 'main') { walk(c, { ...ctx, main: true }); continue; }
+      if (CMS_SKIP_TAGS.has(tag) || CMS_SKIP_CLASS.test(cls) || cmsAttr(c, 'aria-hidden') === 'true') continue;
+      if (!ctx.main) { walk(c, ctx); continue; }
+      const hooked = cmsAttr(c, 'id') || c.attrs.some((a) => a.name.startsWith('data-'));
+      const inner = c.sourceCodeLocation?.endTag ? html.slice(c.sourceCodeLocation.startTag.endOffset, c.sourceCodeLocation.endTag.startOffset) : '';
+      let key = null, rich;
+      // Kinds that already have saved edits keep the exact counting they had.
+      if (tag === 'h1' && !h1done) { h1done = true; if (!isArticle) key = 'title'; }
+      else if (tag === 'h2' && cls === 'rise') key = `heading-${++n.heading}`;
+      else if (tag === 'p' && /^lede/.test(cls)) key = `lede-${++n.lede}`;
+      else if (tag === 'h2') key = `h2-${++n.h2}`;
+      else if (tag === 'h3') key = `subhead-${++n.subhead}`;
+      else if (tag === 'p') key = `text-${++n.text}`;
+      else if (tag === 'small') key = `note-${++n.note}`;
+      else if (tag === 'li' && !/<a\s/i.test(inner)) key = `item-${++n.item}`;
+      else if (ctx.step && tag === 'b') key = `step-title-${++n.stepTitle}`;
+      else if (ctx.step && tag === 'span' && !cls) key = `step-text-${++n.stepText}`;
+      if (key && !hooked && mark(c, key, rich)) continue;
+      walk(c, { ...ctx, step: ctx.step || /(^|\s)step(\s|$)/.test(cls) });
+    }
+  };
+  walk(doc, {});
+  for (const [pos, text] of inserts.sort((a, b) => b[0] - a[0])) html = html.slice(0, pos) + text + html.slice(pos);
   if (!html.includes('cms.srcs.online/loader.js')) html = html.replace('</body>', `${CMS_LOADER}\n</body>`);
   const saved = Object.entries(CMS_DATA.files?.[rel] || {}).map(([key, v]) => ({ key, type: v.type, value: v.value }));
   const globals = Object.entries(CMS_DATA.globals || {}).map(([key, v]) => ({ key, global: true, type: v.type, value: v.value }));
