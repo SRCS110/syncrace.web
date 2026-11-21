@@ -12,11 +12,16 @@ const TO_PAGES = IN_PAGES ? './' : './pages/';
 const TO_ROOT  = IN_PAGES ? '../' : './';
 const HERE     = location.pathname.split('/').pop() || 'index.html';
 
-const LINKS = [
-  { file: 'services.html', label: 'Services', also: ['websites.html','google-business.html','advertising.html','print.html','apps.html'] },
-  { file: 'work.html',     label: 'Work',     also: ['wanderlust.html','staysantarosa.html'] },
-  { file: 'about.html',    label: 'About' },
-  // Contact is deliberately NOT here — the Get started button is its only entry point.
+// Six core items: three either side of the centred logo.
+const LINKS_LEFT = [
+  { file: 'services.html',        label: 'Services', also: ['advertising.html','print.html'] },
+  { file: 'websites.html',        label: 'Websites' },
+  { file: 'google-business.html', label: 'Google' },
+];
+const LINKS_RIGHT = [
+  { file: 'apps.html',    label: 'Apps' },
+  { file: 'about.html',   label: 'About' },
+  { file: 'contact.html', label: 'Contact' },
 ];
 
 const SERVICES = [
@@ -65,10 +70,11 @@ const BRAND = `<span><b>Sync Race</b><em>Business Services</em></span>`;
 
 class SiteNav extends HTMLElement {
   connectedCallback() {
-    const items = LINKS.map(l => {
+    const link = l => {
       const cur = l.file === HERE || (l.also || []).includes(HERE);
       return `<a href="${TO_PAGES}${l.file}"${cur ? ' aria-current="page"' : ''}>${l.label}</a>`;
-    }).join('');
+    };
+    const left = LINKS_LEFT.map(link).join(''), right = LINKS_RIGHT.map(link).join('');
 
     if (!document.querySelector('.skip') && document.getElementById('main')) {
       const skip = document.createElement('a');
@@ -79,13 +85,12 @@ class SiteNav extends HTMLElement {
     this.innerHTML = `
       <header class="nav-shade">
         <div class="nav-in">
-          <a class="brand" href="${TO_ROOT}index.html" aria-label="Sync Race Studios home">${MARK}${BRAND}</a>
-          <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
-          <nav class="nav-links" aria-label="Main">
-            ${items}
-            <a class="nav-cta" href="${TO_PAGES}contact.html"${HERE === 'contact.html' ? ' aria-current="page"' : ''}>Get started</a>
-          </nav>
+          <nav class="nav-links nav-left" aria-label="Main">${left}</nav>
+          <a class="brand brand-center" href="${TO_ROOT}index.html" aria-label="Sync Race Studios home">${MARK}${BRAND}</a>
+          <nav class="nav-links nav-right" aria-label="More">${right}</nav>
+          <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-sheet"><span></span><span></span><span></span></button>
         </div>
+        <nav class="nav-sheet" id="nav-sheet" aria-label="Menu">${left}${right}</nav>
       </header>`;
 
     const burger = this.querySelector('.nav-toggle');
@@ -94,7 +99,7 @@ class SiteNav extends HTMLElement {
       open ? this.removeAttribute('data-open') : this.setAttribute('data-open', '');
       burger.setAttribute('aria-expanded', String(!open));
     });
-    this.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => this.removeAttribute('data-open')));
+    this.querySelectorAll('.nav-links a, .nav-sheet a').forEach(a => a.addEventListener('click', () => this.removeAttribute('data-open')));
     drawFolds(this);
   }
 }
@@ -144,30 +149,55 @@ function drawFolds(root = document) {
 document.addEventListener('DOMContentLoaded', () => drawFolds());
 drawFolds();
 
-/* ---------- background curve: 1,024 steps that draw with scroll ---------- */
+/* ---------- background curve: 1,024 steps that draw with scroll ----------
+   Fills the screen below the nav. On landscape screens the curve is turned
+   on its side so it fits the screen's shape and the drawing stays in view.
+   Separation from the foreground comes from srcs.css: a soft shadow under
+   the line and a paper-coloured halo around the page text. */
 (() => {
   const NS = 'http://www.w3.org/2000/svg';
+  const layer = document.createElement('div');
+  layer.id = 'curve-depth'; layer.setAttribute('aria-hidden', 'true');
   const bg = document.createElementNS(NS, 'svg');
-  bg.id = 'curve-bg'; bg.setAttribute('aria-hidden', 'true'); bg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
+  bg.id = 'curve-bg'; bg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
   bg.innerHTML = '<path class="ghost" fill="none" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round" stroke-linecap="round"/><path class="trail" fill="none" stroke-linejoin="round" stroke-linecap="round"/><circle class="pen" r="0"/>';
-  document.body.prepend(bg);
+  layer.appendChild(bg);
+  document.body.prepend(layer);
   const ghost = bg.querySelector('.ghost'), trail = bg.querySelector('.trail'), pen = bg.querySelector('.pen');
-  const F = SRCurve.fit(SRCurve.points(10), .06);
-  bg.setAttribute('viewBox', F.vb); ghost.setAttribute('d', F.d); trail.setAttribute('d', F.d);
-  const L = trail.getTotalLength();
-  trail.style.strokeDasharray = `${L} ${L}`;
-  const START = .03, reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let shown = 0, target = START, ticking = false;
+  const START = .02, reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let F, L, wide = null, shown = 0, target = START, ticking = false;
+
+  const build = () => {
+    const isWide = innerWidth > innerHeight * 1.05;
+    if (isWide === wide) return;
+    wide = isWide;
+    let p = SRCurve.points(10);
+    if (wide) p = p.map(([x, y]) => [y, -x]);          // lay it on its side
+    F = SRCurve.fit(p, .03);
+    bg.setAttribute('viewBox', F.vb); ghost.setAttribute('d', F.d); trail.setAttribute('d', F.d);
+    L = trail.getTotalLength();
+    trail.style.strokeDasharray = `${L} ${L}`;
+  };
   const progress = () => { const max = document.documentElement.scrollHeight - innerHeight; return max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 1; };
   const render = v => { trail.style.strokeDashoffset = L * (1 - v); const pt = trail.getPointAtLength(L * v); pen.setAttribute('cx', pt.x); pen.setAttribute('cy', pt.y); };
   const loop = () => {
-    shown += (target - shown) * (reduce ? 1 : .14);
+    shown += (target - shown) * (reduce ? 1 : .12);
     if (Math.abs(target - shown) < .0005) shown = target;
     render(shown); ticking = shown !== target; if (ticking) requestAnimationFrame(loop);
   };
-  const size = () => { const k = Math.max(innerWidth / F.w, innerHeight / F.h); trail.setAttribute('stroke-width', 2 / k); pen.setAttribute('r', 4.5 / k); };
-  const update = () => { size(); target = START + (1 - START) * progress(); if (!ticking) { ticking = true; requestAnimationFrame(loop); } };
+  const size = () => {
+    const r = bg.getBoundingClientRect(), k = Math.max(r.width / F.w, r.height / F.h) || 1;
+    trail.setAttribute('stroke-width', 1.7 / k); pen.setAttribute('r', 4.5 / k);
+  };
+  const update = () => {
+    build(); size();
+    const p = progress();
+    target = START + (1 - START) * p;
+    if (!reduce) bg.style.setProperty('--drift', `${(-p * 3).toFixed(2)}vh`);
+    if (!ticking) { ticking = true; requestAnimationFrame(loop); }
+  };
   addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', update);
   new ResizeObserver(update).observe(document.body);
   update();
 })();
