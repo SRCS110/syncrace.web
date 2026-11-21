@@ -838,7 +838,7 @@ for (const rel of files) {
              .replace(/<site-foot>[\s\S]*?<\/site-foot>/, '<site-foot></site-foot>')
              .replace(/<svg id="sr-folds"[\s\S]*?<\/svg>\n?/, '')
              .replace(/<a class="skip"[^>]*>[^<]*<\/a>\n?/, '')
-             .replace(/<nav class="crumbs[\s\S]*?<\/nav>\s*/, '');
+             .replace(/<nav class="crumbs[^"]*" aria-label="Breadcrumb">[\s\S]*?<\/nav>/, '<!--crumbs-->');
 
   html = foldPass(html);
   html = html.replace('<site-nav></site-nav>', `<site-nav>${navHTML(file, toPages, toRoot)}</site-nav>`)
@@ -850,7 +850,17 @@ for (const rel of files) {
     const items = [['Home', `${toRoot}index.html`, SITE], ...t.map(([l, f]) => [l, `${toPages}${f}`, `${SITE}pages/${f}`])];
     const ol = items.map(([l, href], i) => i === items.length - 1
       ? `<li><span aria-current="page">${l}</span></li>` : `<li><a href="${href}">${l}</a></li>`).join('');
-    html = html.replace(/<main id="main" tabindex="-1">\s*/, `<main id="main" tabindex="-1">\n\n  <nav class="crumbs shell" aria-label="Breadcrumb"><ol>${ol}</ol></nav>\n\n  `);
+    // Breadcrumbs take the place of the page's top kicker ("— Page name").
+    // Legal pages have no kicker, so they go just above the h1.
+    if (!html.includes('<!--crumbs-->')) {
+      const at = html.indexOf('<main');
+      const rest = html.slice(at);
+      const k = rest.match(/<(span|a) class="kicker rise"[^>]*>[\s\S]*?<\/\1>/);
+      const h = rest.match(/<h1[\s>]/);
+      const pos = k && (!h || k.index < h.index) ? null : h;
+      html = html.slice(0, at) + (pos ? rest.replace(/<h1([\s>])/, '<!--crumbs--><h1$1') : rest.replace(k[0], '<!--crumbs-->'));
+    }
+    html = html.replace('<!--crumbs-->', `<nav class="crumbs" aria-label="Breadcrumb"><ol>${ol}</ol></nav>`);
     const list = { '@type': 'BreadcrumbList', itemListElement: items.map(([l, , abs], i) => ({ '@type': 'ListItem', position: i + 1, name: l, item: abs })) };
     html = html.replace(/<script type="application\/ld\+json">\n([\s\S]*?)\n<\/script>/, (m, j) => {
       const data = JSON.parse(j);
