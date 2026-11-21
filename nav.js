@@ -1,35 +1,75 @@
 /* ============================================================
-   SYNC RACE STUDIOS — <site-nav>
+   SYNC RACE STUDIOS — shared chrome
+   <site-nav>, <site-foot>, the dragon curve (logo mark, fold icons
+   and the background line that draws with scroll), and cookie consent.
 
    Works from both the root (index.html) and /pages/, so there is
-   only ever one copy of this file. Labels live in LINKS below;
-   filenames are unchanged, so renaming a label breaks nothing.
+   only ever one copy of this file.
    ============================================================ */
 
+const IN_PAGES = /\/pages\//.test(location.pathname);
+const TO_PAGES = IN_PAGES ? './' : './pages/';
+const TO_ROOT  = IN_PAGES ? '../' : './';
+const HERE     = location.pathname.split('/').pop() || 'index.html';
+
 const LINKS = [
-  { file: 'creativestudio.html', label: 'Websites' },
-  { file: 'codestudio.html',     label: 'Software' },
-  { file: 'arcade.html',         label: 'Playground' },
-  { file: 'manifesto.html',      label: 'How we work' },
-  // Contact is deliberately NOT here — the Get in touch button is its only
-  // entry point, so the link doesn't appear twice in the nav.
+  { file: 'services.html', label: 'Services', also: ['websites.html','google-business.html','advertising.html','print.html','apps.html'] },
+  { file: 'work.html',     label: 'Work',     also: ['wanderlust.html','staysantarosa.html'] },
+  { file: 'about.html',    label: 'About' },
+  // Contact is deliberately NOT here — the Get started button is its only entry point.
 ];
+
+const SERVICES = [
+  { file: 'websites.html',        label: 'Website design',        n: 10 },
+  { file: 'google-business.html', label: 'Google Business Profile', n: 6 },
+  { file: 'advertising.html',     label: 'Google Ads',            n: 8 },
+  { file: 'print.html',           label: 'Print & creative',      n: 5 },
+  { file: 'apps.html',            label: 'Business apps',         n: 9 },
+];
+
+/* ---------- the dragon curve ----------
+   n folds -> 2^n segments, every turn exactly 90°, never crossing itself.
+   Rotated so the curve runs from top to bottom. */
+const SRCurve = (() => {
+  const turns = n => { let s = []; for (let i = 0; i < n; i++) s = s.concat([1], s.slice().reverse().map(t => -t)); return s; };
+  const points = n => {
+    const s = turns(n), D = [[1,0],[0,1],[-1,0],[0,-1]];
+    let x = 0, y = 0, d = 0; const p = [[0,0]];
+    [0, ...s].forEach(t => { d = (d + t + 4) % 4; x += D[d][0]; y += D[d][1]; p.push([x, y]); });
+    const [ex, ey] = p[p.length - 1], a = Math.PI / 2 - Math.atan2(ey, ex), c = Math.cos(a), si = Math.sin(a);
+    return p.map(([x, y]) => [Math.round(x * c - y * si), Math.round(x * si + y * c)]);
+  };
+  const fit = (p, padF = .08) => {
+    const xs = p.map(q => q[0]), ys = p.map(q => q[1]), mx = Math.min(...xs), my = Math.min(...ys);
+    const w = Math.max(...xs) - mx, h = Math.max(...ys) - my, pad = Math.max(w, h, 1) * padF + .5;
+    const r = .32; let d = `M${p[0][0]} ${p[0][1]}`;
+    for (let i = 1; i < p.length - 1; i++) {
+      const [ax, ay] = p[i-1], [bx, by] = p[i], [cx, cy] = p[i+1];
+      d += `L${bx-(bx-ax)*r} ${by-(by-ay)*r}Q${bx} ${by} ${bx+(cx-bx)*r} ${by+(cy-by)*r}`;
+    }
+    d += `L${p[p.length-1][0]} ${p[p.length-1][1]}`;
+    return { vb: `${mx-pad} ${my-pad} ${w+pad*2} ${h+pad*2}`, w: w + pad * 2, h: h + pad * 2, d };
+  };
+  const draw = (el, n, sw = 1.6) => {
+    const f = fit(points(n));
+    el.setAttribute('viewBox', f.vb);
+    el.setAttribute('aria-hidden', 'true');
+    el.innerHTML = `<path d="${f.d}" fill="none" stroke="var(--lamp)" stroke-width="${sw}" vector-effect="non-scaling-stroke" stroke-linejoin="round" stroke-linecap="round"/>`;
+  };
+  return { turns, points, fit, draw };
+})();
+window.SRCurve = SRCurve;
+
+const MARK = '<svg class="mark" data-fold="10" data-sw="1.1" width="32" height="32"></svg>';
+const BRAND = `<span><b>Sync Race</b><em>Business Services</em></span>`;
 
 class SiteNav extends HTMLElement {
   connectedCallback() {
-    // Are we sitting inside /pages/, or at the site root?
-    const inPages = /\/pages\//.test(location.pathname);
-    const toPages = inPages ? './'          : './pages/';
-    const toRoot  = inPages ? '../'         : './';
-    const here    = location.pathname.split('/').pop() || 'index.html';
+    const items = LINKS.map(l => {
+      const cur = l.file === HERE || (l.also || []).includes(HERE);
+      return `<a href="${TO_PAGES}${l.file}"${cur ? ' aria-current="page"' : ''}>${l.label}</a>`;
+    }).join('');
 
-    const items = LINKS.map(l =>
-      `<a href="${toPages}${l.file}"${l.file === here ? ' aria-current="page"' : ''}>${l.label}</a>`
-    ).join('');
-
-    const homeCurrent = (here === 'index.html' || here === '') ? ' aria-current="page"' : '';
-
-    // Skip link goes first in the page so keyboard users can jump the nav.
     if (!document.querySelector('.skip') && document.getElementById('main')) {
       const skip = document.createElement('a');
       skip.className = 'skip'; skip.href = '#main'; skip.textContent = 'Skip to content';
@@ -39,18 +79,11 @@ class SiteNav extends HTMLElement {
     this.innerHTML = `
       <header class="nav-shade">
         <div class="nav-in">
-          <a class="brand" href="${toRoot}index.html">
-            <img src="${toRoot}assets/srcs-mark.png" alt="" width="36" height="36">
-            <span><b>Sync Race</b><em>Code Studio · Creative Studio</em></span>
-          </a>
-          <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
-            <span></span><span></span><span></span>
-          </button>
+          <a class="brand" href="${TO_ROOT}index.html" aria-label="Sync Race Studios home">${MARK}${BRAND}</a>
+          <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
           <nav class="nav-links" aria-label="Main">
-            <a href="${toRoot}index.html"${homeCurrent}>Home</a>
             ${items}
-            <button class="theme-btn" type="button" aria-label="Switch between day and evening"></button>
-            <a class="nav-cta" href="${toPages}contact.html">Get in touch</a>
+            <a class="nav-cta" href="${TO_PAGES}contact.html"${HERE === 'contact.html' ? ' aria-current="page"' : ''}>Get started</a>
           </nav>
         </div>
       </header>`;
@@ -61,33 +94,98 @@ class SiteNav extends HTMLElement {
       open ? this.removeAttribute('data-open') : this.setAttribute('data-open', '');
       burger.setAttribute('aria-expanded', String(!open));
     });
-    this.querySelectorAll('.nav-links a').forEach(a =>
-      a.addEventListener('click', () => this.removeAttribute('data-open')));
-
-    this.querySelector('.theme-btn').addEventListener('click', toggleSiteTheme);
-    paintThemeButton();
+    this.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => this.removeAttribute('data-open')));
+    drawFolds(this);
   }
 }
 customElements.define('site-nav', SiteNav);
 
-/* Day / evening. Both are warm — evening is the same room after dark.
-   The initial class is set in each page's <head> to avoid a flash. */
-function toggleSiteTheme() {
-  const dark = document.documentElement.classList.toggle('dark');
-  try {
-    localStorage.setItem('sr-theme', dark ? 'dark' : 'light');
-    localStorage.setItem('sr-theme-v', '2');
-  } catch (e) { /* private browsing — the choice just won't persist */ }
-  paintThemeButton();
+class SiteFoot extends HTMLElement {
+  connectedCallback() {
+    const li = (f, l) => `<li><a href="${TO_PAGES}${f}"${f === HERE ? ' aria-current="page"' : ''}>${l}</a></li>`;
+    this.innerHTML = `
+      <footer class="foot">
+        <div class="shell foot-grid">
+          <div class="foot-brand">
+            <a class="brand" href="${TO_ROOT}index.html">${MARK}${BRAND}</a>
+            <p>Websites, Google, print and small apps for local businesses. One partner, one connected line.</p>
+          </div>
+          <nav class="foot-col" aria-labelledby="foot-svc">
+            <h2 class="foot-title" id="foot-svc">Services</h2>
+            <ul>${SERVICES.map(s => li(s.file, s.label)).join('')}</ul>
+          </nav>
+          <nav class="foot-col" aria-labelledby="foot-studio">
+            <h2 class="foot-title" id="foot-studio">Studio</h2>
+            <ul>${li('about.html','About')}${li('work.html','Work')}${li('manifesto.html','How we work')}${li('arcade.html','Playground')}${li('contact.html','Get started')}<li><a href="mailto:hello@srcs.online">hello@srcs.online</a></li></ul>
+          </nav>
+          <nav class="foot-col" aria-labelledby="foot-legal">
+            <h2 class="foot-title" id="foot-legal">Legal</h2>
+            <ul>${li('privacy.html','Privacy')}${li('terms.html','Terms')}${li('accessibility.html','Accessibility')}<li><a href="#cookie-settings" data-cookie-settings>Cookie settings</a></li></ul>
+          </nav>
+        </div>
+        <div class="shell foot-base">
+          <span>&copy; <span data-year>${new Date().getFullYear()}</span> Sync Race Studios</span>
+          <span>srcs.online</span>
+        </div>
+      </footer>`;
+    drawFolds(this);
+  }
 }
+customElements.define('site-foot', SiteFoot);
 
-function paintThemeButton() {
-  const dark = document.documentElement.classList.contains('dark');
-  document.querySelectorAll('.theme-btn').forEach(b => {
-    b.textContent = dark ? 'Day' : 'Evening';
-    b.setAttribute('aria-pressed', String(dark));
+/* Any <svg data-fold="n"> on the page becomes an n-fold dragon curve. */
+function drawFolds(root = document) {
+  root.querySelectorAll('svg[data-fold]').forEach(s => {
+    if (s.dataset.drawn) return;
+    SRCurve.draw(s, +s.dataset.fold, +(s.dataset.sw || 1.6));
+    s.dataset.drawn = '1';
   });
 }
+document.addEventListener('DOMContentLoaded', () => drawFolds());
+drawFolds();
+
+/* ---------- background curve: 1,024 steps that draw with scroll ---------- */
+(() => {
+  const NS = 'http://www.w3.org/2000/svg';
+  const bg = document.createElementNS(NS, 'svg');
+  bg.id = 'curve-bg'; bg.setAttribute('aria-hidden', 'true'); bg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
+  bg.innerHTML = '<path class="ghost" fill="none" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round" stroke-linecap="round"/><path class="trail" fill="none" stroke-linejoin="round" stroke-linecap="round"/><circle class="pen" r="0"/>';
+  document.body.prepend(bg);
+  const ghost = bg.querySelector('.ghost'), trail = bg.querySelector('.trail'), pen = bg.querySelector('.pen');
+  const F = SRCurve.fit(SRCurve.points(10), .06);
+  bg.setAttribute('viewBox', F.vb); ghost.setAttribute('d', F.d); trail.setAttribute('d', F.d);
+  const L = trail.getTotalLength();
+  trail.style.strokeDasharray = `${L} ${L}`;
+  const START = .03, reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let shown = 0, target = START, ticking = false;
+  const progress = () => { const max = document.documentElement.scrollHeight - innerHeight; return max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 1; };
+  const render = v => { trail.style.strokeDashoffset = L * (1 - v); const pt = trail.getPointAtLength(L * v); pen.setAttribute('cx', pt.x); pen.setAttribute('cy', pt.y); };
+  const loop = () => {
+    shown += (target - shown) * (reduce ? 1 : .14);
+    if (Math.abs(target - shown) < .0005) shown = target;
+    render(shown); ticking = shown !== target; if (ticking) requestAnimationFrame(loop);
+  };
+  const size = () => { const k = Math.max(innerWidth / F.w, innerHeight / F.h); trail.setAttribute('stroke-width', 2 / k); pen.setAttribute('r', 4.5 / k); };
+  const update = () => { size(); target = START + (1 - START) * progress(); if (!ticking) { ticking = true; requestAnimationFrame(loop); } };
+  addEventListener('scroll', update, { passive: true });
+  new ResizeObserver(update).observe(document.body);
+  update();
+})();
+
+/* ---------- entrance animation for .rise ---------- */
+(() => {
+  const go = () => {
+    const items = document.querySelectorAll('.rise:not(.in)');
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) { items.forEach(el => el.classList.add('in')); return; }
+    const io = new IntersectionObserver(es => es.forEach((e, i) => {
+      if (!e.isIntersecting) return;
+      setTimeout(() => e.target.classList.add('in'), i * 70);
+      io.unobserve(e.target);
+    }), { threshold: .1, rootMargin: '0px 0px -50px' });
+    items.forEach(el => io.observe(el));
+  };
+  document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', go) : go();
+})();
 
 /* ============================================================
    COOKIE CONSENT + GOOGLE TAG
@@ -153,7 +251,7 @@ function paintThemeButton() {
     <form id="consent-prefs" hidden>
       <fieldset>
         <legend class="sr-only">Cookie categories</legend>
-        <label class="consent-opt"><input type="checkbox" checked disabled> <span><b>Strictly necessary</b> Always on. Remembers your theme and this choice.</span></label>
+        <label class="consent-opt"><input type="checkbox" checked disabled> <span><b>Strictly necessary</b> Always on. Remembers this choice.</span></label>
         <label class="consent-opt"><input type="checkbox" name="analytics"> <span><b>Analytics</b> Google Analytics: counts visits and pages viewed.</span></label>
       </fieldset>
     </form>

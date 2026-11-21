@@ -29,5 +29,17 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/pages/creativestudio.html",
+      "destination": "/pages/websites.html",
+      "permanent": true
+    },
+    {
+      "source": "/pages/codestudio.html",
+      "destination": "/pages/apps.html",
+      "permanent": true
+    }
   ]
 }
