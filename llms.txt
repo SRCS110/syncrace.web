@@ -1,10 +1,10 @@
 # Sync Race Studios
 
-> Business services for local and independent businesses: website design, Google Business Profile setup and upkeep, Google Ads management, print marketing and creative, and small web apps that make a business more efficient. One partner, every piece connected. Clients own every account (domain, Google Business Profile, Google Ads, code) from the start.
+> Business services for local and independent businesses: website design, Google Business Profile setup and upkeep, Google Ads management, print marketing and creative, and small web apps that make a business more efficient. One partner, every piece connected.
 
-After launch, clients choose one of three: self-manage at no ongoing cost, pay hourly for changes as they come up, or take an optional flat monthly care plan covering updates, backups, profile upkeep, small changes and monitoring. The monthly plan is cancellable at any time and nothing switches off if it ends.
+Websites and apps are built, hosted and managed by Sync Race Studios. Websites start from $1,500 to build plus $75/month for hosting and management, which includes Google Analytics and listing the site in Google Search Console and Bing Webmaster Tools. Business apps are quoted per project (build plus monthly management). Google Business Profile, Google Ads and print work are billed at $125/hour, with an estimate before work starts.
 
-Websites and apps are hand-written HTML, CSS and JavaScript, hosted on Vercel, with Supabase for data and Cloudflare for DNS. No page builders, no platform lock-in, and no tracking without consent.
+Websites and apps are hand-written HTML, CSS and JavaScript, hosted on Vercel, with Supabase for data and Cloudflare for DNS. No page builders and no tracking without consent.
 
 The logo is a dragon curve: a strip of paper folded in half ten times and opened so every crease is 90°, giving one line of 1,024 steps that never crosses itself. It stands for taking every part of a business and unwinding it into one cohesive line.
 
@@ -19,7 +19,7 @@ The logo is a dragon curve: a strip of paper folded in half ten times and opened
 - [Business apps](https://www.srcs.online/pages/apps.html): Booking, intake forms, dashboards, directories and automations.
 - [Work](https://www.srcs.online/pages/work.html): Live client projects.
 - [About](https://www.srcs.online/pages/about.html): The dragon curve logo and what it means for how the studio works.
-- [How we work](https://www.srcs.online/pages/manifesto.html): Why the studio builds without lock-in.
+- [Pricing](https://www.srcs.online/pages/pricing.html): Website build and monthly fees, app quotes and hourly rates.
 - [Get started](https://www.srcs.online/pages/contact.html): Contact form for enquiries.
 - [Wanderlust Santa Rosa case study](https://www.srcs.online/pages/wanderlust.html): Food truck festival website, vendor application and market admin.
 - [Stay Santa Rosa case study](https://www.srcs.online/pages/staysantarosa.html): Sonoma travel guide with a 79-place directory and direct hotel booking.

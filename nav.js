@@ -14,12 +14,12 @@ const HERE     = location.pathname.split('/').pop() || 'index.html';
 
 // Six core items: three either side of the centred logo.
 const LINKS_LEFT = [
-  { file: 'services.html',        label: 'Services', also: ['advertising.html','print.html'] },
+  { file: 'services.html',        label: 'Services', also: ['advertising.html','print.html','apps.html'] },
   { file: 'websites.html',        label: 'Websites' },
   { file: 'google-business.html', label: 'Google' },
 ];
 const LINKS_RIGHT = [
-  { file: 'apps.html',    label: 'Apps' },
+  { file: 'pricing.html', label: 'Pricing' },
   { file: 'about.html',   label: 'About' },
   { file: 'contact.html', label: 'Contact' },
 ];
@@ -129,7 +129,7 @@ class SiteFoot extends HTMLElement {
           </nav>
           <nav class="foot-col" aria-labelledby="foot-studio">
             <h2 class="foot-title" id="foot-studio">Studio</h2>
-            <ul>${li('about.html','About')}${li('work.html','Work')}${li('manifesto.html','How we work')}${li('arcade.html','Playground')}${li('contact.html','Get started')}<li><a href="mailto:hello@srcs.online">hello@srcs.online</a></li></ul>
+            <ul>${li('about.html','About')}${li('work.html','Work')}${li('pricing.html','Pricing')}${li('arcade.html','Playground')}${li('contact.html','Get started')}<li><a href="mailto:hello@srcs.online">hello@srcs.online</a></li></ul>
           </nav>
           <nav class="foot-col" aria-labelledby="foot-legal">
             <h2 class="foot-title" id="foot-legal">Legal</h2>

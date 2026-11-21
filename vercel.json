@@ -40,6 +40,11 @@
       "source": "/pages/codestudio.html",
       "destination": "/pages/apps.html",
       "permanent": true
+    },
+    {
+      "source": "/pages/manifesto.html",
+      "destination": "/pages/about.html",
+      "permanent": true
     }
   ]
 }
