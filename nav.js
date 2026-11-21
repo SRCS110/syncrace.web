@@ -1,16 +1,18 @@
 /* ============================================================
    SYNC RACE STUDIOS — shared chrome
-   <site-nav>, <site-foot>, the dragon curve (logo mark, fold icons
-   and the background line that draws with scroll), and cookie consent.
+   Nav, footer and fold icons are pre-rendered into each page by
+   tools/build.mjs; this file adds the menu button, the background line
+   that draws with scroll, the entrance animation and cookie consent.
 
    Works from both the root (index.html) and /pages/, so there is
    only ever one copy of this file.
    ============================================================ */
 
-const IN_PAGES = /\/pages\//.test(location.pathname);
-const TO_PAGES = IN_PAGES ? './' : './pages/';
-const TO_ROOT  = IN_PAGES ? '../' : './';
-const HERE     = location.pathname.split('/').pop() || 'index.html';
+/* @shared-start ------------------------------------------------------
+   Everything between the @shared markers is also run by the page build
+   (tools/build.mjs), which writes the nav, footer, breadcrumbs and fold
+   icons straight into each page's HTML. Crawlers get finished HTML; the
+   code below only wires up the menu button in the browser. */
 
 // Six core items: three either side of the centred logo.
 const LINKS_LEFT = [
@@ -33,8 +35,7 @@ const SERVICES = [
 ];
 
 /* ---------- the dragon curve ----------
-   n folds -> 2^n segments, every turn exactly 90°, never crossing itself.
-   Rotated so the curve runs from top to bottom. */
+   n folds -> 2^n segments, every turn exactly 90°, never crossing itself. */
 const SRCurve = (() => {
   const turns = n => { let s = []; for (let i = 0; i < n; i++) s = s.concat([1], s.slice().reverse().map(t => -t)); return s; };
   // Walk the turns on a square grid: every step is one unit, every turn exactly 90°.
@@ -42,8 +43,7 @@ const SRCurve = (() => {
   // which would knock it off the grid) so it runs roughly top to bottom.
   const points = n => {
     const s = turns(n), D = [[1,0],[0,1],[-1,0],[0,-1]];
-    let x = 0, y = 0, d = 0; const p = [[0,0], [1,0]];
-    x = 1;
+    let x = 1, y = 0, d = 0; const p = [[0,0], [1,0]];
     s.forEach(t => { d = (d + t + 4) % 4; x += D[d][0]; y += D[d][1]; p.push([x, y]); });
     const [ex, ey] = p[p.length - 1];
     const q = Math.round((Math.PI / 2 - Math.atan2(ey, ex)) / (Math.PI / 2));
@@ -55,52 +55,52 @@ const SRCurve = (() => {
   const fit = (p, padF = .08) => {
     const xs = p.map(q => q[0]), ys = p.map(q => q[1]), mx = Math.min(...xs), my = Math.min(...ys);
     const w = Math.max(...xs) - mx, h = Math.max(...ys) - my, pad = Math.max(w, h, 1) * padF + .5;
-    const r = .32; let d = `M${p[0][0]} ${p[0][1]}`;
+    const r = .32, k = v => +v.toFixed(2); let d = `M${p[0][0]} ${p[0][1]}`;
     for (let i = 1; i < p.length - 1; i++) {
       const [ax, ay] = p[i-1], [bx, by] = p[i], [cx, cy] = p[i+1];
-      d += `L${bx-(bx-ax)*r} ${by-(by-ay)*r}Q${bx} ${by} ${bx+(cx-bx)*r} ${by+(cy-by)*r}`;
+      d += `L${k(bx-(bx-ax)*r)} ${k(by-(by-ay)*r)}Q${bx} ${by} ${k(bx+(cx-bx)*r)} ${k(by+(cy-by)*r)}`;
     }
     d += `L${p[p.length-1][0]} ${p[p.length-1][1]}`;
-    return { vb: `${mx-pad} ${my-pad} ${w+pad*2} ${h+pad*2}`, w: w + pad * 2, h: h + pad * 2, d };
+    return { vb: `${k(mx-pad)} ${k(my-pad)} ${k(w+pad*2)} ${k(h+pad*2)}`, w: w + pad * 2, h: h + pad * 2, d };
   };
-  const draw = (el, n, sw = 1.6) => {
-    const f = fit(points(n));
-    el.setAttribute('viewBox', f.vb);
-    el.setAttribute('aria-hidden', 'true');
-    el.innerHTML = `<path d="${f.d}" fill="none" stroke="var(--lamp)" stroke-width="${sw}" vector-effect="non-scaling-stroke" stroke-linejoin="round" stroke-linecap="round"/>`;
-  };
-  return { turns, points, fit, draw };
+  // One <symbol> per fold count; every icon on the page is a <use> of it.
+  const symbol = n => { const f = fit(points(n)); return `<symbol id="sr-fold-${n}" viewBox="${f.vb}"><path d="${f.d}" vector-effect="non-scaling-stroke"/></symbol>`; };
+  // An icon is a <use> of its symbol; stroke width and colour are inherited.
+  const icon = (n, { sw = 1.6, cls = '', attrs = '', style = '' } = {}) =>
+    `<svg data-fold="${n}" data-sw="${sw}" data-drawn="1" class="fold-icon${cls ? ' ' + cls : ''}"${attrs} style="stroke-width:${sw}${style ? ';' + style : ''}" aria-hidden="true" focusable="false"><use href="#sr-fold-${n}"/></svg>`;
+  return { turns, points, fit, symbol, icon };
 })();
+
+const BRAND = `<span><b>Sync Race</b><em>Business Services</em></span>`;
+const MARK = () => SRCurve.icon(10, { sw: 1.1, cls: 'mark', attrs: ' width="32" height="32"' });
+
+const navHTML = (here, toPages, toRoot) => {
+  const link = l => {
+    const cur = l.file === here || (l.also || []).includes(here);
+    return `<a href="${toPages}${l.file}"${cur ? ' aria-current="page"' : ''}>${l.label}</a>`;
+  };
+  const left = LINKS_LEFT.map(link).join(''), right = LINKS_RIGHT.map(link).join('');
+  return `<header class="nav-shade"><div class="nav-in"><nav class="nav-links nav-left" aria-label="Main">${left}</nav><a class="brand brand-center" href="${toRoot}index.html" aria-label="Sync Race Studios home">${MARK()}${BRAND}</a><nav class="nav-links nav-right" aria-label="More">${right}</nav><button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav-sheet"><span></span><span></span><span></span></button></div><nav class="nav-sheet" id="nav-sheet" aria-label="Menu">${left}${right}</nav></header>`;
+};
+
+const footHTML = (here, toPages, toRoot, year) => {
+  const li = (f, l) => `<li><a href="${toPages}${f}"${f === here ? ' aria-current="page"' : ''}>${l}</a></li>`;
+  return `<footer class="foot"><div class="shell foot-grid"><div class="foot-brand"><a class="brand" href="${toRoot}index.html">${MARK()}${BRAND}</a><p>Websites, branding, Google, print and small apps for local businesses. One partner, one connected line.</p></div><nav class="foot-col" aria-labelledby="foot-svc"><h2 class="foot-title" id="foot-svc">Services</h2><ul>${SERVICES.map(s => li(s.file, s.label)).join('')}</ul></nav><nav class="foot-col" aria-labelledby="foot-studio"><h2 class="foot-title" id="foot-studio">Studio</h2><ul>${li('about.html','About')}${li('resources.html','Resources')}${li('work.html','Work')}${li('pricing.html','Pricing')}${li('arcade.html','Playground')}${li('contact.html','Get started')}<li><a href="mailto:hello@srcs.online">hello@srcs.online</a></li><li><a href="https://www.instagram.com/syncracestudios/" target="_blank" rel="me noopener">Instagram<span class="sr-only"> (opens in a new tab)</span></a></li></ul></nav><nav class="foot-col" aria-labelledby="foot-legal"><h2 class="foot-title" id="foot-legal">Legal</h2><ul>${li('privacy.html','Privacy')}${li('terms.html','Terms')}${li('accessibility.html','Accessibility')}${li('sitemap.html','Sitemap')}<li><a href="#cookie-settings" data-cookie-settings>Cookie settings</a></li></ul></nav></div><div class="shell foot-base"><span>&copy; <span data-year>${year}</span> Sync Race Studios</span><span>srcs.online</span></div></footer>`;
+};
+/* @shared-end ------------------------------------------------------ */
+
+const IN_PAGES = /\/pages\//.test(location.pathname);
+const TO_PAGES = IN_PAGES ? './' : './pages/';
+const TO_ROOT  = IN_PAGES ? '../' : './';
+const HERE     = location.pathname.split('/').pop() || 'index.html';
 window.SRCurve = SRCurve;
 
-const MARK = '<svg class="mark" data-fold="10" data-sw="1.1" width="32" height="32"></svg>';
-const BRAND = `<span><b>Sync Race</b><em>Business Services</em></span>`;
-
+/* The build writes the nav and footer into the HTML. These elements only
+   fill themselves in if that didn't happen (e.g. a page opened from disk
+   before a build), and wire up the menu button. */
 class SiteNav extends HTMLElement {
   connectedCallback() {
-    const link = l => {
-      const cur = l.file === HERE || (l.also || []).includes(HERE);
-      return `<a href="${TO_PAGES}${l.file}"${cur ? ' aria-current="page"' : ''}>${l.label}</a>`;
-    };
-    const left = LINKS_LEFT.map(link).join(''), right = LINKS_RIGHT.map(link).join('');
-
-    if (!document.querySelector('.skip') && document.getElementById('main')) {
-      const skip = document.createElement('a');
-      skip.className = 'skip'; skip.href = '#main'; skip.textContent = 'Skip to content';
-      document.body.prepend(skip);
-    }
-
-    this.innerHTML = `
-      <header class="nav-shade">
-        <div class="nav-in">
-          <nav class="nav-links nav-left" aria-label="Main">${left}</nav>
-          <a class="brand brand-center" href="${TO_ROOT}index.html" aria-label="Sync Race Studios home">${MARK}${BRAND}</a>
-          <nav class="nav-links nav-right" aria-label="More">${right}</nav>
-          <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-sheet"><span></span><span></span><span></span></button>
-        </div>
-        <nav class="nav-sheet" id="nav-sheet" aria-label="Menu">${left}${right}</nav>
-      </header>`;
-
+    if (!this.querySelector('.nav-in')) { this.innerHTML = navHTML(HERE, TO_PAGES, TO_ROOT); ensureSymbols(); }
     const burger = this.querySelector('.nav-toggle');
     burger.addEventListener('click', () => {
       const open = this.hasAttribute('data-open');
@@ -108,54 +108,37 @@ class SiteNav extends HTMLElement {
       burger.setAttribute('aria-expanded', String(!open));
     });
     this.querySelectorAll('.nav-links a, .nav-sheet a').forEach(a => a.addEventListener('click', () => this.removeAttribute('data-open')));
-    drawFolds(this);
   }
 }
 customElements.define('site-nav', SiteNav);
 
 class SiteFoot extends HTMLElement {
   connectedCallback() {
-    const li = (f, l) => `<li><a href="${TO_PAGES}${f}"${f === HERE ? ' aria-current="page"' : ''}>${l}</a></li>`;
-    this.innerHTML = `
-      <footer class="foot">
-        <div class="shell foot-grid">
-          <div class="foot-brand">
-            <a class="brand" href="${TO_ROOT}index.html">${MARK}${BRAND}</a>
-            <p>Websites, branding, Google, print and small apps for local businesses. One partner, one connected line.</p>
-          </div>
-          <nav class="foot-col" aria-labelledby="foot-svc">
-            <h2 class="foot-title" id="foot-svc">Services</h2>
-            <ul>${SERVICES.map(s => li(s.file, s.label)).join('')}</ul>
-          </nav>
-          <nav class="foot-col" aria-labelledby="foot-studio">
-            <h2 class="foot-title" id="foot-studio">Studio</h2>
-            <ul>${li('about.html','About')}${li('resources.html','Resources')}${li('work.html','Work')}${li('pricing.html','Pricing')}${li('arcade.html','Playground')}${li('contact.html','Get started')}<li><a href="mailto:hello@srcs.online">hello@srcs.online</a></li></ul>
-          </nav>
-          <nav class="foot-col" aria-labelledby="foot-legal">
-            <h2 class="foot-title" id="foot-legal">Legal</h2>
-            <ul>${li('privacy.html','Privacy')}${li('terms.html','Terms')}${li('accessibility.html','Accessibility')}${li('sitemap.html','Sitemap')}<li><a href="#cookie-settings" data-cookie-settings>Cookie settings</a></li></ul>
-          </nav>
-        </div>
-        <div class="shell foot-base">
-          <span>&copy; <span data-year>${new Date().getFullYear()}</span> Sync Race Studios</span>
-          <span>srcs.online</span>
-        </div>
-      </footer>`;
-    drawFolds(this);
+    if (!this.querySelector('.foot')) { this.innerHTML = footHTML(HERE, TO_PAGES, TO_ROOT, new Date().getFullYear()); ensureSymbols(); }
   }
 }
 customElements.define('site-foot', SiteFoot);
 
-/* Any <svg data-fold="n"> on the page becomes an n-fold dragon curve. */
-function drawFolds(root = document) {
-  root.querySelectorAll('svg[data-fold]').forEach(s => {
-    if (s.dataset.drawn) return;
-    SRCurve.draw(s, +s.dataset.fold, +(s.dataset.sw || 1.6));
-    s.dataset.drawn = '1';
+/* Fallback for icons the build didn't pre-render: add any missing symbols,
+   and turn bare <svg data-fold="n"> elements into <use> icons. */
+function ensureSymbols() {
+  let defs = document.getElementById('sr-folds');
+  if (!defs) {
+    defs = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    defs.id = 'sr-folds'; defs.setAttribute('aria-hidden', 'true'); defs.setAttribute('class', 'sr-defs');
+    document.body.prepend(defs);
+  }
+  document.querySelectorAll('svg[data-fold]').forEach(s => {
+    const n = +s.dataset.fold;
+    if (!document.getElementById('sr-fold-' + n)) defs.insertAdjacentHTML('beforeend', SRCurve.symbol(n));
+    if (!s.dataset.drawn) {
+      s.setAttribute('aria-hidden', 'true'); s.classList.add('fold-icon');
+      s.style.strokeWidth = s.dataset.sw || 1.6; s.removeAttribute('viewBox');
+      s.innerHTML = `<use href="#sr-fold-${n}"/>`; s.dataset.drawn = '1';
+    }
   });
 }
-document.addEventListener('DOMContentLoaded', () => drawFolds());
-drawFolds();
+document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', ensureSymbols) : ensureSymbols();
 
 /* ---------- background curve: 1,024 steps that draw with scroll ----------
    Fills the screen below the nav. On landscape screens the curve is turned

@@ -528,3 +528,17 @@ a.kicker{ text-decoration:none; }
 main .post-meta, main .post-body p, main .post-body li, main .post small{ text-shadow:0 0 2px var(--paper), 0 0 8px var(--paper); }
 .post-body ul + p{ margin-top:14px; }
 .post-meta + .lede{ margin-top:18px; }
+
+/* fold icons: <svg class="fold-icon"><use href="#sr-fold-n"/></svg> */
+.sr-defs{ position:absolute; width:0; height:0; overflow:hidden; }
+.fold-icon{ fill:none; stroke:var(--lamp); stroke-linejoin:round; stroke-linecap:round; overflow:visible; }
+
+/* breadcrumbs */
+.crumbs{ padding-top:clamp(18px,3vh,28px); font-size:14px; color:var(--dust); position:relative; }
+.crumbs ol{ list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:4px 0; }
+.crumbs li{ display:inline-flex; align-items:center; text-shadow:0 0 2px var(--paper),0 0 8px var(--paper),0 0 16px var(--paper); }
+.crumbs li + li::before{ content:''; width:14px; height:1px; background:var(--lamp); margin:0 10px; }
+.crumbs a{ color:var(--dust); text-decoration:none; padding:6px 0; }
+.crumbs a:hover{ color:var(--lamp-ink); text-decoration:underline; text-underline-offset:.2em; }
+.crumbs [aria-current="page"]{ color:var(--ink); }
+.crumbs + .page-top, .crumbs + .case-hero, .crumbs + .legal, .crumbs + .article .page-top, .crumbs + .article > .page-top{ padding-top:clamp(28px,6vh,64px); }
