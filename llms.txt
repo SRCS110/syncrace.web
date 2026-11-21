@@ -18,6 +18,11 @@ The logo is a dragon curve: a strip of paper folded in half ten times and opened
 - [Logo design & branding](https://www.srcs.online/pages/branding.html): Logos, colour palettes, typefaces and brand guides.
 - [Print & creative](https://www.srcs.online/pages/print.html): Business cards, flyers, menus, posters, signage and social graphics.
 - [Business apps](https://www.srcs.online/pages/apps.html): Booking, intake forms, dashboards, directories and automations.
+- [Resources](https://www.srcs.online/pages/resources.html): Guides for small businesses on websites, search, branding and advertising.
+  - [Squarespace and Wix: where website builders hold your traffic back](https://www.srcs.online/pages/resources-website-builders.html)
+  - [Why your website needs Google Search Console and Bing Webmaster Tools](https://www.srcs.online/pages/resources-search-console-bing.html)
+  - [Why quality branding matters for a small business](https://www.srcs.online/pages/resources-branding.html)
+  - [Before you spend on Google Ads, set up conversion tracking](https://www.srcs.online/pages/resources-google-ads-tracking.html)
 - [Work](https://www.srcs.online/pages/work.html): Live client projects.
 - [About](https://www.srcs.online/pages/about.html): The dragon curve logo and what it means for how the studio works.
 - [Pricing](https://www.srcs.online/pages/pricing.html): Website build fees (no monthly fee), app quotes and hourly rates.

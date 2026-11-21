@@ -492,3 +492,39 @@ main{ isolation:isolate; }
 .price span{ display:block; margin-top:6px; font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:var(--dust); }
 .sec-body .prices + .lede{ margin-top:24px; }
 .sec-body .lede + div .list{ margin-top:20px; }
+
+/* ============================================================
+   RESOURCES
+   ============================================================ */
+.posts{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:56px clamp(32px,6vw,88px); }
+.post{ display:grid; grid-template-columns:56px minmax(0,1fr); gap:20px; align-items:start; text-decoration:none; color:inherit; }
+.post svg{ width:56px; height:56px; }
+.post h3{ margin-top:12px; font-size:21px; }
+.post p{ color:var(--dust); margin-top:8px; }
+.post small{ display:block; margin-top:10px; font-size:14px; color:var(--dust); }
+a.post:hover h3{ color:var(--lamp-ink); }
+@media(max-width:760px){ .posts{ grid-template-columns:minmax(0,1fr); } }
+.post > div, .post-body, .post-more{ position:relative; }
+.post > div::before, .post-body::before, .post-more::before{
+  content:''; position:absolute; z-index:-1; inset:-18px -24px; border-radius:32px; pointer-events:none;
+  background:color-mix(in srgb,var(--paper) 78%,transparent);
+  box-shadow:0 0 36px 28px color-mix(in srgb,var(--paper) 78%,transparent);
+}
+@media(max-width:700px){ .post > div::before, .post-body::before, .post-more::before{ inset:-10px -12px; box-shadow:0 0 18px 8px color-mix(in srgb,var(--paper) 78%,transparent); } }
+.article .page-top{ padding-inline:0; }
+.article h1{ font-size:clamp(32px,4.6vw,52px); }
+a.kicker{ text-decoration:none; }
+.post-meta{ margin-top:16px; font-size:14px; letter-spacing:.06em; color:var(--dust); }
+.post-body{ max-width:68ch; display:grid; gap:40px; padding-block:clamp(24px,4vw,40px); }
+.post-body h2{ font-size:clamp(22px,2.6vw,28px); margin-bottom:14px; }
+.post-body p{ color:var(--ink); font-size:18px; font-weight:300; line-height:1.75; }
+.post-body p + p{ margin-top:14px; }
+.post-body ul{ margin:14px 0 0; padding-left:1.2rem; display:grid; gap:10px; font-size:18px; font-weight:300; }
+.post-body li b{ font-weight:500; }
+.post-body a,.post-more a{ color:var(--lamp-ink); text-underline-offset:.2em; }
+.post-body code{ font-size:.9em; background:var(--sunk); padding:.1em .35em; border-radius:6px; }
+.post-more{ max-width:68ch; padding-top:clamp(24px,4vw,40px); border-top:1px solid var(--hair); }
+.post-more h2{ font-size:20px; }
+main .post-meta, main .post-body p, main .post-body li, main .post small{ text-shadow:0 0 2px var(--paper), 0 0 8px var(--paper); }
+.post-body ul + p{ margin-top:14px; }
+.post-meta + .lede{ margin-top:18px; }
