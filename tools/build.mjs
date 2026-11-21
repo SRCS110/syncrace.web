@@ -827,9 +827,12 @@ const foldPass = html => html.replace(/<svg data-fold="(\d+)"([^>]*)>(?:\s*<use[
 });
 
 const files = ['index.html', ...fs.readdirSync(`${ROOT}/pages`).filter(f => f.endsWith('.html')).map(f => `pages/${f}`)];
+// Icons: the same dragon-curve set on every page, by absolute path.
+const ICONS = '<link rel="icon" href="/favicon.ico" sizes="48x48">\n<link rel="icon" href="/assets/srcs-curve.svg" type="image/svg+xml">\n<link rel="apple-touch-icon" href="/apple-touch-icon.png">\n<link rel="manifest" href="/site.webmanifest">\n';
 for (const rel of files) {
   let html = fs.readFileSync(`${ROOT}/${rel}`, 'utf8');
-  if (!html.includes('<site-nav')) continue;                 // e.g. the old redirect page
+  html = html.replace(/<link rel="(?:icon|apple-touch-icon|manifest)"[^>]*>\n?/g, '').replace('</head>', ICONS + '</head>');
+  if (!html.includes('<site-nav')) { fs.writeFileSync(`${ROOT}/${rel}`, html); continue; }   // e.g. the old redirect page
   const inPages = rel.startsWith('pages/'), file = path.basename(rel);
   const toPages = inPages ? './' : './pages/', toRoot = inPages ? '../' : './';
 
