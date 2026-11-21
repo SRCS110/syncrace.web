@@ -467,10 +467,12 @@ main .btn, main .btn *, main .pill, .nav-links a[aria-current="page"], .nav-link
 .frame{ box-shadow:0 2px 6px rgba(17,17,17,.05), 0 30px 60px -24px rgba(17,17,17,.32); }
 /* A feathered shade of paper behind each block of text: the curve
    fades out as it passes under the words instead of cutting through them. */
+/* The shade hosts are positioned but do NOT form their own stacking
+   context, so every shade drops into main's bottom layer (z-index:-1):
+   above the curve, below all text, buttons and images. */
 .hero .col, .page-top .col, .sec-head, .sec-body, .head, .work-body, .svc > div,
-.cta > div, .legal-body, .prose, .case-hero .shell > *, .faq, .card{
-  position:relative; isolation:isolate;
-}
+.cta > div, .legal-body, .prose{ position:relative; }
+main{ isolation:isolate; }
 .hero .col::before, .page-top .col::before, .sec-head::before, .sec-body::before, .head::before,
 .work-body::before, .svc > div::before, .cta > div::before, .legal-body::before, .prose::before{
   content:''; position:absolute; z-index:-1; inset:-18px -24px; border-radius:32px; pointer-events:none;

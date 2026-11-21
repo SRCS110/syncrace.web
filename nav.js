@@ -37,12 +37,20 @@ const SERVICES = [
    Rotated so the curve runs from top to bottom. */
 const SRCurve = (() => {
   const turns = n => { let s = []; for (let i = 0; i < n; i++) s = s.concat([1], s.slice().reverse().map(t => -t)); return s; };
+  // Walk the turns on a square grid: every step is one unit, every turn exactly 90°.
+  // The finished curve is then turned by a whole quarter-turn (never an odd angle,
+  // which would knock it off the grid) so it runs roughly top to bottom.
   const points = n => {
     const s = turns(n), D = [[1,0],[0,1],[-1,0],[0,-1]];
-    let x = 0, y = 0, d = 0; const p = [[0,0]];
-    [0, ...s].forEach(t => { d = (d + t + 4) % 4; x += D[d][0]; y += D[d][1]; p.push([x, y]); });
-    const [ex, ey] = p[p.length - 1], a = Math.PI / 2 - Math.atan2(ey, ex), c = Math.cos(a), si = Math.sin(a);
-    return p.map(([x, y]) => [Math.round(x * c - y * si), Math.round(x * si + y * c)]);
+    let x = 0, y = 0, d = 0; const p = [[0,0], [1,0]];
+    x = 1;
+    s.forEach(t => { d = (d + t + 4) % 4; x += D[d][0]; y += D[d][1]; p.push([x, y]); });
+    const [ex, ey] = p[p.length - 1];
+    const q = Math.round((Math.PI / 2 - Math.atan2(ey, ex)) / (Math.PI / 2));
+    const rot = ([x, y]) => [-y, x];                       // exact 90° turn
+    let out = p;
+    for (let i = 0; i < ((q % 4) + 4) % 4; i++) out = out.map(rot);
+    return out;
   };
   const fit = (p, padF = .08) => {
     const xs = p.map(q => q[0]), ys = p.map(q => q[1]), mx = Math.min(...xs), my = Math.min(...ys);
