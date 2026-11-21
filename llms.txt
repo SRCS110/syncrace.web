@@ -1,8 +1,8 @@
 # Sync Race Studios
 
-> Business services for local and independent businesses: website design, Google Business Profile setup and upkeep, Google Ads management, print marketing and creative, and small web apps that make a business more efficient. One partner, every piece connected.
+> Business services for local and independent businesses: website design, logo design and branding, Google Business Profile setup and upkeep, Google Ads management, print marketing and creative, and small web apps that make a business more efficient. One partner, every piece connected.
 
-Websites and apps are built, hosted and managed by Sync Race Studios. Websites are optimized for AI search (structured data, llms.txt and clearly written pages for ChatGPT, Claude, Perplexity and Google AI Overviews) and for Google and Bing. Websites start from $1,500 to build, with no monthly hosting fee; changes after launch are billed at $125/hour. Every website includes Google Analytics and listing in Google Search Console and Bing Webmaster Tools. Business apps are quoted per project (build plus monthly management). Google Business Profile, Google Ads and print work are billed at $125/hour, with an estimate before work starts.
+Websites and apps are built, hosted and managed by Sync Race Studios. Websites are optimized for AI search (structured data, llms.txt and clearly written pages for ChatGPT, Claude, Perplexity and Google AI Overviews) and for Google and Bing. Websites start from $1,500 to build, with no monthly hosting fee; changes after launch are billed at $125/hour. Every website includes Google Analytics and listing in Google Search Console and Bing Webmaster Tools. Business apps are quoted per project (build plus monthly management). Branding, Google Business Profile, Google Ads and print work are billed at $125/hour, with an estimate before work starts.
 
 Websites and apps are hand-written HTML, CSS and JavaScript, hosted on Vercel, with Supabase for data and Cloudflare for DNS. No page builders and no tracking without consent.
 
@@ -15,6 +15,7 @@ The logo is a dragon curve: a strip of paper folded in half ten times and opened
 - [Website design](https://www.srcs.online/pages/websites.html): Custom websites, redesigns, domains and hosting.
 - [Google Business Profile](https://www.srcs.online/pages/google-business.html): Profile setup, verification, photos, posts and reviews.
 - [Google Ads](https://www.srcs.online/pages/advertising.html): Search and local campaigns, conversion tracking and monthly reporting.
+- [Logo design & branding](https://www.srcs.online/pages/branding.html): Logos, colour palettes, typefaces and brand guides.
 - [Print & creative](https://www.srcs.online/pages/print.html): Business cards, flyers, menus, posters, signage and social graphics.
 - [Business apps](https://www.srcs.online/pages/apps.html): Booking, intake forms, dashboards, directories and automations.
 - [Work](https://www.srcs.online/pages/work.html): Live client projects.

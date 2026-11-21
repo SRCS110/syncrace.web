@@ -14,7 +14,7 @@ const HERE     = location.pathname.split('/').pop() || 'index.html';
 
 // Six core items: three either side of the centred logo.
 const LINKS_LEFT = [
-  { file: 'services.html',        label: 'Services', also: ['advertising.html','print.html','apps.html'] },
+  { file: 'services.html',        label: 'Services', also: ['advertising.html','print.html','apps.html','branding.html'] },
   { file: 'websites.html',        label: 'Websites' },
   { file: 'google-business.html', label: 'Google' },
 ];
@@ -28,6 +28,7 @@ const SERVICES = [
   { file: 'websites.html',        label: 'Website design',        n: 10 },
   { file: 'google-business.html', label: 'Google Business Profile', n: 6 },
   { file: 'advertising.html',     label: 'Google Ads',            n: 8 },
+  { file: 'branding.html',        label: 'Logo & branding',       n: 4 },
   { file: 'print.html',           label: 'Print & creative',      n: 5 },
   { file: 'apps.html',            label: 'Business apps',         n: 9 },
 ];
@@ -121,7 +122,7 @@ class SiteFoot extends HTMLElement {
         <div class="shell foot-grid">
           <div class="foot-brand">
             <a class="brand" href="${TO_ROOT}index.html">${MARK}${BRAND}</a>
-            <p>Websites, Google, print and small apps for local businesses. One partner, one connected line.</p>
+            <p>Websites, branding, Google, print and small apps for local businesses. One partner, one connected line.</p>
           </div>
           <nav class="foot-col" aria-labelledby="foot-svc">
             <h2 class="foot-title" id="foot-svc">Services</h2>
