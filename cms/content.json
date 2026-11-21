@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "files": {
+    "pages/google-business.html": {
+      "heading-3": {
+        "type": "text",
+        "value": "From search to customer"
+      }
+    }
+  },
+  "globals": {}
+}
