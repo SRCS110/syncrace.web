@@ -13,8 +13,7 @@ The logo is a dragon curve: a strip of paper folded in half ten times and opened
 - [Home](https://www.srcs.online/): What the studio does, recent work, and how a project runs.
 - [Services](https://www.srcs.online/pages/services.html): All services and how they connect.
 - [Website design](https://www.srcs.online/pages/websites.html): Custom websites, redesigns, domains and hosting.
-- [Google Business Profile](https://www.srcs.online/pages/google-business.html): Profile setup, verification, photos, posts and reviews.
-- [Google Ads](https://www.srcs.online/pages/advertising.html): Search and local campaigns, conversion tracking and monthly reporting.
+- [Google Business Profile & Ads](https://www.srcs.online/pages/google-business.html): Profile setup, verification, posts and reviews, plus Google Ads campaigns, conversion tracking and monthly reporting.
 - [Logo design & branding](https://www.srcs.online/pages/branding.html): Logos, colour palettes, typefaces and brand guides.
 - [Print & creative](https://www.srcs.online/pages/print.html): Business cards, flyers, menus, posters, signage and social graphics.
 - [Business apps](https://www.srcs.online/pages/apps.html): Booking, intake forms, dashboards, directories and automations.

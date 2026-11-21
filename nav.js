@@ -14,7 +14,7 @@ const HERE     = location.pathname.split('/').pop() || 'index.html';
 
 // Six core items: three either side of the centred logo.
 const LINKS_LEFT = [
-  { file: 'services.html',        label: 'Services', also: ['advertising.html','print.html','apps.html','branding.html'] },
+  { file: 'services.html',        label: 'Services', also: ['print.html','apps.html','branding.html'] },
   { file: 'websites.html',        label: 'Websites' },
   { file: 'google-business.html', label: 'Google' },
 ];
@@ -26,8 +26,7 @@ const LINKS_RIGHT = [
 
 const SERVICES = [
   { file: 'websites.html',        label: 'Website design',        n: 10 },
-  { file: 'google-business.html', label: 'Google Business Profile', n: 6 },
-  { file: 'advertising.html',     label: 'Google Ads',            n: 8 },
+  { file: 'google-business.html', label: 'Google Profile & Ads',  n: 6 },
   { file: 'branding.html',        label: 'Logo & branding',       n: 4 },
   { file: 'print.html',           label: 'Print & creative',      n: 5 },
   { file: 'apps.html',            label: 'Business apps',         n: 9 },

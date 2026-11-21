@@ -26,6 +26,7 @@ const API_KEY = process.env.RESEND_API_KEY || process.env.Resend_Api_Key;
 
 const SUBJECTS = {
   website:          'website design',
+  google:           'Google Business Profile and Ads',
   'google-profile': 'a Google Business Profile',
   branding:         'logo design and branding',
   ads:              'Google Ads',

@@ -45,6 +45,11 @@
       "source": "/pages/manifesto.html",
       "destination": "/pages/about.html",
       "permanent": true
+    },
+    {
+      "source": "/pages/advertising.html",
+      "destination": "/pages/google-business.html#ads",
+      "permanent": true
     }
   ]
 }
