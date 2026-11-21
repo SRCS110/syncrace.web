@@ -150,24 +150,34 @@ document.addEventListener('DOMContentLoaded', () => drawFolds());
 drawFolds();
 
 /* ---------- background curve: 1,024 steps that draw with scroll ----------
-   Sits in its own depth layer (see #curve-depth in srcs.css): below the nav,
-   pushed back in z, and drifting slower than the page. */
+   Fills the screen below the nav. On landscape screens the curve is turned
+   on its side so it fits the screen's shape and the drawing stays in view.
+   Separation from the foreground comes from srcs.css: a soft shadow under
+   the line and a paper-coloured halo around the page text. */
 (() => {
   const NS = 'http://www.w3.org/2000/svg';
   const layer = document.createElement('div');
   layer.id = 'curve-depth'; layer.setAttribute('aria-hidden', 'true');
   const bg = document.createElementNS(NS, 'svg');
-  bg.id = 'curve-bg'; bg.setAttribute('preserveAspectRatio', 'xMidYMin meet');
+  bg.id = 'curve-bg'; bg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
   bg.innerHTML = '<path class="ghost" fill="none" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round" stroke-linecap="round"/><path class="trail" fill="none" stroke-linejoin="round" stroke-linecap="round"/><circle class="pen" r="0"/>';
   layer.appendChild(bg);
   document.body.prepend(layer);
   const ghost = bg.querySelector('.ghost'), trail = bg.querySelector('.trail'), pen = bg.querySelector('.pen');
-  const F = SRCurve.fit(SRCurve.points(10), .04);
-  bg.setAttribute('viewBox', F.vb); ghost.setAttribute('d', F.d); trail.setAttribute('d', F.d);
-  const L = trail.getTotalLength();
-  trail.style.strokeDasharray = `${L} ${L}`;
   const START = .02, reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let shown = 0, target = START, ticking = false;
+  let F, L, wide = null, shown = 0, target = START, ticking = false;
+
+  const build = () => {
+    const isWide = innerWidth > innerHeight * 1.05;
+    if (isWide === wide) return;
+    wide = isWide;
+    let p = SRCurve.points(10);
+    if (wide) p = p.map(([x, y]) => [y, -x]);          // lay it on its side
+    F = SRCurve.fit(p, .03);
+    bg.setAttribute('viewBox', F.vb); ghost.setAttribute('d', F.d); trail.setAttribute('d', F.d);
+    L = trail.getTotalLength();
+    trail.style.strokeDasharray = `${L} ${L}`;
+  };
   const progress = () => { const max = document.documentElement.scrollHeight - innerHeight; return max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 1; };
   const render = v => { trail.style.strokeDashoffset = L * (1 - v); const pt = trail.getPointAtLength(L * v); pen.setAttribute('cx', pt.x); pen.setAttribute('cy', pt.y); };
   const loop = () => {
@@ -176,15 +186,14 @@ drawFolds();
     render(shown); ticking = shown !== target; if (ticking) requestAnimationFrame(loop);
   };
   const size = () => {
-    const r = bg.getBoundingClientRect(), k = Math.min(r.width / F.w, r.height / F.h) || 1;
-    trail.setAttribute('stroke-width', 2.2 / k); pen.setAttribute('r', 5 / k);
+    const r = bg.getBoundingClientRect(), k = Math.max(r.width / F.w, r.height / F.h) || 1;
+    trail.setAttribute('stroke-width', 1.7 / k); pen.setAttribute('r', 4.5 / k);
   };
   const update = () => {
-    size();
+    build(); size();
     const p = progress();
     target = START + (1 - START) * p;
-    // parallax: the far layer moves a little against the scroll
-    if (!reduce) bg.style.setProperty('--drift', `${(-p * 6).toFixed(2)}vh`);
+    if (!reduce) bg.style.setProperty('--drift', `${(-p * 3).toFixed(2)}vh`);
     if (!ticking) { ticking = true; requestAnimationFrame(loop); }
   };
   addEventListener('scroll', update, { passive: true });
