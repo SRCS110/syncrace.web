@@ -4,5 +4,8 @@
   "type": "module",
   "dependencies": {
     "resend": "^4.0.0"
+  },
+  "devDependencies": {
+    "parse5": "^7.1.2"
   }
 }

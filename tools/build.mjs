@@ -5,10 +5,14 @@
 //    straight into the HTML, so crawlers get finished pages.
 // Pages not generated here (case studies, legal, playground) are edited by
 // hand and still go through step 2.
+// 3. Connects every page to the SRCS CMS: marks headlines and intros as
+//    editable, adds the editor loader, and re-applies edits saved in
+//    cms/content.json so rebuilding never undoes what was changed in the editor.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { POSTS } from './articles.mjs';
+import { applyChanges } from './cms/apply.js';
 const ROOT = process.argv[2] || path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
 
@@ -876,6 +880,42 @@ const foldPass = html => html.replace(/<svg data-fold="(\d+)"([^>]*)>(?:\s*<use[
   return SRCurve.icon(+n, { sw: +sw, cls, attrs, style });
 });
 
+/* ---------- SRCS CMS ----------
+   Editable: each page's h1, every intro paragraph (p.lede) and section h2s inside <main>.
+   Keys follow page order (title, lede-1, heading-1…), so keep that order stable.
+   Only plain text or simple inline formatting is marked; headings with styled spans stay locked. */
+const CMS_LOADER = '<script src="https://cms.srcs.online/loader.js" data-site="srcs" defer></script>';
+const CMS_FILE = `${ROOT}/cms/content.json`;
+const CMS_DATA = fs.existsSync(CMS_FILE) ? JSON.parse(fs.readFileSync(CMS_FILE, 'utf8')) : { files: {}, globals: {} };
+const plainText = (inner) => !/[<>]/.test(inner);
+const simpleInline = (inner) => !/<(?!\/?(strong|em|b|i|br|a)\b)[a-z]/i.test(inner) && !/\sstyle=|\sclass=/.test(inner);
+function cms(html, rel) {
+  const a = html.indexOf('<main'), b = html.indexOf('</main>');
+  if (a < 0 || b < 0) return html;
+  let main = html.slice(a, b);
+  let h2n = 0, leden = 0, h1done = false;
+  main = main.replace(/<(h1|h2|p)(\s[^>]*)?>([\s\S]*?)<\/\1>/g, (m, tag, attrs = '', inner) => {
+    if (/data-cms/.test(attrs)) return m;
+    let key, type;
+    if (tag === 'h1' && !h1done) { h1done = true; key = 'title'; }
+    else if (tag === 'h2' && /class="rise"/.test(attrs)) key = `heading-${++h2n}`;
+    else if (tag === 'p' && /class="lede/.test(attrs)) key = `lede-${++leden}`;
+    else return m;
+    if (plainText(inner)) type = '';
+    else if (simpleInline(inner)) type = ' data-cms-type="rich"';
+    else return m;
+    return `<${tag}${attrs} data-cms="${key}"${type}>${inner}</${tag}>`;
+  });
+  html = html.slice(0, a) + main + html.slice(b);
+  if (!html.includes('cms.srcs.online/loader.js')) html = html.replace('</body>', `${CMS_LOADER}\n</body>`);
+  const saved = Object.entries(CMS_DATA.files?.[rel] || {}).map(([key, v]) => ({ key, type: v.type, value: v.value }));
+  const globals = Object.entries(CMS_DATA.globals || {}).map(([key, v]) => ({ key, global: true, type: v.type, value: v.value }));
+  if (!saved.length && !globals.length) return html;
+  const r = applyChanges(html, [...saved, ...globals.filter((g) => html.includes(`data-cms-global="${g.key}"`))]);
+  if (r.missing.length) console.warn(`  cms: ${rel} no longer has ${r.missing.join(', ')} (saved edits skipped)`);
+  return r.html;
+}
+
 const files = ['index.html', ...fs.readdirSync(`${ROOT}/pages`).filter(f => f.endsWith('.html')).map(f => `pages/${f}`)];
 // Icons: the same dragon-curve set on every page, by absolute path.
 const ICONS = '<link rel="icon" href="/favicon.ico" sizes="48x48">\n<link rel="icon" href="/assets/srcs-curve.svg" type="image/svg+xml">\n<link rel="apple-touch-icon" href="/apple-touch-icon.png">\n<link rel="manifest" href="/site.webmanifest">\n';
@@ -934,6 +974,7 @@ for (const rel of files) {
   const used = [...new Set([...html.matchAll(/href="#sr-fold-(\d+)"/g)].map(m => +m[1]))].sort((a, b) => a - b);
   const defs = `<svg id="sr-folds" class="sr-defs" aria-hidden="true" focusable="false">${used.map(SRCurve.symbol).join('')}</svg>`;
   html = html.replace(/<body([^>]*)>\n?/, (m, a) => `<body${a}>\n<a class="skip" href="#main">Skip to content</a>\n${defs}\n`);
+  html = cms(html, rel);
   fs.writeFileSync(`${ROOT}/${rel}`, html);
 }
 console.log('built', files.length, 'pages');
