@@ -5,7 +5,7 @@
    ENVIRONMENT VARIABLES (Vercel → Settings → Environment Variables)
 
      RESEND_API_KEY   required   Starts with "re_". From resend.com/api-keys
-     CONTACT_TO       optional   Where enquiries land. Defaults to hello@srcs.online
+     CONTACT_TO       optional   Where enquiries land. Defaults to admin@srcs.online
      CONTACT_FROM     optional   The From address. MUST be on a domain you've
                                  verified in Resend — see the note below.
 
@@ -20,7 +20,7 @@ import { Resend } from 'resend';
 
 // Accept both spellings — the Vercel project uses CONTACT_TO_EMAIL,
 // CONTACT_FROM_EMAIL and Resend_Api_Key.
-const TO   = process.env.CONTACT_TO   || process.env.CONTACT_TO_EMAIL   || 'hello@srcs.online';
+const TO   = process.env.CONTACT_TO   || process.env.CONTACT_TO_EMAIL   || 'admin@srcs.online';
 const FROM = process.env.CONTACT_FROM || process.env.CONTACT_FROM_EMAIL || 'Sync Race Studios <hello@srcs.online>';
 const API_KEY = process.env.RESEND_API_KEY || process.env.Resend_Api_Key;
 
