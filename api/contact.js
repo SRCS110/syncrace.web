@@ -25,13 +25,19 @@ const FROM = process.env.CONTACT_FROM || process.env.CONTACT_FROM_EMAIL || 'Sync
 const API_KEY = process.env.RESEND_API_KEY || process.env.Resend_Api_Key;
 
 const SUBJECTS = {
-  website:         'a website for my business',
-  software:        'a custom application',
-  editor:          'the visual HTML editor',
-  care:            'looking after an existing site',
-  stayntouch:      'the Stayntouch reporting engine',
-  'freelancer-os': 'Freelancer OS early access',
-  other:           'something else',
+  website:          'website design',
+  'google-profile': 'a Google Business Profile',
+  ads:              'Google Ads',
+  print:            'print and creative',
+  apps:             'a business app',
+  bundle:           'a few services together',
+  care:             'looking after what they already have',
+  other:            'something else',
+  // Older deep links still resolve.
+  software:         'a business app',
+  editor:           'the visual HTML editor',
+  stayntouch:       'the Stayntouch reporting engine',
+  'freelancer-os':  'Freelancer OS early access',
 };
 
 export default async function handler(req, res) {

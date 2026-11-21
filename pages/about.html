@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About: the dragon curve behind Sync Race Studios</title>
+<meta name="description" content="Why the Sync Race Studios logo is a dragon curve: a strip of paper folded ten times and opened into one line of 1,024 steps that never crosses itself.">
+<link rel="canonical" href="https://www.srcs.online/pages/about.html">
+<meta property="og:title" content="About: the dragon curve behind Sync Race Studios">
+<meta property="og:description" content="Why the Sync Race Studios logo is a dragon curve: a strip of paper folded ten times and opened into one line of 1,024 steps that never crosses itself.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.srcs.online/pages/about.html">
+<meta name="theme-color" content="#FBF8F4">
+<link rel="icon" href="../assets/srcs-curve.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Marcellus&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../srcs.css">
+</head>
+<body>
+
+<site-nav></site-nav>
+
+<main id="main" tabindex="-1">
+
+  <section class="shell page-top">
+    <div class="split" style="align-items:center">
+      <div class="col">
+        <span class="kicker rise">About</span>
+        <h1 class="rise">One strip. Ten folds. No crossings.</h1>
+        <p class="lede rise">Our logo isn't a drawing. It's the shape you get when you fold a strip of paper in half ten times and open it back up. It's also the best description we have of what we do.</p>
+      </div>
+      <div class="rise" aria-hidden="true" style="justify-self:center"><svg data-fold="10" data-sw="1.3" width="320" height="320" style="width:min(320px,70vw);height:auto;aspect-ratio:1"></svg></div>
+    </div>
+  </section>
+
+  <section class="band shell">
+    <div class="col">
+      <span class="kicker rise">The fold</span>
+      <h2 class="rise">How to make the curve</h2>
+      <p class="lede rise">Take a long strip of paper. Fold it in half, always in the same direction. Fold it again, and again, ten times in all. Now open it up so that every crease sits at exactly 90°.</p>
+      <p class="lede rise">What you're holding is a <strong>dragon curve</strong>: one line of <strong>1,024 straight steps</strong> joined by <strong>1,023 right-angle turns</strong>. However many times you fold, the line never runs back over itself. Corners can touch, but no step is ever drawn twice.</p>
+    </div>
+  </section>
+
+  <section class="band shell" id="unfold">
+    <div class="head">
+      <span class="kicker rise">Try it</span>
+      <h2 class="rise">Unfold it yourself</h2>
+      <p class="rise">Drag the slider, or press play, to add one fold at a time.</p>
+    </div>
+    <div class="unfold rise">
+      <div class="unfold-stage"><svg id="uf-svg" role="img" aria-labelledby="uf-label"><title id="uf-label">Dragon curve</title><path id="uf-path" fill="none" stroke="var(--lamp)" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke" stroke-width="2"/></svg></div>
+      <div class="unfold-ctl">
+        <div class="count" aria-live="polite"><span id="uf-n">1</span><small>fold<span id="uf-s"></span></small></div>
+        <label for="uf-range" class="sr-only">Number of folds</label>
+        <input id="uf-range" type="range" min="1" max="10" step="1" value="1">
+        <div class="unfold-stats">
+          <div><b id="uf-seg">2</b>steps</div>
+          <div><b id="uf-turn">1</b>turns</div>
+          <div><b>0</b>crossings</div>
+        </div>
+        <p class="muted" style="font-size:15px">The creases, read from one end (R = right turn, L = left):</p>
+        <p class="seq" id="uf-seq"></p>
+        <div><button class="btn" type="button" id="uf-play">Play the folds</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band shell">
+    <div class="col right">
+      <span class="kicker rise">The rule</span>
+      <h2 class="rise">Simple steps, whole result</h2>
+      <p class="lede rise">Every new fold follows one rule: <strong>keep the line you have, add a right turn, then add the same line again, backwards and mirrored.</strong></p>
+      <div class="steps">
+        <div class="step rise"><svg data-fold="1" width="64" height="64"></svg><div><b>One fold</b><span>R</span></div></div>
+        <div class="step rise"><svg data-fold="2" width="64" height="64"></svg><div><b>Two folds</b><span>R · R · L</span></div></div>
+        <div class="step rise"><svg data-fold="3" width="64" height="64"></svg><div><b>Three folds</b><span>R R L · R · R L L</span></div></div>
+        <div class="step rise"><svg data-fold="10" width="64" height="64"></svg><div><b>Ten folds</b><span>1,023 creases, each one decided by the folds before it.</span></div></div>
+      </div>
+      <p class="lede rise" style="margin-top:44px">No single fold is complicated. The order is what makes the whole thing hold together.</p>
+    </div>
+  </section>
+
+  <section class="band shell">
+    <div class="col">
+      <span class="kicker rise">Like Sync Race</span>
+      <h2 class="rise">We take all the folds and unwind them into one chain.</h2>
+      <p class="lede rise">A local business has a lot of folds. A website. A Google listing. Ads. Business cards and flyers. The spreadsheet that runs the bookings. Usually each one was made by someone different, at a different time, and they pile up on top of each other: different hours here, an old logo there, a flyer pointing at a page that no longer exists.</p>
+      <p class="lede rise">We open all of them out into a single line.</p>
+      <div class="rise"><ul class="list"><li><b>No overlap.</b> One partner, so no two vendors are doing the same job, or undoing each other's.</li><li><b>One direction.</b> Every piece hands off to the next: a flyer's QR code to the website, the website to your Google profile, the profile to booking.</li><li><b>Nothing out of sync.</b> Same name, hours, look and message everywhere a customer might find you.</li><li><b>Each step on its own.</b> You can start with one fold and add the rest later. The line still runs true.</li></ul></div>
+    </div>
+  </section>
+
+  <section class="band shell">
+    <div class="col right">
+      <span class="kicker rise">The mark</span>
+      <h2 class="rise">Ten folds, one colour</h2>
+      <p class="lede rise">The logo is the ten-fold curve drawn as a single terracotta line with softened corners and no wordmark. It sits behind every page of this site too, faintly, and draws itself as you scroll, so by the time you reach the bottom of a page you've unfolded the whole thing.</p>
+      <div class="btns rise"><a class="btn btn-quiet" href="../assets/srcs-curve.svg" download>Download the mark (SVG)</a></div>
+    </div>
+  </section>
+
+  <section class="shell">
+    <div class="cta rise">
+      <div><h2>Let's unfold your business.</h2><p>Tell us which pieces you have and which are missing. We'll show you how they connect.</p></div>
+      <a class="btn" href="contact.html">Get started <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+</main>
+
+<site-foot></site-foot>
+
+<script src="../nav.js" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const C = window.SRCurve, svg = document.getElementById('uf-svg'), path = document.getElementById('uf-path');
+  const range = document.getElementById('uf-range'), play = document.getElementById('uf-play');
+  const out = id => document.getElementById(id);
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let timer = null;
+  function show(n, animate) {
+    const f = C.fit(C.points(n), .1);
+    svg.setAttribute('viewBox', f.vb); path.setAttribute('d', f.d);
+    out('uf-n').textContent = n; out('uf-s').textContent = n === 1 ? '' : 's';
+    out('uf-seg').textContent = (2 ** n).toLocaleString(); out('uf-turn').textContent = (2 ** n - 1).toLocaleString();
+    const s = C.turns(n).map(t => t > 0 ? 'R' : 'L'), max = 63;
+    out('uf-seq').innerHTML = s.slice(0, max).map(c => c === 'R' ? '<span class="r">R</span>' : 'L').join('') + (s.length > max ? ' …' : '');
+    if (animate && !reduce) {
+      const L = path.getTotalLength();
+      path.style.transition = 'none'; path.style.strokeDasharray = L; path.style.strokeDashoffset = L;
+      path.getBoundingClientRect();
+      path.style.transition = 'stroke-dashoffset .9s cubic-bezier(.22,.61,.36,1)'; path.style.strokeDashoffset = 0;
+    } else { path.style.strokeDasharray = 'none'; path.style.strokeDashoffset = 0; }
+  }
+  range.addEventListener('input', () => { stop(); show(+range.value, true); });
+  function stop() { clearInterval(timer); timer = null; play.textContent = 'Play the folds'; }
+  play.addEventListener('click', () => {
+    if (timer) return stop();
+    let n = 1; range.value = n; show(n, true); play.textContent = 'Pause';
+    timer = setInterval(() => { n++; if (n > 10) return stop(); range.value = n; show(n, true); }, 1100);
+  });
+  show(1, false);
+});
+</script>
+</body>
+</html>

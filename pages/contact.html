@@ -1,27 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Get in touch — Sync Race Studios</title>
-<meta name="description" content="Tell Sync Race Studios about your project. A couple of sentences is plenty.">
-<link rel="canonical" href="https://www.srcs.online/pages/contact.html">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>
-/* Light is the default. Dark ("Evening") only applies if the visitor chose it
-   here. The previous version of this site wrote its own values under the same
-   sr-theme key, so anything from before v2 is cleared once and ignored.
-   Wrapped in try/catch because private browsing can throw on localStorage. */
-(function(){try{
-  if(localStorage.getItem('sr-theme-v')!=='2'){
-    localStorage.removeItem('sr-theme');
-    localStorage.setItem('sr-theme-v','2');
-  }
-  if(localStorage.getItem('sr-theme')==='dark'){
-    document.documentElement.classList.add('dark');
-  }
-}catch(e){}})();
-</script>
-<link rel="icon" href="../assets/srcs-mark.png">
+<title>Get started: Sync Race Studios</title>
+<meta name="description" content="Tell Sync Race Studios what your business needs: a website, Google Business Profile, Google Ads, print or a small app. A couple of sentences is plenty.">
+<link rel="canonical" href="https://www.srcs.online/pages/contact.html">
+<meta property="og:title" content="Get started: Sync Race Studios">
+<meta property="og:description" content="Tell Sync Race Studios what your business needs: a website, Google Business Profile, Google Ads, print or a small app. A couple of sentences is plenty.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.srcs.online/pages/contact.html">
+<meta name="theme-color" content="#FBF8F4">
+<link rel="icon" href="../assets/srcs-curve.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Marcellus&display=swap" rel="stylesheet">
@@ -33,183 +23,81 @@
 
 <main id="main" tabindex="-1">
 
-  <section class="shell page-top" style="max-width:1060px">
-    <span class="kicker rise">Get in touch</span>
-    <h1 class="rise">Tell us what<br><span class="warm">you're building.</span></h1>
-    <p class="lede rise" style="margin-top:1.5rem">A couple of sentences is plenty to start. You'll get a reply from the person who'd actually be doing the work, usually the same day.</p>
+  <section class="shell page-top">
+    <div class="col">
+      <span class="kicker rise">Get started</span>
+      <h1 class="rise">Tell us what your business needs.</h1>
+      <p class="lede rise">A couple of sentences is plenty to start. You'll get a reply from the person who'd actually be doing the work, usually the same day.</p>
+    </div>
   </section>
 
-  <section class="shell band" style="max-width:1060px;padding-top:clamp(1.5rem,4vw,2.5rem)">
-    <div class="rise" style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(230px,1fr);gap:clamp(1.5rem,4vw,3rem);align-items:start">
-
-      <div class="card" style="padding:clamp(1.75rem,4vw,2.5rem)">
-        <!--
-          The form posts to /api/contact, a serverless function that sends
-          the message on with Resend. Nothing to configure here — set
-          RESEND_API_KEY in your Vercel project settings and it works.
-        -->
-        <form class="form" id="contact-form" action="/api/contact" method="POST">
-
-          <div class="field">
-            <label for="name">Your name</label>
-            <input id="name" name="name" type="text" autocomplete="name" required>
-          </div>
-         <div class="field">
-            <label for="phone">Phone number</label>
-            <input id="phone" name="phone" type="tel" autocomplete="tel">
-          </div>
-         <div class="field">
-            <label for="budget">Budget <span class="hint">— rough range is fine</span></label>
-            <input id="budget" name="budget" type="text" placeholder="Not sure yet">
-          </div>
-          <div class="field">
-            <label for="email">Email <span class="hint">— so we can reply</span></label>
-            <input id="email" name="email" type="email" autocomplete="email" required>
-          </div>
-
-          <div class="field">
-            <label for="about">What's this about?</label>
-            <select id="about" name="about">
-              <option value="website">A website for my business</option>
-              <option value="software">A custom application</option>
-              <option value="editor">The visual HTML editor</option>
-              <option value="care">Looking after a site I already have</option>
-              <option value="other">Something else</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="message">Tell us a bit more</label>
-            <textarea id="message" name="message" required
-              placeholder="What does your business do, and what do you need this to solve? Rough is fine."></textarea>
-          </div>
-
-          <!-- Honeypot: bots fill this in, people never see it. -->
-          <div class="trap" aria-hidden="true">
-            <label for="company">Company</label>
-            <input id="company" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
-          </div>
-
-          <div>
-            <button class="btn btn-lamp" type="submit">Send it</button>
-          </div>
-
-          <p class="form-note" id="form-status" role="status" aria-live="polite"></p>
-        </form>
-      </div>
-
-      <aside style="display:grid;gap:1.15rem">
-        <div class="card" style="padding:1.6rem 1.5rem">
-          <h3 style="font-size:1.1rem">Rather just email?</h3>
-          <p style="margin-top:.6rem"><a href="mailto:hello@srcs.online" style="color:var(--lamp-ink);font-weight:600;text-decoration:none">hello@srcs.online</a></p>
+  <section class="band shell" style="padding-top:clamp(2rem,4vw,3rem)">
+    <div class="contact-grid">
+      <form class="form rise" id="contact-form" action="/api/contact" method="POST">
+        <div class="row">
+          <div class="field"><label for="name">Your name</label><input id="name" name="name" type="text" autocomplete="name" required></div>
+          <div class="field"><label for="email">Email <span class="hint">so we can reply</span></label><input id="email" name="email" type="email" autocomplete="email" required></div>
         </div>
-        <div class="card" style="padding:1.6rem 1.5rem">
-          <h3 style="font-size:1.1rem">What happens next</h3>
-          <p style="margin-top:.6rem">We read it, and reply with either some questions or an honest "we're not the right fit for this." No automated sequence, no follow-up drip.</p>
+        <div class="row">
+          <div class="field"><label for="phone">Phone <span class="hint">optional</span></label><input id="phone" name="phone" type="tel" autocomplete="tel"></div>
+          <div class="field"><label for="budget">Budget <span class="hint">a rough range is fine</span></label><input id="budget" name="budget" type="text" placeholder="Not sure yet"></div>
         </div>
-        <div class="card" style="padding:1.6rem 1.5rem">
-          <h3 style="font-size:1.1rem">No budget yet?</h3>
-          <p style="margin-top:.6rem">That's fine. Tell us the problem anyway and we'll give you a rough number so you know what you're planning for.</p>
+        <div class="field">
+          <label for="about">What do you need?</label>
+          <select id="about" name="about">
+            <option value="website">Website design</option>
+            <option value="google-profile">Google Business Profile</option>
+            <option value="ads">Google Ads</option>
+            <option value="print">Print and creative</option>
+            <option value="apps">A business app</option>
+            <option value="bundle">A few of these together</option>
+            <option value="care">Looking after what I already have</option>
+            <option value="other">Something else</option>
+          </select>
         </div>
+        <div class="field">
+          <label for="message">Tell us a bit more</label>
+          <textarea id="message" name="message" required placeholder="What does your business do, and what do you want more of: calls, bookings, foot traffic, time back?"></textarea>
+        </div>
+        <div class="trap" aria-hidden="true"><label for="company">Company</label><input id="company" name="_gotcha" type="text" tabindex="-1" autocomplete="off"></div>
+        <div><button class="btn" type="submit">Send it</button></div>
+        <p class="form-note" id="form-status" role="status" aria-live="polite"></p>
+      </form>
+
+      <aside class="cards" style="grid-template-columns:minmax(0,1fr);gap:36px">
+        <div class="card rise"><h3>Rather just email?</h3><p><a href="mailto:hello@srcs.online" style="color:var(--lamp-ink);font-weight:500">hello@srcs.online</a></p></div>
+        <div class="card rise"><h3>What happens next</h3><p>We read it and reply with some questions, a suggested first step, or an honest "we're not the right fit." No automated sequence, no drip emails.</p></div>
+        <div class="card rise"><h3>No budget yet?</h3><p>That's fine. Tell us the problem anyway and we'll give you a rough number so you know what you're planning for.</p></div>
       </aside>
-
     </div>
   </section>
 
 </main>
 
-<footer class="foot">
-  <div class="shell foot-grid">
-    <div class="foot-brand">
-      <a class="brand" href="../index.html">
-        <img src="../assets/srcs-mark.png" alt="" width="36" height="36" loading="lazy" decoding="async">
-        <span><b>Sync Race</b><em>Code Studio · Creative Studio</em></span>
-      </a>
-      <p>Websites and practical software for independent businesses. Hand-built, fast, and handed over.</p>
-    </div>
-    <nav class="foot-col" aria-labelledby="foot-studio">
-      <h2 class="foot-title" id="foot-studio">Studio</h2>
-      <ul><li><a href="../pages/codestudio.html">Software</a></li><li><a href="../pages/creativestudio.html">Websites</a></li><li><a href="../pages/arcade.html">Playground</a></li><li><a href="../pages/manifesto.html">How we work</a></li></ul>
-    </nav>
-    <div class="foot-col">
-      <h2 class="foot-title">Contact</h2>
-      <ul><li><a href="../pages/contact.html">Get in touch</a></li><li><a href="mailto:hello@srcs.online">hello@srcs.online</a></li></ul>
-    </div>
-    <nav class="foot-col" aria-labelledby="foot-legal">
-      <h2 class="foot-title" id="foot-legal">Legal</h2>
-      <ul><li><a href="../pages/privacy.html">Privacy</a></li><li><a href="../pages/terms.html">Terms</a></li><li><a href="../pages/accessibility.html">Accessibility</a></li><li><a href="#cookie-settings" data-cookie-settings>Cookie settings</a></li></ul>
-    </nav>
-  </div>
-  <div class="shell foot-word" aria-hidden="true">Sync Race</div>
-  <div class="shell foot-base">
-    <span>&copy; <span data-year>2026</span> Sync Race Studios</span>
-    <span>srcs.online</span>
-  </div>
-</footer>
+<site-foot></site-foot>
 
 <script src="../nav.js" defer></script>
 <script>
-  const form   = document.getElementById('contact-form');
+  const form = document.getElementById('contact-form');
   const status = document.getElementById('form-status');
   const button = form.querySelector('button[type="submit"]');
-
-  // Deep links like contact?about=stayntouch preselect the dropdown, so
-  // someone arriving from the Software page doesn't re-state why.
+  // Deep links like contact.html?about=ads preselect the dropdown.
   const asked = new URLSearchParams(location.search).get('about');
-  if (asked) {
-    const opt = document.querySelector(`#about option[value="${CSS.escape(asked)}"]`);
-    if (opt) opt.selected = true;
-  }
-
+  if (asked) { const opt = document.querySelector('#about option[value="' + CSS.escape(asked) + '"]'); if (opt) opt.selected = true; }
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-
-    button.disabled = true;
-    const label = button.textContent;
-    button.textContent = 'Sending…';
-    status.textContent = '';
-
+    if (!form.reportValidity()) return;
+    button.disabled = true; const label = button.textContent; button.textContent = 'Sending…'; status.textContent = '';
     const payload = Object.fromEntries(new FormData(form).entries());
-
     try {
-      const res  = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
+      const res = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
       const data = await res.json().catch(() => ({}));
-
       if (!res.ok) throw new Error(data.error || 'Something went wrong.');
-
-      form.reset();
-      status.textContent = 'Thanks — that came through. You\'ll hear back shortly.';
+      form.reset(); status.textContent = 'Thanks, that came through. You\'ll hear back shortly.';
     } catch (err) {
-      status.textContent = err.message.includes('name') || err.message.includes('email')
-        ? err.message
-        : 'That didn\'t send. Email hello@srcs.online directly and it\'ll reach us.';
-    } finally {
-      button.disabled = false;
-      button.textContent = label;
-    }
+      status.textContent = /name|email/.test(err.message) ? err.message : 'That didn\'t send. Email hello@srcs.online directly and it\'ll reach us.';
+    } finally { button.disabled = false; button.textContent = label; }
   });
-
-  const io_items = document.querySelectorAll('.rise');
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
-    io_items.forEach(el => el.classList.add('in'));
-  } else {
-    const io = new IntersectionObserver(es => es.forEach((e,i) => {
-      if (!e.isIntersecting) return;
-      setTimeout(() => e.target.classList.add('in'), i*80);
-      io.unobserve(e.target);
-    }), { threshold:.1, rootMargin:'0px 0px -50px' });
-    io_items.forEach(el => io.observe(el));
-  }
 </script>
-
-<style>
-  @media(max-width:760px){
-    main section > div[style*="grid-template-columns"]{ grid-template-columns:1fr !important; }
-  }
-</style>
 </body>
 </html>
