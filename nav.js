@@ -16,7 +16,7 @@
 
 // Six core items: three either side of the centred logo.
 const LINKS_LEFT = [
-  { file: 'services.html',        label: 'Services', also: ['print.html','apps.html','branding.html'] },
+  { file: 'services.html',        label: 'Services', also: ['print.html','apps.html','branding.html','marketing.html','content.html'] },
   { file: 'websites.html',        label: 'Websites' },
   { file: 'google-business.html', label: 'Google' },
 ];
@@ -30,7 +30,9 @@ const SERVICES = [
   { file: 'websites.html',        label: 'Website design',        n: 10 },
   { file: 'google-business.html', label: 'Google Profile & Ads',  n: 6 },
   { file: 'branding.html',        label: 'Logo & branding',       n: 4 },
+  { file: 'marketing.html',       label: 'Marketing campaigns',   n: 3 },
   { file: 'print.html',           label: 'Print & creative',      n: 5 },
+  { file: 'content.html',         label: 'Content engine',        n: 8 },
   { file: 'apps.html',            label: 'Business apps',         n: 9 },
 ];
 

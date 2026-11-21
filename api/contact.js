@@ -30,6 +30,8 @@ const SUBJECTS = {
   'google-profile': 'a Google Business Profile',
   branding:         'logo design and branding',
   ads:              'Google Ads',
+  marketing:        'a marketing campaign',
+  content:          'the $50/month content engine',
   print:            'print and creative',
   apps:             'a business app',
   bundle:           'a few services together',

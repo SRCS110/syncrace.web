@@ -89,8 +89,10 @@ const SVC = [
   { key: 'website', file: 'websites.html', n: 10, t: 'Website design', d: 'Fast, custom websites shaped around your business, optimized for Google and AI search.', s: 'New sites · redesigns · AI search ready · no monthly fee' },
   { key: 'google', file: 'google-business.html', n: 6, t: 'Google Business Profile & Ads', d: 'Get on Google Search and Maps with a complete, verified profile, then run ads that bring in customers, with tracking to prove it.', s: 'Profile setup · reviews · ad campaigns · conversion tracking' },
   { key: 'branding', file: 'branding.html', n: 4, t: 'Logo design & branding', d: 'A logo and a simple brand system, colours, type and voice, that hold together everywhere your business shows up.', s: 'Logos · colour and type · brand guide' },
+  { key: 'marketing', file: 'marketing.html', n: 3, t: 'Marketing campaigns', d: 'Plan and run a campaign around a launch, a season or an event: the message, the channels, the creative and the tracking.', s: 'Campaign plans · creative · launch and reporting' },
   { key: 'print', file: 'print.html', n: 5, t: 'Print & creative', d: 'Business cards, flyers, menus and signage that match your website and send people to it.', s: 'Print-ready files · QR codes · social graphics' },
   { key: 'apps', file: 'apps.html', n: 9, t: 'Business apps', d: 'Small, focused tools that take repetitive work off your week: bookings, forms, reports and dashboards.', s: 'Booking and intake · dashboards · automations' },
+  { key: 'content', file: 'content.html', n: 8, t: 'Content engine', d: 'An optional add-on that keeps your site fresh with new blog posts on a regular schedule, written for search and AI.', s: '$50/month · optional · cancel anytime' },
   { key: 'pricing', file: 'pricing.html', n: 7, t: 'Hosting & management', d: 'We host and look after every website and app we build. No monthly fee for websites: changes are billed by the hour.', s: 'Hosting · updates · backups · monitoring' },
 ];
 const svcList = (pre) => `<div class="svcs">${SVC.map(s => `
@@ -169,7 +171,7 @@ page('index.html', {
     <div class="col">
       <span class="kicker rise">Business services</span>
       <h1 class="rise">Every piece of your business, in one unbroken line.</h1>
-      <p class="lede rise">Sync Race Studios helps local businesses get found and run smoothly: <strong>websites, logo design and branding, Google Business Profile, Google Ads, print marketing and small apps</strong> that save time. One partner, every piece connected.</p>
+      <p class="lede rise">Sync Race Studios helps local businesses get found and run smoothly: <strong>websites, logo design and branding, Google Business Profile and Ads, marketing campaigns, print and small apps</strong> that save time. One partner, every piece connected.</p>
       <div class="hero-btns rise"><a class="btn" href="./pages/contact.html">Get started <span class="arrow" aria-hidden="true">→</span></a><a class="btn btn-quiet" href="#services">See services</a></div>
       <p class="scroll-hint rise"><i></i>Scroll, and the line keeps folding</p>
     </div>
@@ -284,7 +286,8 @@ ${cta('Not sure where to start?', 'Tell us about your business and what you want
 /* =================== SERVICE PAGES =================== */
 const OFFERS = {
   website: { '@type': 'Offer', priceCurrency: 'USD', priceSpecification: { '@type': 'PriceSpecification', minPrice: 1500, priceCurrency: 'USD', description: 'One-time build from $1,500. No monthly hosting fee; changes billed at $125/hour.' } },
-  google: HOURLY, print: HOURLY, branding: HOURLY,
+  google: HOURLY, print: HOURLY, branding: HOURLY, marketing: HOURLY,
+  content: { '@type': 'Offer', priceCurrency: 'USD', price: 50, priceSpecification: { '@type': 'UnitPriceSpecification', price: 50, priceCurrency: 'USD', unitCode: 'MON', unitText: 'month' } },
 };
 const svcPage = (o) => page(o.file, { title: `${o.title}: Sync Race Studios`, desc: o.desc, path: `pages/${o.file}`, crumb: o.title, service: { name: o.title, offers: OFFERS[o.key] } }, `
   <section class="shell page-top">
@@ -401,6 +404,45 @@ svcPage({
 });
 
 svcPage({
+  file: 'marketing.html', key: 'marketing', n: 3, kicker: 'Marketing campaigns', title: 'Marketing campaigns',
+  desc: 'Marketing campaign help for local businesses: plan the message, pick the channels, make the creative and track the results of a launch, season or event.',
+  h1: 'Campaigns with a beginning, a middle and results.', btn: 'Plan a campaign',
+  lede: 'A grand opening, a new menu, a holiday rush, an event. We help you plan the campaign around it, make everything it needs, and see what it brought in.',
+  incH: 'Everything a campaign needs',
+  inc: [['Goal and offer', 'what the campaign is for and why someone should act now.'], ['Channel plan', 'the mix that fits your customers: Google, social, email, print, your website and your storefront.'], ['Campaign calendar', 'what goes out where, and when, from teaser to last call.'], ['Creative', 'headlines, ad copy, social graphics, flyers and short video, all in your brand.'], ['Landing page', 'one page on your site that every channel points to, so nothing gets lost.'], ['Tracking', 'links, codes and conversions set up so you can see which channel worked.'], ['Wrap-up report', 'what it cost, what it brought in, and what to keep for next time.']],
+  stepH: 'How a campaign comes together',
+  steps: [[2, 'Brief', 'The goal, the offer, the dates and the budget.'], [4, 'Plan', 'Channels, calendar and message, agreed before anything is made.'], [6, 'Create and launch', 'Creative, landing page and tracking, then everything goes live on schedule.'], [9, 'Measure', 'Results gathered across channels, with lessons for the next one.']],
+  conH: 'Where campaigns fit',
+  con: [['Your website', 'hosts the landing page every channel points to.'], ['Google Business Profile & Ads', 'carry the offer to people searching nearby.'], ['Print', 'flyers, posters and table cards with QR codes back to the campaign page.'], ['Branding', 'keeps every piece of the campaign looking like you.']],
+  faq: [['How is campaign help billed?', 'At $125 an hour, with an estimate before we start. Ad spend and printing are separate. <a href="pricing.html">See pricing</a>.'], ['Can you just help me plan, and I run it?', 'Yes. Some clients want the plan and creative only; others want us to run it end to end.'], ['What kind of campaigns?', 'Openings, launches, seasonal promotions, events, re-openings and anything with a date and a goal.']],
+  ctaH: 'Got something to promote?', ctaP: 'Tell us what it is, when it happens and who you want to reach.',
+});
+
+svcPage({
+  file: 'content.html', key: 'content', n: 8, kicker: 'Content engine', title: 'Content engine for your blog',
+  desc: 'An optional $50/month add-on from Sync Race Studios that keeps your website fresh with new blog posts on a regular schedule, optimized for Google and AI search.',
+  h1: 'A site that keeps posting, without you.', btn: 'Add the content engine',
+  lede: 'Search engines and AI assistants favour sites that stay current. The content engine adds new blog posts to your website on a regular schedule, so it keeps working for you between updates. It is optional, and $50 a month.',
+  incH: 'What the content engine does',
+  inc: [['Topics that fit your business', 'local events, seasons, questions your customers ask, and news in your industry.'], ['Posts on a regular schedule', 'so your site never sits still.'], ['Written for search and AI', 'clear headings, schema markup and internal links on every post.'], ['Published to your site', 'added to your blog, sitemap and llms.txt automatically.'], ['Your voice', 'written to match your business, your area and the way you talk to customers.']],
+  extra: `
+  <section class="band shell">
+    <div class="col">
+      <span class="kicker rise">Pricing</span>
+      <h2 class="rise">$50 a month, optional</h2>
+      <div class="prices rise"><div class="price"><b>$50/mo</b><span>content engine add-on</span></div></div>
+      <p class="lede rise">Add it to any website we host. Your site works without it; the content engine just keeps it fresh. See it in action on <a href="resources.html" style="color:var(--lamp-ink)">our own resources page</a>.</p>
+    </div>
+  </section>`,
+  stepH: 'How it runs',
+  steps: [[2, 'Set the direction', 'Your services, your area, and the topics you want to be known for.'], [5, 'Plan topics', 'A running list of posts built around what your customers search for.'], [8, 'Write and publish', 'New posts go live on schedule, with schema and links in place.'], [10, 'Keep it relevant', 'Seasonal and local topics added as the year goes on.']],
+  conH: 'Why it matters',
+  con: [['Search', 'fresh, useful pages give Google and Bing more reasons to show your site.'], ['AI assistants', 'more clear answers about your business for ChatGPT, Claude and Perplexity to draw on.'], ['Your Google profile', 'new posts can be shared as updates on your profile.'], ['Social', 'every post is something new to share.']],
+  faq: [['Is it required?', 'No. It is an optional add-on for websites we host.'], ['What does it cost?', '$50 a month. <a href="pricing.html">See pricing</a>.'], ['Can I stop it?', 'Yes. Your existing posts stay on your site.']],
+  ctaH: 'Keep your site posting.', ctaP: 'Tell us about your business and the topics you want to be known for.',
+});
+
+svcPage({
   file: 'print.html', key: 'print', n: 5, kicker: 'Print & creative', title: 'Print marketing and creative',
   desc: 'Print marketing design for local businesses: business cards, flyers, menus, posters and signage, delivered print-ready and matched to your brand.',
   h1: 'Print that looks like you, and leads somewhere.', btn: 'Start a print job',
@@ -455,14 +497,16 @@ const tier = (o) => `
   </section>`;
 page('pricing.html', {
   title: 'Pricing: Sync Race Studios',
-  desc: 'Sync Race Studios pricing: websites from $1,500 with no monthly fee and optimized for AI search, business apps quoted per project, and Google and print work at $125/hour.',
+  desc: 'Sync Race Studios pricing: websites from $1,500 with no monthly fee and optimized for AI search, an optional $50/month content engine, business apps quoted per project, and Google and print work at $125/hour.',
   path: 'pages/pricing.html',
   extraLd: [{ '@type': 'OfferCatalog', name: 'Sync Race Studios pricing', itemListElement: [
     { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Website design and hosting' }, priceCurrency: 'USD', priceSpecification: { '@type': 'PriceSpecification', minPrice: 1500, priceCurrency: 'USD', description: 'One-time build. No monthly hosting fee.' } },
     { ...HOURLY, itemOffered: { '@type': 'Service', name: 'Website changes after launch' } },
     { ...HOURLY, itemOffered: { '@type': 'Service', name: 'Logo design and branding' } },
     { ...HOURLY, itemOffered: { '@type': 'Service', name: 'Google Business Profile and Google Ads' } },
+    { ...HOURLY, itemOffered: { '@type': 'Service', name: 'Marketing campaigns' } },
     { ...HOURLY, itemOffered: { '@type': 'Service', name: 'Print and creative' } },
+    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Content engine (blog add-on)' }, price: 50, priceCurrency: 'USD', priceSpecification: { '@type': 'UnitPriceSpecification', price: 50, priceCurrency: 'USD', unitCode: 'MON', unitText: 'month' } },
     { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Business apps' }, description: 'Quoted per app: build price plus monthly hosting and management.' },
   ] }],
 }, `
@@ -470,21 +514,25 @@ page('pricing.html', {
     <div class="col">
       <span class="kicker rise">Pricing</span>
       <h1 class="rise">Clear prices, no surprises.</h1>
-      <p class="lede rise">Websites are built and hosted by us with no monthly fee. Changes, branding, Google and print work are billed by the hour, with an estimate before any work starts. Apps are quoted per project.</p>
+      <p class="lede rise">Websites are built and hosted by us with no monthly fee. Changes, branding, Google, campaign and print work are billed by the hour, with an estimate before any work starts. Apps are quoted per project.</p>
     </div>
   </section>
 ${tier({ kicker: 'Websites', key: 'website', btn: 'Start a website', h: 'Built, hosted and managed',
   prices: [['From $1,500', 'one-time build'], ['$0/mo', 'no monthly hosting fee'], ['$125/hr', 'changes after launch']],
   p: 'The build fee depends on the number of pages and features. Once it\'s live, we host it with no monthly fee. When you want a change, it\'s billed by the hour.',
   inc: [['Custom design and build', 'server-side rendered, fast and optimized, with schema markup on every page.'], ['Optimized for AI search', 'schema markup, llms.txt and clearly written pages, so AI assistants like ChatGPT, Claude, Perplexity and Google AI Overviews can find and recommend you.'], ['Google Analytics', 'set up with a consent banner, so you can see who visits and what they do.'], ['Google Search Console and Bing Webmaster Tools', 'your site added and its sitemap submitted to both, so Google and Bing find every page.'], ['Hosting', 'on Vercel, with Cloudflare in front and SSL included.'], ['Changes and new features', 'billed at $125/hour, quoted first. No monthly fee.']] })}
+${tier({ kicker: 'Content engine', key: 'content', btn: 'Add the content engine', h: 'Optional blog add-on',
+  prices: [['$50/mo', 'new blog posts on a regular schedule']],
+  p: 'Keep your website fresh without lifting a finger. Optional, for any website we host.',
+  inc: [['Regular blog posts', 'on topics that fit your business, your area and your customers.'], ['Written for search and AI', 'schema markup, headings and internal links on every post.'], ['Published automatically', 'added to your blog, sitemap and llms.txt.']] })}
 ${tier({ kicker: 'Business apps', key: 'apps', btn: 'Describe the job', h: 'Quoted per app',
   prices: [['Custom quote', 'build and monthly management']],
   p: 'Every app does a different job, so each one is priced on its own: a build price plus a monthly fee for hosting and managing it, based on what it does and how much data it handles.',
   inc: [['Fixed build price', 'agreed in writing before we start.'], ['Hosting and data', 'on Vercel and Supabase, managed by us.'], ['Updates, backups and monitoring', 'included in the monthly fee.'], ['Changes and new features', 'quoted before we start.']] })}
-${tier({ kicker: 'Branding, Google and print', key: 'other', btn: 'Get an estimate', h: 'Billed by the hour',
-  prices: [['$125/hr', 'Branding · Google Business Profile & Ads · Print']],
+${tier({ kicker: 'Branding, Google, campaigns and print', key: 'other', btn: 'Get an estimate', h: 'Billed by the hour',
+  prices: [['$125/hr', 'Branding · Google Profile & Ads · Campaigns · Print']],
   p: 'You get an estimate in hours before any work starts, and you only pay for the time used.',
-  inc: [['Logo design & branding', 'logo, colour palette, type and a one-page brand guide.'], ['Google Business Profile & Ads', 'profile setup, verification, posts and review replies; ad campaigns, tracking and ongoing management. Ad spend is paid directly to Google, on your card.'], ['Print & creative', 'business cards, flyers, menus, signage and social graphics. Printing costs are quoted separately.']] })}
+  inc: [['Logo design & branding', 'logo, colour palette, type and a one-page brand guide.'], ['Google Business Profile & Ads', 'profile setup, verification, posts and review replies; ad campaigns, tracking and ongoing management. Ad spend is paid directly to Google, on your card.'], ['Marketing campaigns', 'campaign plans, creative, landing pages and tracking. Ad spend is separate.'], ['Print & creative', 'business cards, flyers, menus, signage and social graphics. Printing costs are quoted separately.']] })}
 
   <section class="band shell">
     <div class="col right">
@@ -557,7 +605,7 @@ ${cta("Have a question we haven’t covered?", "Ask us. If it’s useful to othe
 /* =================== SITEMAP (HTML) =================== */
 const SM = [
   ['Main', [['../index.html', 'Home'], ['services.html', 'Services'], ['pricing.html', 'Pricing'], ['work.html', 'Work'], ['about.html', 'About'], ['contact.html', 'Get started']]],
-  ['Services', [['websites.html', 'Website design'], ['branding.html', 'Logo design & branding'], ['google-business.html', 'Google Business Profile & Ads'], ['print.html', 'Print & creative'], ['apps.html', 'Business apps']]],
+  ['Services', [['websites.html', 'Website design'], ['branding.html', 'Logo design & branding'], ['google-business.html', 'Google Business Profile & Ads'], ['marketing.html', 'Marketing campaigns'], ['content.html', 'Content engine'], ['print.html', 'Print & creative'], ['apps.html', 'Business apps']]],
   ['Resources', [['resources.html', 'All resources'], ...POSTS.map(p => [p.slug, p.short])]],
   ['Work', [['wanderlust.html', 'Wanderlust Santa Rosa case study'], ['staysantarosa.html', 'Stay Santa Rosa case study'], ['arcade.html', 'Playground']]],
   ['Legal', [['privacy.html', 'Privacy policy'], ['terms.html', 'Terms of use'], ['accessibility.html', 'Accessibility statement'], ['../sitemap.xml', 'XML sitemap']]],
@@ -751,6 +799,8 @@ page('contact.html', {
             <option value="website">Website design</option>
             <option value="branding">Logo design and branding</option>
             <option value="google">Google Business Profile and Ads</option>
+            <option value="marketing">A marketing campaign</option>
+            <option value="content">The $50/month content engine</option>
             <option value="print">Print and creative</option>
             <option value="apps">A business app</option>
             <option value="bundle">A few of these together</option>
@@ -806,7 +856,7 @@ const { navHTML, footHTML, SRCurve } = new Function(shared + '\nreturn { navHTML
 const YEAR = new Date().getFullYear();
 
 // Breadcrumb trails: file -> [[label, file], ...] after Home. Last item is the page itself.
-const SVC_NAMES = { 'websites.html': 'Website design', 'branding.html': 'Logo design & branding', 'google-business.html': 'Google Business Profile & Ads', 'print.html': 'Print & creative', 'apps.html': 'Business apps' };
+const SVC_NAMES = { 'websites.html': 'Website design', 'branding.html': 'Logo design & branding', 'google-business.html': 'Google Business Profile & Ads', 'marketing.html': 'Marketing campaigns', 'content.html': 'Content engine', 'print.html': 'Print & creative', 'apps.html': 'Business apps' };
 const SIMPLE = { 'services.html': 'Services', 'pricing.html': 'Pricing', 'about.html': 'About', 'contact.html': 'Get started', 'work.html': 'Work', 'resources.html': 'Resources', 'sitemap.html': 'Sitemap', 'privacy.html': 'Privacy policy', 'terms.html': 'Terms of use', 'accessibility.html': 'Accessibility statement', 'arcade.html': 'Playground' };
 const CASES = { 'wanderlust.html': 'Wanderlust Santa Rosa', 'staysantarosa.html': 'Stay Santa Rosa' };
 const trail = f => {
