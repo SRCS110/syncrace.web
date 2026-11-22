@@ -153,46 +153,78 @@ document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded'
   layer.id = 'curve-depth'; layer.setAttribute('aria-hidden', 'true');
   const bg = document.createElementNS(NS, 'svg');
   bg.id = 'curve-bg'; bg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
-  bg.innerHTML = '<path class="ghost" fill="none" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round" stroke-linecap="round"/><path class="trail" fill="none" stroke-linejoin="round" stroke-linecap="round"/><circle class="pen" r="0"/>';
+  bg.innerHTML = '<path class="ghost" fill="none" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round" stroke-linecap="round"/><path class="shade" fill="none" stroke-linejoin="round" stroke-linecap="round"/><path class="trail" fill="none" stroke-linejoin="round" stroke-linecap="round"/><circle class="pen" r="0"/>';
   layer.appendChild(bg);
   document.body.prepend(layer);
-  const ghost = bg.querySelector('.ghost'), trail = bg.querySelector('.trail'), pen = bg.querySelector('.pen');
+  const ghost = bg.querySelector('.ghost'), shade = bg.querySelector('.shade'), trail = bg.querySelector('.trail'), pen = bg.querySelector('.pen');
   const START = .02, reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let F, L, wide = null, shown = 0, target = START, ticking = false;
+  let F, L, wide = null, shown = 0, target = START, ticking = false, pieces = null, total = 1;
+
+  // The pen's position is worked out from the curve's own geometry (straight runs and
+  // rounded corners, built the same way as SRCurve.fit) instead of asking the browser
+  // to measure a 4,000-piece path on every frame, which is what made scrolling slow.
+  const R = .32;
+  const quadLen = (() => { let l = 0, a = [-R, 0]; for (let i = 1; i <= 64; i++) { const t = i / 64, x = (1 - t) * (1 - t) * -R, y = t * t * R; l += Math.hypot(x - a[0], y - a[1]); a = [x, y]; } return l; })();
+  const mapPieces = (p) => {
+    const out = []; let acc = 0, prev = p[0];
+    const line = (a, b) => { const l = Math.hypot(b[0] - a[0], b[1] - a[1]); out.push({ s: acc, l, f: (u) => [a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u] }); acc += l; };
+    for (let i = 1; i < p.length - 1; i++) {
+      const [ax, ay] = p[i - 1], [bx, by] = p[i], [cx, cy] = p[i + 1];
+      const p1 = [bx - (bx - ax) * R, by - (by - ay) * R], p2 = [bx + (cx - bx) * R, by + (cy - by) * R];
+      line(prev, p1);
+      out.push({ s: acc, l: quadLen, f: (u) => [(1 - u) * (1 - u) * p1[0] + 2 * (1 - u) * u * bx + u * u * p2[0], (1 - u) * (1 - u) * p1[1] + 2 * (1 - u) * u * by + u * u * p2[1]] });
+      acc += quadLen; prev = p2;
+    }
+    line(prev, p[p.length - 1]);
+    return { out, total: acc };
+  };
+  const pointAt = (d) => {
+    let lo = 0, hi = pieces.length - 1;
+    while (lo < hi) { const m = (lo + hi + 1) >> 1; if (pieces[m].s <= d) lo = m; else hi = m - 1; }
+    const pc = pieces[lo]; return pc.f(pc.l ? Math.min(1, Math.max(0, (d - pc.s) / pc.l)) : 0);
+  };
 
   const build = () => {
     const isWide = innerWidth > innerHeight * 1.05;
-    if (isWide === wide) return;
+    if (isWide === wide) return false;
     wide = isWide;
     let p = SRCurve.points(10);
     if (wide) p = p.map(([x, y]) => [y, -x]);          // lay it on its side
     F = SRCurve.fit(p, .03);
-    bg.setAttribute('viewBox', F.vb); ghost.setAttribute('d', F.d); trail.setAttribute('d', F.d);
+    bg.setAttribute('viewBox', F.vb); ghost.setAttribute('d', F.d); shade.setAttribute('d', F.d); trail.setAttribute('d', F.d);
     L = trail.getTotalLength();
-    trail.style.strokeDasharray = `${L} ${L}`;
+    ({ out: pieces, total } = mapPieces(p));
+    for (const el of [trail, shade]) el.style.strokeDasharray = `${L} ${L}`;
+    return true;
   };
   const progress = () => { const max = document.documentElement.scrollHeight - innerHeight; return max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 1; };
-  const render = v => { trail.style.strokeDashoffset = L * (1 - v); const pt = trail.getPointAtLength(L * v); pen.setAttribute('cx', pt.x); pen.setAttribute('cy', pt.y); };
+  const render = v => {
+    const off = L * (1 - v); trail.style.strokeDashoffset = off; shade.style.strokeDashoffset = off;
+    const pt = pointAt(total * v); pen.setAttribute('cx', pt[0]); pen.setAttribute('cy', pt[1]);
+  };
   const loop = () => {
     shown += (target - shown) * (reduce ? 1 : .12);
     if (Math.abs(target - shown) < .0005) shown = target;
     render(shown); ticking = shown !== target; if (ticking) requestAnimationFrame(loop);
   };
+  // Sizes only change on resize, never on scroll: measuring layout on every scroll
+  // event forced the browser to recalculate the page each time.
   const size = () => {
     const r = bg.getBoundingClientRect(), k = Math.max(r.width / F.w, r.height / F.h) || 1;
     trail.setAttribute('stroke-width', 1.7 / k); pen.setAttribute('r', 4.5 / k);
+    shade.setAttribute('stroke-width', 3.2 / k); shade.setAttribute('transform', `translate(0 ${(3 / k).toFixed(4)})`);
   };
   const update = () => {
-    build(); size();
     const p = progress();
     target = START + (1 - START) * p;
     if (!reduce) bg.style.setProperty('--drift', `${(-p * 3).toFixed(2)}vh`);
     if (!ticking) { ticking = true; requestAnimationFrame(loop); }
   };
+  const relayout = () => { build(); size(); update(); };
   addEventListener('scroll', update, { passive: true });
-  addEventListener('resize', update);
+  addEventListener('resize', relayout);
   new ResizeObserver(update).observe(document.body);
-  update();
+  relayout();
 })();
 
 /* ---------- entrance animation for .rise ---------- */

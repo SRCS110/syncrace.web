@@ -75,8 +75,13 @@ main,footer,site-nav,site-foot{ position:relative; z-index:1; }
 #curve-bg{
   position:absolute; left:0; top:96px; width:100%; height:calc(100% - 96px);
   transform:translate3d(0,var(--drift,0px),0);
-  filter:drop-shadow(0 3px 2px rgba(60,30,15,.10)) drop-shadow(0 10px 14px rgba(60,30,15,.06));
+  will-change:transform;
 }
+#curve-depth{ contain:strict; }
+/* The line's shadow is a second, offset stroke (see nav.js) rather than a CSS
+   filter: a filter on a full-screen drawing that changes every frame forced a
+   full repaint on every scroll frame. */
+#curve-bg .shade{ stroke:rgb(60,30,15); opacity:.07; }
 #curve-bg .ghost{ stroke:var(--lamp); opacity:.07; }
 #curve-bg .trail{ stroke:var(--lamp); opacity:.26; }
 #curve-bg .pen{ fill:var(--lamp); opacity:.7; }
@@ -459,7 +464,7 @@ h1 + .lede, h2 + .lede, .lede + .lede, h2 + .stack{ margin-top:20px; }
 main h1, main h2, main h3, main p, main li, main summary, main dt, main dd,
 main .kicker, main .lede, main .stack, main label, main .fold span, main .more, main td, main th,
 .foot-col a, .foot-brand p, .foot-base, .foot-title, .brand b, .brand em, .nav-links a{
-  text-shadow:0 0 2px var(--paper), 0 0 8px var(--paper), 0 0 18px var(--paper), 0 0 32px var(--paper);
+  text-shadow:0 0 2px var(--paper), 0 0 12px var(--paper);
 }
 main .btn, main .btn *, main .pill, .nav-links a[aria-current="page"], .nav-links a:hover{ text-shadow:none; }
 /* screenshots and frames float a touch higher than the text */
