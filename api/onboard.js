@@ -19,16 +19,21 @@ import { handler, send, db, must, HttpError, logEvent, rateLimit, ipOf, uaOf, va
 import { cleanAnswers, summarize, publicSpec } from './_onboard/fields.js';
 import { buildAgreement, agreementText, agreementHTML, sha256 } from './_onboard/agreement.js';
 import { agreementPDF } from './_onboard/pdf.js';
+import { cleanText, cleanEmail } from './_onboard/guard.js';
 
 const consentText = (clientName) => `I have read the Client Service Agreement above and I am authorized to sign it for ${clientName}. I agree to sign electronically, and that my electronic signature has the same legal effect as my handwritten signature.`;
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-const str = (v, max) => (typeof v === 'string' ? v.replace(/[\u0000-\u001f\u007f]/g, ' ').trim().slice(0, max) : '');
+const SIGNED_LINK_DAYS = 30;   // a signed agreement's link keeps working this long, then stops
+const field = (v, opts) => { const r = cleanText(v, opts); if (r.error) throw new HttpError(400, r.error); return r.value; };
 
-async function loadInvite(t) {
-  if (!validToken(t)) throw new HttpError(404, 'That link isn’t valid. Please use the link from your email, or contact hello@srcs.online.');
-  const inv = must(await db().from('onboarding_invites').select('*').eq('token', t).maybeSingle());
-  if (!inv) throw new HttpError(404, 'That link isn’t valid. Please use the link from your email, or contact hello@srcs.online.');
+async function loadInvite(req, t) {
+  const invalid = 'That link isn’t valid. Please use the link from your email, or contact hello@srcs.online.';
+  // Guessing links: after 15 wrong ones in an hour, this connection is locked out.
+  await rateLimit(req, ['bad_token'], 15, { message: 'Too many invalid links from this connection. Please wait an hour, or email hello@srcs.online.' });
+  const inv = validToken(t) ? must(await db().from('onboarding_invites').select('*').eq('token', t).maybeSingle()) : null;
+  if (!inv) { await logEvent(req, 'bad_token'); throw new HttpError(404, invalid); }
   if (!inv.signed_at && new Date(inv.expires_at) < new Date()) throw new HttpError(410, 'This link has expired. Email hello@srcs.online and we’ll send a new one.');
+  if (inv.signed_at && Date.now() - new Date(inv.signed_at).getTime() > SIGNED_LINK_DAYS * 86400_000) throw new HttpError(410, 'This agreement was signed and its link has now closed. Email hello@srcs.online for a copy.');
   const client = must(await db().from('clients').select('*').eq('id', inv.client_id).single());
   return { inv, client };
 }
@@ -36,12 +41,15 @@ async function loadInvite(t) {
 const latestIntake = async (clientId) => must(await db().from('intake_submissions').select('*').eq('client_id', clientId).order('submitted_at', { ascending: false }).limit(1).maybeSingle());
 
 export default handler(['GET', 'POST'], async (req, res) => {
+  if (req.method === 'POST' && req.body.action !== undefined && typeof req.body.action !== 'string') throw new HttpError(400, 'Unknown action');
   const action = req.method === 'GET' ? req.query.action : req.body.action;
 
   if (action === 'spec') return send(res, 200, { steps: publicSpec() });
 
   if (action === 'invite') {
-    const { inv, client } = await loadInvite(req.query.t);
+    await rateLimit(req, ['invite_lookup'], 60);
+    await logEvent(req, 'invite_lookup');
+    const { inv, client } = await loadInvite(req, req.query.t);
     if (!inv.viewed_at) {
       await db().from('onboarding_invites').update({ viewed_at: new Date().toISOString() }).eq('id', inv.id);
       await logEvent(req, 'invite_viewed', { client_id: client.id, invite_id: inv.id });
@@ -66,10 +74,12 @@ export default handler(['GET', 'POST'], async (req, res) => {
     if (errors.length) throw new HttpError(400, errors[0], { errors });
     let inv = null, client;
     if (req.body.t) {
-      ({ inv, client } = await loadInvite(req.body.t));
+      ({ inv, client } = await loadInvite(req, req.body.t));
       if (inv.signed_at) throw new HttpError(409, 'This agreement is already signed. Email hello@srcs.online to update your details.');
+      await rateLimit(req, ['intake_invited'], 5, { scope: { invite_id: inv.id } });
     } else {
-      await rateLimit(req, ['intake_open'], 5);
+      await rateLimit(req, ['intake_open'], 3);
+      await rateLimit(req, ['intake_open'], 30, { scope: 'global', windowMs: 86400_000, message: 'We’re getting a lot of requests right now. Please email hello@srcs.online instead.' });
       client = must(await db().from('clients').insert({
         slug: slugify(answers.display_name || answers.legal_name),
         business_name: answers.display_name || answers.legal_name,
@@ -100,7 +110,8 @@ export default handler(['GET', 'POST'], async (req, res) => {
   }
 
   if (action === 'agreement' || action === 'sign') {
-    const { inv, client } = await loadInvite(req.body.t);
+    if (action === 'agreement') await rateLimit(req, ['agreement_viewed'], 30);
+    const { inv, client } = await loadInvite(req, req.body.t);
     if (inv.signed_at) throw new HttpError(409, 'This agreement is already signed.', { signed: true });
     const intake = await latestIntake(client.id);
     if (!intake) throw new HttpError(409, 'Please complete the intake form first.', { needIntake: true });
@@ -117,9 +128,12 @@ export default handler(['GET', 'POST'], async (req, res) => {
     await rateLimit(req, ['sign_attempt'], 10);
     await logEvent(req, 'sign_attempt', { client_id: client.id, invite_id: inv.id });
     if (req.body.sha256 !== hash) throw new HttpError(409, 'The agreement was updated since you opened it. Please review it again before signing.', { changed: true });
-    const name = str(req.body.name, 120), title = str(req.body.title, 120), email = str(req.body.email, 200).toLowerCase();
+    const name = field(req.body.name, { max: 120, label: 'Your name' }), title = field(req.body.title, { max: 120, label: 'Title' });
+    const em = cleanEmail(req.body.email, 'Email');
+    if (em.error) throw new HttpError(400, em.error);
+    const email = em.value || '';
     if (name.length < 2) throw new HttpError(400, 'Please type your full name.');
-    if (!EMAIL.test(email)) throw new HttpError(400, 'Please enter a valid email address.');
+    if (!email) throw new HttpError(400, 'Please enter a valid email address.');
     if (req.body.consent !== true) throw new HttpError(400, 'Please check the box to agree to sign electronically.');
     const sig = req.body.signature || {};
     const type = sig.type === 'drawn' ? 'drawn' : 'typed';
@@ -129,7 +143,7 @@ export default handler(['GET', 'POST'], async (req, res) => {
       if (!m || m[1].length > 400_000) throw new HttpError(400, 'Please draw your signature again.');
       png = Buffer.from(m[1], 'base64');
       if (png.length < 100 || png.readUInt32BE(0) !== 0x89504e47) throw new HttpError(400, 'Please draw your signature again.');
-    } else if (str(sig.typed, 120).toLowerCase() !== name.toLowerCase()) {
+    } else if (field(sig.typed, { max: 120, label: 'Signature' }).toLowerCase() !== name.toLowerCase()) {
       throw new HttpError(400, 'Your typed signature should match your full name.');
     }
 
@@ -175,4 +189,4 @@ export default handler(['GET', 'POST'], async (req, res) => {
   }
 
   throw new HttpError(400, 'Unknown action');
-});
+}, { maxBytes: 600 * 1024 });

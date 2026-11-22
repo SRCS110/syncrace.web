@@ -17,6 +17,8 @@
    ============================================================ */
 
 import { Resend } from 'resend';
+import { checkRequest, lockHeaders, cleanText, cleanEmail } from './_onboard/guard.js';
+import { rateLimit, logEvent, HttpError } from './_onboard/lib.js';
 
 // Accept both spellings — the Vercel project uses CONTACT_TO_EMAIL,
 // CONTACT_FROM_EMAIL and Resend_Api_Key.
@@ -44,16 +46,20 @@ const SUBJECTS = {
   'freelancer-os':  'Freelancer OS early access',
 };
 
+const reply = (res, status, body) => { lockHeaders(res); res.setHeader('Content-Type', 'application/json; charset=utf-8'); return res.status(status).json(body); };
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
-    return res.status(405).json({ error: 'Use POST.' });
+    return reply(res, 405, { error: 'Use POST.' });
   }
+  const blocked = checkRequest(req, { maxBytes: 32 * 1024 });
+  if (blocked) return reply(res, blocked === 'Request too large.' ? 413 : 403, { error: blocked });
 
   if (!API_KEY) {
     // Don't leak config problems to visitors — log it, show something human.
     console.error('RESEND_API_KEY is not set.');
-    return res.status(500).json({ error: 'Mail is not configured yet.' });
+    return reply(res, 500, { error: 'Mail is not configured yet.' });
   }
 
   const body = typeof req.body === 'string' ? safeParse(req.body) : (req.body || {});
@@ -61,23 +67,37 @@ export default async function handler(req, res) {
           about = 'other', message = '', _gotcha = '' } = body;
 
   // Honeypot. Bots fill this; people can't see it. Pretend it worked.
-  if (_gotcha) return res.status(200).json({ ok: true });
+  if (_gotcha) return reply(res, 200, { ok: true });
 
-  const clean = {
-    name:    String(name).trim().slice(0, 120),
-    email:   String(email).trim().slice(0, 200),
-    phone:   String(phone).trim().slice(0, 40),
-    budget:  String(budget).trim().slice(0, 60),
-    message: String(message).trim().slice(0, 5000),
-    about:   SUBJECTS[about] ? about : 'other',
+  // 5 messages an hour per visitor, 50 a day overall. If the limiter's database
+  // is unreachable the form still works (fail open).
+  try {
+    await rateLimit(req, ['contact'], 5, { failOpen: true });
+    await rateLimit(req, ['contact'], 50, { scope: 'global', windowMs: 86400_000, failOpen: true });
+  } catch (e) {
+    if (e instanceof HttpError) return reply(res, e.status, { error: 'You’ve sent a few messages already. Please email hello@srcs.online directly.' });
+    throw e;
+  }
+
+  const fields = {
+    name: cleanText(name, { max: 120, label: 'Your name' }),
+    email: cleanEmail(email, 'Email'),
+    phone: cleanText(phone, { max: 40, label: 'Phone' }),
+    budget: cleanText(budget, { max: 60, label: 'Budget' }),
+    message: cleanText(message, { max: 5000, multiline: true, label: 'Your message' }),
   };
+  const bad = Object.values(fields).find((f) => f.error);
+  if (bad) return reply(res, 400, { error: bad.error });
+  const clean = Object.fromEntries(Object.entries(fields).map(([k, f]) => [k, f.value]));
+  clean.about = typeof about === 'string' && Object.hasOwn(SUBJECTS, about) ? about : 'other';
 
   if (!clean.name || !clean.message) {
-    return res.status(400).json({ error: 'Please add your name and a message.' });
+    return reply(res, 400, { error: 'Please add your name and a message.' });
   }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(clean.email)) {
-    return res.status(400).json({ error: 'That email address looks incomplete.' });
+  if (!clean.email) {
+    return reply(res, 400, { error: 'That email address looks incomplete.' });
   }
+  await logEvent(req, 'contact');
 
   const resend = new Resend(API_KEY);
 
@@ -99,13 +119,13 @@ Sent from the contact form at srcs.online`,
 
     if (error) {
       console.error('Resend rejected the send:', error);
-      return res.status(502).json({ error: 'That didn\'t send.' });
+      return reply(res, 502, { error: 'That didn\'t send.' });
     }
 
-    return res.status(200).json({ ok: true });
+    return reply(res, 200, { ok: true });
   } catch (err) {
     console.error('Contact form failed:', err);
-    return res.status(500).json({ error: 'That didn\'t send.' });
+    return reply(res, 500, { error: 'That didn\'t send.' });
   }
 }
 

@@ -1,3 +1,5 @@
+import { cleanText, cleanEmail, cleanUrl } from './guard.js';
+
 // The client intake form, defined once. /start renders its steps from this,
 // the API validates answers against it, and emails, PDFs and the admin view
 // use its labels.
@@ -130,29 +132,32 @@ export const FIELDS = STEPS.flatMap((s) => s.fields);
 const BY_KEY = new Map(FIELDS.map((f) => [f.key, f]));
 
 const LIMIT = { textarea: 3000, default: 300 };
-const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-// Returns { answers, errors }. Unknown keys are dropped; values are trimmed and capped.
+// Returns { answers, errors }. Unknown keys are dropped; every value is checked
+// for markup and script (see guard.js), trimmed and capped.
 export function cleanAnswers(input) {
   const answers = {};
   const errors = [];
-  const src = input && typeof input === 'object' ? input : {};
+  const src = input && typeof input === 'object' && !Array.isArray(input) ? input : {};
   for (const f of FIELDS) {
-    let v = src[f.key];
+    const raw = Object.prototype.hasOwnProperty.call(src, f.key) ? src[f.key] : undefined;
     if (f.type === 'checks') {
       const allowed = new Set(f.options.map(([k]) => k));
-      v = Array.isArray(v) ? [...new Set(v.map(String))].filter((x) => allowed.has(x)) : [];
+      const v = Array.isArray(raw) ? [...new Set(raw.filter((x) => typeof x === 'string'))].filter((x) => allowed.has(x)) : [];
       if (v.length) answers[f.key] = v;
       continue;
     }
+    let v = '';
     if (f.type === 'radio') {
-      v = typeof v === 'string' && f.options.some(([k]) => k === v) ? v : '';
+      v = typeof raw === 'string' && f.options.some(([k]) => k === raw) ? raw : '';
     } else {
-      v = typeof v === 'string' ? v.replace(/\r\n?/g, '\n').replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/g, '').trim() : '';
-      v = v.slice(0, f.type === 'textarea' ? LIMIT.textarea : LIMIT.default);
+      const r = f.type === 'email' ? cleanEmail(raw, f.label)
+        : f.type === 'url' ? cleanUrl(raw, f.label)
+        : cleanText(raw, { max: f.type === 'textarea' ? LIMIT.textarea : LIMIT.default, multiline: f.type === 'textarea', label: f.label });
+      if (r.error) { errors.push(r.error); continue; }
+      v = r.value;
     }
     if (f.required && !v) errors.push(`${f.label} is required.`);
-    if (v && f.type === 'email' && !EMAIL.test(v)) errors.push(`${f.label} doesn’t look like an email address.`);
     if (v) answers[f.key] = v;
   }
   return { answers, errors };

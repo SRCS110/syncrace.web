@@ -7,24 +7,43 @@
    POST { action:'invite', ... }         create a project + signing link (optionally email it)
    POST { action:'status', id, status }  move a client between stages
    ============================================================ */
-import { handler, send, db, must, HttpError, logEvent, newToken, slugify, signedUrl, mail, notifyTo, SITE, escHtml } from './_onboard/lib.js';
+import { handler, send, db, must, HttpError, logEvent, rateLimit, ipOf, newToken, slugify, signedUrl, mail, notifyTo, SITE, escHtml } from './_onboard/lib.js';
 import { summarize } from './_onboard/fields.js';
+import { cleanText, cleanEmail, UUID } from './_onboard/guard.js';
+
+// Optional IP allowlist (Vercel env ADMIN_ALLOWED_IPS): comma-separated exact
+// addresses, or prefixes ending in * (e.g. 203.0.113.* or 2601:640:abcd:*).
+// Empty or unset = no IP restriction, so a changed home IP can't lock you out silently.
+function ipAllowed(ip) {
+  const list = String(process.env.ADMIN_ALLOWED_IPS || '').split(',').map((s) => s.trim().toLowerCase()).filter(Boolean);
+  if (!list.length) return true;
+  const me = String(ip || '').toLowerCase();
+  return list.some((rule) => (rule.endsWith('*') ? me.startsWith(rule.slice(0, -1)) : me === rule));
+}
 
 async function requireAdmin(req) {
-  const h = req.headers.authorization || '';
+  if (!ipAllowed(ipOf(req))) {
+    await logEvent(req, 'admin_ip_blocked');
+    throw new HttpError(403, `Client files can’t be opened from this network (${ipOf(req)}). Add this address to ADMIN_ALLOWED_IPS in Vercel if it’s yours.`);
+  }
+  // 10 failed sign-ins an hour locks this connection out.
+  await rateLimit(req, ['admin_auth_failed'], 10, { message: 'Too many failed attempts. Please wait an hour.' });
+  const fail = async (status, msg) => { await logEvent(req, 'admin_auth_failed', { detail: { status } }); throw new HttpError(status, msg); };
+  const h = String(req.headers.authorization || '');
   const token = h.startsWith('Bearer ') ? h.slice(7).trim() : '';
-  if (!token) throw new HttpError(401, 'Please sign in.');
+  if (!token || token.length > 4096) return fail(401, 'Please sign in.');
   const { data, error } = await db().auth.getUser(token);
-  if (error || !data?.user) throw new HttpError(401, 'Your session has expired. Please sign in again.');
+  if (error || !data?.user) return fail(401, 'Your session has expired. Please sign in again.');
   const row = must(await db().from('admins').select('user_id').eq('user_id', data.user.id).maybeSingle());
-  if (!row) throw new HttpError(403, 'This account isn’t a Sync Race Studios admin.');
+  if (!row) return fail(403, 'This account isn’t a Sync Race Studios admin.');
   return data.user;
 }
 
-const str = (v, max) => (typeof v === 'string' ? v.trim().slice(0, max) : '');
+const str = (v, max, label, multiline = false) => { const r = cleanText(v, { max, label, multiline }); if (r.error) throw new HttpError(400, r.error); return r.value; };
+const mail1 = (v, label) => { const r = cleanEmail(v, label); if (r.error) throw new HttpError(400, r.error); return r.value || ''; };
+const uuid = (v, what = 'client') => { const x = String(v || ''); if (!UUID.test(x)) throw new HttpError(400, `Invalid ${what}`); return x; };
 const num = (v, min, max) => { const n = Number(v); return v === '' || v == null || !Number.isFinite(n) ? null : Math.min(max, Math.max(min, Math.round(n * 100) / 100)); };
 const day = (v) => (typeof v === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(v) ? v : null);
-const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const link = (t) => `${SITE}/start?invite=${t}`;
 
 export default handler(['GET', 'POST'], async (req, res) => {
@@ -40,8 +59,7 @@ export default handler(['GET', 'POST'], async (req, res) => {
   }
 
   if (action === 'client') {
-    const id = String(req.query.id || '');
-    if (!/^[0-9a-f-]{36}$/.test(id)) throw new HttpError(400, 'Invalid client');
+    const id = uuid(req.query.id);
     const client = must(await db().from('clients').select('*').eq('id', id).maybeSingle());
     if (!client) throw new HttpError(404, 'Client not found');
     const [intakes, invites, agreements, events] = await Promise.all([
@@ -64,20 +82,19 @@ export default handler(['GET', 'POST'], async (req, res) => {
     const b = req.body;
     let client;
     if (b.client_id) {
-      client = must(await db().from('clients').select('*').eq('id', String(b.client_id)).maybeSingle());
+      client = must(await db().from('clients').select('*').eq('id', uuid(b.client_id)).maybeSingle());
       if (!client) throw new HttpError(404, 'Client not found');
     } else {
-      const business_name = str(b.business_name, 160);
+      const business_name = str(b.business_name, 160, 'Business name');
       if (!business_name) throw new HttpError(400, 'Add the business name.');
-      const email = str(b.contact_email, 200).toLowerCase();
-      if (email && !EMAIL.test(email)) throw new HttpError(400, 'That email address looks incomplete.');
-      client = must(await db().from('clients').insert({ slug: slugify(business_name), business_name, contact_name: str(b.contact_name, 120) || null, contact_email: email || null, status: 'invited' }).select('*').single());
+      const email = mail1(b.contact_email, 'Contact email');
+      client = must(await db().from('clients').insert({ slug: slugify(business_name), business_name, contact_name: str(b.contact_name, 120, 'Contact name') || null, contact_email: email || null, status: 'invited' }).select('*').single());
       await logEvent(req, 'client_created', { client_id: client.id, detail: { by: user.email } });
     }
-    const project_name = str(b.project_name, 160);
+    const project_name = str(b.project_name, 160, 'Project name');
     if (!project_name) throw new HttpError(400, 'Add a project name.');
     const services = (Array.isArray(b.services) ? b.services : []).slice(0, 20)
-      .map((s) => ({ service: str(s?.service, 120), description: str(s?.description, 500), fee: num(s?.fee, 0, 1e7) }))
+      .map((s) => ({ service: str(s?.service, 120, 'Service'), description: str(s?.description, 500, 'Description'), fee: num(s?.fee, 0, 1e7) }))
       .filter((s) => s.service);
     if (!services.length) throw new HttpError(400, 'Add at least one service.');
     const total_fee = services.reduce((t, s) => t + (s.fee || 0), 0);
@@ -85,15 +102,14 @@ export default handler(['GET', 'POST'], async (req, res) => {
     const inv = must(await db().from('onboarding_invites').insert({
       client_id: client.id, token: newToken(), project_name, services, total_fee,
       deposit_percent: num(b.deposit_percent, 0, 100) ?? 50, hourly_rate: num(b.hourly_rate, 0, 10000) ?? 125, hosting_monthly: num(b.hosting_monthly, 0, 10000) ?? 25,
-      est_start: day(b.est_start), est_completion: day(b.est_completion), message: str(b.message, 2000) || null,
+      est_start: day(b.est_start), est_completion: day(b.est_completion), message: str(b.message, 2000, 'Note', true) || null,
       expires_at: new Date(Date.now() + days * 86400_000).toISOString(), created_by: user.id,
     }).select('*').single());
     await logEvent(req, 'invite_created', { client_id: client.id, invite_id: inv.id, detail: { by: user.email, total_fee } });
 
     let emailed = false;
-    const to = str(b.send_to, 200).toLowerCase() || client.contact_email;
+    const to = mail1(b.send_to, 'Send-to email') || client.contact_email;
     if (b.send_email && to) {
-      if (!EMAIL.test(to)) throw new HttpError(400, 'That email address looks incomplete.');
       const first = (client.contact_name || '').split(' ')[0];
       emailed = await mail({
         to, replyTo: notifyTo, subject: `Your project with Sync Race Studios: next steps`,
@@ -108,11 +124,11 @@ export default handler(['GET', 'POST'], async (req, res) => {
   if (action === 'status') {
     const status = String(req.body.status || '');
     if (!['invited', 'intake', 'signed', 'active', 'archived'].includes(status)) throw new HttpError(400, 'Invalid status');
-    const id = String(req.body.id || '');
+    const id = uuid(req.body.id);
     must(await db().from('clients').update({ status, updated_at: new Date().toISOString() }).eq('id', id));
     await logEvent(req, 'status_changed', { client_id: id, detail: { status, by: user.email } });
     return send(res, 200, { ok: true });
   }
 
   throw new HttpError(400, 'Unknown action');
-});
+}, { maxBytes: 64 * 1024 });

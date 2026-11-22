@@ -1013,7 +1013,7 @@ page('contact.html', {
       if (!res.ok) throw new Error(data.error || 'Something went wrong.');
       form.reset(); status.textContent = 'Thanks, that came through. You\\'ll hear back shortly.';
     } catch (err) {
-      status.textContent = /name|email/.test(err.message) ? err.message : 'That didn\\'t send. Email hello@srcs.online directly and it\\'ll reach us.';
+      status.textContent = /name|email|code|HTML|long|messages/.test(err.message) ? err.message : 'That didn\\'t send. Email hello@srcs.online directly and it\\'ll reach us.';
     } finally { button.disabled = false; button.textContent = label; }
   });
 </script>`);
