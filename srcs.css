@@ -77,7 +77,9 @@ main,footer,site-nav,site-foot{ position:relative; z-index:1; }
   transform:translate3d(0,var(--drift,0px),0);
   will-change:transform;
 }
-#curve-depth{ contain:strict; }
+#curve-depth{ contain:strict; opacity:0; transition:opacity .6s ease; }
+#curve-depth.on{ opacity:1; }
+@media (prefers-reduced-motion: reduce){ #curve-depth{ transition:none; } }
 /* The line's shadow is a second, offset stroke (see nav.js) rather than a CSS
    filter: a filter on a full-screen drawing that changes every frame forced a
    full repaint on every scroll frame. */

@@ -91,6 +91,12 @@ const footHTML = (here, toPages, toRoot, year) => {
 };
 /* @shared-end ------------------------------------------------------ */
 
+// Run non-essential work once the page has loaded and the browser is idle.
+const whenIdle = (fn, timeout = 2500) => {
+  const go = () => ('requestIdleCallback' in window ? requestIdleCallback(() => fn(), { timeout }) : setTimeout(fn, 200));
+  document.readyState === 'complete' ? go() : addEventListener('load', go, { once: true });
+};
+
 const IN_PAGES = /\/pages\//.test(location.pathname);
 const TO_PAGES = IN_PAGES ? './' : './pages/';
 const TO_ROOT  = IN_PAGES ? '../' : './';
@@ -146,8 +152,9 @@ document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded'
    Fills the screen below the nav. On landscape screens the curve is turned
    on its side so it fits the screen's shape and the drawing stays in view.
    Separation from the foreground comes from srcs.css: a soft shadow under
-   the line and a paper-coloured halo around the page text. */
-(() => {
+   the line and a paper-coloured halo around the page text.
+   Decorative, so it starts after the page has loaded and fades in. */
+whenIdle(() => {
   const NS = 'http://www.w3.org/2000/svg';
   const layer = document.createElement('div');
   layer.id = 'curve-depth'; layer.setAttribute('aria-hidden', 'true');
@@ -225,6 +232,25 @@ document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded'
   addEventListener('resize', relayout);
   new ResizeObserver(update).observe(document.body);
   relayout();
+  requestAnimationFrame(() => layer.classList.add('on'));
+});
+
+/* ---------- SRCS CMS loader, deferred ----------
+   The editor loader is only needed by people editing the site. Pages carry it as
+   <script type="text/plain" data-defer-src="…">; it loads right away for editors
+   (?edit, a sign-in link, or a saved session) and otherwise once the page is idle. */
+(() => {
+  const tags = document.querySelectorAll('script[type="text/plain"][data-defer-src]');
+  if (!tags.length) return;
+  const load = () => tags.forEach((t) => {
+    const s = document.createElement('script');
+    for (const a of t.attributes) if (a.name.startsWith('data-') && a.name !== 'data-defer-src') s.setAttribute(a.name, a.value);
+    s.src = t.dataset.deferSrc;
+    t.replaceWith(s);
+  });
+  let editor = /[?&]edit(=|&|$)/.test(location.search) || /[#&]srcs-cms=/.test(location.hash);
+  try { tags.forEach((t) => { if (localStorage.getItem('srcs-cms:' + t.dataset.site)) editor = true; }); } catch (e) {}
+  editor ? load() : whenIdle(load, 4000);
 })();
 
 /* ---------- entrance animation for .rise ---------- */
@@ -367,5 +393,5 @@ document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded'
   if (location.hash === '#cookie-settings') open(true);
 
   if (!state) open(false);
-  loadGA();
+  whenIdle(loadGA);   // analytics waits until the page is idle (it loads at once when someone clicks Accept)
 })();

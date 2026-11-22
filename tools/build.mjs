@@ -1058,7 +1058,8 @@ const foldPass = html => html.replace(/<svg data-fold="(\d+)"([^>]*)>(?:\s*<use[
    script hook.
    Keys follow page order per kind (title, heading-N, lede-N, text-N…). Existing kinds keep
    their numbering, so saved edits stay attached. */
-const CMS_LOADER = '<script src="https://cms.srcs.online/loader.js" data-site="srcs" defer></script>';
+// Deferred: nav.js turns this into a real script for editors at once, for everyone else when idle.
+const CMS_LOADER = '<script type="text/plain" data-defer-src="https://cms.srcs.online/loader.js" data-site="srcs"></script>';
 const CMS_FILE = `${ROOT}/cms/content.json`;
 const CMS_DATA = fs.existsSync(CMS_FILE) ? JSON.parse(fs.readFileSync(CMS_FILE, 'utf8')) : { files: {}, globals: {} };
 const CMS_SKIP_TAGS = new Set(['form', 'details', 'nav', 'svg', 'script', 'style', 'noscript', 'template', 'button', 'select', 'label', 'textarea', 'site-nav', 'site-foot']);
@@ -1151,6 +1152,7 @@ function cms(html, rel) {
   };
   walk(doc, {});
   for (const [pos, text] of inserts.sort((a, b) => b[0] - a[0])) html = html.slice(0, pos) + text + html.slice(pos);
+  html = html.replace('<script src="https://cms.srcs.online/loader.js" data-site="srcs" defer></script>\n', '');
   if (!html.includes('cms.srcs.online/loader.js')) html = html.replace('</body>', `${CMS_LOADER}\n</body>`);
   const saved = Object.entries(CMS_DATA.files?.[rel] || {}).map(([key, v]) => ({ key, type: v.type, value: v.value }));
   const globals = Object.entries(CMS_DATA.globals || {}).map(([key, v]) => ({ key, global: true, type: v.type, value: v.value }));
