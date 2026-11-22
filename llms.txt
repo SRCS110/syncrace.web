@@ -2,7 +2,7 @@
 
 > Business services for local and independent businesses: website design, logo design and branding, marketing campaigns, an optional blog content engine, Google Business Profile setup and upkeep, Google Ads management, print marketing and creative, and small web apps that make a business more efficient. One partner, every piece connected.
 
-Websites and apps are built, hosted and managed by Sync Race Studios. Websites are server-side rendered, fast and optimized, with schema markup on every page. They are optimized for AI search (schema markup, llms.txt and clearly written pages for ChatGPT, Claude, Perplexity and Google AI Overviews) and for Google and Bing. Websites start from $1,500 to build, with no monthly hosting fee; changes after launch are billed at $125/hour. Every website includes Google Analytics and listing in Google Search Console and Bing Webmaster Tools. Business apps are quoted per project (build plus monthly management). Branding, Google Business Profile, Google Ads, marketing campaign and print work are billed at $125/hour. An optional content engine add-on publishes new blog posts on a regular schedule for $50/month, with an estimate before work starts.
+Websites and apps are built, hosted and managed by Sync Race Studios. Websites are server-side rendered, fast and optimized, with schema markup on every page. They are optimized for AI search (schema markup, llms.txt and clearly written pages for ChatGPT, Claude, Perplexity and Google AI Overviews) and for Google and Bing. Websites start from $1,500 to build, then $25/month for hosting, which includes a built-in content editor so clients can change their own text, photos and lists; bigger changes after launch are billed at $125/hour. Every website includes Google Analytics and listing in Google Search Console and Bing Webmaster Tools. Business apps are quoted per project (build plus monthly management). Branding, Google Business Profile, Google Ads, marketing campaign and print work are billed at $125/hour. An optional content engine add-on publishes new blog posts on a regular schedule for $50/month, with an estimate before work starts.
 
 Websites and apps are hand-written HTML, CSS and JavaScript, hosted on Vercel, with Supabase for data and Cloudflare for DNS. No page builders and no tracking without consent.
 
@@ -27,7 +27,7 @@ The logo is a dragon curve: a strip of paper folded in half ten times and opened
   - [Before you spend on Google Ads, set up conversion tracking](https://www.srcs.online/pages/resources-google-ads-tracking.html)
 - [Work](https://www.srcs.online/pages/work.html): Live client projects.
 - [About](https://www.srcs.online/pages/about.html): The dragon curve logo and what it means for how the studio works.
-- [Pricing](https://www.srcs.online/pages/pricing.html): Website build fees (no monthly fee), app quotes and hourly rates.
+- [Pricing](https://www.srcs.online/pages/pricing.html): Website build fees, $25/month hosting with a built-in content editor, app quotes and hourly rates.
 - [Get started](https://www.srcs.online/pages/contact.html): Contact form for enquiries.
 - [Wanderlust Santa Rosa case study](https://www.srcs.online/pages/wanderlust.html): Food truck festival website, vendor application and market admin.
 - [Stay Santa Rosa case study](https://www.srcs.online/pages/staysantarosa.html): Sonoma travel guide with a 79-place directory and direct hotel booking.
