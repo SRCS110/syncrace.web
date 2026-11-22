@@ -99,7 +99,6 @@ p{ margin:0; }
   font-size:13px; font-weight:500; letter-spacing:.18em; text-transform:uppercase;
   color:var(--lamp-ink); margin-bottom:1.2rem;
 }
-.kicker::before{ content:''; width:1.6rem; height:1.5px; background:var(--lamp); flex:none; }
 .lede{ color:var(--dust); font-size:19px; font-weight:300; line-height:1.7; max-width:60ch; }
 .lede strong{ color:var(--ink); font-weight:500; }
 .muted{ color:var(--dust); }
@@ -537,7 +536,7 @@ main .post-meta, main .post-body p, main .post-body li, main .post small{ text-s
 .crumbs{ margin-bottom:1.2rem; font-size:13px; font-weight:500; letter-spacing:.14em; text-transform:uppercase; color:var(--dust); }
 .crumbs ol{ list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; align-items:center; gap:4px 0; }
 .crumbs li{ display:inline-flex; align-items:center; }
-.crumbs li + li::before{ content:''; width:1.1rem; height:1.5px; background:var(--lamp); margin:0 .7rem; flex:none; }
+.crumbs li + li::before{ content:'/'; content:'/' / ''; margin:0 .6rem; color:var(--dust); font-weight:400; }
 .crumbs a{ color:var(--dust); text-decoration:none; display:inline-flex; align-items:center; min-height:32px; }
 .crumbs a:hover{ color:var(--lamp-ink); text-decoration:underline; text-underline-offset:.25em; }
 .crumbs [aria-current="page"]{ color:var(--lamp-ink); }
