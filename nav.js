@@ -97,10 +97,11 @@ const whenIdle = (fn, timeout = 2500) => {
   document.readyState === 'complete' ? go() : addEventListener('load', go, { once: true });
 };
 
-const IN_PAGES = /\/pages\//.test(location.pathname);
-const TO_PAGES = IN_PAGES ? './' : './pages/';
-const TO_ROOT  = IN_PAGES ? '../' : './';
-const HERE     = location.pathname.split('/').pop() || 'index.html';
+// Pages are served at clean addresses (/services); links rendered here point at the
+// files and redirect, but pages normally arrive with the nav already built.
+const TO_PAGES = '/pages/';
+const TO_ROOT  = '/';
+const HERE     = (() => { const last = location.pathname.replace(/\/+$/, '').split('/').pop(); return !last ? 'index.html' : last.endsWith('.html') ? last : last + '.html'; })();
 window.SRCurve = SRCurve;
 
 /* The build writes the nav and footer into the HTML. These elements only
@@ -280,8 +281,7 @@ whenIdle(() => {
   const CONSENT_VERSION = 1;
   const KEY = 'srcs-consent';
   const gpc = navigator.globalPrivacyControl === true;
-  const inPages = /\/pages\//.test(location.pathname);
-  const privacyHref = (inPages ? './' : './pages/') + 'privacy.html';
+  const privacyHref = '/privacy';
 
   document.querySelectorAll('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
 

@@ -276,7 +276,7 @@
       store.clear();
       const btns = [];
       if (r.pdf) btns.push(`<a class="btn" href="${esc(r.pdf)}">Download signed PDF</a>`);
-      btns.push('<a class="btn btn-quiet" href="/index.html">Back to srcs.online</a>');
+      btns.push('<a class="btn btn-quiet" href="/">Back to srcs.online</a>');
       done('Signed. Welcome aboard.', r.emailed ? `A copy of your signed agreement is on its way to ${email}. Next, we’ll send your deposit invoice and set up a kickoff call.` : 'Your agreement is signed. Download your copy below. Next, we’ll send your deposit invoice and set up a kickoff call.', btns);
     } catch (err) {
       if (err.data?.changed) { say(err.message); await openAgreement(); return; }

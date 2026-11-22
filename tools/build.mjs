@@ -1162,16 +1162,41 @@ function cms(html, rel) {
   return r.html;
 }
 
+// Clean URLs: pages are served at /services, /about … (vercel.json rewrites them to
+// /pages/*.html and redirects the old .html addresses). Every link a page makes is
+// rewritten to a root-absolute clean path, so it works from any address.
+const SITE_ORIGIN = 'https://www.srcs.online';
+const cleanPath = (pathname) => {
+  if (pathname === '/index.html') return '/';
+  if (pathname === '/pages/start.html') return '/start';
+  if (pathname === '/pages/start-admin.html') return '/start/admin';
+  if (pathname === '/pages/home.html') return '/';
+  const m = pathname.match(/^\/pages\/([a-z0-9-]+)\.html$/);
+  return m ? '/' + m[1] : pathname;
+};
+const cleanUrlsIn = (text) => text
+  .replace(/https:\/\/www\.srcs\.online\/index\.html/g, SITE_ORIGIN + '/')
+  .replace(/https:\/\/www\.srcs\.online(\/pages\/[a-z0-9-]+\.html)/g, (m, p) => SITE_ORIGIN + cleanPath(p));
+function cleanLinks(html, rel) {
+  const base = `https://x/${rel}`;
+  html = html.replace(/\b(href|src|action)="([^"]*)"/g, (m, attr, val) => {
+    if (!val || /^(#|[a-z][a-z0-9+.-]*:|\/\/)/i.test(val)) return m;
+    let u; try { u = new URL(val, base); } catch { return m; }
+    if (u.host !== 'x') return m;
+    return `${attr}="${cleanPath(u.pathname)}${u.search}${u.hash}"`;
+  });
+  return cleanUrlsIn(html);
+}
+
 // Client onboarding (srcs.online/start): no CMS editing on the admin page, and both are served at /start.
 const NO_CMS = new Set(['start-admin.html']);
-const ROOT_LINKS = new Set(['start.html', 'start-admin.html']);
 const files = ['index.html', ...fs.readdirSync(`${ROOT}/pages`).filter(f => f.endsWith('.html')).map(f => `pages/${f}`)];
 // Icons: the same dragon-curve set on every page, by absolute path.
 const ICONS = '<link rel="icon" href="/favicon.ico" sizes="48x48">\n<link rel="icon" href="/assets/srcs-curve.svg" type="image/svg+xml">\n<link rel="apple-touch-icon" href="/apple-touch-icon.png">\n<link rel="manifest" href="/site.webmanifest">\n';
 for (const rel of files) {
   let html = fs.readFileSync(`${ROOT}/${rel}`, 'utf8');
   html = html.replace(/<link rel="(?:icon|apple-touch-icon|manifest)"[^>]*>\n?/g, '').replace('</head>', ICONS + '</head>');
-  if (!html.includes('<site-nav')) { fs.writeFileSync(`${ROOT}/${rel}`, html); continue; }   // e.g. the old redirect page
+  if (!html.includes('<site-nav')) { fs.writeFileSync(`${ROOT}/${rel}`, cleanLinks(html, rel)); continue; }   // e.g. the old redirect page
   const inPages = rel.startsWith('pages/'), file = path.basename(rel);
   const toPages = inPages ? './' : './pages/', toRoot = inPages ? '../' : './';
 
@@ -1225,8 +1250,9 @@ for (const rel of files) {
   html = html.replace(/<body([^>]*)>\n?/, (m, a) => `<body${a}>\n<a class="skip" href="#main">Skip to content</a>\n${defs}\n`);
   if (!NO_CMS.has(file)) html = cms(html, rel);
   else html = html.replace(/ data-cms(?:-type)?="[^"]*"/g, '').replace(`${CMS_LOADER}\n`, '');
-  // Pages served from a rewrite (srcs.online/start) need root-relative links.
-  if (ROOT_LINKS.has(file)) html = html.replace(/(href|src)="\.\.\/(?!\.)/g, '$1="/').replace(/(href|src)="\.\/(?!\.)/g, '$1="/pages/');
+  html = cleanLinks(html, rel);
   fs.writeFileSync(`${ROOT}/${rel}`, html);
 }
+// The sitemap and llms.txt list the clean addresses too.
+for (const f of ['sitemap.xml', 'llms.txt']) if (fs.existsSync(`${ROOT}/${f}`)) fs.writeFileSync(`${ROOT}/${f}`, cleanUrlsIn(fs.readFileSync(`${ROOT}/${f}`, 'utf8')));
 console.log('built', files.length, 'pages');

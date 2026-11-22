@@ -11,43 +11,43 @@ The logo is a dragon curve: a strip of paper folded in half ten times and opened
 ## Pages
 
 - [Home](https://www.srcs.online/): What the studio does, recent work, and how a project runs.
-- [Services](https://www.srcs.online/pages/services.html): All services and how they connect.
-- [Website design](https://www.srcs.online/pages/websites.html): Custom websites, redesigns, domains and hosting.
-- [Google Business Profile & Ads](https://www.srcs.online/pages/google-business.html): Profile setup, verification, posts and reviews, plus Google Ads campaigns, conversion tracking and monthly reporting.
-- [Logo design & branding](https://www.srcs.online/pages/branding.html): Logos, colour palettes, typefaces and brand guides.
-- [Marketing campaigns](https://www.srcs.online/pages/marketing.html): Campaign planning, creative, landing pages and tracking for launches, seasons and events. Billed hourly.
-- [Content engine](https://www.srcs.online/pages/content.html): Optional $50/month add-on that publishes new blog posts to a client's website on a regular schedule.
-- [Print & creative](https://www.srcs.online/pages/print.html): Business cards, flyers, menus, posters, signage and social graphics.
-- [Business apps](https://www.srcs.online/pages/apps.html): Booking, intake forms, dashboards, directories and automations.
-- [Resources](https://www.srcs.online/pages/resources.html): Guides for small businesses on websites, search, branding and advertising.
-  - [Squarespace and Wix: where website builders hold your traffic back](https://www.srcs.online/pages/resources-website-builders.html)
-  - [Why your website needs Google Search Console and Bing Webmaster Tools](https://www.srcs.online/pages/resources-search-console-bing.html)
-  - [Backlinks: why they matter and how a local business can earn them](https://www.srcs.online/pages/resources-backlinks.html)
-  - [Why quality branding matters for a small business](https://www.srcs.online/pages/resources-branding.html)
-  - [Before you spend on Google Ads, set up conversion tracking](https://www.srcs.online/pages/resources-google-ads-tracking.html)
-- [Work](https://www.srcs.online/pages/work.html): Live client projects.
-- [About](https://www.srcs.online/pages/about.html): The dragon curve logo and what it means for how the studio works.
-- [Pricing](https://www.srcs.online/pages/pricing.html): Website build fees, $25/month hosting with a built-in content editor, app quotes and hourly rates.
-- [Get started](https://www.srcs.online/pages/contact.html): Contact form for enquiries.
-- [Wanderlust Santa Rosa case study](https://www.srcs.online/pages/wanderlust.html): Food truck festival website, vendor application and market admin.
-- [Stay Santa Rosa case study](https://www.srcs.online/pages/staysantarosa.html): Sonoma travel guide with a 79-place directory and direct hotel booking.
-- [Playground](https://www.srcs.online/pages/arcade.html): Browser games.
-- [Privacy policy](https://www.srcs.online/pages/privacy.html)
-- [Terms of use](https://www.srcs.online/pages/terms.html)
-- [Accessibility statement](https://www.srcs.online/pages/accessibility.html)
+- [Services](https://www.srcs.online/services): All services and how they connect.
+- [Website design](https://www.srcs.online/websites): Custom websites, redesigns, domains and hosting.
+- [Google Business Profile & Ads](https://www.srcs.online/google-business): Profile setup, verification, posts and reviews, plus Google Ads campaigns, conversion tracking and monthly reporting.
+- [Logo design & branding](https://www.srcs.online/branding): Logos, colour palettes, typefaces and brand guides.
+- [Marketing campaigns](https://www.srcs.online/marketing): Campaign planning, creative, landing pages and tracking for launches, seasons and events. Billed hourly.
+- [Content engine](https://www.srcs.online/content): Optional $50/month add-on that publishes new blog posts to a client's website on a regular schedule.
+- [Print & creative](https://www.srcs.online/print): Business cards, flyers, menus, posters, signage and social graphics.
+- [Business apps](https://www.srcs.online/apps): Booking, intake forms, dashboards, directories and automations.
+- [Resources](https://www.srcs.online/resources): Guides for small businesses on websites, search, branding and advertising.
+  - [Squarespace and Wix: where website builders hold your traffic back](https://www.srcs.online/resources-website-builders)
+  - [Why your website needs Google Search Console and Bing Webmaster Tools](https://www.srcs.online/resources-search-console-bing)
+  - [Backlinks: why they matter and how a local business can earn them](https://www.srcs.online/resources-backlinks)
+  - [Why quality branding matters for a small business](https://www.srcs.online/resources-branding)
+  - [Before you spend on Google Ads, set up conversion tracking](https://www.srcs.online/resources-google-ads-tracking)
+- [Work](https://www.srcs.online/work): Live client projects.
+- [About](https://www.srcs.online/about): The dragon curve logo and what it means for how the studio works.
+- [Pricing](https://www.srcs.online/pricing): Website build fees, $25/month hosting with a built-in content editor, app quotes and hourly rates.
+- [Get started](https://www.srcs.online/contact): Contact form for enquiries.
+- [Wanderlust Santa Rosa case study](https://www.srcs.online/wanderlust): Food truck festival website, vendor application and market admin.
+- [Stay Santa Rosa case study](https://www.srcs.online/staysantarosa): Sonoma travel guide with a 79-place directory and direct hotel booking.
+- [Playground](https://www.srcs.online/arcade): Browser games.
+- [Privacy policy](https://www.srcs.online/privacy)
+- [Terms of use](https://www.srcs.online/terms)
+- [Accessibility statement](https://www.srcs.online/accessibility)
 
 
 ## Sonoma County
 
 Sync Race Studios serves businesses across Sonoma County, California.
 
-- [Website design in Sonoma County](https://www.srcs.online/pages/website-design-sonoma-county.html)
-- [Google Business Profile and Ads in Sonoma County](https://www.srcs.online/pages/google-business-profile-sonoma-county.html)
-- [Logo design and branding in Sonoma County](https://www.srcs.online/pages/logo-design-sonoma-county.html)
-- [Marketing campaigns in Sonoma County](https://www.srcs.online/pages/marketing-campaigns-sonoma-county.html)
-- [Print design in Sonoma County](https://www.srcs.online/pages/print-design-sonoma-county.html)
-- [Small business apps in Sonoma County](https://www.srcs.online/pages/business-apps-sonoma-county.html)
-- [Blog content for Sonoma County businesses](https://www.srcs.online/pages/blog-content-sonoma-county.html)
+- [Website design in Sonoma County](https://www.srcs.online/website-design-sonoma-county)
+- [Google Business Profile and Ads in Sonoma County](https://www.srcs.online/google-business-profile-sonoma-county)
+- [Logo design and branding in Sonoma County](https://www.srcs.online/logo-design-sonoma-county)
+- [Marketing campaigns in Sonoma County](https://www.srcs.online/marketing-campaigns-sonoma-county)
+- [Print design in Sonoma County](https://www.srcs.online/print-design-sonoma-county)
+- [Small business apps in Sonoma County](https://www.srcs.online/business-apps-sonoma-county)
+- [Blog content for Sonoma County businesses](https://www.srcs.online/blog-content-sonoma-county)
 
 ## Projects
 

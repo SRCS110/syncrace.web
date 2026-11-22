@@ -137,22 +137,52 @@
   "redirects": [
     {
       "source": "/pages/creativestudio.html",
-      "destination": "/pages/websites.html",
+      "destination": "/websites",
       "permanent": true
     },
     {
       "source": "/pages/codestudio.html",
-      "destination": "/pages/apps.html",
+      "destination": "/apps",
       "permanent": true
     },
     {
       "source": "/pages/manifesto.html",
-      "destination": "/pages/about.html",
+      "destination": "/about",
       "permanent": true
     },
     {
       "source": "/pages/advertising.html",
-      "destination": "/pages/google-business.html#ads",
+      "destination": "/google-business#ads",
+      "permanent": true
+    },
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/home",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/home.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/pages/start.html",
+      "destination": "/start",
+      "permanent": true
+    },
+    {
+      "source": "/pages/start-admin.html",
+      "destination": "/start/admin",
+      "permanent": true
+    },
+    {
+      "source": "/pages/:slug([a-z0-9-]+)\\.html",
+      "destination": "/:slug",
       "permanent": true
     }
   ],
@@ -164,6 +194,10 @@
     {
       "source": "/start/admin",
       "destination": "/pages/start-admin.html"
+    },
+    {
+      "source": "/:slug((?!api$|demo$|assets$|pages$|start$)[a-z0-9-]+)",
+      "destination": "/pages/:slug.html"
     }
   ],
   "functions": {
