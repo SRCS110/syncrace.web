@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fern &amp; Fold Bakery: editor demo by Sync Race Studios</title>
+<meta name="description" content="A demo website by Sync Race Studios for a made-up bakery. Try the built-in editor: change text, photos and lists on the page and publish.">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://www.srcs.online/demo/">
+<meta property="og:title" content="Try the Sync Race Studios website editor">
+<meta property="og:description" content="Edit a demo bakery website right on the page. Nothing you change is saved.">
+<meta property="og:image" content="https://www.srcs.online/demo/img/hero-1200.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="preload" as="image" href="img/hero-1600.webp" imagesrcset="img/hero-768.webp 768w, img/hero-1200.webp 1200w, img/hero-1600.webp 1600w" imagesizes="100vw" fetchpriority="high">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* Service and hospitality palette (SRCS site system, section 10) */
+  :root {
+    --page: #FFFFFF;
+    --contrast: #405861;
+    --contrast-2: #8A4A2E;      /* terracotta, darkened to pass 4.5:1 on every band, the hero bleed included */
+    --accent-hover: #6F3A23;
+    --featured: #CCA054;
+    --body-text: #5C5650;       /* warm grey, passes 4.5:1 on every band, the hero bleed included */
+    --hairline: #EAE7DE;
+    --base: #F8F6F4;
+    --base-2: #F3EFE9;
+    --invert: #1A1A1A;
+    --hero-bleed: #E1D4C4;      /* sampled from the bottom 5% of the hero photo */
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'Open Sans', system-ui, sans-serif;
+    --wide: 1200px;
+    --pad: 100px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--page); color: var(--body-text); font: 400 18px/1.6 var(--font-body); }
+  img { max-width: 100%; height: auto; display: block; }
+  a { color: var(--contrast-2); }
+  :focus-visible { outline: 2px solid var(--contrast-2); outline-offset: 3px; }
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 400; color: var(--contrast); margin: 0; }
+  h2 { font-size: clamp(36px, 4.2vw, 48px); line-height: 1.2; }
+  h1, h2 { text-wrap: balance; }
+  h3 { font-size: clamp(22px, 2.2vw, 26px); line-height: 1.4; }
+  .skip { position: absolute; left: -9999px; top: 8px; background: #fff; padding: 8px 12px; z-index: 30; }
+  .skip:focus { left: 8px; }
+  .inner { max-width: var(--wide); margin-inline: auto; padding-inline: 24px; }
+  .eyebrow { font: 400 14px/1.4 var(--font-body); letter-spacing: 3px; text-transform: uppercase; color: var(--contrast-2); margin: 0 0 14px; }
+  .lead { font-size: 18px; line-height: 1.4; margin: 16px auto 0; max-width: 620px; }
+  .opener { text-align: center; margin-bottom: 56px; }
+  .section { padding-block: var(--pad); }
+  .section--base { background: var(--base); }
+  .section--base-2 { background: var(--base-2); }
+  .section--bleed { background: var(--hero-bleed); }
+  .btn { display: inline-flex; align-items: center; gap: 10px; background: var(--contrast-2); color: #fff; text-decoration: none; border-radius: 4px; padding: 12px 22px; font: 600 16px/1.6 var(--font-body); }
+  .btn:hover { background: var(--accent-hover); }
+  .btn--hero { font-size: 15px; letter-spacing: .08em; text-transform: uppercase; padding: 14px 26px; }
+  .icon { width: 1.1em; height: 1.1em; stroke: currentColor; fill: none; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+
+  /* Demo ribbon (announcement bar) */
+  .ribbon { background: var(--invert); color: #EDE7DF; font-size: 14px; line-height: 1.5; }
+  .ribbon .inner { display: flex; flex-wrap: wrap; gap: 6px 24px; justify-content: space-between; align-items: center; padding-block: 10px; }
+  .ribbon a { color: #F0B596; }
+  .ribbon strong { color: #fff; font-weight: 600; }
+
+  /* Hero cover with the nav inside, dissolving into the first section (section 9) */
+  .hero { position: relative; background: var(--hero-bleed); color: var(--contrast); }
+  .hero__frame { position: relative; min-height: min(820px, 100svh); display: grid; grid-template-rows: auto 1fr; -webkit-mask-image: linear-gradient(to bottom, #000 82%, transparent 100%); mask-image: linear-gradient(to bottom, #000 82%, transparent 100%); }
+  .hero__media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .hero header, .hero__body { position: relative; z-index: 1; }
+  .hero header { width: 100%; }
+  .nav { height: 90px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .brand { font: 400 30px/1 var(--font-display); color: var(--contrast); text-decoration: none; }
+  .nav nav { display: flex; gap: 28px; font-size: 15px; }
+  .nav nav a { color: var(--contrast); text-decoration: none; }
+  .nav nav a:hover { color: var(--contrast-2); text-decoration: underline; text-underline-offset: 4px; }
+  /* Copy sits on the plain wall above the bread; no overlay, contrast checked against the wall pixels */
+  .hero__body { display: grid; align-content: start; justify-items: center; text-align: center; padding: clamp(16px, 4vh, 48px) 24px 0; }
+  .hero h1 { font-size: clamp(38px, 5vw, 60px); line-height: 1.15; max-width: 760px; margin: 0 auto; }
+  .hero__lead { color: var(--body-text); font-size: 18px; line-height: 1.5; max-width: 560px; margin: 16px auto 28px; }
+  .hero__body > p:last-child { margin: 0; }
+  .hero__curve { position: absolute; inset-inline: 0; bottom: -1px; height: clamp(50px, 7vw, 110px); background: var(--hero-bleed); border-radius: 50% 50% 0 0 / 100% 100% 0 0; pointer-events: none; }
+  .hero__cue { position: absolute; left: 50%; bottom: clamp(20px, 3vw, 44px); transform: translateX(-50%); z-index: 2; display: inline-flex; flex-direction: column; align-items: center; gap: 6px; font: 600 11px/1 var(--font-body); letter-spacing: .18em; text-transform: uppercase; color: var(--contrast); text-decoration: none; }
+  .hero__cue .icon { animation: cue 2s ease-in-out infinite; }
+  @keyframes cue { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+
+  /* Story */
+  .notice { max-width: 760px; margin: 0 auto 64px; text-align: center; background: #fff; border: 1px solid var(--hairline); border-radius: 4px; padding: 16px 22px; color: var(--contrast); }
+  .story { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 72px; align-items: center; }
+  .story img { border-radius: 4px; aspect-ratio: 4 / 3; object-fit: cover; width: 100%; }
+  .story__text { text-align: center; }
+  .story__body p { margin: 0 0 16px; }
+
+  /* Menu */
+  .menu { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 40px 32px; text-align: center; }
+  .menu img { border-radius: 4px; aspect-ratio: 4 / 5; object-fit: cover; width: 100%; margin-bottom: 20px; }
+  .menu > li { display: flex; flex-direction: column; }
+  .menu p { margin: 8px 0 10px; font-size: 16px; line-height: 1.45; }
+  .menu .price { margin-top: auto; }
+  .price { color: var(--contrast-2); font-weight: 600; font-size: 16px; letter-spacing: .04em; }
+
+  /* Visit */
+  .visit { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; text-align: center; }
+  .visit__icon { width: 56px; height: 56px; border: 1px solid var(--hairline); border-radius: 50%; display: grid; place-items: center; margin: 0 auto 18px; color: var(--contrast-2); }
+  .visit__icon .icon { width: 22px; height: 22px; }
+  .visit h3 { margin-bottom: 10px; }
+  .hours { white-space: pre-line; margin: 0; }
+  address { font-style: normal; white-space: pre-line; }
+  .visit a { color: var(--contrast-2); text-decoration: none; }
+
+  /* Booking CTA */
+  .cta { text-align: center; }
+  .cta .btn { margin-top: 32px; }
+
+  /* Footer */
+  .foot { background: var(--invert); color: #CFC8BF; padding-block: 80px 140px; font-size: 15px; }
+  .foot .inner { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 40px; }
+  .foot .brand { color: #fff; font-size: 30px; display: block; margin-bottom: 12px; }
+  .foot h2 { font: 600 13px/1.4 var(--font-body); letter-spacing: .14em; text-transform: uppercase; color: #fff; margin-bottom: 12px; }
+  .foot a { color: #F0B596; }
+  .foot p { margin: 0 0 8px; }
+
+  @media (max-width: 1100px) { .menu { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 860px) {
+    :root { --pad: 60px; }
+    .story, .visit, .foot .inner { grid-template-columns: 1fr; gap: 36px; }
+    .nav nav { gap: 18px; font-size: 14px; }
+    .hero__frame { min-height: min(720px, 92svh); }
+    .hero__lead { font-size: 17px; }
+  }
+  @media (max-width: 520px) { .menu { grid-template-columns: 1fr; } .nav nav { display: none; } }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="ribbon" role="note">
+  <div class="inner">
+    <span><strong>Demo website.</strong> Fern &amp; Fold is a made-up bakery. Press <strong>Try the editor</strong> to change anything outlined. Nothing is saved.</span>
+    <span><a href="/pages/websites.html">Sync Race Studios websites</a> &middot; <a href="/pages/contact.html?about=website">Get a site like this</a></span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero__frame">
+    <img class="hero__media" data-cms="hero-img" data-cms-label="hero photo" src="img/hero-1600.webp" srcset="img/hero-768.webp 768w, img/hero-1200.webp 1200w, img/hero-1600.webp 1600w" sizes="100vw" alt="A row of sourdough loaves and baguettes on a pale stone counter against a cream wall" width="1600" height="900" fetchpriority="high" decoding="async">
+    <header class="inner nav">
+      <a class="brand" href="#main"><span data-cms-global="business-name">Fern &amp; Fold</span></a>
+      <nav aria-label="Primary"><a href="#story">Our story</a><a href="#menu">Menu</a><a href="#visit">Visit</a></nav>
+    </header>
+    <div class="hero__body">
+      <p class="eyebrow" data-cms="hero-eyebrow" data-cms-label="hero eyebrow">Neighborhood bakery</p>
+      <h1 data-cms="hero-title" data-cms-label="headline" data-cms-max="60">Slow bread, baked before sunrise.</h1>
+      <p class="hero__lead" data-cms="hero-sub" data-cms-label="intro" data-cms-max="180">Naturally leavened loaves, flaky pastries and good coffee, made from scratch every morning.</p>
+      <p><a class="btn btn--hero" href="#visit"><span data-cms="hero-cta" data-cms-label="button label">Plan your visit</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></p>
+    </div>
+  </div>
+  <div class="hero__curve" aria-hidden="true"></div>
+  <a class="hero__cue" href="#main">Scroll<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a>
+</div>
+
+<main id="main">
+  <section class="section section--bleed" id="story">
+    <div class="inner">
+      <p class="notice" data-cms="notice" data-cms-type="rich" data-cms-label="announcement"><strong>This weekend:</strong> pumpkin loaves are back, Saturday and Sunday only.</p>
+      <div class="story">
+        <img data-cms="story-img" data-cms-label="story photo" src="img/story-1200.webp" srcset="img/story-768.webp 768w, img/story-1200.webp 1200w" sizes="(max-width: 860px) 100vw, 560px" alt="A baker shaping dough by hand on a floured wooden bench" width="1200" height="900" loading="lazy" decoding="async">
+        <div class="story__text">
+          <p class="eyebrow" data-cms="story-eyebrow">Our story</p>
+          <h2 data-cms="story-title" data-cms-label="story heading">One loaf at a time, since the first alarm.</h2>
+          <div class="lead story__body" data-cms="story-body" data-cms-type="rich" data-cms-label="story text">
+            <p>Fern &amp; Fold started in a borrowed kitchen with one starter and a lot of early mornings. Every loaf is still shaped by hand and given two days to ferment.</p>
+            <p>Flour from a mill an hour north, eggs from down the road, and coffee from a roaster who visits every Tuesday.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="menu">
+    <div class="inner">
+      <div class="opener">
+        <p class="eyebrow" data-cms="menu-eyebrow">On the counter</p>
+        <h2 data-cms="menu-title" data-cms-label="menu heading">Baked this morning</h2>
+        <p class="lead" data-cms="menu-lead" data-cms-label="menu intro">Out of the oven by seven. When it's gone, it's gone.</p>
+      </div>
+      <ul class="menu" data-cms="menu" data-cms-type="list" data-cms-label="menu">
+        <li><img data-cms-field="photo" src="img/sourdough-768.webp" srcset="img/sourdough-480.webp 480w, img/sourdough-768.webp 768w" sizes="(max-width: 520px) 100vw, (max-width: 1100px) 50vw, 270px" alt="A round country sourdough loaf with a deep scored crust" width="768" height="960" loading="lazy" decoding="async"><h3 data-cms-field="name">Country sourdough</h3><p data-cms-field="description">Two-day ferment, dark crust, open crumb.</p><span class="price" data-cms-field="price">$9</span></li>
+        <li><img data-cms-field="photo" src="img/bun-768.webp" srcset="img/bun-480.webp 480w, img/bun-768.webp 768w" sizes="(max-width: 520px) 100vw, (max-width: 1100px) 50vw, 270px" alt="Spiral morning buns glazed with orange sugar" width="768" height="960" loading="lazy" decoding="async"><h3 data-cms-field="name">Morning bun</h3><p data-cms-field="description">Laminated dough, orange zest, cinnamon sugar.</p><span class="price" data-cms-field="price">$5</span></li>
+        <li><img data-cms-field="photo" src="img/rye-768.webp" srcset="img/rye-480.webp 480w, img/rye-768.webp 768w" sizes="(max-width: 520px) 100vw, (max-width: 1100px) 50vw, 270px" alt="Sliced seeded rye bread on a board" width="768" height="960" loading="lazy" decoding="async"><h3 data-cms-field="name">Seeded rye</h3><p data-cms-field="description">Rye, sunflower and flax, with a little molasses.</p><span class="price" data-cms-field="price">$10</span></li>
+        <li><img data-cms-field="photo" src="img/baguette-768.webp" srcset="img/baguette-480.webp 480w, img/baguette-768.webp 768w" sizes="(max-width: 520px) 100vw, (max-width: 1100px) 50vw, 270px" alt="Baguettes standing in a woven basket" width="768" height="960" loading="lazy" decoding="async"><h3 data-cms-field="name">Baguette</h3><p data-cms-field="description">Crackling crust, baked twice a day.</p><span class="price" data-cms-field="price">$4</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--base" id="visit">
+    <div class="inner">
+      <div class="opener">
+        <p class="eyebrow" data-cms="visit-eyebrow">Visit</p>
+        <h2 data-cms="visit-title" data-cms-label="visit heading">Come say hello</h2>
+        <p class="lead" data-cms="visit-lead" data-cms-label="visit intro">Grab a seat by the window, or call ahead and we'll have your order ready.</p>
+      </div>
+      <div class="visit">
+        <div><span class="visit__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span><h3>Hours</h3><p class="hours" data-cms-global="hours" data-cms-label="hours">Wednesday to Friday, 7am to 2pm
+Saturday and Sunday, 8am to 3pm
+Closed Monday and Tuesday</p></div>
+        <div><span class="visit__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg></span><h3>Find us</h3><address data-cms-global="address" data-cms-label="address">212 Juniper Street
+Springfield</address></div>
+        <div><span class="visit__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span><h3>Call ahead</h3><p><a data-cms-global="phone" data-cms-type="link" data-cms-label="phone" href="tel:+15555550142">(555) 555-0142</a></p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--base-2 cta">
+    <div class="inner">
+      <p class="eyebrow" data-cms="cta-eyebrow">Order ahead</p>
+      <h2 data-cms="cta-title" data-cms-label="closing heading">Want a loaf set aside?</h2>
+      <p class="lead" data-cms="cta-lead" data-cms-label="closing text">Call before 10am and we'll hold it at the counter with your name on it.</p>
+      <a class="btn" href="tel:+15555550142"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span data-cms="cta-button" data-cms-label="button label">Call to reserve</span></a>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="inner">
+    <div><span class="brand" data-cms-global="business-name">Fern &amp; Fold</span><p>A made-up bakery, built to show what the Sync Race Studios editor can do.</p></div>
+    <div><h2>Hours</h2><p class="hours" data-cms-global="hours">Wednesday to Friday, 7am to 2pm
+Saturday and Sunday, 8am to 3pm
+Closed Monday and Tuesday</p></div>
+    <div><h2>Want one?</h2><p>Every site we build comes with this editor.</p><p><a href="/pages/websites.html">See website design</a></p><p><a href="/pages/pricing.html">See pricing</a></p></div>
+  </div>
+</footer>
+
+<script src="https://cms.srcs.online/loader.js" data-site="demo" data-demo defer></script>
+</body>
+</html>
