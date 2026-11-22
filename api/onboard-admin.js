@@ -31,12 +31,24 @@ async function requireAdmin(req) {
   const fail = async (status, msg) => { await logEvent(req, 'admin_auth_failed', { detail: { status } }); throw new HttpError(status, msg); };
   const h = String(req.headers.authorization || '');
   const token = h.startsWith('Bearer ') ? h.slice(7).trim() : '';
-  if (!token || token.length > 4096) return fail(401, 'Please sign in.');
-  const { data, error } = await db().auth.getUser(token);
-  if (error || !data?.user) return fail(401, 'Your session has expired. Please sign in again.');
-  const row = must(await db().from('admins').select('user_id').eq('user_id', data.user.id).maybeSingle());
+  // Only an SRCS editor pass for srcs.online is accepted (never a full Supabase session),
+  // checked by the editor service, then against the admins table here.
+  if (!token.startsWith('scms1.') || token.length > 2048) return fail(401, 'Please sign in.');
+  let who;
+  try {
+    const r = await fetch(`${CMS}/api/whoami?site=srcs`, { headers: { Authorization: `Bearer ${token}` }, signal: AbortSignal.timeout(5000) });
+    if (r.status === 401) return fail(401, 'Your session has expired. Please sign in again.');
+    if (!r.ok) return fail(403, 'This account isn’t a Sync Race Studios admin.');
+    who = await r.json();
+  } catch (e) {
+    if (e instanceof HttpError) throw e;
+    console.error('whoami failed', e?.message);
+    throw new HttpError(503, 'Sign-in check isn’t available right now. Try again in a minute.');
+  }
+  if (who?.role !== 'admin' || !who.user?.id) return fail(403, 'This account isn’t a Sync Race Studios admin.');
+  const row = must(await db().from('admins').select('user_id').eq('user_id', who.user.id).maybeSingle());
   if (!row) return fail(403, 'This account isn’t a Sync Race Studios admin.');
-  return data.user;
+  return { id: who.user.id, email: who.user.email };
 }
 
 const str = (v, max, label, multiline = false) => { const r = cleanText(v, { max, label, multiline }); if (r.error) throw new HttpError(400, r.error); return r.value; };
@@ -44,6 +56,7 @@ const mail1 = (v, label) => { const r = cleanEmail(v, label); if (r.error) throw
 const uuid = (v, what = 'client') => { const x = String(v || ''); if (!UUID.test(x)) throw new HttpError(400, `Invalid ${what}`); return x; };
 const num = (v, min, max) => { const n = Number(v); return v === '' || v == null || !Number.isFinite(n) ? null : Math.min(max, Math.max(min, Math.round(n * 100) / 100)); };
 const day = (v) => (typeof v === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(v) ? v : null);
+const CMS = (process.env.CMS_ORIGIN || 'https://cms.srcs.online').replace(/\/$/, '');
 const link = (t) => `${SITE}/start?invite=${t}`;
 
 export default handler(['GET', 'POST'], async (req, res) => {

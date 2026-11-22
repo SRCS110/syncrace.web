@@ -7,7 +7,7 @@
   const b64e = (o) => { const b = new TextEncoder().encode(JSON.stringify(o)); let s = ''; b.forEach((c) => { s += String.fromCharCode(c); }); return btoa(s).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''); };
   const b64d = (str) => { const s = atob(str.replace(/-/g, '+').replace(/_/g, '/')); return JSON.parse(new TextDecoder().decode(Uint8Array.from(s, (c) => c.charCodeAt(0)))); };
   const auth = {
-    get() { try { const r = localStorage.getItem(KEY); return r ? b64d(r) : null; } catch { return null; } },
+    get() { try { const r = localStorage.getItem(KEY); const a = r ? b64d(r) : null; if (a && !String(a.access_token || '').startsWith('scms1.')) { localStorage.removeItem(KEY); return null; } return a; } catch { return null; } },
     set(a) { try { localStorage.setItem(KEY, b64e(a)); } catch {} },
     clear() { try { localStorage.removeItem(KEY); } catch {} },
   };
@@ -21,19 +21,13 @@
   $('signin-btn').href = `${CMS}/login.html?site=${SITE_KEY}&return=${encodeURIComponent(ret)}`;
   $('signin-btn').addEventListener('click', () => { try { if (route.client) sessionStorage.setItem('srcs-admin-client', route.client); } catch {} });
 
-  async function refresh(a) {
-    if (!a?.refresh_token) return null;
-    const r = await fetch(`${CMS}/api/refresh`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ refresh_token: a.refresh_token }) });
-    if (!r.ok) return null;
-    const n = await r.json(); auth.set(n); return n;
-  }
-  async function api(method, query, body, retry = true) {
-    let a = auth.get();
-    if (!a) throw Object.assign(new Error('Please sign in.'), { status: 401 });
-    if (a.expires_at && a.expires_at * 1000 < Date.now() + 30_000) a = (await refresh(a)) || a;
+  // Passes last 12 hours; a new one comes from the sign-in page (no new email while
+  // you're still signed in at cms.srcs.online).
+  async function api(method, query, body) {
+    const a = auth.get();
+    if (!a || (a.expires_at && a.expires_at * 1000 < Date.now() + 30_000)) throw Object.assign(new Error('Please sign in.'), { status: 401 });
     const r = await fetch('/api/onboard-admin' + (query || ''), { method, headers: { Authorization: 'Bearer ' + a.access_token, ...(body ? { 'Content-Type': 'application/json' } : {}) }, body: body ? JSON.stringify(body) : undefined });
     const data = await r.json().catch(() => ({}));
-    if (r.status === 401 && retry && (await refresh(a))) return api(method, query, body, false);
     if (!r.ok) throw Object.assign(new Error(data.error || 'Something went wrong.'), { status: r.status });
     return data;
   }
