@@ -6,13 +6,13 @@
 <title>Fern &amp; Fold Bakery: editor demo by Sync Race Studios</title>
 <meta name="description" content="A demo website by Sync Race Studios for a made-up bakery. Try the built-in editor: change text, photos and lists on the page and publish.">
 <meta name="robots" content="noindex, follow">
-<link rel="canonical" href="https://www.srcs.online/demo/">
+<link rel="canonical" href="https://www.srcs.online/demo">
 <meta property="og:title" content="Try the Sync Race Studios website editor">
 <meta property="og:description" content="Edit a demo bakery website right on the page. Nothing you change is saved.">
 <meta property="og:image" content="https://www.srcs.online/demo/img/hero-1200.webp">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
-<link rel="preload" as="image" href="img/hero-1600.webp" imagesrcset="img/hero-768.webp 768w, img/hero-1200.webp 1200w, img/hero-1600.webp 1600w" imagesizes="100vw" fetchpriority="high">
+<link rel="preload" as="image" href="/demo/img/hero-1600.webp" imagesrcset="/demo/img/hero-768.webp 768w, /demo/img/hero-1200.webp 1200w, /demo/img/hero-1600.webp 1600w" imagesizes="100vw" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
@@ -146,7 +146,7 @@
 
 <div class="hero">
   <div class="hero__frame">
-    <img class="hero__media" data-cms="hero-img" data-cms-label="hero photo" src="img/hero-1600.webp" srcset="img/hero-768.webp 768w, img/hero-1200.webp 1200w, img/hero-1600.webp 1600w" sizes="100vw" alt="A row of sourdough loaves and baguettes on a pale stone counter against a cream wall" width="1600" height="900" fetchpriority="high" decoding="async">
+    <img class="hero__media" data-cms="hero-img" data-cms-label="hero photo" src="/demo/img/hero-1600.webp" srcset="/demo/img/hero-768.webp 768w, /demo/img/hero-1200.webp 1200w, /demo/img/hero-1600.webp 1600w" sizes="100vw" alt="A row of sourdough loaves and baguettes on a pale stone counter against a cream wall" width="1600" height="900" fetchpriority="high" decoding="async">
     <header class="inner nav">
       <a class="brand" href="#main"><span data-cms-global="business-name">Fern &amp; Fold</span></a>
       <nav aria-label="Primary"><a href="#story">Our story</a><a href="#menu">Menu</a><a href="#visit">Visit</a></nav>
@@ -167,7 +167,7 @@
     <div class="inner">
       <p class="notice" data-cms="notice" data-cms-type="rich" data-cms-label="announcement"><strong>This weekend:</strong> pumpkin loaves are back, Saturday and Sunday only.</p>
       <div class="story">
-        <img data-cms="story-img" data-cms-label="story photo" src="img/story-1200.webp" srcset="img/story-768.webp 768w, img/story-1200.webp 1200w" sizes="(max-width: 860px) 100vw, 560px" alt="A baker shaping dough by hand on a floured wooden bench" width="1200" height="900" loading="lazy" decoding="async">
+        <img data-cms="story-img" data-cms-label="story photo" src="/demo/img/story-1200.webp" srcset="/demo/img/story-768.webp 768w, /demo/img/story-1200.webp 1200w" sizes="(max-width: 860px) 100vw, 560px" alt="A baker shaping dough by hand on a floured wooden bench" width="1200" height="900" loading="lazy" decoding="async">
         <div class="story__text">
           <p class="eyebrow" data-cms="story-eyebrow">Our story</p>
           <h2 data-cms="story-title" data-cms-label="story heading">One loaf at a time, since the first alarm.</h2>
@@ -188,10 +188,10 @@
         <p class="lead" data-cms="menu-lead" data-cms-label="menu intro">Out of the oven by seven. When it's gone, it's gone.</p>
       </div>
       <ul class="menu" data-cms="menu" data-cms-type="list" data-cms-label="menu">
-        <li><img data-cms-field="photo" src="img/sourdough-768.webp" srcset="img/sourdough-480.webp 480w, img/sourdough-768.webp 768w" sizes="(max-width: 520px) 100vw, (max-width: 1100px) 50vw, 270px" alt="A round country sourdough loaf with a deep scored crust" width="768" height="960" loading="lazy" decoding="async"><h3 data-cms-field="name">Country sourdough</h3><p data-cms-field="description">Two-day ferment, dark crust, open crumb.</p><span class="price" data-cms-field="price">$9</span></li>
-        <li><img data-cms-field="photo" src="img/bun-768.webp" srcset="img/bun-480.webp 480w, img/bun-768.webp 768w" sizes="(max-width: 520px) 100vw, (max-width: 1100px) 50vw, 270px" alt="Spiral morning buns glazed with orange sugar" width="768" height="960" loading="lazy" decoding="async"><h3 data-cms-field="name">Morning bun</h3><p data-cms-field="description">Laminated dough, orange zest, cinnamon sugar.</p><span class="price" data-cms-field="price">$5</span></li>
-        <li><img data-cms-field="photo" src="img/rye-768.webp" srcset="img/rye-480.webp 480w, img/rye-768.webp 768w" sizes="(max-width: 520px) 100vw, (max-width: 1100px) 50vw, 270px" alt="Sliced seeded rye bread on a board" width="768" height="960" loading="lazy" decoding="async"><h3 data-cms-field="name">Seeded rye</h3><p data-cms-field="description">Rye, sunflower and flax, with a little molasses.</p><span class="price" data-cms-field="price">$10</span></li>
-        <li><img data-cms-field="photo" src="img/baguette-768.webp" srcset="img/baguette-480.webp 480w, img/baguette-768.webp 768w" sizes="(max-width: 520px) 100vw, (max-width: 1100px) 50vw, 270px" alt="Baguettes standing in a woven basket" width="768" height="960" loading="lazy" decoding="async"><h3 data-cms-field="name">Baguette</h3><p data-cms-field="description">Crackling crust, baked twice a day.</p><span class="price" data-cms-field="price">$4</span></li>
+        <li><img data-cms-field="photo" src="/demo/img/sourdough-768.webp" srcset="/demo/img/sourdough-480.webp 480w, /demo/img/sourdough-768.webp 768w" sizes="(max-width: 520px) 100vw, (max-width: 1100px) 50vw, 270px" alt="A round country sourdough loaf with a deep scored crust" width="768" height="960" loading="lazy" decoding="async"><h3 data-cms-field="name">Country sourdough</h3><p data-cms-field="description">Two-day ferment, dark crust, open crumb.</p><span class="price" data-cms-field="price">$9</span></li>
+        <li><img data-cms-field="photo" src="/demo/img/bun-768.webp" srcset="/demo/img/bun-480.webp 480w, /demo/img/bun-768.webp 768w" sizes="(max-width: 520px) 100vw, (max-width: 1100px) 50vw, 270px" alt="Spiral morning buns glazed with orange sugar" width="768" height="960" loading="lazy" decoding="async"><h3 data-cms-field="name">Morning bun</h3><p data-cms-field="description">Laminated dough, orange zest, cinnamon sugar.</p><span class="price" data-cms-field="price">$5</span></li>
+        <li><img data-cms-field="photo" src="/demo/img/rye-768.webp" srcset="/demo/img/rye-480.webp 480w, /demo/img/rye-768.webp 768w" sizes="(max-width: 520px) 100vw, (max-width: 1100px) 50vw, 270px" alt="Sliced seeded rye bread on a board" width="768" height="960" loading="lazy" decoding="async"><h3 data-cms-field="name">Seeded rye</h3><p data-cms-field="description">Rye, sunflower and flax, with a little molasses.</p><span class="price" data-cms-field="price">$10</span></li>
+        <li><img data-cms-field="photo" src="/demo/img/baguette-768.webp" srcset="/demo/img/baguette-480.webp 480w, /demo/img/baguette-768.webp 768w" sizes="(max-width: 520px) 100vw, (max-width: 1100px) 50vw, 270px" alt="Baguettes standing in a woven basket" width="768" height="960" loading="lazy" decoding="async"><h3 data-cms-field="name">Baguette</h3><p data-cms-field="description">Crackling crust, baked twice a day.</p><span class="price" data-cms-field="price">$4</span></li>
       </ul>
     </div>
   </section>
