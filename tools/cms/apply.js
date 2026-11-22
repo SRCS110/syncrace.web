@@ -74,8 +74,13 @@ function attrOps(src, node, attrs, base = 0) {
 }
 
 // Returns splice ops for one region node given a change value.
+// Elements whose contents are code or raw text: an editable region here could turn
+// edited words into script, so they're refused whatever the markup says.
+const UNSAFE_HOSTS = new Set(['script', 'style', 'textarea', 'title', 'noscript', 'template', 'iframe', 'object', 'embed', 'svg', 'math', 'xmp', 'noembed', 'noframes', 'plaintext', 'head', 'html', 'body', 'meta', 'link', 'base']);
+
 function regionOps(src, node, type, value, base = 0) {
   const tag = node.tagName;
+  if (UNSAFE_HOSTS.has(String(tag).toLowerCase())) throw new ContentError(`<${tag}> can’t be an editable area`);
   switch (type) {
     case 'text': {
       const r = innerRange(node);
@@ -215,6 +220,7 @@ export function applyChanges(html, changes, { onlyGlobals = false } = {}) {
     if (!ch || typeof ch.key !== 'string') throw new ContentError('Each change needs a key');
     if (onlyGlobals && !ch.global) continue;
     const nodes = ch.global ? (byGlobal.get(ch.key) || []) : (byKey.has(ch.key) ? [byKey.get(ch.key)] : []);
+    for (const n of nodes) if (UNSAFE_HOSTS.has(String(n.tagName).toLowerCase())) throw new ContentError(`<${n.tagName}> can’t be an editable area`);
     if (!nodes.length) { missing.push(ch.key); continue; }
     for (const node of nodes) {
       const type = regionType(node);
