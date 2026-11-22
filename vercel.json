@@ -28,6 +28,36 @@
           "value": "SAMEORIGIN"
         }
       ]
+    },
+    {
+      "source": "/start(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "no-referrer"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    },
+    {
+      "source": "/pages/start(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "no-referrer"
+        }
+      ]
     }
   ],
   "redirects": [
@@ -51,5 +81,23 @@
       "destination": "/pages/google-business.html#ads",
       "permanent": true
     }
-  ]
+  ],
+  "rewrites": [
+    {
+      "source": "/start",
+      "destination": "/pages/start.html"
+    },
+    {
+      "source": "/start/admin",
+      "destination": "/pages/start-admin.html"
+    }
+  ],
+  "functions": {
+    "api/onboard.js": {
+      "maxDuration": 30
+    },
+    "api/onboard-admin.js": {
+      "maxDuration": 15
+    }
+  }
 }

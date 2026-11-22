@@ -1160,6 +1160,9 @@ function cms(html, rel) {
   return r.html;
 }
 
+// Client onboarding (srcs.online/start): no CMS editing on the admin page, and both are served at /start.
+const NO_CMS = new Set(['start-admin.html']);
+const ROOT_LINKS = new Set(['start.html', 'start-admin.html']);
 const files = ['index.html', ...fs.readdirSync(`${ROOT}/pages`).filter(f => f.endsWith('.html')).map(f => `pages/${f}`)];
 // Icons: the same dragon-curve set on every page, by absolute path.
 const ICONS = '<link rel="icon" href="/favicon.ico" sizes="48x48">\n<link rel="icon" href="/assets/srcs-curve.svg" type="image/svg+xml">\n<link rel="apple-touch-icon" href="/apple-touch-icon.png">\n<link rel="manifest" href="/site.webmanifest">\n';
@@ -1218,7 +1221,10 @@ for (const rel of files) {
   const used = [...new Set([...html.matchAll(/href="#sr-fold-(\d+)"/g)].map(m => +m[1]))].sort((a, b) => a - b);
   const defs = `<svg id="sr-folds" class="sr-defs" aria-hidden="true" focusable="false">${used.map(SRCurve.symbol).join('')}</svg>`;
   html = html.replace(/<body([^>]*)>\n?/, (m, a) => `<body${a}>\n<a class="skip" href="#main">Skip to content</a>\n${defs}\n`);
-  html = cms(html, rel);
+  if (!NO_CMS.has(file)) html = cms(html, rel);
+  else html = html.replace(/ data-cms(?:-type)?="[^"]*"/g, '').replace(`${CMS_LOADER}\n`, '');
+  // Pages served from a rewrite (srcs.online/start) need root-relative links.
+  if (ROOT_LINKS.has(file)) html = html.replace(/(href|src)="\.\.\/(?!\.)/g, '$1="/').replace(/(href|src)="\.\/(?!\.)/g, '$1="/pages/');
   fs.writeFileSync(`${ROOT}/${rel}`, html);
 }
 console.log('built', files.length, 'pages');
