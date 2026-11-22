@@ -547,3 +547,8 @@ main .post-meta, main .post-body p, main .post-body li, main .post small{ text-s
 /* Service page link to its Sonoma County page */
 .local-link{ margin-top:1.25rem; font-size:15px; color:var(--dust); }
 .local-link a{ color:var(--lamp-ink); text-underline-offset:3px; }
+
+/* Editor demo video (websites page) */
+.demo-video{ background:var(--sunk); }
+.demo-video video{ display:block; width:100%; height:auto; aspect-ratio:16/9; background:var(--paper); }
+.demo-video-btns{ margin-top:clamp(1.5rem,3vw,2rem); }
