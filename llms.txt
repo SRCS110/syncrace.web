@@ -36,6 +36,19 @@ The logo is a dragon curve: a strip of paper folded in half ten times and opened
 - [Terms of use](https://www.srcs.online/pages/terms.html)
 - [Accessibility statement](https://www.srcs.online/pages/accessibility.html)
 
+
+## Sonoma County
+
+Sync Race Studios serves businesses across Sonoma County, California.
+
+- [Website design in Sonoma County](https://www.srcs.online/pages/website-design-sonoma-county.html)
+- [Google Business Profile and Ads in Sonoma County](https://www.srcs.online/pages/google-business-profile-sonoma-county.html)
+- [Logo design and branding in Sonoma County](https://www.srcs.online/pages/logo-design-sonoma-county.html)
+- [Marketing campaigns in Sonoma County](https://www.srcs.online/pages/marketing-campaigns-sonoma-county.html)
+- [Print design in Sonoma County](https://www.srcs.online/pages/print-design-sonoma-county.html)
+- [Small business apps in Sonoma County](https://www.srcs.online/pages/business-apps-sonoma-county.html)
+- [Blog content for Sonoma County businesses](https://www.srcs.online/pages/blog-content-sonoma-county.html)
+
 ## Projects
 
 - Wanderlust Santa Rosa (wanderlustsantarosa.com): Website for a free weekly food truck festival in Old Courthouse Square, Santa Rosa, with a vendor application and market admin. HTML, CSS, JavaScript, Supabase, Vercel. Live.

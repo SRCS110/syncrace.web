@@ -35,7 +35,7 @@ const ldScript = (meta, faqs) => {
     isPartOf: { '@id': SITE + '#site' }, about: { '@id': SITE + '#org' } });
   const bc = crumbs(meta.path, meta.crumb || meta.title.split(':')[0]); if (bc) graph.push(bc);
   if (meta.service) graph.push({ '@type': 'Service', name: meta.service.name, serviceType: meta.service.name, description: meta.desc, url,
-    provider: { '@id': SITE + '#org' }, ...(meta.service.offers ? { offers: meta.service.offers } : {}) });
+    provider: { '@id': SITE + '#org' }, ...(meta.service.areaServed ? { areaServed: meta.service.areaServed } : {}), ...(meta.service.offers ? { offers: meta.service.offers } : {}) });
   if (meta.extraLd) graph.push(...meta.extraLd);
   if (faqs.length) graph.push({ '@type': 'FAQPage', mainEntity: faqs.map(([q, a]) => ({ '@type': 'Question', name: strip(q), acceptedAnswer: { '@type': 'Answer', text: strip(a) } })) });
   return `<script type="application/ld+json">\n${JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }, null, 1)}\n</script>\n`;
@@ -100,6 +100,98 @@ const SVC = [
   { key: 'content', file: 'content.html', n: 8, t: 'Content engine', d: 'An optional add-on that keeps your site fresh with new blog posts on a regular schedule, written for search and AI.', s: '$50/month · optional · cancel anytime' },
   { key: 'pricing', file: 'pricing.html', n: 7, t: 'Hosting & management', d: 'We host and look after every website and app we build. Websites are $25/month, with a built-in editor so you can make content changes yourself.', s: 'Hosting · updates · backups · monitoring' },
 ];
+/* =================== SONOMA COUNTY PAGES ===================
+   One local search page per service. Copy is drawn from the service pages; the area
+   (Sonoma County, served, no in-person claim) was confirmed by Daniel. */
+const AREA = { '@type': 'AdministrativeArea', name: 'Sonoma County, California' };
+const LOCAL = [
+  { key: 'website', file: 'website-design-sonoma-county.html', svc: 'websites.html', n: 10, short: 'Website design',
+    title: 'Website design in Sonoma County: Sync Race Studios', h1: 'Website design in Sonoma County',
+    desc: 'Custom website design for Sonoma County businesses: fast, built for Google and AI search, hosted for $25/month, with a built-in editor for your own changes.',
+    lede: 'Custom websites for businesses across Sonoma County, designed from an empty file around what your customers come to you for. Fast, built for Google and AI search, and hosted by us for $25 a month, with a built-in editor so you can change your own content.',
+    btn: 'Start a website',
+    incH: 'Everything a site needs to launch',
+    inc: [['Custom design', 'in your colours, type and photography, never a template with your logo dropped in.'], ['Schema markup', 'structured data that tells Google and AI search what your business is, where it is and what it offers.'], ['Fast on any phone', 'lean, mobile-first code, compressed images and caching.'], ['Analytics and search listings', 'Google Analytics set up, and your site added to Google Search Console and Bing Webmaster Tools.'], ['Built-in content editor', 'change text, photos and lists on your own site and publish in about a minute. <a href="../demo">Try the demo</a>.']],
+    priceH: 'From $1,500, then $25 a month', prices: [['$1,500+', 'one-time build'], ['$25/mo', 'hosting and built-in editor'], ['$125/hr', 'bigger changes, quoted first']],
+    priceP: 'Hosting covers updates, backups and monitoring on Vercel and Cloudflare.',
+    locH: 'Made to be found nearby',
+    loc: [['Your location in the code', 'schema markup tells Google and AI assistants where you are and what you offer.'], ['Matched to your Google profile', 'the same name, hours and phone number, so Google trusts both.'], ['Pages for each campaign', 'Google Ads land on pages written for the search, with conversion tracking built in.'], ['Room to grow', 'add the content engine for regular posts on local events, seasons and the questions your customers ask.']],
+    ctaH: 'Tell us about your site.', ctaP: 'What your business does and what the site needs to do. Rough is fine.' },
+  { key: 'google', file: 'google-business-profile-sonoma-county.html', svc: 'google-business.html', n: 6, short: 'Google Business Profile & Ads',
+    title: 'Google Profile and Ads in Sonoma County: Sync Race Studios', h1: 'Google Business Profile and Ads in Sonoma County',
+    desc: 'Google Business Profile setup and Google Ads management for Sonoma County businesses: show up on Search and Maps, and track what every ad dollar brings in.',
+    lede: 'Your Google Business Profile puts you on Search and Maps for free, and Google Ads put you at the top when it matters most. We set up both properly for Sonoma County businesses, connect them, and track what they bring in.',
+    btn: 'Talk about Google',
+    incH: 'Profile and ads, set up properly',
+    inc: [['Claim or create', 'your profile, or recover one someone else set up.'], ['Categories, services and service area', 'chosen carefully and matched to your website.'], ['Reviews', 'a simple way to ask happy customers for reviews, and help drafting replies.'], ['Google Ads', 'Search, local and Performance Max campaigns where they make sense, in an account in your name.'], ['Conversion tracking', 'calls, forms and bookings measured with Google Analytics 4 and Google Ads, with consent.']],
+    priceH: '$125 an hour, estimate first', prices: [['$125/hr', 'profile and ads work']],
+    priceP: 'Ad spend goes directly to Google on your own card, and you set the limit.',
+    locH: 'Showing up in local searches',
+    loc: [['Maps', 'rankings depend on relevance, distance and prominence. A complete, active profile gives you the best chance.'], ['Your service area', 'filled in on your profile, so Google knows where you work.'], ['Local ads', 'can show your location, hours and reviews straight from your profile.'], ['Reviews at the counter', 'a QR code on receipts and table cards takes customers straight to leave a review.']],
+    ctaH: 'Get your business seen on Google.', ctaP: 'Tell us your business name, whether you have a profile today, and whether you\'re running ads.' },
+  { key: 'branding', file: 'logo-design-sonoma-county.html', svc: 'branding.html', n: 4, short: 'Logo design & branding',
+    title: 'Logo design in Sonoma County: Sync Race Studios', h1: 'Logo design and branding in Sonoma County',
+    desc: 'Logo design and branding for Sonoma County businesses: a logo, colour palette, typefaces and a one-page brand guide for your website, signage and print.',
+    lede: 'A logo and a simple brand system for Sonoma County businesses: your mark plus the colours, type and tone around it, so your website, Google listing, menus and signs all look like the same business.',
+    btn: 'Start a brand',
+    incH: 'What you get',
+    inc: [['Logo design', 'a primary logo, a simplified mark for small spaces, and versions for light and dark backgrounds.'], ['Colour palette', 'a few colours with exact values for screen and print.'], ['Typefaces', 'heading and body fonts that work on the web and in print.'], ['Brand guide', 'one page showing how to use it all, so anyone can keep it consistent.'], ['Every file you need', 'SVG, PNG and PDF, plus a favicon and social profile images.']],
+    priceH: '$125 an hour, estimate first', prices: [['$125/hr', 'logo and brand work']],
+    priceP: 'You get the final logo files and the rights to use them for your business.',
+    locH: 'One look, everywhere you show up',
+    loc: [['Storefront and signage', 'signs, menus and business cards all follow the brand guide.'], ['Google Business Profile', 'gets a matching logo and cover image.'], ['Your website', 'uses the same colours, type and logo from day one.'], ['Ads and social', 'graphics look like you, so people recognise you before they read the name.']],
+    ctaH: 'Ready for a brand that fits?', ctaP: 'Tell us about your business and whether you have a logo today.' },
+  { key: 'marketing', file: 'marketing-campaigns-sonoma-county.html', svc: 'marketing.html', n: 3, short: 'Marketing campaigns',
+    title: 'Marketing campaigns in Sonoma County: Sync Race Studios', h1: 'Marketing campaigns in Sonoma County',
+    desc: 'Marketing campaign help for Sonoma County businesses: plan the message, pick the channels, make the creative and track results for a launch, season or event.',
+    lede: 'A grand opening, a new menu, a holiday rush, an event. We help Sonoma County businesses plan the campaign around it, make everything it needs, and see what it brought in.',
+    btn: 'Plan a campaign',
+    incH: 'Everything a campaign needs',
+    inc: [['Goal and offer', 'what the campaign is for and why someone should act now.'], ['Channel plan', 'the mix that fits your customers: Google, social, email, print, your website and your storefront.'], ['Campaign calendar', 'what goes out where, and when, from teaser to last call.'], ['Creative', 'headlines, ad copy, social graphics, flyers and short video, all in your brand.'], ['Tracking and wrap-up', 'links, codes and conversions, then a report on what it cost and what it brought in.']],
+    priceH: '$125 an hour, estimate first', prices: [['$125/hr', 'campaign planning and creative']],
+    priceP: 'Ad spend and printing are separate. We can plan only, or run it end to end.',
+    locH: 'Reaching people nearby',
+    loc: [['Google Business Profile & Ads', 'carry the offer to people searching nearby.'], ['Print', 'flyers, posters and table cards with QR codes back to the campaign page.'], ['Your storefront', 'part of the channel plan, alongside your website, email and social.'], ['Dates that matter', 'openings, launches, seasonal promotions and events: anything with a date and a goal.']],
+    ctaH: 'Got something to promote?', ctaP: 'Tell us what it is, when it happens and who you want to reach.' },
+  { key: 'print', file: 'print-design-sonoma-county.html', svc: 'print.html', n: 5, short: 'Print & creative',
+    title: 'Print design in Sonoma County: Sync Race Studios', h1: 'Print design in Sonoma County',
+    desc: 'Print design for Sonoma County businesses: business cards, flyers, menus, posters and signage, delivered print-ready and matched to your website and brand.',
+    lede: 'Business cards, flyers, menus, posters and signs for Sonoma County businesses, designed to match your website and Google listing, and delivered as print-ready files.',
+    btn: 'Start a print job',
+    incH: 'Creative for the real world',
+    inc: [['Business cards and stationery', 'letterheads, envelopes, thank-you cards.'], ['Flyers, postcards and rack cards', 'for counters, mailers and local events.'], ['Menus and price lists', 'easy to read and easy to update for next season.'], ['Posters, banners and signage', 'from window decals to event banners.'], ['Print-ready files', 'CMYK, bleed and crop marks set up for your printer, plus PDFs for sharing.']],
+    priceH: '$125 an hour, estimate first', prices: [['$125/hr', 'print design']],
+    priceP: 'You get the final print files and editable source files.',
+    locH: 'Printed locally, tracked online',
+    loc: [['A local printer', 'we send files to your printer, or coordinate printing with a local shop and pass the cost through at quote.'], ['QR codes', 'that point to the right page, so you can tell which piece worked.'], ['Reviews', 'a QR code on receipts and table cards brings customers to your Google profile.'], ['Same look as online', 'the same colours, type and message as your website and listing.']],
+    ctaH: 'Need something printed?', ctaP: 'Tell us what it is, how many, and when you need it.' },
+  { key: 'apps', file: 'business-apps-sonoma-county.html', svc: 'apps.html', n: 9, short: 'Business apps',
+    title: 'Business apps in Sonoma County: Sync Race Studios', h1: 'Small business apps in Sonoma County',
+    desc: 'Small web apps for Sonoma County businesses: booking, intake forms, dashboards, reports and automations, built, hosted and managed by Sync Race Studios.',
+    lede: 'Small, focused tools for Sonoma County businesses that take repetitive work off your week: bookings, forms, reports and dashboards. We build the one tool that removes the task eating your week, then host and manage it for you.',
+    btn: 'Describe the job',
+    incH: 'The kind of jobs we take off your plate',
+    inc: [['Booking and scheduling', 'customers or vendors pick dates; you approve from one place.'], ['Intake and request forms', 'quotes, applications and work orders, sent to the right person automatically.'], ['Dashboards and reports', 'your numbers each morning, without an hour of exporting.'], ['Directories and catalogues', 'searchable, filterable lists of places, products or services.'], ['Automations', 'emails, reminders and hand-offs that happen on their own.']],
+    priceH: 'Quoted per project', prices: [],
+    priceP: 'Each app is quoted on its own: a build price and a monthly hosting and management fee, based on what it does and how much data it handles.',
+    locH: 'Connected to how customers find you',
+    loc: [['Your website', 'hosts the forms and booking customers use.'], ['Google Business Profile', 'can link straight to your booking page.'], ['Ads', 'track a completed booking as a conversion, not just a click.'], ['Your team', 'sees everything in one dashboard instead of five inboxes.']],
+    ctaH: 'Got a job eating your week?', ctaP: 'Tell us what it looks like. We\'ll say honestly whether it\'s worth building.' },
+  { key: 'content', file: 'blog-content-sonoma-county.html', svc: 'content.html', n: 8, short: 'Content engine',
+    title: 'Blog writing in Sonoma County: Sync Race Studios', h1: 'Blog content for Sonoma County businesses',
+    desc: 'Regular blog posts for Sonoma County business websites, on local and seasonal topics, written for Google and AI search. An optional $50/month add-on.',
+    lede: 'The content engine adds new blog posts to your website on a regular schedule, on topics that fit your business and your area, so your site keeps working for you between updates. It is optional, and $50 a month.',
+    btn: 'Add the content engine',
+    incH: 'What the content engine does',
+    inc: [['Topics that fit your business', 'local events, seasons, questions your customers ask, and news in your industry.'], ['Posts on a regular schedule', 'so your site never sits still.'], ['Written for search and AI', 'clear headings, schema markup and internal links on every post.'], ['Published to your site', 'added to your blog, sitemap and llms.txt automatically.'], ['Your voice', 'written to match your business, your area and the way you talk to customers.']],
+    priceH: '$50 a month, optional', prices: [['$50/mo', 'content engine add-on']],
+    priceP: 'Add it to any website we host. You can stop anytime, and your existing posts stay on your site.',
+    locH: 'Local topics, all year',
+    loc: [['Seasons and events', 'seasonal and local topics added as the year goes on.'], ['Your area', 'posts written for your business, your area and your customers.'], ['Your Google profile', 'new posts can be shared as updates on your profile.'], ['AI assistants', 'more clear answers about your business for ChatGPT, Claude and Perplexity to draw on.']],
+    ctaH: 'Keep your site posting.', ctaP: 'Tell us about your business and the topics you want to be known for.' },
+];
+const LOCAL_BY = Object.fromEntries(LOCAL.map(o => [o.key, o]));
+
 const svcList = (pre) => `<div class="svcs">${SVC.map(s => `
       <a class="svc rise" href="${pre}${s.file}">
         <svg data-fold="${s.n}" width="56" height="56"></svg>
@@ -260,6 +352,14 @@ page('services.html', {
   </section>
 
   <section class="band shell">
+    <div class="col">
+      <span class="kicker rise">Sonoma County</span>
+      <h2 class="rise">Serving businesses across Sonoma County</h2>
+      <div class="rise">${list(LOCAL.map(o => [`<a href="${o.file}">${o.h1}</a>`, '']))}</div>
+    </div>
+  </section>
+
+  <section class="band shell">
     <div class="col right">
       <span class="kicker rise">How the pieces connect</span>
       <h2 class="rise">Each fold leads to the next.</h2>
@@ -296,6 +396,7 @@ const OFFERS = {
   google: HOURLY, print: HOURLY, branding: HOURLY, marketing: HOURLY,
   content: { '@type': 'Offer', priceCurrency: 'USD', price: 50, priceSpecification: { '@type': 'UnitPriceSpecification', price: 50, priceCurrency: 'USD', unitCode: 'MON', unitText: 'month' } },
 };
+
 const svcPage = (o) => page(o.file, { title: `${o.title}: Sync Race Studios`, desc: o.desc, path: `pages/${o.file}`, crumb: o.title, service: { name: o.title, offers: OFFERS[o.key] } }, `
   <section class="shell page-top">
     <div class="split" style="align-items:end">
@@ -303,7 +404,8 @@ const svcPage = (o) => page(o.file, { title: `${o.title}: Sync Race Studios`, de
         <span class="kicker rise">${o.kicker}</span>
         <h1 class="rise">${o.h1}</h1>
         <p class="lede rise">${o.lede}</p>
-        <div class="hero-btns rise"><a class="btn" href="contact.html?about=${o.key}">${o.btn} <span class="arrow" aria-hidden="true">→</span></a><a class="btn btn-quiet" href="services.html">All services</a></div>
+        <div class="hero-btns rise"><a class="btn" href="contact.html?about=${o.key}">${o.btn} <span class="arrow" aria-hidden="true">→</span></a><a class="btn btn-quiet" href="services.html">All services</a></div>${LOCAL_BY[o.key] ? `
+        <p class="rise local-link">In Sonoma County? <a href="${LOCAL_BY[o.key].file}">${LOCAL_BY[o.key].h1}</a></p>` : ''}
       </div>
       <div class="rise" aria-hidden="true" style="justify-self:center"><svg data-fold="${o.n}" data-sw="1.4" width="260" height="260" style="width:min(260px,60vw);height:auto;aspect-ratio:1"></svg></div>
     </div>
@@ -490,6 +592,65 @@ svcPage({
 });
 
 
+/* =================== SONOMA COUNTY PAGES (rendered after the service pages) =================== */
+const LOCAL_WORK = WORK.filter(w => w.case);
+const localPage = (o) => page(o.file, { title: o.title, desc: o.desc, path: `pages/${o.file}`, crumb: o.h1,
+  service: { name: `${o.short} in Sonoma County`, offers: OFFERS[o.key], areaServed: AREA } }, `
+  <section class="shell page-top">
+    <div class="split" style="align-items:end">
+      <div class="col">
+        <span class="kicker rise">Sonoma County</span>
+        <h1 class="rise">${o.h1}</h1>
+        <p class="lede rise">${o.lede}</p>
+        <div class="hero-btns rise"><a class="btn" href="contact.html?about=${o.key}">${o.btn} <span class="arrow" aria-hidden="true">→</span></a><a class="btn btn-quiet" href="${o.svc}">Full service details</a></div>
+      </div>
+      <div class="rise" aria-hidden="true" style="justify-self:center"><svg data-fold="${o.n}" data-sw="1.4" width="260" height="260" style="width:min(260px,60vw);height:auto;aspect-ratio:1"></svg></div>
+    </div>
+  </section>
+
+  <section class="band shell">
+    <div class="col">
+      <span class="kicker rise">What's included</span>
+      <h2 class="rise">${o.incH}</h2>
+      <div class="rise">${list(o.inc)}</div>
+    </div>
+  </section>
+
+  <section class="band shell">
+    <div class="col right">
+      <span class="kicker rise">Pricing</span>
+      <h2 class="rise">${o.priceH}</h2>${o.prices.length ? `
+      <div class="prices rise">${o.prices.map(([a, b]) => `<div class="price"><b>${a}</b><span>${b}</span></div>`).join('')}</div>` : ''}
+      <p class="lede rise">${o.priceP} <a href="pricing.html" style="color:var(--lamp-ink)">See pricing</a>.</p>
+    </div>
+  </section>
+
+  <section class="band shell">
+    <div class="col">
+      <span class="kicker rise">Local search</span>
+      <h2 class="rise">${o.locH}</h2>
+      <div class="rise">${list(o.loc)}</div>
+    </div>
+  </section>
+
+  <section class="band shell">
+    <div class="head"><span class="kicker rise">Local work</span><h2 class="rise">Built in Santa Rosa</h2></div>
+    <div class="cards">${LOCAL_WORK.map(w => `
+      <a class="card rise" href="${w.case}"><span class="pill pill-lamp">${w.pills.join(' and ')}</span><h3>${w.t}</h3><p>${w.d}</p><span class="more">Case study <span aria-hidden="true">→</span></span></a>`).join('')}
+    </div>
+  </section>
+
+  <section class="band shell">
+    <div class="col right">
+      <span class="kicker rise">Also in Sonoma County</span>
+      <h2 class="rise">More ways we can help</h2>
+      <div class="rise">${list(LOCAL.filter(x => x !== o).map(x => [`<a href="${x.file}">${x.h1}</a>`, '']))}</div>
+    </div>
+  </section>
+${cta(o.ctaH, o.ctaP, `contact.html?about=${o.key}`)}`);
+LOCAL.forEach(localPage);
+
+
 /* =================== PRICING =================== */
 const tier = (o) => `
   <section class="band shell">
@@ -614,6 +775,7 @@ ${cta("Have a question we haven’t covered?", "Ask us. If it’s useful to othe
 const SM = [
   ['Main', [['../index.html', 'Home'], ['services.html', 'Services'], ['pricing.html', 'Pricing'], ['work.html', 'Work'], ['about.html', 'About'], ['contact.html', 'Get started']]],
   ['Services', [['websites.html', 'Website design'], ['branding.html', 'Logo design & branding'], ['google-business.html', 'Google Business Profile & Ads'], ['marketing.html', 'Marketing campaigns'], ['content.html', 'Content engine'], ['print.html', 'Print & creative'], ['apps.html', 'Business apps']]],
+  ['Sonoma County', LOCAL.map(o => [o.file, o.h1])],
   ['Resources', [['resources.html', 'All resources'], ...POSTS.map(p => [p.slug, p.short])]],
   ['Work', [['wanderlust.html', 'Wanderlust Santa Rosa case study'], ['staysantarosa.html', 'Stay Santa Rosa case study'], ['arcade.html', 'Playground']]],
   ['Legal', [['privacy.html', 'Privacy policy'], ['terms.html', 'Terms of use'], ['accessibility.html', 'Accessibility statement'], ['../sitemap.xml', 'XML sitemap']]],
@@ -869,6 +1031,8 @@ const SIMPLE = { 'services.html': 'Services', 'pricing.html': 'Pricing', 'about.
 const CASES = { 'wanderlust.html': 'Wanderlust Santa Rosa', 'staysantarosa.html': 'Stay Santa Rosa' };
 const trail = f => {
   if (SVC_NAMES[f]) return [['Services', 'services.html'], [SVC_NAMES[f], f]];
+  const loc = LOCAL.find(o => o.file === f);
+  if (loc) return [['Services', 'services.html'], [SVC_NAMES[loc.svc], loc.svc], ['Sonoma County', f]];
   if (CASES[f]) return [['Work', 'work.html'], [CASES[f], f]];
   const post = POSTS.find(p => p.slug === f);
   if (post) return [['Resources', 'resources.html'], [post.short, f]];

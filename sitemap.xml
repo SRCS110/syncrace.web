@@ -2,7 +2,7 @@
 <!-- Sync Race Studios sitemap. srcs.online redirects to www, so every URL uses www. Update <lastmod> when a page's content changes. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://www.srcs.online/</loc><lastmod>2026-11-21</lastmod><changefreq>monthly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://www.srcs.online/pages/services.html</loc><lastmod>2026-11-21</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.srcs.online/pages/services.html</loc><lastmod>2026-11-22</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://www.srcs.online/pages/websites.html</loc><lastmod>2026-11-21</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://www.srcs.online/pages/google-business.html</loc><lastmod>2026-11-21</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://www.srcs.online/pages/branding.html</loc><lastmod>2026-11-21</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
@@ -27,4 +27,11 @@
   <url><loc>https://www.srcs.online/pages/resources-backlinks.html</loc><lastmod>2026-11-21</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
   <url><loc>https://www.srcs.online/pages/marketing.html</loc><lastmod>2026-11-21</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://www.srcs.online/pages/content.html</loc><lastmod>2026-11-21</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.srcs.online/pages/website-design-sonoma-county.html</loc><lastmod>2026-11-22</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.srcs.online/pages/google-business-profile-sonoma-county.html</loc><lastmod>2026-11-22</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.srcs.online/pages/logo-design-sonoma-county.html</loc><lastmod>2026-11-22</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.srcs.online/pages/marketing-campaigns-sonoma-county.html</loc><lastmod>2026-11-22</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.srcs.online/pages/print-design-sonoma-county.html</loc><lastmod>2026-11-22</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.srcs.online/pages/business-apps-sonoma-county.html</loc><lastmod>2026-11-22</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.srcs.online/pages/blog-content-sonoma-county.html</loc><lastmod>2026-11-22</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 </urlset>
