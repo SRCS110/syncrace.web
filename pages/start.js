@@ -27,6 +27,36 @@
     clear() { try { localStorage.removeItem(DRAFT); } catch {} },
   };
 
+  // Cloudflare Turnstile on the public form (no project link). Rendered explicitly so it
+  // can be reset after every attempt: tokens work once.
+  const TS_SITEKEY = '0x4AAAAAAGNkdynvd29FTfAN', TS_ACTION = 'start_intake';
+  let tsId = null, tsToken = '', tsLoading = null;
+  function loadTurnstile() {
+    if (window.turnstile) return Promise.resolve();
+    if (tsLoading) return tsLoading;
+    tsLoading = new Promise((resolve, reject) => {
+      const sc = document.createElement('script');
+      sc.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      sc.async = true; sc.defer = true;
+      sc.onload = () => resolve(); sc.onerror = () => { tsLoading = null; reject(new Error('Turnstile failed to load')); };
+      document.head.appendChild(sc);
+    });
+    return tsLoading;
+  }
+  async function renderTurnstile(el) {
+    tsToken = '';
+    try { await loadTurnstile(); } catch { el.textContent = 'The verification check didn’t load. Check your connection, or email hello@srcs.online.'; return; }
+    if (tsId !== null) { try { window.turnstile.remove(tsId); } catch {} tsId = null; }
+    if (!el.isConnected) return;
+    tsId = window.turnstile.render(el, {
+      sitekey: TS_SITEKEY, action: TS_ACTION,
+      callback: (t) => { tsToken = t; },
+      'expired-callback': () => { tsToken = ''; },
+      'error-callback': () => { tsToken = ''; },
+    });
+  }
+  function resetTurnstile() { tsToken = ''; if (tsId !== null && window.turnstile) { try { window.turnstile.reset(tsId); } catch {} } }
+
   let spec = [], invite = null, answers = {}, step = 0, agreement = null;
   const VIEWS = ['v-loading', 'v-error', 'v-welcome', 'v-wizard', 'v-agreement', 'v-done'];
 
@@ -104,11 +134,13 @@
         return `<h3><span>${esc(s.title)}</span><button class="linkish" type="button" data-edit="${i}">Edit<span class="sr-only"> ${esc(s.title)}</span></button></h3>${rows.length ? `<table><tbody>${rows.map(([f, v]) => `<tr><th scope="row">${esc(f.label)}</th><td>${esc(v)}</td></tr>`).join('')}</tbody></table>` : '<p class="intro" style="margin:0">Nothing added.</p>'}`;
       }).join('');
       host.innerHTML = `<div class="review"><h2 tabindex="-1">Check your answers.</h2><p class="intro">${token ? 'Submit these, then you’ll review your agreement.' : 'Submit these and we’ll be in touch, usually the same day.'}</p>${groups}
+        ${token ? '' : '<div id="ts" class="ts-box" style="margin-top:1.75rem;min-height:65px"></div>'}
         <p class="form-note" id="step-status" role="status"></p>
         <div class="ob-nav"><button class="btn btn-quiet" type="button" id="back">Back</button><div class="right"><button class="btn" type="button" id="submit">${token ? 'Submit and continue' : 'Submit'} <span class="arrow" aria-hidden="true">→</span></button></div></div></div>`;
       host.querySelectorAll('[data-edit]').forEach((b) => b.onclick = () => { step = Number(b.dataset.edit); renderStep(); });
       $('back').onclick = () => { step--; renderStep(); };
       $('submit').onclick = submitIntake;
+      if (!token) renderTurnstile($('ts'));
     }
     const h = host.querySelector('h2'); if (h) h.focus({ preventScroll: true });
     $('ob').scrollIntoView({ block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
@@ -134,14 +166,16 @@
 
   async function submitIntake() {
     const btn = $('submit'), st = $('step-status');
+    if (!token && !tsToken) { st.textContent = 'Please complete the verification check above.'; return; }
     btn.disabled = true; st.textContent = 'Sending…';
+    const ts = tsToken;
     try {
-      const r = await api('POST', { action: 'intake', t: token || undefined, answers, _gotcha: trap });
+      const r = await api('POST', { action: 'intake', t: token || undefined, answers, _gotcha: trap, ...(token ? {} : { 'cf-turnstile-response': ts }) });
       if (r.next === 'agreement') { invite.intake = { answers: { ...answers }, submitted_at: new Date().toISOString() }; await openAgreement(); }
       else { store.clear(); done('Thanks, we’ve got it.', 'We’ll read through your answers and reply by email, usually the same day. If it’s a fit, we’ll send your agreement to review and sign online.', []); }
     } catch (e) {
       st.textContent = e.message;
-    } finally { btn.disabled = false; }
+    } finally { btn.disabled = false; if (!token) resetTurnstile(); }
   }
 
   /* ---------- agreement + signature ---------- */

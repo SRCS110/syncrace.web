@@ -20,6 +20,7 @@ import { cleanAnswers, summarize, publicSpec } from './_onboard/fields.js';
 import { buildAgreement, agreementText, agreementHTML, sha256 } from './_onboard/agreement.js';
 import { agreementPDF } from './_onboard/pdf.js';
 import { cleanText, cleanEmail } from './_onboard/guard.js';
+import { verifyTurnstile } from './_onboard/turnstile.js';
 
 const consentText = (clientName) => `I have read the Client Service Agreement above and I am authorized to sign it for ${clientName}. I agree to sign electronically, and that my electronic signature has the same legal effect as my handwritten signature.`;
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -80,6 +81,8 @@ export default handler(['GET', 'POST'], async (req, res) => {
     } else {
       await rateLimit(req, ['intake_open'], 3);
       await rateLimit(req, ['intake_open'], 30, { scope: 'global', windowMs: 86400_000, message: 'We’re getting a lot of requests right now. Please email hello@srcs.online instead.' });
+      // The public form (no project link) must pass Cloudflare Turnstile.
+      await verifyTurnstile(req.body['cf-turnstile-response'], { action: 'start_intake', ip: ipOf(req) });
       client = must(await db().from('clients').insert({
         slug: slugify(answers.display_name || answers.legal_name),
         business_name: answers.display_name || answers.legal_name,
