@@ -243,8 +243,8 @@ const WORK = [
   { t: 'Stay Santa Rosa', url: 'staysantarosa.com', img: 'stay-home.webp', phone: 'stay-mobile.webp', case: 'staysantarosa.html', site: 'https://staysantarosa.com/', pills: ['Website', 'Travel guide'],
     alt: 'Stay Santa Rosa home page: redwoods behind the headline One City Worth Exploring, with a hotel booking bar along the bottom.',
     d: 'A travel guide to Santa Rosa and Sonoma wine country, created by two downtown hotels. Dining, wine, attractions and a searchable directory of 79 places, with booking that sends guests straight to each hotel.' },
-  { t: 'Topophilia Design Studio', url: 'topophiliadesign.com', img: 'topophilia-hero.webp', h: 893, case: 'topophilia.html', site: 'https://www.topophiliadesign.com/', pills: ['Logo and branding', 'Website'],
-    alt: 'Topophilia Design Studio home page: a calm living room with a carved walnut coffee table, a leather lounge chair and a cream sofa, with vineyard hills through tall windows.',
+  { t: 'Topophilia Design Studio', url: 'topophiliadesign.com', img: 'topophilia-home.webp', phone: 'topophilia-mobile.webp', case: 'topophilia.html', site: 'https://www.topophiliadesign.com/', pills: ['Logo and branding', 'Website'],
+    alt: 'Topophilia Design Studio home page: the headline A love of place, carried home over a calm living room with vineyard hills through tall windows.',
     d: 'An interior and wardrobe design studio in Santa Rosa. We designed the logo and brand from scratch, built the website, and set up Google Analytics, Google Search Console and Bing Webmaster Tools.' },
 ];
 const SURF = { t: 'Surfline 8th Ave. So', url: 'surflinejaxbeach.com', img: 'surfline.webp', h: 864, pills: ['Website', 'Availability calendar'],
