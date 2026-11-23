@@ -73,7 +73,7 @@ const SRCurve = (() => {
   return { turns, points, fit, symbol, icon };
 })();
 
-const BRAND = `<span><b>Sync Race</b><em>Business Services</em></span>`;
+const BRAND = `<span><b>Sync Race</b><em>Business Studio</em></span>`;
 const MARK = () => SRCurve.icon(10, { sw: 1.1, cls: 'mark', attrs: ' width="32" height="32"' });
 
 const navHTML = (here, toPages, toRoot) => {
