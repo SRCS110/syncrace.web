@@ -31,6 +31,7 @@ The logo is a dragon curve: a strip of paper folded in half ten times and opened
 - [Get started](https://www.srcs.online/contact): Contact form for enquiries.
 - [Wanderlust Santa Rosa case study](https://www.srcs.online/wanderlust): Food truck festival website, vendor application and market admin.
 - [Stay Santa Rosa case study](https://www.srcs.online/staysantarosa): Sonoma travel guide with a 79-place directory and direct hotel booking.
+- [Topophilia Design Studio case study](https://www.srcs.online/topophilia): Logo, branding and website for a Santa Rosa interior and wardrobe design studio, with Google Analytics, Search Console and Bing Webmaster Tools.
 - [Playground](https://www.srcs.online/arcade): Browser games.
 - [Privacy policy](https://www.srcs.online/privacy)
 - [Terms of use](https://www.srcs.online/terms)
@@ -53,6 +54,7 @@ Sync Race Studios serves businesses across Sonoma County, California.
 
 - Wanderlust Santa Rosa (wanderlustsantarosa.com): Website for a free weekly food truck festival in Old Courthouse Square, Santa Rosa, with a vendor application and market admin. HTML, CSS, JavaScript, Supabase, Vercel. Live.
 - Stay Santa Rosa (staysantarosa.com): Travel guide to Santa Rosa and Sonoma wine country created by Hotel E and Art House Santa Rosa, with a searchable 79-place directory and direct hotel booking. Live.
+- Topophilia Design Studio (topophiliadesign.com): Interior and wardrobe design studio in Santa Rosa serving Sonoma County and the Bay Area. Full logo and brand identity, custom website design, and Google Analytics, Google Search Console and Bing Webmaster Tools setup. Live.
 - Surfline 8th Ave. So (surflinejaxbeach.com): Marketing website with an availability calendar for a Jacksonville, Florida vacation rental. Live.
 - Visual HTML editor (htmlv.srcs.online): Lets clients change text and images on their own site without touching code.
 

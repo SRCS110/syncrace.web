@@ -243,6 +243,9 @@ const WORK = [
   { t: 'Stay Santa Rosa', url: 'staysantarosa.com', img: 'stay-home.webp', phone: 'stay-mobile.webp', case: 'staysantarosa.html', site: 'https://staysantarosa.com/', pills: ['Website', 'Travel guide'],
     alt: 'Stay Santa Rosa home page: redwoods behind the headline One City Worth Exploring, with a hotel booking bar along the bottom.',
     d: 'A travel guide to Santa Rosa and Sonoma wine country, created by two downtown hotels. Dining, wine, attractions and a searchable directory of 79 places, with booking that sends guests straight to each hotel.' },
+  { t: 'Topophilia Design Studio', url: 'topophiliadesign.com', img: 'topophilia-hero.webp', h: 893, case: 'topophilia.html', site: 'https://www.topophiliadesign.com/', pills: ['Logo and branding', 'Website'],
+    alt: 'Topophilia Design Studio home page: a calm living room with a carved walnut coffee table, a leather lounge chair and a cream sofa, with vineyard hills through tall windows.',
+    d: 'An interior and wardrobe design studio in Santa Rosa. We designed the logo and brand from scratch, built the website, and set up Google Analytics, Google Search Console and Bing Webmaster Tools.' },
 ];
 const SURF = { t: 'Surfline 8th Ave. So', url: 'surflinejaxbeach.com', img: 'surfline.webp', h: 864, pills: ['Website', 'Availability calendar'],
   alt: 'Surfline 8th Ave. So rental website home page.',
@@ -777,7 +780,7 @@ const SM = [
   ['Services', [['websites.html', 'Website design'], ['branding.html', 'Logo design & branding'], ['google-business.html', 'Google Business Profile & Ads'], ['marketing.html', 'Marketing campaigns'], ['content.html', 'Content engine'], ['print.html', 'Print & creative'], ['apps.html', 'Business apps']]],
   ['Sonoma County', LOCAL.map(o => [o.file, o.h1])],
   ['Resources', [['resources.html', 'All resources'], ...POSTS.map(p => [p.slug, p.short])]],
-  ['Work', [['wanderlust.html', 'Wanderlust Santa Rosa case study'], ['staysantarosa.html', 'Stay Santa Rosa case study'], ['arcade.html', 'Playground']]],
+  ['Work', [['wanderlust.html', 'Wanderlust Santa Rosa case study'], ['staysantarosa.html', 'Stay Santa Rosa case study'], ['topophilia.html', 'Topophilia Design Studio case study'], ['arcade.html', 'Playground']]],
   ['Legal', [['privacy.html', 'Privacy policy'], ['terms.html', 'Terms of use'], ['accessibility.html', 'Accessibility statement'], ['../sitemap.xml', 'XML sitemap']]],
 ];
 page('sitemap.html', {
@@ -801,7 +804,7 @@ page('sitemap.html', {
 /* =================== WORK =================== */
 page('work.html', {
   title: 'Work: Sync Race Studios',
-  desc: 'Websites and business apps by Sync Race Studios: Wanderlust Santa Rosa, Stay Santa Rosa and Surfline 8th Ave. So.',
+  desc: 'Websites and business apps by Sync Race Studios: Wanderlust Santa Rosa, Stay Santa Rosa, Topophilia Design Studio and Surfline 8th Ave. So.',
   path: 'pages/work.html', pageType: 'CollectionPage', crumb: 'Work',
 }, `
   <section class="shell page-top">
@@ -1028,7 +1031,7 @@ const YEAR = new Date().getFullYear();
 // Breadcrumb trails: file -> [[label, file], ...] after Home. Last item is the page itself.
 const SVC_NAMES = { 'websites.html': 'Website design', 'branding.html': 'Logo design & branding', 'google-business.html': 'Google Business Profile & Ads', 'marketing.html': 'Marketing campaigns', 'content.html': 'Content engine', 'print.html': 'Print & creative', 'apps.html': 'Business apps' };
 const SIMPLE = { 'services.html': 'Services', 'pricing.html': 'Pricing', 'about.html': 'About', 'contact.html': 'Get started', 'work.html': 'Work', 'resources.html': 'Resources', 'sitemap.html': 'Sitemap', 'privacy.html': 'Privacy policy', 'terms.html': 'Terms of use', 'accessibility.html': 'Accessibility statement', 'arcade.html': 'Playground' };
-const CASES = { 'wanderlust.html': 'Wanderlust Santa Rosa', 'staysantarosa.html': 'Stay Santa Rosa' };
+const CASES = { 'wanderlust.html': 'Wanderlust Santa Rosa', 'staysantarosa.html': 'Stay Santa Rosa', 'topophilia.html': 'Topophilia Design Studio' };
 const trail = f => {
   if (SVC_NAMES[f]) return [['Services', 'services.html'], [SVC_NAMES[f], f]];
   const loc = LOCAL.find(o => o.file === f);
