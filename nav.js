@@ -118,9 +118,30 @@ class SiteNav extends HTMLElement {
       burger.setAttribute('aria-expanded', String(!open));
     });
     this.querySelectorAll('.nav-links a, .nav-sheet a').forEach(a => a.addEventListener('click', () => this.removeAttribute('data-open')));
+    hideOnScroll(this);
   }
 }
 customElements.define('site-nav', SiteNav);
+
+/* Mobile: the header slides away on scroll down and returns on scroll up.
+   Stays put near the top, while the menu is open, while it holds focus,
+   and for anyone who prefers reduced motion. */
+function hideOnScroll(el) {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const mq = matchMedia('(max-width: 900px)');
+  let last = scrollY, ticking = false;
+  const show = () => el.classList.remove('nav-hidden');
+  const update = () => {
+    ticking = false;
+    const y = Math.max(0, scrollY), d = y - last;
+    if (!mq.matches || el.hasAttribute('data-open') || el.contains(document.activeElement) || y <= el.offsetHeight) { show(); last = y; return; }
+    if (d > 6) { el.classList.add('nav-hidden'); last = y; }
+    else if (d < -6) { show(); last = y; }
+  };
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  el.addEventListener('focusin', show);
+  mq.addEventListener?.('change', show);
+}
 
 class SiteFoot extends HTMLElement {
   connectedCallback() {

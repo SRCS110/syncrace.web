@@ -350,6 +350,11 @@ site-nav[data-open] .nav-toggle span:nth-child(3){ transform:translateY(-6.5px) 
   .nav-sheet a{ border-radius:0; padding:.9rem var(--gut); font-family:var(--display); text-transform:uppercase; letter-spacing:.06em; font-size:20px; color:var(--ink); }
   .nav-sheet a[aria-current="page"]{ color:var(--lamp-ink); }
 }
+/* Mobile: header slides away on scroll down, returns on scroll up (nav.js) */
+@media(max-width:900px){
+  site-nav{ transition:transform .35s cubic-bezier(.22,1,.36,1); }
+  site-nav.nav-hidden{ transform:translateY(-100%); }
+}
 
 /* ============================================================
    CONTACT FORM
