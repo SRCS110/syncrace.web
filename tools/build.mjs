@@ -40,7 +40,7 @@ const ldScript = (meta, faqs) => {
   if (faqs.length) graph.push({ '@type': 'FAQPage', mainEntity: faqs.map(([q, a]) => ({ '@type': 'Question', name: strip(q), acceptedAnswer: { '@type': 'Answer', text: strip(a) } })) });
   return `<script type="application/ld+json">\n${JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }, null, 1)}\n</script>\n`;
 };
-const HOURLY = { '@type': 'Offer', priceCurrency: 'USD', priceSpecification: { '@type': 'UnitPriceSpecification', price: 125, priceCurrency: 'USD', unitCode: 'HUR', unitText: 'hour' } };
+const HOURLY = { '@type': 'Offer', priceCurrency: 'USD', priceSpecification: { '@type': 'UnitPriceSpecification', price: 129, priceCurrency: 'USD', unitCode: 'HUR', unitText: 'hour' } };
 
 const head = ({ title, desc, path, root }) => {
   const r = root ? './' : '../';
@@ -97,8 +97,9 @@ const SVC = [
   { key: 'marketing', file: 'marketing.html', n: 3, t: 'Marketing campaigns', d: 'Plan and run a campaign around a launch, a season or an event: the message, the channels, the creative and the tracking.', s: 'Campaign plans · creative · launch and reporting' },
   { key: 'print', file: 'print.html', n: 5, t: 'Print & creative', d: 'Business cards, flyers, menus and signage that match your website and send people to it.', s: 'Print-ready files · QR codes · social graphics' },
   { key: 'apps', file: 'apps.html', n: 9, t: 'Business apps', d: 'Small, focused tools that take repetitive work off your week: bookings, forms, reports and dashboards.', s: 'Booking and intake · dashboards · automations' },
+  { key: 'agents', file: 'ai-agents.html', n: 2, t: 'AI website assistants', d: 'An AI assistant on your website that answers questions, takes enquiries and sends people to book, day and night. Trained on your business.', s: '$99/month + AI usage · any website' },
   { key: 'content', file: 'content.html', n: 8, t: 'Content engine', d: 'An optional add-on that keeps your site fresh with new blog posts on a regular schedule, written for search and AI.', s: '$50/month · optional · cancel anytime' },
-  { key: 'pricing', file: 'pricing.html', n: 7, t: 'Hosting & management', d: 'We host and look after every website and app we build. Websites are $25/month, with a built-in editor so you can make content changes yourself.', s: 'Hosting · updates · backups · monitoring' },
+  { key: 'pricing', file: 'pricing.html', n: 7, t: 'Hosting & management', d: 'We host and look after every website and app we build. Websites are $49/month, with a built-in editor so you can make content changes yourself.', s: 'Hosting · updates · backups · monitoring' },
 ];
 /* =================== SONOMA COUNTY PAGES ===================
    One local search page per service. Copy is drawn from the service pages; the area
@@ -107,12 +108,12 @@ const AREA = { '@type': 'AdministrativeArea', name: 'Sonoma County, California' 
 const LOCAL = [
   { key: 'website', file: 'website-design-sonoma-county.html', svc: 'websites.html', n: 10, short: 'Website design',
     title: 'Website design in Sonoma County: Sync Race Studios', h1: 'Website design in Sonoma County',
-    desc: 'Custom website design for Sonoma County businesses: fast, built for Google and AI search, hosted for $25/month, with a built-in editor for your own changes.',
-    lede: 'Custom websites for businesses across Sonoma County, designed from an empty file around what your customers come to you for. Fast, built for Google and AI search, and hosted by us for $25 a month, with a built-in editor so you can change your own content.',
+    desc: 'Custom website design for Sonoma County businesses: fast, built for Google and AI search, hosted for $49/month, with a built-in editor for your own changes.',
+    lede: 'Custom websites for businesses across Sonoma County, designed from an empty file around what your customers come to you for. Fast, built for Google and AI search, and hosted by us for $49 a month, with a built-in editor so you can change your own content.',
     btn: 'Start a website',
     incH: 'Everything a site needs to launch',
     inc: [['Custom design', 'in your colours, type and photography, never a template with your logo dropped in.'], ['Schema markup', 'structured data that tells Google and AI search what your business is, where it is and what it offers.'], ['Fast on any phone', 'lean, mobile-first code, compressed images and caching.'], ['Analytics and search listings', 'Google Analytics set up, and your site added to Google Search Console and Bing Webmaster Tools.'], ['Built-in content editor', 'change text, photos and lists on your own site and publish in about a minute. <a href="../demo">Try the demo</a>.']],
-    priceH: 'From $1,500, then $25 a month', prices: [['$1,500+', 'one-time build'], ['$25/mo', 'hosting and built-in editor'], ['$125/hr', 'bigger changes, quoted first']],
+    priceH: 'From $1,200, then $49 a month', prices: [['$1,200+', 'one-time build'], ['$49/mo', 'hosting and built-in editor'], ['$129/hr', 'bigger changes, quoted first']],
     priceP: 'Hosting covers updates, backups and monitoring on Vercel and Cloudflare.',
     locH: 'Made to be found nearby',
     loc: [['Your location in the code', 'schema markup tells Google and AI assistants where you are and what you offer.'], ['Matched to your Google profile', 'the same name, hours and phone number, so Google trusts both.'], ['Pages for each campaign', 'Google Ads land on pages written for the search, with conversion tracking built in.'], ['Room to grow', 'add the content engine for regular posts on local events, seasons and the questions your customers ask.']],
@@ -124,7 +125,7 @@ const LOCAL = [
     btn: 'Talk about Google',
     incH: 'Profile and ads, set up properly',
     inc: [['Claim or create', 'your profile, or recover one someone else set up.'], ['Categories, services and service area', 'chosen carefully and matched to your website.'], ['Reviews', 'a simple way to ask happy customers for reviews, and help drafting replies.'], ['Google Ads', 'Search, local and Performance Max campaigns where they make sense, in an account in your name.'], ['Conversion tracking', 'calls, forms and bookings measured with Google Analytics 4 and Google Ads, with consent.']],
-    priceH: '$125 an hour, estimate first', prices: [['$125/hr', 'profile and ads work']],
+    priceH: '$129 an hour, estimate first', prices: [['$129/hr', 'profile and ads work']],
     priceP: 'Ad spend goes directly to Google on your own card, and you set the limit.',
     locH: 'Showing up in local searches',
     loc: [['Maps', 'rankings depend on relevance, distance and prominence. A complete, active profile gives you the best chance.'], ['Your service area', 'filled in on your profile, so Google knows where you work.'], ['Local ads', 'can show your location, hours and reviews straight from your profile.'], ['Reviews at the counter', 'a QR code on receipts and table cards takes customers straight to leave a review.']],
@@ -136,7 +137,7 @@ const LOCAL = [
     btn: 'Start a brand',
     incH: 'What you get',
     inc: [['Logo design', 'a primary logo, a simplified mark for small spaces, and versions for light and dark backgrounds.'], ['Colour palette', 'a few colours with exact values for screen and print.'], ['Typefaces', 'heading and body fonts that work on the web and in print.'], ['Brand guide', 'one page showing how to use it all, so anyone can keep it consistent.'], ['Every file you need', 'SVG, PNG and PDF, plus a favicon and social profile images.']],
-    priceH: '$125 an hour, estimate first', prices: [['$125/hr', 'logo and brand work']],
+    priceH: '$129 an hour, estimate first', prices: [['$129/hr', 'logo and brand work']],
     priceP: 'You get the final logo files and the rights to use them for your business.',
     locH: 'One look, everywhere you show up',
     loc: [['Storefront and signage', 'signs, menus and business cards all follow the brand guide.'], ['Google Business Profile', 'gets a matching logo and cover image.'], ['Your website', 'uses the same colours, type and logo from day one.'], ['Ads and social', 'graphics look like you, so people recognise you before they read the name.']],
@@ -148,7 +149,7 @@ const LOCAL = [
     btn: 'Plan a campaign',
     incH: 'Everything a campaign needs',
     inc: [['Goal and offer', 'what the campaign is for and why someone should act now.'], ['Channel plan', 'the mix that fits your customers: Google, social, email, print, your website and your storefront.'], ['Campaign calendar', 'what goes out where, and when, from teaser to last call.'], ['Creative', 'headlines, ad copy, social graphics, flyers and short video, all in your brand.'], ['Tracking and wrap-up', 'links, codes and conversions, then a report on what it cost and what it brought in.']],
-    priceH: '$125 an hour, estimate first', prices: [['$125/hr', 'campaign planning and creative']],
+    priceH: '$129 an hour, estimate first', prices: [['$129/hr', 'campaign planning and creative']],
     priceP: 'Ad spend and printing are separate. We can plan only, or run it end to end.',
     locH: 'Reaching people nearby',
     loc: [['Google Business Profile & Ads', 'carry the offer to people searching nearby.'], ['Print', 'flyers, posters and table cards with QR codes back to the campaign page.'], ['Your storefront', 'part of the channel plan, alongside your website, email and social.'], ['Dates that matter', 'openings, launches, seasonal promotions and events: anything with a date and a goal.']],
@@ -160,7 +161,7 @@ const LOCAL = [
     btn: 'Start a print job',
     incH: 'Creative for the real world',
     inc: [['Business cards and stationery', 'letterheads, envelopes, thank-you cards.'], ['Flyers, postcards and rack cards', 'for counters, mailers and local events.'], ['Menus and price lists', 'easy to read and easy to update for next season.'], ['Posters, banners and signage', 'from window decals to event banners.'], ['Print-ready files', 'CMYK, bleed and crop marks set up for your printer, plus PDFs for sharing.']],
-    priceH: '$125 an hour, estimate first', prices: [['$125/hr', 'print design']],
+    priceH: '$129 an hour, estimate first', prices: [['$129/hr', 'print design']],
     priceP: 'You get the final print files and editable source files.',
     locH: 'Printed locally, tracked online',
     loc: [['A local printer', 'we send files to your printer, or coordinate printing with a local shop and pass the cost through at quote.'], ['QR codes', 'that point to the right page, so you can tell which piece worked.'], ['Reviews', 'a QR code on receipts and table cards brings customers to your Google profile.'], ['Same look as online', 'the same colours, type and message as your website and listing.']],
@@ -256,7 +257,7 @@ const own = `
     <div class="col">
       <span class="kicker rise">Hosted and managed</span>
       <h2 class="rise">We build it, host it and look after it.</h2>
-      <p class="stack rise">Websites and apps run on our stack: <b>Vercel</b> hosting, <b>Supabase</b> data and <b>Cloudflare</b> in front, managed by us. Websites are <b>$25/month</b> and come with a <b>built-in editor</b>, so you can change your own content any time. Bigger changes and Google and print work are billed <b>hourly</b>, quoted before we start.</p>
+      <p class="stack rise">Websites and apps run on our stack: <b>Vercel</b> hosting, <b>Supabase</b> data and <b>Cloudflare</b> in front, managed by us. Websites are <b>$49/month</b> and come with a <b>built-in editor</b>, so you can change your own content any time. Bigger changes and Google and print work are billed <b>hourly</b>, quoted before we start.</p>
       <div class="btns rise"><a class="btn btn-quiet" href="./pages/pricing.html">See pricing <span class="arrow" aria-hidden="true">→</span></a></div>
     </div>
   </section>`;
@@ -382,8 +383,8 @@ page('services.html', {
       <h2 class="rise">Good to know</h2>
       ${faq([
         ['Do I have to buy everything?', 'No. Start with whichever piece matters most. Many clients begin with a Google Business Profile or a website and add the rest later.'],
-        ['Who hosts my website or app?', 'We do. Every website and app we build is hosted and managed by us, so one team is responsible for keeping it fast, secure and working. Websites are $25/month; apps have a monthly fee quoted with the build.'],
-        ['How is pricing handled?', 'Websites have a one-time build fee and $25/month hosting, with a built-in editor for your own content changes. Bigger changes are billed hourly. Apps are quoted per project. Google Business Profile, Google Ads and print work are billed hourly, with an estimate before we start. <a href="pricing.html">See pricing</a>.'],
+        ['Who hosts my website or app?', 'We do. Every website and app we build is hosted and managed by us, so one team is responsible for keeping it fast, secure and working. Websites are $49/month; apps have a monthly fee quoted with the build.'],
+        ['How is pricing handled?', 'Websites have a one-time build fee and $49/month hosting, with a built-in editor for your own content changes. Bigger changes are billed hourly. Apps are quoted per project. Google Business Profile, Google Ads and print work are billed hourly, with an estimate before we start. <a href="pricing.html">See pricing</a>.'],
         ['Whose name are my Google accounts in?', 'Yours. Your Google Business Profile and Google Ads account are set up under your Google account, and we work inside them as a manager.'],
         ['Can you work with what I already have?', 'Yes. We can take over an existing website, claim a profile someone else set up, or clean up an ads account that isn\'t tracking properly.'],
       ])}
@@ -394,9 +395,10 @@ ${cta('Not sure where to start?', 'Tell us about your business and what you want
 /* =================== SERVICE PAGES =================== */
 const OFFERS = {
   website: [
-    { '@type': 'Offer', priceCurrency: 'USD', priceSpecification: { '@type': 'PriceSpecification', minPrice: 1500, priceCurrency: 'USD', description: 'One-time build from $1,500. Bigger changes after launch billed at $125/hour.' } },
-    { '@type': 'Offer', name: 'Hosting and built-in content editor', priceCurrency: 'USD', priceSpecification: { '@type': 'UnitPriceSpecification', price: 25, priceCurrency: 'USD', unitCode: 'MON', unitText: 'month' } }],
+    { '@type': 'Offer', priceCurrency: 'USD', priceSpecification: { '@type': 'PriceSpecification', minPrice: 1200, priceCurrency: 'USD', description: 'One-time build from $1,200. Bigger changes after launch billed at $129/hour.' } },
+    { '@type': 'Offer', name: 'Hosting and built-in content editor', priceCurrency: 'USD', priceSpecification: { '@type': 'UnitPriceSpecification', price: 49, priceCurrency: 'USD', unitCode: 'MON', unitText: 'month' } }],
   google: HOURLY, print: HOURLY, branding: HOURLY, marketing: HOURLY,
+  agents: { '@type': 'Offer', priceCurrency: 'USD', price: 99, priceSpecification: { '@type': 'UnitPriceSpecification', price: 99, priceCurrency: 'USD', unitCode: 'MON', unitText: 'month', description: 'Plus AI usage, billed at cost' } },
   content: { '@type': 'Offer', priceCurrency: 'USD', price: 50, priceSpecification: { '@type': 'UnitPriceSpecification', price: 50, priceCurrency: 'USD', unitCode: 'MON', unitText: 'month' } },
 };
 
@@ -449,11 +451,11 @@ ${cta(o.ctaH, o.ctaP, `contact.html?about=${o.key}`)}`);
 
 svcPage({
   file: 'websites.html', key: 'website', n: 10, kicker: 'Website design', title: 'Website design',
-  desc: 'Custom websites for local businesses, optimized for Google and AI search, with a built-in editor for your own content changes. Hosting is $25/month. Built by Sync Race Studios.',
+  desc: 'Custom websites for local businesses, optimized for Google and AI search, with a built-in editor for your own content changes. Hosting is $49/month. Built by Sync Race Studios.',
   h1: 'A website that fits your business.', btn: 'Start a website',
-  lede: 'Designed and built from an empty file around what your customers actually come to you for. Server-side rendered, fast and optimized, with schema markup for Google and AI search, and hosted by us for $25 a month, with a built-in editor so you can change your own content.',
+  lede: 'Designed and built from an empty file around what your customers actually come to you for. Server-side rendered, fast and optimized, with schema markup for Google and AI search, and hosted by us for $49 a month, with a built-in editor so you can change your own content.',
   incH: 'Everything a site needs to launch',
-  inc: [['Custom design', 'in your colours, type and photography, never a template with your logo dropped in.'], ['Server-side rendered', 'every page arrives as finished HTML, so it loads fast and search engines and AI assistants read all of it.'], ['Fast and optimized', 'lean, mobile-first code, compressed images and caching, so pages load quickly on any phone.'], ['Schema markup', 'structured data that tells Google and AI search exactly what your business is, where it is and what it offers.'], ['Optimized for AI search', 'schema markup, llms.txt and clearly written pages, so ChatGPT, Claude, Perplexity and Google AI Overviews can understand and recommend your business.'], ['Search basics', 'page titles, descriptions, sitemap and fast load times for Google and Bing.'], ['Analytics and search listings', 'Google Analytics set up, and your site added to Google Search Console and Bing Webmaster Tools.'], ['Forms that reach you', 'contact, quote and booking forms delivered to your inbox.'], ['Hosting for $25/month', 'on Vercel and Cloudflare, managed by us, with updates, backups and monitoring.'], ['Privacy and accessibility', 'consent-based analytics, a privacy policy and a WCAG 2.2 AA target.'], ['Built-in content editor', 'sign in on your own site, change text, photos and lists right on the page, and publish in about a minute. Every change can be undone. <a href="../demo">Try the demo</a>.']],
+  inc: [['Custom design', 'in your colours, type and photography, never a template with your logo dropped in.'], ['Server-side rendered', 'every page arrives as finished HTML, so it loads fast and search engines and AI assistants read all of it.'], ['Fast and optimized', 'lean, mobile-first code, compressed images and caching, so pages load quickly on any phone.'], ['Schema markup', 'structured data that tells Google and AI search exactly what your business is, where it is and what it offers.'], ['Optimized for AI search', 'schema markup, llms.txt and clearly written pages, so ChatGPT, Claude, Perplexity and Google AI Overviews can understand and recommend your business.'], ['Search basics', 'page titles, descriptions, sitemap and fast load times for Google and Bing.'], ['Analytics and search listings', 'Google Analytics set up, and your site added to Google Search Console and Bing Webmaster Tools.'], ['Forms that reach you', 'contact, quote and booking forms delivered to your inbox.'], ['Hosting for $49/month', 'on Vercel and Cloudflare, managed by us, with updates, backups and monitoring.'], ['Privacy and accessibility', 'consent-based analytics, a privacy policy and a WCAG 2.2 AA target.'], ['Built-in content editor', 'sign in on your own site, change text, photos and lists right on the page, and publish in about a minute. Every change can be undone. <a href="../demo">Try the demo</a>.']],
   extra: `
   <section class="band shell">
     <div class="head"><span class="kicker rise">Recent sites</span><h2 class="rise">Live and in use</h2></div>
@@ -461,10 +463,10 @@ svcPage({
     </div>
   </section>`,
   stepH: 'From first call to launch',
-  steps: [[2, 'Discover', 'Goals, audience, content and timeline, agreed together.'], [4, 'Design', 'Layouts and a visual direction you approve before we build.'], [7, 'Build', 'Clean code on a live preview link, so you\'re never guessing from a flat picture.'], [10, 'Launch and manage', 'We put it live and host it for $25 a month. You edit your own content with the built-in editor; bigger changes are billed by the hour.']],
+  steps: [[2, 'Discover', 'Goals, audience, content and timeline, agreed together.'], [4, 'Design', 'Layouts and a visual direction you approve before we build.'], [7, 'Build', 'Clean code on a live preview link, so you\'re never guessing from a flat picture.'], [10, 'Launch and manage', 'We put it live and host it for $49 a month. You edit your own content with the built-in editor; bigger changes are billed by the hour.']],
   conH: 'The hub of the whole line',
   con: [['Google Business Profile', 'links here, with matching name, hours and phone number.'], ['Google Ads', 'land on pages written for each campaign, with conversion tracking built in.'], ['Print', 'QR codes point to specific pages, so you can see which flyer worked.'], ['Business apps', 'like booking or intake forms plug straight into the site.']],
-  faq: [['Can you redesign the site I already have?', 'Yes. We carry over the content that works, fix speed and search issues, and rebuild it mobile first.'], ['Will I be able to edit it myself?', 'Yes. Every site comes with a built-in editor: open your site, sign in with your email, change text, photos and lists in place, and publish. Every change is kept in a history you can undo, and the site stays plain HTML underneath, so it\'s never locked to a tool.'], ['What happens after launch?', 'We host and manage the site for $25 a month. You can make content changes yourself with the built-in editor; new pages, features or design changes are billed at $125 an hour, quoted first.'], ['What does a website cost?', 'Builds start from $1,500, then $25 a month for hosting and the built-in editor. Bigger changes after launch are $125 an hour. <a href="pricing.html">See pricing</a>.']],
+  faq: [['Can you redesign the site I already have?', 'Yes. We carry over the content that works, fix speed and search issues, and rebuild it mobile first.'], ['Will I be able to edit it myself?', 'Yes. Every site comes with a built-in editor: open your site, sign in with your email, change text, photos and lists in place, and publish. Every change is kept in a history you can undo, and the site stays plain HTML underneath, so it\'s never locked to a tool.'], ['What happens after launch?', 'We host and manage the site for $49 a month. You can make content changes yourself with the built-in editor; new pages, features or design changes are billed at $129 an hour, quoted first.'], ['What does a website cost?', 'Builds start from $1,200, then $49 a month for hosting and the built-in editor. Bigger changes after launch are $129 an hour. <a href="pricing.html">See pricing</a>.']],
   ctaH: 'Tell us about your site.', ctaP: 'What your business does and what the site needs to do. Rough is fine.',
 });
 
@@ -487,7 +489,7 @@ svcPage({
   steps: [[2, 'Audit', 'What Google already shows for your business, and what\'s missing or wrong.'], [4, 'Profile', 'Claim, verify and complete every section, matched to your website.'], [6, 'Ads and tracking', 'Keywords, ads, landing pages and conversion tracking, set up before anything goes live.'], [9, 'Refine and report', 'Fresh posts and photos, review replies, and campaigns tuned on what actually brings in customers.']],
   conH: 'How profile and ads work together',
   con: [['Local ads', 'can show your location, hours and reviews straight from your profile.'], ['Your website', 'shares the same details as your profile and provides the landing pages for ads.'], ['Tracking', 'shows calls, direction requests and bookings from both, in one place.'], ['Print', 'can carry a QR code that takes customers straight to leave a review.']],
-  faq: [['Can you guarantee a top spot on Google?', 'No one honestly can. Maps rankings depend on relevance, distance and prominence, and ad positions on your bids and ad quality. A complete, active profile and well-built campaigns give you the best chance.'], ['How is this billed?', 'At $125 an hour, with an estimate before we start. Ad spend goes directly to Google on your own card. <a href="pricing.html">See pricing</a>.'], ['How much should I spend on ads?', 'It depends on your area, your industry and what a customer is worth to you. We\'ll suggest a starting budget to test, and you set the limit.'], ['Who owns the profile and ads account?', 'You do. Both are set up under your Google account, and we\'re added as a manager you can remove at any time.'], ['Can you fix what someone else set up?', 'Yes. We can recover a profile, and audit an ads account, fixing the tracking first and then the campaigns.']],
+  faq: [['Can you guarantee a top spot on Google?', 'No one honestly can. Maps rankings depend on relevance, distance and prominence, and ad positions on your bids and ad quality. A complete, active profile and well-built campaigns give you the best chance.'], ['How is this billed?', 'At $129 an hour, with an estimate before we start. Ad spend goes directly to Google on your own card. <a href="pricing.html">See pricing</a>.'], ['How much should I spend on ads?', 'It depends on your area, your industry and what a customer is worth to you. We\'ll suggest a starting budget to test, and you set the limit.'], ['Who owns the profile and ads account?', 'You do. Both are set up under your Google account, and we\'re added as a manager you can remove at any time.'], ['Can you fix what someone else set up?', 'Yes. We can recover a profile, and audit an ads account, fixing the tracking first and then the campaigns.']],
   ctaH: 'Get your business seen on Google.', ctaP: 'Tell us your business name, whether you have a profile today, and whether you\'re running ads.',
 });
 
@@ -511,7 +513,7 @@ svcPage({
   steps: [[2, 'Listen', 'Your business, your customers, what you want people to feel, and what you don\'t.'], [4, 'Explore', 'A few distinct logo directions, shown on real things: a sign, a card, a phone screen.'], [6, 'Refine', 'One direction, developed with colours and type, with a round of changes included.'], [8, 'Deliver', 'Final files and a one-page brand guide, ready for web and print.']],
   conH: 'Where branding fits',
   con: [['Your website', 'uses the same colours, type and logo from day one.'], ['Google Business Profile', 'gets a matching logo and cover image.'], ['Print', 'business cards, menus and signs all follow the brand guide.'], ['Ads and social', 'graphics look like you, so people recognise you before they read the name.']],
-  faq: [['How is branding billed?', 'At $125 an hour, with an estimate before we start. <a href="pricing.html">See pricing</a>.'], ['Do I own my logo?', 'Yes. You get the final logo files and the rights to use them for your business.'], ['Can you work with the logo I already have?', 'Yes. We can redraw it cleanly, build colours and type around it, or refresh it without losing what customers recognise.']],
+  faq: [['How is branding billed?', 'At $129 an hour, with an estimate before we start. <a href="pricing.html">See pricing</a>.'], ['Do I own my logo?', 'Yes. You get the final logo files and the rights to use them for your business.'], ['Can you work with the logo I already have?', 'Yes. We can redraw it cleanly, build colours and type around it, or refresh it without losing what customers recognise.']],
   ctaH: 'Ready for a brand that fits?', ctaP: 'Tell us about your business and whether you have a logo today.',
 });
 
@@ -526,8 +528,42 @@ svcPage({
   steps: [[2, 'Brief', 'The goal, the offer, the dates and the budget.'], [4, 'Plan', 'Channels, calendar and message, agreed before anything is made.'], [6, 'Create and launch', 'Creative, landing page and tracking, then everything goes live on schedule.'], [9, 'Measure', 'Results gathered across channels, with lessons for the next one.']],
   conH: 'Where campaigns fit',
   con: [['Your website', 'hosts the landing page every channel points to.'], ['Google Business Profile & Ads', 'carry the offer to people searching nearby.'], ['Print', 'flyers, posters and table cards with QR codes back to the campaign page.'], ['Branding', 'keeps every piece of the campaign looking like you.']],
-  faq: [['How is campaign help billed?', 'At $125 an hour, with an estimate before we start. Ad spend and printing are separate. <a href="pricing.html">See pricing</a>.'], ['Can you just help me plan, and I run it?', 'Yes. Some clients want the plan and creative only; others want us to run it end to end.'], ['What kind of campaigns?', 'Openings, launches, seasonal promotions, events, re-openings and anything with a date and a goal.']],
+  faq: [['How is campaign help billed?', 'At $129 an hour, with an estimate before we start. Ad spend and printing are separate. <a href="pricing.html">See pricing</a>.'], ['Can you just help me plan, and I run it?', 'Yes. Some clients want the plan and creative only; others want us to run it end to end.'], ['What kind of campaigns?', 'Openings, launches, seasonal promotions, events, re-openings and anything with a date and a goal.']],
   ctaH: 'Got something to promote?', ctaP: 'Tell us what it is, when it happens and who you want to reach.',
+});
+
+svcPage({
+  file: 'ai-agents.html', key: 'agents', n: 2, kicker: 'AI website assistants', title: 'AI website assistants',
+  desc: 'AI chat assistants for local business websites from Sync Race Studios: answers visitor questions, captures leads and sends people to book. A widget for any website, or an add-on for sites we build.',
+  h1: 'An assistant on your site that never clocks out.', btn: 'Add an AI assistant',
+  lede: 'Visitors ask the same questions at all hours: prices, hours, parking, availability. An AI assistant trained on your business answers them right on your website, takes down enquiries for you and sends people straight to booking. Add it to a site we build, or to the website you already have.',
+  incH: 'What your assistant does',
+  inc: [['Answers from your business', 'services, prices, hours, policies and FAQs, written by you. It doesn\'t make things up, and says so when it doesn\'t know.'], ['Captures leads', 'when someone wants a quote or a callback, it takes their name, email or phone and what they need, and emails it to you with the conversation.'], ['Sends people to book', 'a booking button straight to your calendar, reservations or scheduling page.'], ['Matches your website', 'your colours, your wording and a button that sits where you want it. Fits on any phone.'], ['You stay in control', 'on sites we build, change what it knows from the built-in editor, see every lead, and set its tone.'], ['Honest and private', 'it tells visitors it\'s an AI, never asks for payment details, and keeps chats for 90 days.']],
+  extra: `
+  <section class="band shell">
+    <div class="col">
+      <span class="kicker rise">Try it</span>
+      <h2 class="rise">Ask ours anything</h2>
+      <p class="lede rise">This is our own assistant, built the same way yours would be. Ask about our services, prices or how a project runs, or ask it to pass your details on.</p>
+      <div class="rise agent-demo" id="agent-demo" style="width:100%;max-width:460px;height:560px;margin-top:28px"></div>
+    </div>
+  </section>
+  <script src="https://cms.srcs.online/agent.js" data-agent="srcs" data-target="#agent-demo" data-font="Jost, system-ui, sans-serif" async></script>
+
+  <section class="band shell">
+    <div class="col">
+      <span class="kicker rise">Pricing</span>
+      <h2 class="rise">$99 a month, plus AI usage</h2>
+      <div class="prices rise"><div class="price"><b>$99/mo</b><span>assistant, hosting and management</span></div><div class="price"><b>At cost</b><span>AI usage, billed as used</span></div></div>
+      <p class="lede rise">One price whether it goes on a website we build or the one you already have. The AI usage is passed on at cost, so you pay for what your visitors actually use, with a monthly limit so it never runs away. It works on Squarespace, Wix, WordPress, Shopify or anything that lets you paste one line of code.</p>
+    </div>
+  </section>`,
+  stepH: 'How it gets built',
+  steps: [[2, 'Gather what it should know', 'Your services, prices, hours, policies and the questions customers ask most.'], [4, 'Write and test', 'We set up its knowledge and tone, then try to trip it up before visitors can.'], [7, 'Put it on your site', 'One line of code on your website, or switched on in a site we built.'], [10, 'Keep it sharp', 'Update what it knows any time; leads land in your inbox as they come in.']],
+  conH: 'How it connects',
+  con: [['Your website', 'add-on for any site we build, wired into the built-in editor so you can update it yourself.'], ['Your inbox', 'every lead emailed to you with the full conversation, ready to reply.'], ['Your booking page', 'Calendly, Square, OpenTable, Tripleseat or your own booking form.'], ['Your Google profile and ads', 'people arriving from Google get answers straight away, so fewer of them leave without getting in touch.']],
+  faq: [['Will it make things up?', 'It is told to answer only from the information you give it, and to say it isn\'t sure otherwise. We test it before launch, and you can add to what it knows any time.'], ['Does it work on my current website?', 'Yes. The widget works on any website that lets you add a line of code: Squarespace, Wix, WordPress, Shopify and hand-built sites.'], ['What happens if a visitor wants to talk to a person?', 'It offers to take their name and email or phone, and sends them to you with the conversation so you can follow up.'], ['What does it cost?', '$99 a month, plus the AI usage at cost. Every assistant has a monthly usage limit, so the AI bill can\'t run away. <a href="pricing.html">See pricing</a>.'], ['What stops bots from running up the bill?', 'Each assistant checks that visitors are human, limits how much any one visitor can send, and has daily and monthly caps. If something looks wrong, it pauses and we\'re alerted.'], ['Which AI does it use?', 'Claude, from Anthropic. Your business information is used only to answer your visitors.']],
+  ctaH: 'Put an assistant on your site.', ctaP: 'Tell us about your business and the questions your customers ask most.',
 });
 
 svcPage({
@@ -668,17 +704,18 @@ const tier = (o) => `
   </section>`;
 page('pricing.html', {
   title: 'Pricing: Sync Race Studios',
-  desc: 'Sync Race Studios pricing: websites from $1,500 plus $25/month hosting with a built-in content editor, optimized for AI search, an optional $50/month content engine, business apps quoted per project, and Google and print work at $125/hour.',
+  desc: 'Sync Race Studios pricing: websites from $1,200 plus $49/month hosting with a built-in content editor, optimized for AI search, an optional $50/month content engine, business apps quoted per project, and Google and print work at $129/hour.',
   path: 'pages/pricing.html',
   extraLd: [{ '@type': 'OfferCatalog', name: 'Sync Race Studios pricing', itemListElement: [
-    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Website design and build' }, priceCurrency: 'USD', priceSpecification: { '@type': 'PriceSpecification', minPrice: 1500, priceCurrency: 'USD', description: 'One-time build.' } },
-    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Website hosting and built-in content editor' }, priceCurrency: 'USD', priceSpecification: { '@type': 'UnitPriceSpecification', price: 25, priceCurrency: 'USD', unitCode: 'MON', unitText: 'month' } },
+    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Website design and build' }, priceCurrency: 'USD', priceSpecification: { '@type': 'PriceSpecification', minPrice: 1200, priceCurrency: 'USD', description: 'One-time build.' } },
+    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Website hosting and built-in content editor' }, priceCurrency: 'USD', priceSpecification: { '@type': 'UnitPriceSpecification', price: 49, priceCurrency: 'USD', unitCode: 'MON', unitText: 'month' } },
     { ...HOURLY, itemOffered: { '@type': 'Service', name: 'Website changes after launch' } },
     { ...HOURLY, itemOffered: { '@type': 'Service', name: 'Logo design and branding' } },
     { ...HOURLY, itemOffered: { '@type': 'Service', name: 'Google Business Profile and Google Ads' } },
     { ...HOURLY, itemOffered: { '@type': 'Service', name: 'Marketing campaigns' } },
     { ...HOURLY, itemOffered: { '@type': 'Service', name: 'Print and creative' } },
     { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Content engine (blog add-on)' }, price: 50, priceCurrency: 'USD', priceSpecification: { '@type': 'UnitPriceSpecification', price: 50, priceCurrency: 'USD', unitCode: 'MON', unitText: 'month' } },
+    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'AI website assistant' }, price: 99, priceCurrency: 'USD', priceSpecification: { '@type': 'UnitPriceSpecification', price: 99, priceCurrency: 'USD', unitCode: 'MON', unitText: 'month', description: 'Plus AI usage, billed at cost' } },
     { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Business apps' }, description: 'Quoted per app: build price plus monthly hosting and management.' },
   ] }],
 }, `
@@ -686,23 +723,27 @@ page('pricing.html', {
     <div class="col">
       <span class="kicker rise">Pricing</span>
       <h1 class="rise">Clear prices, no surprises.</h1>
-      <p class="lede rise">Websites are built by us, then hosted for $25 a month with a built-in editor so you can change your own content. Bigger changes, branding, Google, campaign and print work are billed by the hour, with an estimate before any work starts. Apps are quoted per project.</p>
+      <p class="lede rise">Websites are built by us, then hosted for $49 a month with a built-in editor so you can change your own content. Bigger changes, branding, Google, campaign and print work are billed by the hour, with an estimate before any work starts. Apps are quoted per project.</p>
     </div>
   </section>
 ${tier({ kicker: 'Websites', key: 'website', btn: 'Start a website', h: 'Built, hosted and managed',
-  prices: [['From $1,500', 'one-time build'], ['$25/mo', 'hosting and built-in editor'], ['$125/hr', 'changes after launch']],
-  p: 'The build fee depends on the number of pages and features. Once it\'s live, we host it for $25 a month, and you can change your own text and photos with the built-in editor. Anything bigger is billed by the hour.',
-  inc: [['Custom design and build', 'server-side rendered, fast and optimized, with schema markup on every page.'], ['Optimized for AI search', 'schema markup, llms.txt and clearly written pages, so AI assistants like ChatGPT, Claude, Perplexity and Google AI Overviews can find and recommend you.'], ['Google Analytics', 'set up with a consent banner, so you can see who visits and what they do.'], ['Google Search Console and Bing Webmaster Tools', 'your site added and its sitemap submitted to both, so Google and Bing find every page.'], ['Hosting for $25/month', 'on Vercel, with Cloudflare in front and SSL included.'], ['Built-in content editor', 'change text, photos and lists on your own site and publish in about a minute, with a full history you can undo. <a href="../demo">Try the demo</a>.'], ['Bigger changes and new features', 'billed at $125/hour, quoted first.']] })}
+  prices: [['From $1,200', 'one-time build'], ['$49/mo', 'hosting and built-in editor'], ['$129/hr', 'changes after launch']],
+  p: 'The build fee depends on the number of pages and features. Once it\'s live, we host it for $49 a month, and you can change your own text and photos with the built-in editor. Anything bigger is billed by the hour.',
+  inc: [['Custom design and build', 'server-side rendered, fast and optimized, with schema markup on every page.'], ['Optimized for AI search', 'schema markup, llms.txt and clearly written pages, so AI assistants like ChatGPT, Claude, Perplexity and Google AI Overviews can find and recommend you.'], ['Google Analytics', 'set up with a consent banner, so you can see who visits and what they do.'], ['Google Search Console and Bing Webmaster Tools', 'your site added and its sitemap submitted to both, so Google and Bing find every page.'], ['Hosting for $49/month', 'on Vercel, with Cloudflare in front and SSL included.'], ['Built-in content editor', 'change text, photos and lists on your own site and publish in about a minute, with a full history you can undo. <a href="../demo">Try the demo</a>.'], ['Bigger changes and new features', 'billed at $129/hour, quoted first.']] })}
 ${tier({ kicker: 'Content engine', key: 'content', btn: 'Add the content engine', h: 'Optional blog add-on',
   prices: [['$50/mo', 'new blog posts on a regular schedule']],
   p: 'Keep your website fresh without lifting a finger. Optional, for any website we host.',
   inc: [['Regular blog posts', 'on topics that fit your business, your area and your customers.'], ['Written for search and AI', 'schema markup, headings and internal links on every post.'], ['Published automatically', 'added to your blog, sitemap and llms.txt.']] })}
+${tier({ kicker: 'AI website assistants', key: 'agents', btn: 'Add an AI assistant', h: 'Monthly, plus AI usage',
+  prices: [['$99/mo', 'assistant, hosting and management'], ['At cost', 'AI usage']],
+  p: 'An AI assistant trained on your business that answers questions, captures leads and sends visitors to book, on any website. AI usage is billed at cost, with a monthly limit so it never runs away.',
+  inc: [['Set up with you', 'we write and test what it knows, and fit it to your site.'], ['Lead capture', 'enquiries emailed to you with the full conversation.'], ['Booking button', 'straight to your calendar or reservations page.'], ['Editable by you', 'on sites we host, update its knowledge from the built-in editor.']] })}
 ${tier({ kicker: 'Business apps', key: 'apps', btn: 'Describe the job', h: 'Quoted per app',
   prices: [['Custom quote', 'build and monthly management']],
   p: 'Every app does a different job, so each one is priced on its own: a build price plus a monthly fee for hosting and managing it, based on what it does and how much data it handles.',
   inc: [['Fixed build price', 'agreed in writing before we start.'], ['Hosting and data', 'on Vercel and Supabase, managed by us.'], ['Updates, backups and monitoring', 'included in the monthly fee.'], ['Changes and new features', 'quoted before we start.']] })}
 ${tier({ kicker: 'Branding, Google, campaigns and print', key: 'other', btn: 'Get an estimate', h: 'Billed by the hour',
-  prices: [['$125/hr', 'Branding · Google Profile & Ads · Campaigns · Print']],
+  prices: [['$129/hr', 'Branding · Google Profile & Ads · Campaigns · Print']],
   p: 'You get an estimate in hours before any work starts, and you only pay for the time used.',
   inc: [['Logo design & branding', 'logo, colour palette, type and a one-page brand guide.'], ['Google Business Profile & Ads', 'profile setup, verification, posts and review replies; ad campaigns, tracking and ongoing management. Ad spend is paid directly to Google, on your card.'], ['Marketing campaigns', 'campaign plans, creative, landing pages and tracking. Ad spend is separate.'], ['Print & creative', 'business cards, flyers, menus, signage and social graphics. Printing costs are quoted separately.']] })}
 
@@ -714,7 +755,7 @@ ${tier({ kicker: 'Branding, Google, campaigns and print', key: 'other', btn: 'Ge
         ['Why do you host the websites and apps you build?', 'So one team is responsible for keeping them fast, secure and working. You don\'t have to deal with hosting accounts, updates or outages.'],
         ['What does the website build fee depend on?', 'Mostly the number of pages and features such as booking, forms or a directory. You get a fixed price in writing before we start.'],
         ['How does hourly billing work?', 'We estimate the hours before we start. If a job looks like it will run over, we tell you before going further.'],
-        ['Is Google Ads spend included?', 'No. Ad spend is paid directly to Google on your own card. Our $125/hour covers setting up and managing the campaigns.'],
+        ['Is Google Ads spend included?', 'No. Ad spend is paid directly to Google on your own card. Our $129/hour covers setting up and managing the campaigns.'],
       ])}
     </div>
   </section>
@@ -777,7 +818,7 @@ ${cta("Have a question we haven’t covered?", "Ask us. If it’s useful to othe
 /* =================== SITEMAP (HTML) =================== */
 const SM = [
   ['Main', [['../index.html', 'Home'], ['services.html', 'Services'], ['pricing.html', 'Pricing'], ['work.html', 'Work'], ['about.html', 'About'], ['contact.html', 'Get started']]],
-  ['Services', [['websites.html', 'Website design'], ['branding.html', 'Logo design & branding'], ['google-business.html', 'Google Business Profile & Ads'], ['marketing.html', 'Marketing campaigns'], ['content.html', 'Content engine'], ['print.html', 'Print & creative'], ['apps.html', 'Business apps']]],
+  ['Services', [['websites.html', 'Website design'], ['branding.html', 'Logo design & branding'], ['google-business.html', 'Google Business Profile & Ads'], ['marketing.html', 'Marketing campaigns'], ['ai-agents.html', 'AI website assistants'], ['content.html', 'Content engine'], ['print.html', 'Print & creative'], ['apps.html', 'Business apps']]],
   ['Sonoma County', LOCAL.map(o => [o.file, o.h1])],
   ['Resources', [['resources.html', 'All resources'], ...POSTS.map(p => [p.slug, p.short])]],
   ['Work', [['wanderlust.html', 'Wanderlust Santa Rosa case study'], ['staysantarosa.html', 'Stay Santa Rosa case study'], ['topophilia.html', 'Topophilia Design Studio case study'], ['arcade.html', 'Playground']]],
@@ -973,6 +1014,7 @@ page('contact.html', {
             <option value="branding">Logo design and branding</option>
             <option value="google">Google Business Profile and Ads</option>
             <option value="marketing">A marketing campaign</option>
+            <option value="agents">An AI assistant for my website</option>
             <option value="content">The $50/month content engine</option>
             <option value="print">Print and creative</option>
             <option value="apps">A business app</option>
@@ -1029,7 +1071,7 @@ const { navHTML, footHTML, SRCurve } = new Function(shared + '\nreturn { navHTML
 const YEAR = new Date().getFullYear();
 
 // Breadcrumb trails: file -> [[label, file], ...] after Home. Last item is the page itself.
-const SVC_NAMES = { 'websites.html': 'Website design', 'branding.html': 'Logo design & branding', 'google-business.html': 'Google Business Profile & Ads', 'marketing.html': 'Marketing campaigns', 'content.html': 'Content engine', 'print.html': 'Print & creative', 'apps.html': 'Business apps' };
+const SVC_NAMES = { 'websites.html': 'Website design', 'branding.html': 'Logo design & branding', 'google-business.html': 'Google Business Profile & Ads', 'marketing.html': 'Marketing campaigns', 'ai-agents.html': 'AI website assistants', 'content.html': 'Content engine', 'print.html': 'Print & creative', 'apps.html': 'Business apps' };
 const SIMPLE = { 'services.html': 'Services', 'pricing.html': 'Pricing', 'about.html': 'About', 'contact.html': 'Get started', 'work.html': 'Work', 'resources.html': 'Resources', 'sitemap.html': 'Sitemap', 'privacy.html': 'Privacy policy', 'terms.html': 'Terms of use', 'accessibility.html': 'Accessibility statement', 'arcade.html': 'Playground' };
 const CASES = { 'wanderlust.html': 'Wanderlust Santa Rosa', 'staysantarosa.html': 'Stay Santa Rosa', 'topophilia.html': 'Topophilia Design Studio' };
 const trail = f => {

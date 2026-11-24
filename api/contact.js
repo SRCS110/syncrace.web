@@ -33,6 +33,7 @@ const SUBJECTS = {
   branding:         'logo design and branding',
   ads:              'Google Ads',
   marketing:        'a marketing campaign',
+  agents:           'an AI assistant for their website',
   content:          'the $50/month content engine',
   print:            'print and creative',
   apps:             'a business app',
