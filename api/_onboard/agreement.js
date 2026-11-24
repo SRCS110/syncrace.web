@@ -22,8 +22,8 @@ export function buildAgreement(invite, client, intake) {
   const services = Array.isArray(invite.services) ? invite.services : [];
   const total = invite.total_fee != null ? Number(invite.total_fee) : services.reduce((t, s) => t + (Number(s.fee) || 0), 0);
   const deposit = Number(invite.deposit_percent ?? 50);
-  const hourly = money(invite.hourly_rate ?? 125);
-  const hosting = money(invite.hosting_monthly ?? 25);
+  const hourly = money(invite.hourly_rate ?? 129);
+  const hosting = money(invite.hosting_monthly ?? 49);
   const clientName = a.legal_name || client.legal_name || client.business_name;
 
   const parties = [
@@ -57,7 +57,7 @@ export function buildAgreement(invite, client, intake) {
         { p: '**2.2 Included with websites.** Every website includes Google Analytics, Google Search Console and Bing Webmaster Tools setup, basic on-page search optimization, and access to the SRCS site editor.' },
         { p: `**2.3 Payment schedule.** A non-refundable deposit of ${deposit}% of the total project fee is due before work begins. The remaining ${100 - deposit}% is due at Completion (Section 3.4), before the site or app is launched publicly.` },
         { p: `**2.4 Hourly work.** Work outside the scope above, revisions beyond those included, and changes after the 30-day Post-Completion Period are billed at **${hourly} per hour**. Google Business Profile, Google Ads management and print design are also billed at ${hourly} per hour. SRCS will give an estimate and get Client's approval before starting any hourly work.` },
-        { p: `**2.5 Recurring services.** Website hosting and the site editor are ${hosting} per month per website, billed monthly starting at launch. Optional add-ons, such as the automated blog content service at $50 per month, are billed monthly in advance. Recurring services may be canceled by either party with 30 days' written notice.` },
+        { p: `**2.5 Recurring services.** Website hosting and the site editor are ${hosting} per month per website, billed monthly starting at launch. Optional add-ons, such as the automated blog content service at $50 per month and the AI website assistant at $99 per month, are billed monthly in advance. AI assistant usage is billed monthly in arrears at cost. Recurring services may be canceled by either party with 30 days' written notice.` },
         { p: '**2.6 Third-party costs.** Client pays directly for domain registration and renewal, ad spend, printing, paid software or plugins, stock images and other third-party costs. SRCS will not buy anything on Client\'s behalf without written approval.' },
         { p: '**2.7 Invoices.** Invoices are due within 15 days. Unpaid balances over 30 days may accrue a late fee of 1.5% per month, or the maximum allowed by law if lower. SRCS may pause work, or take a site or app offline, if an invoice is more than 30 days overdue, after 7 days\' written notice.' },
       ],

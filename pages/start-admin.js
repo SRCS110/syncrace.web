@@ -76,7 +76,7 @@
 
   async function openNew(clientId) {
     newClientId = clientId || null;
-    $('new-form').reset(); $('svcs').innerHTML = ''; svcRow({ service: 'Website design and build', fee: 1500 }); total();
+    $('new-form').reset(); $('svcs').innerHTML = ''; svcRow({ service: 'Website design and build', fee: 1200 }); total();
     $('new-result').hidden = true; $('new-form').hidden = false; $('new-status').textContent = '';
     $('new-client-fields').hidden = !!newClientId;
     $('n-biz').required = !newClientId;

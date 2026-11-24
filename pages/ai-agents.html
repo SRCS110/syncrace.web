@@ -66,48 +66,19 @@
    "provider": {
     "@id": "https://www.srcs.online/#org"
    },
-   "offers": [
-    {
-     "@type": "Offer",
-     "name": "AI assistant add-on for a website we host",
+   "offers": {
+    "@type": "Offer",
+    "priceCurrency": "USD",
+    "price": 99,
+    "priceSpecification": {
+     "@type": "UnitPriceSpecification",
+     "price": 99,
      "priceCurrency": "USD",
-     "priceSpecification": [
-      {
-       "@type": "PriceSpecification",
-       "price": 500,
-       "priceCurrency": "USD",
-       "description": "One-time setup"
-      },
-      {
-       "@type": "UnitPriceSpecification",
-       "price": 49,
-       "priceCurrency": "USD",
-       "unitCode": "MON",
-       "unitText": "month"
-      }
-     ]
-    },
-    {
-     "@type": "Offer",
-     "name": "AI assistant widget for any website",
-     "priceCurrency": "USD",
-     "priceSpecification": [
-      {
-       "@type": "PriceSpecification",
-       "price": 750,
-       "priceCurrency": "USD",
-       "description": "One-time setup"
-      },
-      {
-       "@type": "UnitPriceSpecification",
-       "price": 79,
-       "priceCurrency": "USD",
-       "unitCode": "MON",
-       "unitText": "month"
-      }
-     ]
+     "unitCode": "MON",
+     "unitText": "month",
+     "description": "Plus AI usage, billed at cost"
     }
-   ]
+   }
   },
   {
    "@type": "FAQPage",
@@ -141,7 +112,15 @@
      "name": "What does it cost?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "$500 setup and $49 a month as an add-on for a website we host, or $750 setup and $79 a month as a widget for any website. Both include up to 3,000 visitor messages a month. See pricing."
+      "text": "$99 a month, plus the AI usage at cost. Every assistant has a monthly usage limit, so the AI bill can't run away. See pricing."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "What stops bots from running up the bill?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Each assistant checks that visitors are human, limits how much any one visitor can send, and has daily and monthly caps. If something looks wrong, it pauses and we're alerted."
      }
     },
     {
@@ -230,10 +209,10 @@
   <section class="band shell">
     <div class="sec">
       <div class="sec-head"><span class="kicker rise" data-cms="kicker-3">Pricing</span>
-      <h2 class="rise" data-cms="heading-3">Two ways to add one</h2></div>
+      <h2 class="rise" data-cms="heading-3">$99 a month, plus AI usage</h2></div>
       <div class="sec-body">
-      <div class="prices rise"><div class="price"><b>$500 + $49/mo</b><span>add-on for a website we build and host</span></div><div class="price"><b>$750 + $79/mo</b><span>widget for any website</span></div></div>
-      <p class="lede rise" data-cms="lede-3">The setup fee covers writing and testing your assistant's knowledge with you and fitting it to your site. The monthly fee covers hosting, the AI itself and up to 3,000 visitor messages a month. The widget works on Squarespace, Wix, WordPress, Shopify or anything that lets you paste one line of code.</p>
+      <div class="prices rise"><div class="price"><b>$99/mo</b><span>assistant, hosting and management</span></div><div class="price"><b>At cost</b><span>AI usage, billed as used</span></div></div>
+      <p class="lede rise" data-cms="lede-3">One price whether it goes on a website we build or the one you already have. The AI usage is passed on at cost, so you pay for what your visitors actually use, with a monthly limit so it never runs away. It works on Squarespace, Wix, WordPress, Shopify or anything that lets you paste one line of code.</p>
       </div>
     </div>
   </section>
@@ -271,7 +250,8 @@
         <details><summary>Will it make things up?</summary><p>It is told to answer only from the information you give it, and to say it isn't sure otherwise. We test it before launch, and you can add to what it knows any time.</p></details>
         <details><summary>Does it work on my current website?</summary><p>Yes. The widget works on any website that lets you add a line of code: Squarespace, Wix, WordPress, Shopify and hand-built sites.</p></details>
         <details><summary>What happens if a visitor wants to talk to a person?</summary><p>It offers to take their name and email or phone, and sends them to you with the conversation so you can follow up.</p></details>
-        <details><summary>What does it cost?</summary><p>$500 setup and $49 a month as an add-on for a website we host, or $750 setup and $79 a month as a widget for any website. Both include up to 3,000 visitor messages a month. <a href="/pricing">See pricing</a>.</p></details>
+        <details><summary>What does it cost?</summary><p>$99 a month, plus the AI usage at cost. Every assistant has a monthly usage limit, so the AI bill can't run away. <a href="/pricing">See pricing</a>.</p></details>
+        <details><summary>What stops bots from running up the bill?</summary><p>Each assistant checks that visitors are human, limits how much any one visitor can send, and has daily and monthly caps. If something looks wrong, it pauses and we're alerted.</p></details>
         <details><summary>Which AI does it use?</summary><p>Claude, from Anthropic. Your business information is used only to answer your visitors.</p></details>
       </div>
       </div>

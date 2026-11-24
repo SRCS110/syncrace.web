@@ -114,7 +114,7 @@ export default handler(['GET', 'POST'], async (req, res) => {
     const days = num(b.expires_days, 1, 90) || 30;
     const inv = must(await db().from('onboarding_invites').insert({
       client_id: client.id, token: newToken(), project_name, services, total_fee,
-      deposit_percent: num(b.deposit_percent, 0, 100) ?? 50, hourly_rate: num(b.hourly_rate, 0, 10000) ?? 125, hosting_monthly: num(b.hosting_monthly, 0, 10000) ?? 25,
+      deposit_percent: num(b.deposit_percent, 0, 100) ?? 50, hourly_rate: num(b.hourly_rate, 0, 10000) ?? 129, hosting_monthly: num(b.hosting_monthly, 0, 10000) ?? 49,
       est_start: day(b.est_start), est_completion: day(b.est_completion), message: str(b.message, 2000, 'Note', true) || null,
       expires_at: new Date(Date.now() + days * 86400_000).toISOString(), created_by: user.id,
     }).select('*').single());
