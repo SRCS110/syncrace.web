@@ -107,13 +107,15 @@
     <p data-cms="text-4">A hidden anti-spam field is also sent. Real visitors never see or fill it in.</p>
     <h3 data-cms="subhead-2">When you email us directly</h3>
     <p data-cms="text-5">Your email address, your name if included, and whatever you write.</p>
-    <h3 data-cms="subhead-3">When you visit any page</h3>
-    <p data-cms="text-6">Like every website, the server that delivers pages receives technical request information: your IP address, browser type, the page requested and the time. Our hosting provider records this in its logs to run and protect the service. We do not use it to identify or profile visitors.</p>
-    <h3 data-cms="subhead-4">If you accept Analytics</h3>
-    <p data-cms="text-7">Google Analytics records which pages you view, how you arrived, your device and browser type, and your approximate location (city level), linked to a random identifier stored in a cookie. It does not receive your name or email. If you decline, or never answer, it does not load at all.</p>
-    <h3 data-cms="subhead-5">Fonts</h3>
-    <p data-cms="text-8">The site's typefaces are served by Google Fonts. When a page loads, your browser requests them from Google, which receives your IP address and browser details. Google Fonts does not set cookies.</p>
-    <p data-cms="text-9">We do not use advertising pixels or social media embeds on this site.</p>
+    <h3 data-cms="subhead-3">When you chat with our assistant</h3>
+    <p data-cms="text-6">The AI assistant on our AI assistants page receives the messages you type and the address of the page you're on. If you ask it to pass your details on, it records the name, email or phone number and request you give it and emails them to us. Don't share anything sensitive in the chat.</p>
+    <h3 data-cms="subhead-4">When you visit any page</h3>
+    <p data-cms="text-7">Like every website, the server that delivers pages receives technical request information: your IP address, browser type, the page requested and the time. Our hosting provider records this in its logs to run and protect the service. We do not use it to identify or profile visitors.</p>
+    <h3 data-cms="subhead-5">If you accept Analytics</h3>
+    <p data-cms="text-8">Google Analytics records which pages you view, how you arrived, your device and browser type, and your approximate location (city level), linked to a random identifier stored in a cookie. It does not receive your name or email. If you decline, or never answer, it does not load at all.</p>
+    <h3 data-cms="subhead-6">Fonts</h3>
+    <p data-cms="text-9">The site's typefaces are served by Google Fonts. When a page loads, your browser requests them from Google, which receives your IP address and browser details. Google Fonts does not set cookies.</p>
+    <p data-cms="text-10">We do not use advertising pixels or social media embeds on this site.</p>
 
     <h2 id="why" data-cms="section-why">3. Why we use it</h2>
     <div class="table-wrap" role="region" aria-label="Why we use your data" tabindex="0">
@@ -121,68 +123,73 @@
         <thead><tr><th scope="col">Purpose</th><th scope="col">Data</th><th scope="col">Legal basis</th></tr></thead>
         <tbody>
           <tr><td data-cms="cell-1">Replying to your enquiry and discussing a project</td><td data-cms="cell-2">Contact form and email content</td><td data-cms="cell-3">Steps you ask us to take before a contract, and our legitimate interest in answering messages</td></tr>
-          <tr><td data-cms="cell-4">Keeping the site running and secure</td><td data-cms="cell-5">Server request logs</td><td data-cms="cell-6">Our legitimate interest in operating a safe website</td></tr>
-          <tr><td data-cms="cell-7">Understanding which pages are useful, so we can improve the site</td><td data-cms="cell-8">Google Analytics usage data</td><td data-cms="cell-9">Your consent, which you can withdraw at any time</td></tr>
-          <tr><td data-cms="cell-10">Remembering your privacy choices</td><td data-cms="cell-11">Browser storage on your device</td><td data-cms="cell-12">Strictly necessary for the features you use</td></tr>
+          <tr><td data-cms="cell-4">Answering questions in the assistant chat and following up when you ask us to</td><td data-cms="cell-5">Chat messages and any contact details you give</td><td data-cms="cell-6">Steps you ask us to take, and our legitimate interest in answering questions</td></tr>
+          <tr><td data-cms="cell-7">Keeping the site running and secure</td><td data-cms="cell-8">Server request logs</td><td data-cms="cell-9">Our legitimate interest in operating a safe website</td></tr>
+          <tr><td data-cms="cell-10">Understanding which pages are useful, so we can improve the site</td><td data-cms="cell-11">Google Analytics usage data</td><td data-cms="cell-12">Your consent, which you can withdraw at any time</td></tr>
+          <tr><td data-cms="cell-13">Remembering your privacy choices</td><td data-cms="cell-14">Browser storage on your device</td><td data-cms="cell-15">Strictly necessary for the features you use</td></tr>
         </tbody>
       </table>
     </div>
-    <p data-cms="text-10">We do not sell your personal information, and we do not share it for advertising.</p>
+    <p data-cms="text-11">We do not sell your personal information, and we do not share it for advertising.</p>
 
     <h2 id="providers" data-cms="section-providers">4. Who processes it for us</h2>
-    <p data-cms="text-11">These are the services actually used to run this site:</p>
+    <p data-cms="text-12">These are the services actually used to run this site:</p>
     <ul>
       <li data-cms="item-4" data-cms-type="rich"><b>Vercel</b> hosts the website and runs the small server function that receives the contact form. It keeps request logs as described above.</li>
       <li data-cms="item-5" data-cms-type="rich"><b>Resend</b> delivers contact form messages to our inbox by email.</li>
       <li data-cms="item-6" data-cms-type="rich"><b>Google Analytics</b> (Google LLC) measures site usage, only if you accept Analytics. Google's advertising features are switched off.</li>
       <li data-cms="item-7" data-cms-type="rich"><b>Google Fonts</b> (Google LLC) serves the typefaces used on every page.</li>
-      <li data-cms="item-8" data-cms-type="rich"><b>Cloudflare</b> provides the domain name service (DNS) for srcs.online.</li>
-      <li data-cms="item-9" data-cms-type="rich"><b><span class="supply">[CLIENT TO SUPPLY: email provider that hosts the hello@srcs.online inbox]</span></b> stores the messages we receive and send.</li>
+      <li data-cms="item-8" data-cms-type="rich"><b>Anthropic</b> provides the Claude AI model that writes the assistant's replies. It receives your chat messages to answer them.</li>
+      <li data-cms="item-9" data-cms-type="rich"><b>Supabase</b> stores assistant chats and any details you ask the assistant to pass on.</li>
+      <li data-cms="item-10" data-cms-type="rich"><b>Cloudflare</b> provides the domain name service (DNS) for srcs.online.</li>
+      <li data-cms="item-11" data-cms-type="rich"><b><span class="supply">[CLIENT TO SUPPLY: email provider that hosts the hello@srcs.online inbox]</span></b> stores the messages we receive and send.</li>
     </ul>
-    <p data-cms="text-12">Each provider handles data under its own terms and privacy policy. We only give them what they need to do their job.</p>
+    <p data-cms="text-13">Each provider handles data under its own terms and privacy policy. We only give them what they need to do their job.</p>
 
     <h2 id="storage" data-cms="section-storage">5. Cookies and browser storage</h2>
-    <p data-cms="text-13">Our own code sets no cookies. It stores a few small values in your browser's local storage, which never leave your device. Google Analytics sets cookies only if you accept Analytics.</p>
+    <p data-cms="text-14">Our own code sets no cookies. It stores a few small values in your browser's local storage, which never leave your device. Google Analytics sets cookies only if you accept Analytics.</p>
     <div class="table-wrap" role="region" aria-label="Browser storage and cookies" tabindex="0">
       <table>
         <thead><tr><th scope="col">Name</th><th scope="col">What it does</th><th scope="col">Category</th></tr></thead>
         <tbody>
-          <tr><td><code>srcs-consent</code></td><td data-cms="cell-14">Records your privacy choice, when you made it, and which version of these choices you saw</td><td data-cms="cell-15">Strictly necessary</td></tr>
-          <tr><td><code>_ga</code>, <code>_ga_7CEJ06WQR2</code> (cookies)</td><td data-cms="cell-17">Google Analytics identifier that tells repeat visits apart. Expires after up to 2 years.</td><td data-cms="cell-18">Analytics (only with your consent)</td></tr>
+          <tr><td><code>srcs-consent</code></td><td data-cms="cell-17">Records your privacy choice, when you made it, and which version of these choices you saw</td><td data-cms="cell-18">Strictly necessary</td></tr>
+          <tr><td><code>srcs-agent:srcs</code> (session storage), <code>srcs-agent-v</code></td><td data-cms="cell-20">Keeps your assistant chat open as you move between pages, and a random ID so one conversation stays together. Only set if you use the chat.</td><td data-cms="cell-21">Strictly necessary for the chat</td></tr>
+          <tr><td><code>_ga</code>, <code>_ga_7CEJ06WQR2</code> (cookies)</td><td data-cms="cell-23">Google Analytics identifier that tells repeat visits apart. Expires after up to 2 years.</td><td data-cms="cell-24">Analytics (only with your consent)</td></tr>
         </tbody>
       </table>
     </div>
-    <p data-cms="text-14" data-cms-type="rich">Analytics stays off unless you switch it on, and we don't use marketing cookies. If you turn Analytics off later, we remove its cookies. You can change your choice at any time with <a href="#cookie-settings" data-cookie-settings>Cookie settings</a>, also linked in the footer of every page. If your browser sends a Global Privacy Control signal, we treat it as a refusal of anything non-essential.</p>
+    <p data-cms="text-15" data-cms-type="rich">Analytics stays off unless you switch it on, and we don't use marketing cookies. If you turn Analytics off later, we remove its cookies. You can change your choice at any time with <a href="#cookie-settings" data-cookie-settings>Cookie settings</a>, also linked in the footer of every page. If your browser sends a Global Privacy Control signal, we treat it as a refusal of anything non-essential.</p>
 
     <h2 id="transfers" data-cms="section-transfers">6. International transfers</h2>
-    <p data-cms="text-15">Our providers operate in the United States and other countries. If you contact us from outside those countries, your information will be processed there. Where the law requires it, transfers rely on the providers' standard contractual safeguards.</p>
+    <p data-cms="text-16">Our providers operate in the United States and other countries. If you contact us from outside those countries, your information will be processed there. Where the law requires it, transfers rely on the providers' standard contractual safeguards.</p>
 
     <h2 id="retention" data-cms="section-retention">7. How long we keep it</h2>
     <ul>
-      <li data-cms="item-10" data-cms-type="rich">Enquiries and email correspondence: <span class="supply">[CLIENT TO SUPPLY: retention period for enquiry emails]</span>, or longer if we go on to work together and the messages form part of the project record.</li>
-      <li data-cms="item-11" data-cms-type="rich">Google Analytics data: <span class="supply">[CLIENT TO SUPPLY: GA4 data retention setting, 2 or 14 months]</span>.</li>
-      <li data-cms="item-12">Server request logs: kept by Vercel for the period set by its log retention for our plan.</li>
-      <li data-cms="item-13">Browser storage: stays on your device until you clear it.</li>
+      <li data-cms="item-12" data-cms-type="rich">Enquiries and email correspondence: <span class="supply">[CLIENT TO SUPPLY: retention period for enquiry emails]</span>, or longer if we go on to work together and the messages form part of the project record.</li>
+      <li data-cms="item-13" data-cms-type="rich">Google Analytics data: <span class="supply">[CLIENT TO SUPPLY: GA4 data retention setting, 2 or 14 months]</span>.</li>
+      <li data-cms="item-14">Assistant chats: 90 days. Details you ask the assistant to pass on are kept like other enquiries.</li>
+      <li data-cms="item-15">Server request logs: kept by Vercel for the period set by its log retention for our plan.</li>
+      <li data-cms="item-16">Browser storage: stays on your device until you clear it.</li>
     </ul>
 
     <h2 id="rights" data-cms="section-rights">8. Your rights</h2>
-    <p data-cms="text-16">Depending on where you live (for example the EU, the UK, or US states such as California), you may have the right to:</p>
+    <p data-cms="text-17">Depending on where you live (for example the EU, the UK, or US states such as California), you may have the right to:</p>
     <ul>
-      <li data-cms="item-14">ask for a copy of the personal data we hold about you;</li>
-      <li data-cms="item-15">ask us to correct it or delete it;</li>
-      <li data-cms="item-16">receive it in a portable format;</li>
-      <li data-cms="item-17">object to or restrict how we use it;</li>
-      <li data-cms="item-18">withdraw consent you have given, at any time.</li>
+      <li data-cms="item-17">ask for a copy of the personal data we hold about you;</li>
+      <li data-cms="item-18">ask us to correct it or delete it;</li>
+      <li data-cms="item-19">receive it in a portable format;</li>
+      <li data-cms="item-20">object to or restrict how we use it;</li>
+      <li data-cms="item-21">withdraw consent you have given, at any time.</li>
     </ul>
-    <p data-cms="text-17" data-cms-type="rich">To use any of these rights, email <a href="mailto:hello@srcs.online">hello@srcs.online</a>. We will reply within <span class="supply">[CLIENT TO SUPPLY: response window]</span>. You can also complain to your local data protection authority.</p>
+    <p data-cms="text-18" data-cms-type="rich">To use any of these rights, email <a href="mailto:hello@srcs.online">hello@srcs.online</a>. We will reply within <span class="supply">[CLIENT TO SUPPLY: response window]</span>. You can also complain to your local data protection authority.</p>
 
     <h2 id="children" data-cms="section-children">9. Children</h2>
-    <p data-cms="text-18">This site is for businesses and is not aimed at children. We do not knowingly collect personal data from anyone under 16. If you think a child has sent us their details, email us and we will delete them.</p>
+    <p data-cms="text-19">This site is for businesses and is not aimed at children. We do not knowingly collect personal data from anyone under 16. If you think a child has sent us their details, email us and we will delete them.</p>
 
     <h2 id="changes" data-cms="section-changes">10. Changes to this policy</h2>
-    <p data-cms="text-19">If we change how we handle data, we will update this page and the date below. If the change affects your privacy choices, the site will ask you again.</p>
+    <p data-cms="text-20">If we change how we handle data, we will update this page and the date below. If the change affects your privacy choices, the site will ask you again.</p>
 
-    <p class="effective" data-cms="text-20" data-cms-type="rich">
+    <p class="effective" data-cms="text-21" data-cms-type="rich">
       Effective date: <span class="supply">[CLIENT TO SUPPLY: effective date, once reviewed]</span><br>
       Changelog: 2026-09-27, first version.
     </p>
@@ -191,7 +198,7 @@
 
 </main>
 
-<site-foot><footer class="foot"><div class="shell foot-grid"><div class="foot-brand"><a class="brand" href="/"><svg data-fold="10" data-sw="1.1" data-drawn="1" class="fold-icon mark" width="32" height="32" style="stroke-width:1.1" aria-hidden="true" focusable="false"><use href="#sr-fold-10"/></svg><span><b>Sync Race</b><em>Business Studio</em></span></a><p>Websites, branding, Google, print and small apps for local businesses. One partner, one connected line.</p></div><nav class="foot-col" aria-labelledby="foot-svc"><h2 class="foot-title" id="foot-svc">Services</h2><ul><li><a href="/websites">Website design</a></li><li><a href="/google-business">Google Profile & Ads</a></li><li><a href="/branding">Logo & branding</a></li><li><a href="/marketing">Marketing campaigns</a></li><li><a href="/print">Print & creative</a></li><li><a href="/content">Content engine</a></li><li><a href="/apps">Business apps</a></li></ul></nav><nav class="foot-col" aria-labelledby="foot-studio"><h2 class="foot-title" id="foot-studio">Studio</h2><ul><li><a href="/about">About</a></li><li><a href="/resources">Resources</a></li><li><a href="/work">Work</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/arcade">Playground</a></li><li><a href="/contact">Get started</a></li></ul></nav><nav class="foot-col" aria-labelledby="foot-legal"><h2 class="foot-title" id="foot-legal">Legal</h2><ul><li><a href="/privacy" aria-current="page">Privacy</a></li><li><a href="/terms">Terms</a></li><li><a href="/accessibility">Accessibility</a></li><li><a href="/sitemap">Sitemap</a></li><li><a href="#cookie-settings" data-cookie-settings>Cookie settings</a></li></ul></nav></div><div class="shell foot-base"><span>&copy; <span data-year>2026</span> Sync Race Studios</span><span class="foot-links"><a href="mailto:hello@srcs.online">hello@srcs.online</a><a href="https://www.instagram.com/syncracestudios/" target="_blank" rel="me noopener">Instagram<span class="sr-only"> (opens in a new tab)</span></a><span>srcs.online</span></span></div></footer></site-foot>
+<site-foot><footer class="foot"><div class="shell foot-grid"><div class="foot-brand"><a class="brand" href="/"><svg data-fold="10" data-sw="1.1" data-drawn="1" class="fold-icon mark" width="32" height="32" style="stroke-width:1.1" aria-hidden="true" focusable="false"><use href="#sr-fold-10"/></svg><span><b>Sync Race</b><em>Business Studio</em></span></a><p>Websites, branding, Google, print and small apps for local businesses. One partner, one connected line.</p></div><nav class="foot-col" aria-labelledby="foot-svc"><h2 class="foot-title" id="foot-svc">Services</h2><ul><li><a href="/websites">Website design</a></li><li><a href="/google-business">Google Profile & Ads</a></li><li><a href="/branding">Logo & branding</a></li><li><a href="/marketing">Marketing campaigns</a></li><li><a href="/print">Print & creative</a></li><li><a href="/ai-agents">AI assistants</a></li><li><a href="/content">Content engine</a></li><li><a href="/apps">Business apps</a></li></ul></nav><nav class="foot-col" aria-labelledby="foot-studio"><h2 class="foot-title" id="foot-studio">Studio</h2><ul><li><a href="/about">About</a></li><li><a href="/resources">Resources</a></li><li><a href="/work">Work</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/arcade">Playground</a></li><li><a href="/contact">Get started</a></li></ul></nav><nav class="foot-col" aria-labelledby="foot-legal"><h2 class="foot-title" id="foot-legal">Legal</h2><ul><li><a href="/privacy" aria-current="page">Privacy</a></li><li><a href="/terms">Terms</a></li><li><a href="/accessibility">Accessibility</a></li><li><a href="/sitemap">Sitemap</a></li><li><a href="#cookie-settings" data-cookie-settings>Cookie settings</a></li></ul></nav></div><div class="shell foot-base"><span>&copy; <span data-year>2026</span> Sync Race Studios</span><span class="foot-links"><a href="mailto:hello@srcs.online">hello@srcs.online</a><a href="https://www.instagram.com/syncracestudios/" target="_blank" rel="me noopener">Instagram<span class="sr-only"> (opens in a new tab)</span></a><span>srcs.online</span></span></div></footer></site-foot>
 
 <script src="/nav.js" defer></script>
 <script>

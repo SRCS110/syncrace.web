@@ -97,6 +97,7 @@ const SVC = [
   { key: 'marketing', file: 'marketing.html', n: 3, t: 'Marketing campaigns', d: 'Plan and run a campaign around a launch, a season or an event: the message, the channels, the creative and the tracking.', s: 'Campaign plans · creative · launch and reporting' },
   { key: 'print', file: 'print.html', n: 5, t: 'Print & creative', d: 'Business cards, flyers, menus and signage that match your website and send people to it.', s: 'Print-ready files · QR codes · social graphics' },
   { key: 'apps', file: 'apps.html', n: 9, t: 'Business apps', d: 'Small, focused tools that take repetitive work off your week: bookings, forms, reports and dashboards.', s: 'Booking and intake · dashboards · automations' },
+  { key: 'agents', file: 'ai-agents.html', n: 2, t: 'AI website assistants', d: 'An AI assistant on your website that answers questions, takes enquiries and sends people to book, day and night. Trained on your business.', s: 'Widget for any website · add-on for ours' },
   { key: 'content', file: 'content.html', n: 8, t: 'Content engine', d: 'An optional add-on that keeps your site fresh with new blog posts on a regular schedule, written for search and AI.', s: '$50/month · optional · cancel anytime' },
   { key: 'pricing', file: 'pricing.html', n: 7, t: 'Hosting & management', d: 'We host and look after every website and app we build. Websites are $25/month, with a built-in editor so you can make content changes yourself.', s: 'Hosting · updates · backups · monitoring' },
 ];
@@ -397,6 +398,9 @@ const OFFERS = {
     { '@type': 'Offer', priceCurrency: 'USD', priceSpecification: { '@type': 'PriceSpecification', minPrice: 1500, priceCurrency: 'USD', description: 'One-time build from $1,500. Bigger changes after launch billed at $125/hour.' } },
     { '@type': 'Offer', name: 'Hosting and built-in content editor', priceCurrency: 'USD', priceSpecification: { '@type': 'UnitPriceSpecification', price: 25, priceCurrency: 'USD', unitCode: 'MON', unitText: 'month' } }],
   google: HOURLY, print: HOURLY, branding: HOURLY, marketing: HOURLY,
+  agents: [
+    { '@type': 'Offer', name: 'AI assistant add-on for a website we host', priceCurrency: 'USD', priceSpecification: [{ '@type': 'PriceSpecification', price: 500, priceCurrency: 'USD', description: 'One-time setup' }, { '@type': 'UnitPriceSpecification', price: 49, priceCurrency: 'USD', unitCode: 'MON', unitText: 'month' }] },
+    { '@type': 'Offer', name: 'AI assistant widget for any website', priceCurrency: 'USD', priceSpecification: [{ '@type': 'PriceSpecification', price: 750, priceCurrency: 'USD', description: 'One-time setup' }, { '@type': 'UnitPriceSpecification', price: 79, priceCurrency: 'USD', unitCode: 'MON', unitText: 'month' }] }],
   content: { '@type': 'Offer', priceCurrency: 'USD', price: 50, priceSpecification: { '@type': 'UnitPriceSpecification', price: 50, priceCurrency: 'USD', unitCode: 'MON', unitText: 'month' } },
 };
 
@@ -528,6 +532,40 @@ svcPage({
   con: [['Your website', 'hosts the landing page every channel points to.'], ['Google Business Profile & Ads', 'carry the offer to people searching nearby.'], ['Print', 'flyers, posters and table cards with QR codes back to the campaign page.'], ['Branding', 'keeps every piece of the campaign looking like you.']],
   faq: [['How is campaign help billed?', 'At $125 an hour, with an estimate before we start. Ad spend and printing are separate. <a href="pricing.html">See pricing</a>.'], ['Can you just help me plan, and I run it?', 'Yes. Some clients want the plan and creative only; others want us to run it end to end.'], ['What kind of campaigns?', 'Openings, launches, seasonal promotions, events, re-openings and anything with a date and a goal.']],
   ctaH: 'Got something to promote?', ctaP: 'Tell us what it is, when it happens and who you want to reach.',
+});
+
+svcPage({
+  file: 'ai-agents.html', key: 'agents', n: 2, kicker: 'AI website assistants', title: 'AI website assistants',
+  desc: 'AI chat assistants for local business websites from Sync Race Studios: answers visitor questions, captures leads and sends people to book. A widget for any website, or an add-on for sites we build.',
+  h1: 'An assistant on your site that never clocks out.', btn: 'Add an AI assistant',
+  lede: 'Visitors ask the same questions at all hours: prices, hours, parking, availability. An AI assistant trained on your business answers them right on your website, takes down enquiries for you and sends people straight to booking. Add it to a site we build, or to the website you already have.',
+  incH: 'What your assistant does',
+  inc: [['Answers from your business', 'services, prices, hours, policies and FAQs, written by you. It doesn\'t make things up, and says so when it doesn\'t know.'], ['Captures leads', 'when someone wants a quote or a callback, it takes their name, email or phone and what they need, and emails it to you with the conversation.'], ['Sends people to book', 'a booking button straight to your calendar, reservations or scheduling page.'], ['Matches your website', 'your colours, your wording and a button that sits where you want it. Fits on any phone.'], ['You stay in control', 'on sites we build, change what it knows from the built-in editor, see every lead, and set its tone.'], ['Honest and private', 'it tells visitors it\'s an AI, never asks for payment details, and keeps chats for 90 days.']],
+  extra: `
+  <section class="band shell">
+    <div class="col">
+      <span class="kicker rise">Try it</span>
+      <h2 class="rise">Ask ours anything</h2>
+      <p class="lede rise">This is our own assistant, built the same way yours would be. Ask about our services, prices or how a project runs, or ask it to pass your details on.</p>
+      <div class="rise agent-demo" id="agent-demo" style="width:100%;max-width:460px;height:560px;margin-top:28px"></div>
+    </div>
+  </section>
+  <script src="https://cms.srcs.online/agent.js" data-agent="srcs" data-target="#agent-demo" data-font="Jost, system-ui, sans-serif" async></script>
+
+  <section class="band shell">
+    <div class="col">
+      <span class="kicker rise">Pricing</span>
+      <h2 class="rise">Two ways to add one</h2>
+      <div class="prices rise"><div class="price"><b>$500 + $49/mo</b><span>add-on for a website we build and host</span></div><div class="price"><b>$750 + $79/mo</b><span>widget for any website</span></div></div>
+      <p class="lede rise">The setup fee covers writing and testing your assistant's knowledge with you and fitting it to your site. The monthly fee covers hosting, the AI itself and up to 3,000 visitor messages a month. The widget works on Squarespace, Wix, WordPress, Shopify or anything that lets you paste one line of code.</p>
+    </div>
+  </section>`,
+  stepH: 'How it gets built',
+  steps: [[2, 'Gather what it should know', 'Your services, prices, hours, policies and the questions customers ask most.'], [4, 'Write and test', 'We set up its knowledge and tone, then try to trip it up before visitors can.'], [7, 'Put it on your site', 'One line of code on your website, or switched on in a site we built.'], [10, 'Keep it sharp', 'Update what it knows any time; leads land in your inbox as they come in.']],
+  conH: 'How it connects',
+  con: [['Your website', 'add-on for any site we build, wired into the built-in editor so you can update it yourself.'], ['Your inbox', 'every lead emailed to you with the full conversation, ready to reply.'], ['Your booking page', 'Calendly, Square, OpenTable, Tripleseat or your own booking form.'], ['Your Google profile and ads', 'people arriving from Google get answers straight away, so fewer of them leave without getting in touch.']],
+  faq: [['Will it make things up?', 'It is told to answer only from the information you give it, and to say it isn\'t sure otherwise. We test it before launch, and you can add to what it knows any time.'], ['Does it work on my current website?', 'Yes. The widget works on any website that lets you add a line of code: Squarespace, Wix, WordPress, Shopify and hand-built sites.'], ['What happens if a visitor wants to talk to a person?', 'It offers to take their name and email or phone, and sends them to you with the conversation so you can follow up.'], ['What does it cost?', '$500 setup and $49 a month as an add-on for a website we host, or $750 setup and $79 a month as a widget for any website. Both include up to 3,000 visitor messages a month. <a href="pricing.html">See pricing</a>.'], ['Which AI does it use?', 'Claude, from Anthropic. Your business information is used only to answer your visitors.']],
+  ctaH: 'Put an assistant on your site.', ctaP: 'Tell us about your business and the questions your customers ask most.',
 });
 
 svcPage({
@@ -679,6 +717,8 @@ page('pricing.html', {
     { ...HOURLY, itemOffered: { '@type': 'Service', name: 'Marketing campaigns' } },
     { ...HOURLY, itemOffered: { '@type': 'Service', name: 'Print and creative' } },
     { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Content engine (blog add-on)' }, price: 50, priceCurrency: 'USD', priceSpecification: { '@type': 'UnitPriceSpecification', price: 50, priceCurrency: 'USD', unitCode: 'MON', unitText: 'month' } },
+    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'AI website assistant add-on' }, priceCurrency: 'USD', priceSpecification: [{ '@type': 'PriceSpecification', price: 500, priceCurrency: 'USD', description: 'One-time setup' }, { '@type': 'UnitPriceSpecification', price: 49, priceCurrency: 'USD', unitCode: 'MON', unitText: 'month' }] },
+    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'AI website assistant widget' }, priceCurrency: 'USD', priceSpecification: [{ '@type': 'PriceSpecification', price: 750, priceCurrency: 'USD', description: 'One-time setup' }, { '@type': 'UnitPriceSpecification', price: 79, priceCurrency: 'USD', unitCode: 'MON', unitText: 'month' }] },
     { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Business apps' }, description: 'Quoted per app: build price plus monthly hosting and management.' },
   ] }],
 }, `
@@ -697,6 +737,10 @@ ${tier({ kicker: 'Content engine', key: 'content', btn: 'Add the content engine'
   prices: [['$50/mo', 'new blog posts on a regular schedule']],
   p: 'Keep your website fresh without lifting a finger. Optional, for any website we host.',
   inc: [['Regular blog posts', 'on topics that fit your business, your area and your customers.'], ['Written for search and AI', 'schema markup, headings and internal links on every post.'], ['Published automatically', 'added to your blog, sitemap and llms.txt.']] })}
+${tier({ kicker: 'AI website assistants', key: 'agents', btn: 'Add an AI assistant', h: 'Setup plus monthly',
+  prices: [['$500 + $49/mo', 'add-on for a website we host'], ['$750 + $79/mo', 'widget for any website']],
+  p: 'An AI assistant trained on your business that answers questions, captures leads and sends visitors to book. The monthly fee includes hosting, the AI and up to 3,000 visitor messages a month.',
+  inc: [['Setup', 'we write and test what it knows with you, and fit it to your site.'], ['Lead capture', 'enquiries emailed to you with the full conversation.'], ['Booking button', 'straight to your calendar or reservations page.'], ['Editable by you', 'on sites we host, update its knowledge from the built-in editor.']] })}
 ${tier({ kicker: 'Business apps', key: 'apps', btn: 'Describe the job', h: 'Quoted per app',
   prices: [['Custom quote', 'build and monthly management']],
   p: 'Every app does a different job, so each one is priced on its own: a build price plus a monthly fee for hosting and managing it, based on what it does and how much data it handles.',
@@ -777,7 +821,7 @@ ${cta("Have a question we haven’t covered?", "Ask us. If it’s useful to othe
 /* =================== SITEMAP (HTML) =================== */
 const SM = [
   ['Main', [['../index.html', 'Home'], ['services.html', 'Services'], ['pricing.html', 'Pricing'], ['work.html', 'Work'], ['about.html', 'About'], ['contact.html', 'Get started']]],
-  ['Services', [['websites.html', 'Website design'], ['branding.html', 'Logo design & branding'], ['google-business.html', 'Google Business Profile & Ads'], ['marketing.html', 'Marketing campaigns'], ['content.html', 'Content engine'], ['print.html', 'Print & creative'], ['apps.html', 'Business apps']]],
+  ['Services', [['websites.html', 'Website design'], ['branding.html', 'Logo design & branding'], ['google-business.html', 'Google Business Profile & Ads'], ['marketing.html', 'Marketing campaigns'], ['ai-agents.html', 'AI website assistants'], ['content.html', 'Content engine'], ['print.html', 'Print & creative'], ['apps.html', 'Business apps']]],
   ['Sonoma County', LOCAL.map(o => [o.file, o.h1])],
   ['Resources', [['resources.html', 'All resources'], ...POSTS.map(p => [p.slug, p.short])]],
   ['Work', [['wanderlust.html', 'Wanderlust Santa Rosa case study'], ['staysantarosa.html', 'Stay Santa Rosa case study'], ['topophilia.html', 'Topophilia Design Studio case study'], ['arcade.html', 'Playground']]],
@@ -973,6 +1017,7 @@ page('contact.html', {
             <option value="branding">Logo design and branding</option>
             <option value="google">Google Business Profile and Ads</option>
             <option value="marketing">A marketing campaign</option>
+            <option value="agents">An AI assistant for my website</option>
             <option value="content">The $50/month content engine</option>
             <option value="print">Print and creative</option>
             <option value="apps">A business app</option>
@@ -1029,7 +1074,7 @@ const { navHTML, footHTML, SRCurve } = new Function(shared + '\nreturn { navHTML
 const YEAR = new Date().getFullYear();
 
 // Breadcrumb trails: file -> [[label, file], ...] after Home. Last item is the page itself.
-const SVC_NAMES = { 'websites.html': 'Website design', 'branding.html': 'Logo design & branding', 'google-business.html': 'Google Business Profile & Ads', 'marketing.html': 'Marketing campaigns', 'content.html': 'Content engine', 'print.html': 'Print & creative', 'apps.html': 'Business apps' };
+const SVC_NAMES = { 'websites.html': 'Website design', 'branding.html': 'Logo design & branding', 'google-business.html': 'Google Business Profile & Ads', 'marketing.html': 'Marketing campaigns', 'ai-agents.html': 'AI website assistants', 'content.html': 'Content engine', 'print.html': 'Print & creative', 'apps.html': 'Business apps' };
 const SIMPLE = { 'services.html': 'Services', 'pricing.html': 'Pricing', 'about.html': 'About', 'contact.html': 'Get started', 'work.html': 'Work', 'resources.html': 'Resources', 'sitemap.html': 'Sitemap', 'privacy.html': 'Privacy policy', 'terms.html': 'Terms of use', 'accessibility.html': 'Accessibility statement', 'arcade.html': 'Playground' };
 const CASES = { 'wanderlust.html': 'Wanderlust Santa Rosa', 'staysantarosa.html': 'Stay Santa Rosa', 'topophilia.html': 'Topophilia Design Studio' };
 const trail = f => {
