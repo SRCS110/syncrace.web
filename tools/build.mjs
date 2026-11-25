@@ -97,7 +97,7 @@ const SVC = [
   { key: 'marketing', file: 'marketing.html', n: 3, t: 'Marketing campaigns', d: 'Plan and run a campaign around a launch, a season or an event: the message, the channels, the creative and the tracking.', s: 'Campaign plans · creative · launch and reporting' },
   { key: 'print', file: 'print.html', n: 5, t: 'Print & creative', d: 'Business cards, flyers, menus and signage that match your website and send people to it.', s: 'Print-ready files · QR codes · social graphics' },
   { key: 'apps', file: 'apps.html', n: 9, t: 'Business apps', d: 'Small, focused tools that take repetitive work off your week: bookings, forms, reports and dashboards.', s: 'Booking and intake · dashboards · automations' },
-  { key: 'agents', file: 'ai-agents.html', n: 2, t: 'AI website assistants', d: 'An AI assistant on your website that answers questions, takes enquiries and sends people to book, day and night. Trained on your business.', s: '$99/month + AI usage · any website' },
+  { key: 'agents', file: 'ai-agents.html', n: 2, t: 'AI website assistants', d: 'An AI assistant on your website that answers questions, takes enquiries and sends people to book, day and night. Trained on your business.', s: '$199/month + AI usage · any website' },
   { key: 'content', file: 'content.html', n: 8, t: 'Content engine', d: 'An optional add-on that keeps your site fresh with new blog posts on a regular schedule, written for search and AI.', s: '$50/month · optional · cancel anytime' },
   { key: 'pricing', file: 'pricing.html', n: 7, t: 'Hosting & management', d: 'We host and look after every website and app we build. Websites are $49/month, with a built-in editor so you can make content changes yourself.', s: 'Hosting · updates · backups · monitoring' },
 ];
@@ -105,6 +105,7 @@ const SVC = [
    One local search page per service. Copy is drawn from the service pages; the area
    (Sonoma County, served, no in-person claim) was confirmed by Daniel. */
 const AREA = { '@type': 'AdministrativeArea', name: 'Sonoma County, California' };
+const SANTA_ROSA = [{ '@type': 'City', name: 'Santa Rosa, California' }, AREA];
 const LOCAL = [
   { key: 'website', file: 'website-design-sonoma-county.html', svc: 'websites.html', n: 10, short: 'Website design',
     title: 'Website design in Sonoma County: Sync Race Studios', h1: 'Website design in Sonoma County',
@@ -178,6 +179,19 @@ const LOCAL = [
     locH: 'Connected to how customers find you',
     loc: [['Your website', 'hosts the forms and booking customers use.'], ['Google Business Profile', 'can link straight to your booking page.'], ['Ads', 'track a completed booking as a conversion, not just a click.'], ['Your team', 'sees everything in one dashboard instead of five inboxes.']],
     ctaH: 'Got a job eating your week?', ctaP: 'Tell us what it looks like. We\'ll say honestly whether it\'s worth building.' },
+  { key: 'agents', file: 'ai-chatbot-santa-rosa.html', svc: 'ai-agents.html', n: 2, short: 'AI website chatbots', kicker: 'Santa Rosa', near: 'In Santa Rosa?',
+    serviceName: 'AI website chatbots in Santa Rosa', area: SANTA_ROSA,
+    title: 'AI chatbots for Santa Rosa businesses: Sync Race Studios', h1: 'AI chatbots for Santa Rosa business websites',
+    desc: 'AI chatbots for Santa Rosa business websites, trained on your business: answers questions 24/7, captures leads and books customers. $199/mo plus AI usage.',
+    lede: 'Your customers ask the same questions at all hours: are you open, what does it cost, can I book for Saturday. An AI chatbot trained on your business answers them on your website, takes enquiries for you and sends people to book. Built for businesses in Santa Rosa and across Sonoma County.',
+    btn: 'Add an AI chatbot',
+    incH: 'What your chatbot does',
+    inc: [['Answers from your business', 'services, prices, hours and policies you give it. It says so when it doesn\'t know, instead of guessing.'], ['Captures leads', 'name, email or phone and what they need, emailed to you with the conversation.'], ['Books customers', 'a button straight to your booking or reservations page.'], ['Matches your website', 'your colours and wording, in the corner of every page.'], ['Works on any website', 'one we build, or the Squarespace, Wix, WordPress or Shopify site you already have.'], ['Kept in check', 'it checks visitors are human, limits each visitor, and has a monthly cap so the AI bill can\'t run away.']],
+    priceH: '$199 a month, plus AI usage', prices: [['$199/mo', 'chatbot, hosting and management'], ['At cost', 'AI usage']],
+    priceP: 'AI usage is passed on at cost, with a monthly limit so it never runs away.',
+    locH: 'Made for local customers',
+    loc: [['Local questions answered', 'hours, parking, service area, seasonal schedules: whatever your customers ask.'], ['Fewer missed enquiries', 'questions that arrive after hours get an answer, and leads land in your inbox.'], ['Works with your Google profile', 'people who find you on Google Search and Maps and click through to your website get answers straight away.'], ['Built nearby', 'by a studio serving businesses across Sonoma County, with websites live for Santa Rosa businesses.']],
+    ctaH: 'Put a chatbot on your website.', ctaP: 'Tell us about your business and the questions your customers ask most.' },
   { key: 'content', file: 'blog-content-sonoma-county.html', svc: 'content.html', n: 8, short: 'Content engine',
     title: 'Blog writing in Sonoma County: Sync Race Studios', h1: 'Blog content for Sonoma County businesses',
     desc: 'Regular blog posts for Sonoma County business websites, on local and seasonal topics, written for Google and AI search. An optional $50/month add-on.',
@@ -398,11 +412,11 @@ const OFFERS = {
     { '@type': 'Offer', priceCurrency: 'USD', priceSpecification: { '@type': 'PriceSpecification', minPrice: 1200, priceCurrency: 'USD', description: 'One-time build from $1,200. Bigger changes after launch billed at $129/hour.' } },
     { '@type': 'Offer', name: 'Hosting and built-in content editor', priceCurrency: 'USD', priceSpecification: { '@type': 'UnitPriceSpecification', price: 49, priceCurrency: 'USD', unitCode: 'MON', unitText: 'month' } }],
   google: HOURLY, print: HOURLY, branding: HOURLY, marketing: HOURLY,
-  agents: { '@type': 'Offer', priceCurrency: 'USD', price: 99, priceSpecification: { '@type': 'UnitPriceSpecification', price: 99, priceCurrency: 'USD', unitCode: 'MON', unitText: 'month', description: 'Plus AI usage, billed at cost' } },
+  agents: { '@type': 'Offer', priceCurrency: 'USD', price: 199, priceSpecification: { '@type': 'UnitPriceSpecification', price: 199, priceCurrency: 'USD', unitCode: 'MON', unitText: 'month', description: 'Plus AI usage, billed at cost' } },
   content: { '@type': 'Offer', priceCurrency: 'USD', price: 50, priceSpecification: { '@type': 'UnitPriceSpecification', price: 50, priceCurrency: 'USD', unitCode: 'MON', unitText: 'month' } },
 };
 
-const svcPage = (o) => page(o.file, { title: `${o.title}: Sync Race Studios`, desc: o.desc, path: `pages/${o.file}`, crumb: o.title, service: { name: o.title, offers: OFFERS[o.key] } }, `
+const svcPage = (o) => page(o.file, { title: o.seoTitle || `${o.title}: Sync Race Studios`, desc: o.desc, path: `pages/${o.file}`, crumb: o.title, service: { name: o.serviceName || o.title, offers: OFFERS[o.key], ...(o.area ? { areaServed: o.area } : {}) } }, `
   <section class="shell page-top">
     <div class="split" style="align-items:end">
       <div class="col">
@@ -410,7 +424,7 @@ const svcPage = (o) => page(o.file, { title: `${o.title}: Sync Race Studios`, de
         <h1 class="rise">${o.h1}</h1>
         <p class="lede rise">${o.lede}</p>
         <div class="hero-btns rise"><a class="btn" href="contact.html?about=${o.key}">${o.btn} <span class="arrow" aria-hidden="true">→</span></a><a class="btn btn-quiet" href="services.html">All services</a></div>${LOCAL_BY[o.key] ? `
-        <p class="rise local-link">In Sonoma County? <a href="${LOCAL_BY[o.key].file}">${LOCAL_BY[o.key].h1}</a></p>` : ''}
+        <p class="rise local-link">${LOCAL_BY[o.key].near || 'In Sonoma County?'} <a href="${LOCAL_BY[o.key].file}">${LOCAL_BY[o.key].h1}</a></p>` : ''}
       </div>
       <div class="rise" aria-hidden="true" style="justify-self:center"><svg data-fold="${o.n}" data-sw="1.4" width="260" height="260" style="width:min(260px,60vw);height:auto;aspect-ratio:1"></svg></div>
     </div>
@@ -533,10 +547,11 @@ svcPage({
 });
 
 svcPage({
-  file: 'ai-agents.html', key: 'agents', n: 2, kicker: 'AI website assistants', title: 'AI website assistants',
-  desc: 'AI chat assistants for local business websites from Sync Race Studios: answers visitor questions, captures leads and sends people to book. A widget for any website, or an add-on for sites we build.',
-  h1: 'An assistant on your site that never clocks out.', btn: 'Add an AI assistant',
-  lede: 'Visitors ask the same questions at all hours: prices, hours, parking, availability. An AI assistant trained on your business answers them right on your website, takes down enquiries for you and sends people straight to booking. Add it to a site we build, or to the website you already have.',
+  file: 'ai-agents.html', key: 'agents', n: 2, kicker: 'AI chatbots · Santa Rosa', title: 'AI website assistants',
+  seoTitle: 'AI website chatbots in Santa Rosa: Sync Race Studios', serviceName: 'AI website assistant (chatbot)', area: SANTA_ROSA,
+  desc: 'AI chatbots for Santa Rosa and Sonoma County business websites. Answers customer questions 24/7, captures leads and books appointments. $199/mo plus AI usage.',
+  h1: 'An AI assistant on your website that never clocks out.', btn: 'Add an AI assistant',
+  lede: 'Visitors ask the same questions at all hours: prices, hours, parking, availability. An AI chatbot trained on your business answers them right on your website, takes down enquiries for you and sends people straight to booking. Built for businesses in Santa Rosa and across Sonoma County, on a site we build or the one you already have.',
   incH: 'What your assistant does',
   inc: [['Answers from your business', 'services, prices, hours, policies and FAQs, written by you. It doesn\'t make things up, and says so when it doesn\'t know.'], ['Captures leads', 'when someone wants a quote or a callback, it takes their name, email or phone and what they need, and emails it to you with the conversation.'], ['Sends people to book', 'a booking button straight to your calendar, reservations or scheduling page.'], ['Matches your website', 'your colours, your wording and a button that sits where you want it. Fits on any phone.'], ['You stay in control', 'on sites we build, change what it knows from the built-in editor, see every lead, and set its tone.'], ['Honest and private', 'it tells visitors it\'s an AI, never asks for payment details, and keeps chats for 90 days.']],
   extra: `
@@ -544,17 +559,16 @@ svcPage({
     <div class="col">
       <span class="kicker rise">Try it</span>
       <h2 class="rise">Ask ours anything</h2>
-      <p class="lede rise">This is our own assistant, built the same way yours would be. Ask about our services, prices or how a project runs, or ask it to pass your details on.</p>
-      <div class="rise agent-demo" id="agent-demo" style="width:100%;max-width:460px;height:560px;margin-top:28px"></div>
+      <p class="lede rise">This is our own assistant, built the same way yours would be, and it's in the corner of every page on this site. Ask about our services, prices or how a project runs, or ask it to pass your details on.</p>
+      <div class="btns rise"><a class="btn" href="#chat" data-agent-open="full">Chat with our assistant <span class="arrow" aria-hidden="true">→</span></a></div>
     </div>
   </section>
-  <script src="https://cms.srcs.online/agent.js" data-agent="srcs" data-target="#agent-demo" data-font="Jost, system-ui, sans-serif" async></script>
 
   <section class="band shell">
     <div class="col">
       <span class="kicker rise">Pricing</span>
-      <h2 class="rise">$99 a month, plus AI usage</h2>
-      <div class="prices rise"><div class="price"><b>$99/mo</b><span>assistant, hosting and management</span></div><div class="price"><b>At cost</b><span>AI usage, billed as used</span></div></div>
+      <h2 class="rise">$199 a month, plus AI usage</h2>
+      <div class="prices rise"><div class="price"><b>$199/mo</b><span>assistant, hosting and management</span></div><div class="price"><b>At cost</b><span>AI usage, billed as used</span></div></div>
       <p class="lede rise">One price whether it goes on a website we build or the one you already have. The AI usage is passed on at cost, so you pay for what your visitors actually use, with a monthly limit so it never runs away. It works on Squarespace, Wix, WordPress, Shopify or anything that lets you paste one line of code.</p>
     </div>
   </section>`,
@@ -562,7 +576,7 @@ svcPage({
   steps: [[2, 'Gather what it should know', 'Your services, prices, hours, policies and the questions customers ask most.'], [4, 'Write and test', 'We set up its knowledge and tone, then try to trip it up before visitors can.'], [7, 'Put it on your site', 'One line of code on your website, or switched on in a site we built.'], [10, 'Keep it sharp', 'Update what it knows any time; leads land in your inbox as they come in.']],
   conH: 'How it connects',
   con: [['Your website', 'add-on for any site we build, wired into the built-in editor so you can update it yourself.'], ['Your inbox', 'every lead emailed to you with the full conversation, ready to reply.'], ['Your booking page', 'Calendly, Square, OpenTable, Tripleseat or your own booking form.'], ['Your Google profile and ads', 'people arriving from Google get answers straight away, so fewer of them leave without getting in touch.']],
-  faq: [['Will it make things up?', 'It is told to answer only from the information you give it, and to say it isn\'t sure otherwise. We test it before launch, and you can add to what it knows any time.'], ['Does it work on my current website?', 'Yes. The widget works on any website that lets you add a line of code: Squarespace, Wix, WordPress, Shopify and hand-built sites.'], ['What happens if a visitor wants to talk to a person?', 'It offers to take their name and email or phone, and sends them to you with the conversation so you can follow up.'], ['What does it cost?', '$99 a month, plus the AI usage at cost. Every assistant has a monthly usage limit, so the AI bill can\'t run away. <a href="pricing.html">See pricing</a>.'], ['What stops bots from running up the bill?', 'Each assistant checks that visitors are human, limits how much any one visitor can send, and has daily and monthly caps. If something looks wrong, it pauses and we\'re alerted.'], ['Which AI does it use?', 'Claude, from Anthropic. Your business information is used only to answer your visitors.']],
+  faq: [['Will it make things up?', 'It is told to answer only from the information you give it, and to say it isn\'t sure otherwise. We test it before launch, and you can add to what it knows any time.'], ['Does it work on my current website?', 'Yes. The widget works on any website that lets you add a line of code: Squarespace, Wix, WordPress, Shopify and hand-built sites.'], ['What happens if a visitor wants to talk to a person?', 'It offers to take their name and email or phone, and sends them to you with the conversation so you can follow up.'], ['What does it cost?', '$199 a month, plus the AI usage at cost. Every assistant has a monthly usage limit, so the AI bill can\'t run away. <a href="pricing.html">See pricing</a>.'], ['What stops bots from running up the bill?', 'Each assistant checks that visitors are human, limits how much any one visitor can send, and has daily and monthly caps. If something looks wrong, it pauses and we\'re alerted.'], ['Which AI does it use?', 'Claude, from Anthropic. Your business information is used only to answer your visitors.'], ['Is this a chatbot?', 'Yes, an AI chatbot for your website, but trained only on your business. Unlike older chatbots with fixed menus, it understands questions written in your customers\' own words.'], ['Do you set it up for businesses in Santa Rosa?', 'Yes. We build and run AI chatbots for businesses in Santa Rosa and across Sonoma County, and the widget works on websites anywhere.']],
   ctaH: 'Put an assistant on your site.', ctaP: 'Tell us about your business and the questions your customers ask most.',
 });
 
@@ -634,11 +648,11 @@ svcPage({
 /* =================== SONOMA COUNTY PAGES (rendered after the service pages) =================== */
 const LOCAL_WORK = WORK.filter(w => w.case);
 const localPage = (o) => page(o.file, { title: o.title, desc: o.desc, path: `pages/${o.file}`, crumb: o.h1,
-  service: { name: `${o.short} in Sonoma County`, offers: OFFERS[o.key], areaServed: AREA } }, `
+  service: { name: o.serviceName || `${o.short} in Sonoma County`, offers: OFFERS[o.key], areaServed: o.area || AREA } }, `
   <section class="shell page-top">
     <div class="split" style="align-items:end">
       <div class="col">
-        <span class="kicker rise">Sonoma County</span>
+        <span class="kicker rise">${o.kicker || 'Sonoma County'}</span>
         <h1 class="rise">${o.h1}</h1>
         <p class="lede rise">${o.lede}</p>
         <div class="hero-btns rise"><a class="btn" href="contact.html?about=${o.key}">${o.btn} <span class="arrow" aria-hidden="true">→</span></a><a class="btn btn-quiet" href="${o.svc}">Full service details</a></div>
@@ -715,7 +729,7 @@ page('pricing.html', {
     { ...HOURLY, itemOffered: { '@type': 'Service', name: 'Marketing campaigns' } },
     { ...HOURLY, itemOffered: { '@type': 'Service', name: 'Print and creative' } },
     { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Content engine (blog add-on)' }, price: 50, priceCurrency: 'USD', priceSpecification: { '@type': 'UnitPriceSpecification', price: 50, priceCurrency: 'USD', unitCode: 'MON', unitText: 'month' } },
-    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'AI website assistant' }, price: 99, priceCurrency: 'USD', priceSpecification: { '@type': 'UnitPriceSpecification', price: 99, priceCurrency: 'USD', unitCode: 'MON', unitText: 'month', description: 'Plus AI usage, billed at cost' } },
+    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'AI website assistant' }, price: 199, priceCurrency: 'USD', priceSpecification: { '@type': 'UnitPriceSpecification', price: 199, priceCurrency: 'USD', unitCode: 'MON', unitText: 'month', description: 'Plus AI usage, billed at cost' } },
     { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Business apps' }, description: 'Quoted per app: build price plus monthly hosting and management.' },
   ] }],
 }, `
@@ -735,7 +749,7 @@ ${tier({ kicker: 'Content engine', key: 'content', btn: 'Add the content engine'
   p: 'Keep your website fresh without lifting a finger. Optional, for any website we host.',
   inc: [['Regular blog posts', 'on topics that fit your business, your area and your customers.'], ['Written for search and AI', 'schema markup, headings and internal links on every post.'], ['Published automatically', 'added to your blog, sitemap and llms.txt.']] })}
 ${tier({ kicker: 'AI website assistants', key: 'agents', btn: 'Add an AI assistant', h: 'Monthly, plus AI usage',
-  prices: [['$99/mo', 'assistant, hosting and management'], ['At cost', 'AI usage']],
+  prices: [['$199/mo', 'assistant, hosting and management'], ['At cost', 'AI usage']],
   p: 'An AI assistant trained on your business that answers questions, captures leads and sends visitors to book, on any website. AI usage is billed at cost, with a monthly limit so it never runs away.',
   inc: [['Set up with you', 'we write and test what it knows, and fit it to your site.'], ['Lead capture', 'enquiries emailed to you with the full conversation.'], ['Booking button', 'straight to your calendar or reservations page.'], ['Editable by you', 'on sites we host, update its knowledge from the built-in editor.']] })}
 ${tier({ kicker: 'Business apps', key: 'apps', btn: 'Describe the job', h: 'Quoted per app',
@@ -1077,7 +1091,7 @@ const CASES = { 'wanderlust.html': 'Wanderlust Santa Rosa', 'staysantarosa.html'
 const trail = f => {
   if (SVC_NAMES[f]) return [['Services', 'services.html'], [SVC_NAMES[f], f]];
   const loc = LOCAL.find(o => o.file === f);
-  if (loc) return [['Services', 'services.html'], [SVC_NAMES[loc.svc], loc.svc], ['Sonoma County', f]];
+  if (loc) return [['Services', 'services.html'], [SVC_NAMES[loc.svc], loc.svc], [loc.kicker || 'Sonoma County', f]];
   if (CASES[f]) return [['Work', 'work.html'], [CASES[f], f]];
   const post = POSTS.find(p => p.slug === f);
   if (post) return [['Resources', 'resources.html'], [post.short, f]];
