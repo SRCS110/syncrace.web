@@ -292,6 +292,29 @@ whenIdle(() => {
 })();
 
 /* ============================================================
+   AI ASSISTANT
+   Our own assistant sits in the bottom corner of every page
+   except onboarding (/start). It loads once the cookie banner
+   is out of the way, or at once when someone clicks a
+   [data-agent-open] button or arrives on #chat.
+   ============================================================ */
+const loadAgent = (() => {
+  let done = false;
+  return () => {
+    if (done || /^\/(pages\/)?start/.test(location.pathname)) return;
+    done = true;
+    const s = document.createElement('script');
+    s.src = 'https://cms.srcs.online/agent.js';
+    s.async = true;
+    s.dataset.agent = 'srcs';
+    s.dataset.font = 'Jost, system-ui, sans-serif';
+    document.body.append(s);
+  };
+})();
+document.addEventListener('click', (e) => { if (e.target.closest && e.target.closest('[data-agent-open]')) loadAgent(); }, true);
+if (location.hash === '#chat') loadAgent();
+
+/* ============================================================
    COOKIE CONSENT + GOOGLE TAG
    Google Analytics (G-7CEJ06WQR2) loads only after a visitor
    accepts Analytics. Declining, ignoring the banner, or sending a
@@ -384,6 +407,7 @@ whenIdle(() => {
   }
   function close() {
     banner.hidden = true;
+    whenIdle(loadAgent);
     if (returnFocus && document.contains(returnFocus)) returnFocus.focus();
     returnFocus = null;
   }
@@ -414,6 +438,6 @@ whenIdle(() => {
     a.addEventListener('click', (e) => { e.preventDefault(); open(true); }));
   if (location.hash === '#cookie-settings') open(true);
 
-  if (!state) open(false);
+  if (!state) open(false); else whenIdle(loadAgent);
   whenIdle(loadGA);   // analytics waits until the page is idle (it loads at once when someone clicks Accept)
 })();
